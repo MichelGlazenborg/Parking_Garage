@@ -5,5 +5,3 @@ public class Main {
         sim.run();
     }
 }
-
-kkkkkkkkkkkkkkkkkkkkkk
