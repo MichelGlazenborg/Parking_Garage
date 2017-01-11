@@ -4,5 +4,6 @@ public class Main {
         Simulator sim = new Simulator();
         sim.run();
         System.out.println("Hello??");
+        System.out.println("Hello??");
     }
 }
