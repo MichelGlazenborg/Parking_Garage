@@ -41,6 +41,13 @@ public class Simulator {
         }
     }
 
+
+    public void run50() {
+        for(int i=0; i<50; i++) {
+            tick();
+        }
+    }
+
     private void tick() {
     	advanceTime();
     	handleExit();

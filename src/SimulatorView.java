@@ -18,6 +18,7 @@ public class SimulatorView extends JFrame {
         
         carParkView = new CarParkView();
 
+        makeMenuBar(this);
         Container contentPane = getContentPane();
         contentPane.add(carParkView, BorderLayout.CENTER);
         pack();
@@ -25,6 +26,27 @@ public class SimulatorView extends JFrame {
 
         updateView();
     }
+
+    private void makeMenuBar(JFrame frame)
+    {
+        JMenuBar menubar = new JMenuBar();
+        frame.setJMenuBar(menubar);
+
+        //create the execute menu
+        JMenu executeMenu = new JMenu("Execute");
+        menubar.add(executeMenu);
+
+        JMenuItem run50 = new JMenu("Run for 50 ticks");
+            run50.addActionListener(e -> run50());
+        executeMenu.add(run50);
+    }
+
+    private void run50()
+    {
+        //make the simulator run 50 ticks
+        //-Jelmer 13-jan-17 16:46
+    }
+
 
     public void updateView() {
         carParkView.updateView();
