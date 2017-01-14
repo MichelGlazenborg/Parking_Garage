@@ -2,10 +2,10 @@ import java.awt.*;
 
 public abstract class Car {
 
-    private Location location;
-    private int minutesLeft;
-    private boolean isPaying;
-    private boolean hasToPay;
+    private Location _location;
+    private int _minutesLeft;
+    private boolean _isPaying;
+    private boolean _hasToPay;
 
     /**
      * Constructor for objects of class Car
@@ -15,39 +15,39 @@ public abstract class Car {
     }
 
     public Location getLocation() {
-        return location;
+        return _location;
     }
 
     public void setLocation(Location location) {
-        this.location = location;
+        _location = location;
     }
 
     public int getMinutesLeft() {
-        return minutesLeft;
+        return _minutesLeft;
     }
 
     public void setMinutesLeft(int minutesLeft) {
-        this.minutesLeft = minutesLeft;
+        _minutesLeft = minutesLeft;
     }
     
     public boolean getIsPaying() {
-        return isPaying;
+        return _isPaying;
     }
 
     public void setIsPaying(boolean isPaying) {
-        this.isPaying = isPaying;
+        _isPaying = isPaying;
     }
 
     public boolean getHasToPay() {
-        return hasToPay;
+        return _hasToPay;
     }
 
     public void setHasToPay(boolean hasToPay) {
-        this.hasToPay = hasToPay;
+        _hasToPay = hasToPay;
     }
 
     public void tick() {
-        minutesLeft--;
+        _minutesLeft--;
     }
     
     public abstract Color getColor();

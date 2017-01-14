@@ -4,17 +4,26 @@ import javax.swing.*;
  * Created by Jelmer on 13-Jan-17.
  */
 public class Menu {
-    public Menu(Simulator sim, SimulatorView view)
+
+    private JMenuBar _menu;
+    private SimulatorView _simulatorView;
+    //private Simulator _simulator;
+
+    public Menu(SimulatorView simulatorView)
     {
-            JMenuBar menubar = new JMenuBar();
-            view.setJMenuBar(menubar);
+        _menu = new JMenuBar();
+        _simulatorView = simulatorView;
+    }
 
-            //create the execute menu
-            JMenu executeMenu = new JMenu("Execute");
-            menubar.add(executeMenu);
+    public JMenuBar getMenuBar() {
+        //create the execute menu
+        JMenu executeMenu = new JMenu("Execute");
+        _menu.add(executeMenu);
 
-            JMenuItem run50 = new JMenu("Run for 50 ticks");
-                run50.addActionListener( e -> {for(int i=0; i<50; i++){sim.run();}} );
-            executeMenu.add(run50);
+        JMenuItem run50 = new JMenu("Run for 50 ticks");
+        run50.addActionListener(e -> _simulatorView.run50());
+        executeMenu.add(run50);
+
+        return _menu;
     }
 }

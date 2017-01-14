@@ -2,25 +2,27 @@ import javax.swing.*;
 import java.awt.*;
 
 public class SimulatorView extends JFrame {
-    private CarParkView carParkView;
-    private int numberOfFloors;
-    private int numberOfRows;
-    private int numberOfPlaces;
-    private int numberOfOpenSpots;
-    private Car[][][] cars;
+    private CarParkView _carParkView;
+    private int _numberOfFloors;
+    private int _numberOfRows;
+    private int _numberOfPlaces;
+    private int _numberOfOpenSpots;
+    private Car[][][] _cars;
 
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
-        this.numberOfFloors = numberOfFloors;
-        this.numberOfRows = numberOfRows;
-        this.numberOfPlaces = numberOfPlaces;
-        this.numberOfOpenSpots =numberOfFloors*numberOfRows*numberOfPlaces;
-        cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
+        _numberOfFloors = numberOfFloors;
+        _numberOfRows = numberOfRows;
+        _numberOfPlaces = numberOfPlaces;
+        _numberOfOpenSpots = numberOfFloors * numberOfRows * numberOfPlaces;
+        _cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         
-        carParkView = new CarParkView();
+        _carParkView = new CarParkView();
 
-        makeMenuBar(this);
+        Menu menu = new Menu(this);
+        setJMenuBar(menu.getMenuBar());
+
         Container contentPane = getContentPane();
-        contentPane.add(carParkView, BorderLayout.CENTER);
+        contentPane.add(_carParkView, BorderLayout.CENTER);
         pack();
         setVisible(true);
 
@@ -41,7 +43,7 @@ public class SimulatorView extends JFrame {
         executeMenu.add(run50);
     }
 
-    private void run50()
+    public void run50()
     {
         //make the simulator run 50 ticks
         //-Jelmer 13-jan-17 16:46
@@ -49,30 +51,30 @@ public class SimulatorView extends JFrame {
 
 
     public void updateView() {
-        carParkView.updateView();
+        _carParkView.updateView();
     }
     
 	public int getNumberOfFloors() {
-        return numberOfFloors;
+        return _numberOfFloors;
     }
 
     public int getNumberOfRows() {
-        return numberOfRows;
+        return _numberOfRows;
     }
 
     public int getNumberOfPlaces() {
-        return numberOfPlaces;
+        return _numberOfPlaces;
     }
 
     public int getNumberOfOpenSpots(){
-    	return numberOfOpenSpots;
+    	return _numberOfOpenSpots;
     }
     
     public Car getCarAt(Location location) {
         if (!locationIsValid(location)) {
             return null;
         }
-        return cars[location.getFloor()][location.getRow()][location.getPlace()];
+        return _cars[location.getFloor()][location.getRow()][location.getPlace()];
     }
 
     public boolean setCarAt(Location location, Car car) {
@@ -81,9 +83,9 @@ public class SimulatorView extends JFrame {
         }
         Car oldCar = getCarAt(location);
         if (oldCar == null) {
-            cars[location.getFloor()][location.getRow()][location.getPlace()] = car;
+            _cars[location.getFloor()][location.getRow()][location.getPlace()] = car;
             car.setLocation(location);
-            numberOfOpenSpots--;
+            _numberOfOpenSpots--;
             return true;
         }
         return false;
@@ -97,9 +99,9 @@ public class SimulatorView extends JFrame {
         if (car == null) {
             return null;
         }
-        cars[location.getFloor()][location.getRow()][location.getPlace()] = null;
+        _cars[location.getFloor()][location.getRow()][location.getPlace()] = null;
         car.setLocation(null);
-        numberOfOpenSpots++;
+        _numberOfOpenSpots++;
         return car;
     }
 
@@ -150,7 +152,7 @@ public class SimulatorView extends JFrame {
         int floor = location.getFloor();
         int row = location.getRow();
         int place = location.getPlace();
-        if (floor < 0 || floor >= numberOfFloors || row < 0 || row > numberOfRows || place < 0 || place > numberOfPlaces) {
+        if (floor < 0 || floor >= _numberOfFloors || row < 0 || row > _numberOfRows || place < 0 || place > _numberOfPlaces) {
             return false;
         }
         return true;
@@ -226,5 +228,4 @@ public class SimulatorView extends JFrame {
                     10 - 1); // TODO use dynamic size or constants
         }
     }
-
 }
