@@ -1,4 +1,4 @@
-import views.GUI;
+import controllers.GUI;
 
 import static javafx.application.Application.launch;
 

@@ -4,19 +4,16 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 
-import views.GUI;
-import views.SimulatorView;
+import controllers.GUI;
 
 /**
  * Created by Jelmer on 13-Jan-17.
  */
 public class NavBar extends GUI {
 
-    private GUI _gui;
     private MenuBar _menuBar;
 
-    public NavBar(GUI gui) {
-        _gui = gui;
+    public NavBar() {
         _menuBar = new MenuBar();
     }
 

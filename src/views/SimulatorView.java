@@ -1,11 +1,11 @@
 package views;
 
 import controllers.Car;
+import controllers.GUI;
 import controllers.Location;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.paint.*;
 import javafx.scene.canvas.*;
 
 import java.awt.*;

@@ -1,12 +1,12 @@
-package views;
-
-import controllers.Simulator;
+package controllers;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+
+import views.NavBar;
 
 import java.awt.*;
 
@@ -15,11 +15,12 @@ public class GUI extends Application {
     private Scene _mainScene;
     private BorderPane _mainLayout;
     private Simulator _simulator;
+
+    private NavBar _navBar;
     private MenuBar _menu;
 
     public GUI() {
-        NavBar navBar = new NavBar(this);
-        _menu = navBar.generate();
+        _navBar = new NavBar();
         _simulator = new Simulator();
     }
 
@@ -33,6 +34,7 @@ public class GUI extends Application {
 
         _mainScene = new Scene(_mainLayout, 800, 500);
 
+        _menu = _navBar.generate();
         _mainLayout.setTop(_menu);
 
         window.setScene(_mainScene);
