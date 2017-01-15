@@ -1,13 +1,25 @@
-import javax.swing.*;
-import java.awt.*;
+package views;
 
-public class SimulatorView extends JFrame {
+import controllers.Car;
+import controllers.Location;
+
+import javafx.scene.canvas.Canvas;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.*;
+import javafx.scene.canvas.*;
+
+import java.awt.*;
+import java.awt.Color;
+
+public class SimulatorView extends GUI {
+
     private CarParkView _carParkView;
     private int _numberOfFloors;
     private int _numberOfRows;
     private int _numberOfPlaces;
     private int _numberOfOpenSpots;
     private Car[][][] _cars;
+    private BorderPane _pane;
 
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
         _numberOfFloors = numberOfFloors;
@@ -15,40 +27,14 @@ public class SimulatorView extends JFrame {
         _numberOfPlaces = numberOfPlaces;
         _numberOfOpenSpots = numberOfFloors * numberOfRows * numberOfPlaces;
         _cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
-        
+
         _carParkView = new CarParkView();
+        _carParkView.updateView();
 
-        Menu menu = new Menu(this);
-        setJMenuBar(menu.getMenuBar());
+        _pane = new BorderPane();
 
-        Container contentPane = getContentPane();
-        contentPane.add(_carParkView, BorderLayout.CENTER);
-        pack();
-        setVisible(true);
-
-        updateView();
+        super.setCenter(_pane);
     }
-
-    private void makeMenuBar(JFrame frame)
-    {
-        JMenuBar menubar = new JMenuBar();
-        frame.setJMenuBar(menubar);
-
-        //create the execute menu
-        JMenu executeMenu = new JMenu("Execute");
-        menubar.add(executeMenu);
-
-        JMenuItem run50 = new JMenu("Run for 50 ticks");
-            run50.addActionListener(e -> run50());
-        executeMenu.add(run50);
-    }
-
-    public void run50()
-    {
-        //make the simulator run 50 ticks
-        //-Jelmer 13-jan-17 16:46
-    }
-
 
     public void updateView() {
         _carParkView.updateView();
@@ -158,16 +144,19 @@ public class SimulatorView extends JFrame {
         return true;
     }
     
-    private class CarParkView extends JPanel {
+    private class CarParkView {
         
-        private Dimension size;
-        private Image carParkImage;    
+        private Dimension _size;
+        private Canvas _canvas;
+        private Image _image;
+        private GraphicsContext _graphicsContext;
     
         /**
          * Constructor for objects of class CarPark
          */
         public CarParkView() {
-            size = new Dimension(0, 0);
+            _size = new Dimension(0, 0);
+            _graphicsContext = _canvas.getGraphicsContext2D();
         }
     
         /**
@@ -180,29 +169,28 @@ public class SimulatorView extends JFrame {
         /**
          * Overriden. The car park view component needs to be redisplayed. Copy the
          * internal image to screen.
-         */
+         *
         public void paintComponent(Graphics g) {
-            if (carParkImage == null) {
+            if (_canvas == null) {
                 return;
             }
-    
-            Dimension currentSize = getSize();
-            if (size.equals(currentSize)) {
-                g.drawImage(carParkImage, 0, 0, null);
+
+            Dimension currentSize = super.getDimensions();
+            if (_size.equals(currentSize)) {
+                _graphicsContext.drawImage(_graphicsContext, 0, 0, null);
             }
             else {
                 // Rescale the previous image.
-                g.drawImage(carParkImage, 0, 0, currentSize.width, currentSize.height, null);
+                _graphicsContext.drawImage(_canvas, 0, 0, currentSize.width, currentSize.height, null);
             }
-        }
+        }*/
     
-        public void updateView() {
+        public void updateView() {/*
             // Create a new car park image if the size has changed.
-            if (!size.equals(getSize())) {
-                size = getSize();
-                carParkImage = createImage(size.width, size.height);
+            if (!_size.equals(super.getDimensions())) {
+                _canvas = new Canvas(super.getWidth(), super.getHeight());
             }
-            Graphics graphics = carParkImage.getGraphics();
+            Graphics graphics = _canvas.getGraphics();
             for(int floor = 0; floor < getNumberOfFloors(); floor++) {
                 for(int row = 0; row < getNumberOfRows(); row++) {
                     for(int place = 0; place < getNumberOfPlaces(); place++) {
@@ -213,7 +201,7 @@ public class SimulatorView extends JFrame {
                     }
                 }
             }
-            repaint();
+            repaint();*/
         }
     
         /**

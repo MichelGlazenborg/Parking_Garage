@@ -1,3 +1,5 @@
+package controllers;
+
 import java.awt.*;
 
 public abstract class Car {
@@ -8,7 +10,7 @@ public abstract class Car {
     private boolean _hasToPay;
 
     /**
-     * Constructor for objects of class Car
+     * Constructor for objects of class controllers.Car
      */
     public Car() {
 
