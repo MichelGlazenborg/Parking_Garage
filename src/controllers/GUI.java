@@ -20,8 +20,7 @@ public class GUI extends Application {
     private MenuBar _menu;
 
     public GUI() {
-        _navBar = new NavBar();
-        _simulator = new Simulator();
+
     }
 
     public static void GUI(String[] args) {
@@ -34,6 +33,8 @@ public class GUI extends Application {
 
         _mainScene = new Scene(_mainLayout, 800, 500);
 
+        _simulator = new Simulator();
+        _navBar = new NavBar();
         _menu = _navBar.generate();
         _mainLayout.setTop(_menu);
 
