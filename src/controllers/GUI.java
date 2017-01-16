@@ -20,7 +20,7 @@ public class GUI extends Application {
     private MenuBar _menu;
 
     public GUI() {
-
+        _mainLayout = new BorderPane();
     }
 
     public static void GUI(String[] args) {
@@ -29,12 +29,10 @@ public class GUI extends Application {
 
     @Override
     public void start(Stage window) throws Exception {
-        _mainLayout = new BorderPane();
-
         _mainScene = new Scene(_mainLayout, 800, 500);
-
-        _simulator = new Simulator();
+        _simulator = new Simulator(this);
         _navBar = new NavBar();
+
         _menu = _navBar.generate();
         _mainLayout.setTop(_menu);
 

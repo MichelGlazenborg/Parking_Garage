@@ -156,6 +156,7 @@ public class SimulatorView extends GUI {
          */
         public CarParkView() {
             _size = new Dimension(0, 0);
+            _canvas = new Canvas();
             _graphicsContext = _canvas.getGraphicsContext2D();
         }
     
