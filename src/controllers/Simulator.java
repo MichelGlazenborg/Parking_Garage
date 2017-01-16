@@ -1,11 +1,14 @@
+package controllers;
+
+import views.SimulatorView;
+
 import java.util.Random;
 
 public class Simulator {
 
 	private static final String AD_HOC = "1";
 	private static final String PASS = "2";
-	
-	
+
 	private CarQueue entranceCarQueue;
     private CarQueue entrancePassQueue;
     private CarQueue paymentCarQueue;
@@ -27,7 +30,7 @@ public class Simulator {
     int paymentSpeed = 7; // number of cars that can pay per minute
     int exitSpeed = 5; // number of cars that can leave per minute
 
-    public Simulator() {
+    public Simulator(GUI gui) {
         entranceCarQueue = new CarQueue();
         entrancePassQueue = new CarQueue();
         paymentCarQueue = new CarQueue();
@@ -46,6 +49,10 @@ public class Simulator {
         for(int i=0; i<50; i++) {
             tick();
         }
+    }
+
+    public SimulatorView getView() {
+        return simulatorView;
     }
 
     private void tick() {
@@ -119,7 +126,7 @@ public class Simulator {
     private void carsReadyToLeave(){
         // Add leaving cars to the payment queue.
         Car car = simulatorView.getFirstLeavingCar();
-        while (car!=null) {
+        while (car != null) {
         	if (car.getHasToPay()){
 	            car.setIsPaying(true);
 	            paymentCarQueue.addCar(car);
@@ -133,7 +140,7 @@ public class Simulator {
 
     private void carsPaying(){
         // Let cars pay.
-    	int i=0;
+    	int i = 0;
     	while (paymentCarQueue.carsInQueue()>0 && i < paymentSpeed){
             Car car = paymentCarQueue.removeCar();
             // TODO Handle payment.
@@ -144,7 +151,7 @@ public class Simulator {
     
     private void carsLeaving(){
         // Let cars leave.
-    	int i=0;
+    	int i = 0;
     	while (exitCarQueue.carsInQueue()>0 && i < exitSpeed){
             exitCarQueue.removeCar();
             i++;
@@ -185,5 +192,4 @@ public class Simulator {
     	simulatorView.removeCarAt(car.getLocation());
         exitCarQueue.addCar(car);
     }
-
 }
