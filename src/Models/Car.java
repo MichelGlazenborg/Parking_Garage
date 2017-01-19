@@ -1,4 +1,4 @@
-package controllers;
+package Models;
 
 import java.awt.*;
 

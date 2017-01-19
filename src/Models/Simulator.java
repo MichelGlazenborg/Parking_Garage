@@ -1,6 +1,4 @@
-package controllers;
-
-import views.SimulatorView;
+package Models;
 
 import java.util.Random;
 
@@ -30,7 +28,7 @@ public class Simulator {
     int paymentSpeed = 7; // number of cars that can pay per minute
     int exitSpeed = 5; // number of cars that can leave per minute
 
-    public Simulator(GUI gui) {
+    public Simulator() {
         entranceCarQueue = new CarQueue();
         entrancePassQueue = new CarQueue();
         paymentCarQueue = new CarQueue();
@@ -38,18 +36,8 @@ public class Simulator {
         simulatorView = new SimulatorView(3, 6, 30);
     }
 
-    public void run() {
-        for (int i = 0; i < 10000; i++) {
-            tick();
-        }
-    }
+    public void run() { tick();}
 
-
-    public void run50() {
-        for(int i=0; i<50; i++) {
-            tick();
-        }
-    }
 
     public SimulatorView getView() {
         return simulatorView;
@@ -100,7 +88,7 @@ public class Simulator {
     private void updateViews(){
     	simulatorView.tick();
         // Update the car park view.
-        simulatorView.updateView();	
+        //simulatorView.updateView();
     }
     
     private void carsArriving(){

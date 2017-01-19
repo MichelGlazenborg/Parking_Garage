@@ -1,10 +1,21 @@
-import controllers.GUI;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-import static javafx.application.Application.launch;
+public class Main extends Application {
 
-public class Main {
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("View/Parkeergarage.fxml"));
+        primaryStage.setTitle("Hello World");
+        primaryStage.setScene(new Scene(root, 1000, 800));
+        primaryStage.show();
+    }
+
 
     public static void main(String[] args) {
-        launch(GUI.class, args);
+        launch(args);
     }
 }
