@@ -55,7 +55,9 @@ public class Controller {
         textTarget.setText(txt);
     }
 
-    public Rectangle car(Object car) {
+
+    @FXML
+    private Rectangle car(Object car) {
         int floor;
         int row;
         int place;
