@@ -1,10 +1,13 @@
 package Models;
 
+import javafx.scene.paint.*;
+
 import java.awt.*;
+import java.awt.Color;
 import java.util.Random;
 
 public class AdHocCar extends Car {
-	private static final Color COLOR = Color.red;
+	private static final javafx.scene.paint.Color COLOR = javafx.scene.paint.Color.red;
 	
     public AdHocCar() {
     	Random random = new Random();
@@ -13,7 +16,7 @@ public class AdHocCar extends Car {
         this.setHasToPay(true);
     }
     
-    public Color getColor(){
+    public javafx.scene.paint.Color getColor(){
     	return COLOR;
     }
 }

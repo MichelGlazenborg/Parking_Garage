@@ -12,6 +12,8 @@
 
 
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.layout.GridPane?>
 <BorderPane fx:controller="Controller.Controller"
             maxHeight="-Infinity"
             maxWidth="-Infinity"
@@ -64,7 +66,11 @@
       </VBox>
    </left>
    <center>
-      <Canvas height="600.0" width="800.0" BorderPane.alignment="CENTER" />
+      <!--<Canvas height="600.0" width="800.0" BorderPane.alignment="CENTER" /> -->
+       <GridPane fx:id="carPark" prefHeight="600.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+
+       </GridPane>
+
    </center>
    <bottom>
       <TextArea fx:id="textTarget" prefHeight="50.0" prefWidth="1000.0" BorderPane.alignment="CENTER" />

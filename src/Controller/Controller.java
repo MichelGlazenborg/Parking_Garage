@@ -1,9 +1,14 @@
 package Controller;
 
+import Models.AdHocCar;
+import Models.Location;
+import Models.ParkingPassCar;
 import Models.Simulator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 public class Controller {
     //make simulator object
@@ -48,5 +53,25 @@ public class Controller {
 
     private void setText(String txt) {
         textTarget.setText(txt);
+    }
+
+    public Rectangle car(Object car) {
+        int floor;
+        int row;
+        int place;
+        if(car.getClass().isInstance(AdHocCar.class)) {
+            Location loc = ((AdHocCar) car).getLocation();
+            floor = loc.getFloor();
+            row = loc.getRow();
+            place = loc.getPlace();
+            Color col = ((AdHocCar) car).getColor();
+        } else if(car.getClass().isInstance(ParkingPassCar.class)) {
+            Location loc = ((ParkingPassCar) car).getLocation();
+            floor = loc.getFloor();
+            row = loc.getRow();
+            place = loc.getPlace();
+            Color col = ((ParkingPassCar) car).getColor();
+        }
+
     }
 }

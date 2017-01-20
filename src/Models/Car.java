@@ -1,7 +1,5 @@
 package Models;
 
-import java.awt.*;
-
 public abstract class Car {
 
     private Location _location;
@@ -52,5 +50,5 @@ public abstract class Car {
         _minutesLeft--;
     }
     
-    public abstract Color getColor();
+    public abstract javafx.scene.paint.Color getColor();
 }
