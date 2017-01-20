@@ -66,11 +66,7 @@
       </VBox>
    </left>
    <center>
-      <!--<Canvas height="600.0" width="800.0" BorderPane.alignment="CENTER" /> -->
-       <GridPane fx:id="carPark" prefHeight="600.0" prefWidth="800.0" BorderPane.alignment="CENTER">
-
-       </GridPane>
-
+      <Canvas fx:id="carPark" height="600.0" width="800.0" BorderPane.alignment="CENTER" />
    </center>
    <bottom>
       <TextArea fx:id="textTarget" prefHeight="50.0" prefWidth="1000.0" BorderPane.alignment="CENTER" />
