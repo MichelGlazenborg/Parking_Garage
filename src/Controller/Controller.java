@@ -72,6 +72,7 @@ public class Controller {
             place = loc.getPlace();
             Color col = ((ParkingPassCar) car).getColor();
         }
+        return null;
 
     }
 }
