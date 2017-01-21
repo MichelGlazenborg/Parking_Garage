@@ -1,13 +1,13 @@
 package Controller;
 
-import Models.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.TextArea;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+
+import Models.*;
 
 public class Controller {
 

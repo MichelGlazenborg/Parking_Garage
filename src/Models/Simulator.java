@@ -4,8 +4,6 @@ import java.util.Random;
 
 import javafx.scene.canvas.Canvas;
 
-//import View.CarParkView;
-
 public class Simulator {
 
 	private static final String AD_HOC = "1";
