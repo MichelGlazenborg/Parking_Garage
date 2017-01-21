@@ -26,7 +26,7 @@
    <top>
       <MenuBar>
         <menus>
-          <Menu mnemonicParsing="false" text="Simulator">
+          <Menu mnemonicParsing="false" text="_Simulator">
             <items>
               <MenuItem mnemonicParsing="false" text="Close" onAction="#closeApp" />
             </items>
@@ -36,7 +36,7 @@
               <MenuItem mnemonicParsing="false" text="Delete" />
             </items>
           </Menu>-->
-          <Menu mnemonicParsing="false" text="Help">
+          <Menu mnemonicParsing="false" text="_Help">
             <items>
               <MenuItem mnemonicParsing="false" text="About" onAction="#showAbout"/>
             </items>
@@ -66,7 +66,7 @@
       </VBox>
    </left>
    <center>
-      <Canvas fx:id="carPark" height="600.0" width="800.0" BorderPane.alignment="CENTER" />
+      <Canvas fx:id="_canvas" height="600.0" width="800.0" BorderPane.alignment="CENTER" />
    </center>
    <bottom>
       <TextArea fx:id="textTarget" prefHeight="50.0" prefWidth="1000.0" BorderPane.alignment="CENTER" />

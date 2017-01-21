@@ -1,8 +1,15 @@
 package Models;
 
+import View.CarParkView;
+import javafx.fxml.FXML;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+
 import java.util.Random;
 
 public class Simulator {
+
+    private CarPark _carPark;
 
 	private static final String AD_HOC = "1";
 	private static final String PASS = "2";
@@ -34,9 +41,13 @@ public class Simulator {
         paymentCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
         simulatorView = new SimulatorView(3, 6, 30);
+
+        _carPark = new CarPark();
     }
 
-    public void run() { tick();}
+    public void run() {
+        tick();
+    }
 
 
     public SimulatorView getView() {
@@ -70,7 +81,6 @@ public class Simulator {
         while (day > 6) {
             day -= 7;
         }
-
     }
 
     private void handleEntrance(){
@@ -88,22 +98,20 @@ public class Simulator {
     private void updateViews(){
     	simulatorView.tick();
         // Update the car park view.
-        //simulatorView.updateView();
+        _carPark.update();
     }
     
     private void carsArriving(){
-    	int numberOfCars=getNumberOfCars(weekDayArrivals, weekendArrivals);
+    	int numberOfCars = getNumberOfCars(weekDayArrivals, weekendArrivals);
         addArrivingCars(numberOfCars, AD_HOC);    	
-    	numberOfCars=getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
+    	numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
         addArrivingCars(numberOfCars, PASS);    	
     }
 
     private void carsEntering(CarQueue queue){
         int i=0;
         // Remove car from the front of the queue and assign to a parking space.
-    	while (queue.carsInQueue()>0 && 
-    			simulatorView.getNumberOfOpenSpots()>0 && 
-    			i<enterSpeed) {
+    	while (queue.carsInQueue() > 0 && simulatorView.getNumberOfOpenSpots() > 0 && i < enterSpeed) {
             Car car = queue.removeCar();
             Location freeLocation = simulatorView.getFirstFreeLocation();
             simulatorView.setCarAt(freeLocation, car);
@@ -150,9 +158,7 @@ public class Simulator {
         Random random = new Random();
 
         // Get the average number of cars that arrive per hour.
-        int averageNumberOfCarsPerHour = day < 5
-                ? weekDay
-                : weekend;
+        int averageNumberOfCarsPerHour = day < 5 ? weekDay : weekend;
 
         // Calculate the number of cars that arrive this minute.
         double standardDeviation = averageNumberOfCarsPerHour * 0.3;

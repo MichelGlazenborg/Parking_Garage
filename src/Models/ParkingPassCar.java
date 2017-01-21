@@ -2,8 +2,11 @@ package Models;
 
 import java.util.Random;
 
+import javafx.scene.paint.Color;
+
 public class ParkingPassCar extends Car {
-	private static final javafx.scene.paint.Color COLOR= javafx.scene.paint.Color.BLUE;
+
+	private static final Color COLOR = Color.BLUE;
 	
     public ParkingPassCar() {
     	Random random = new Random();

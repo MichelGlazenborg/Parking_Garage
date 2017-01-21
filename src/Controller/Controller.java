@@ -1,11 +1,9 @@
 package Controller;
 
-import Models.AdHocCar;
-import Models.Location;
-import Models.ParkingPassCar;
-import Models.Simulator;
+import Models.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.TextArea;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -16,6 +14,11 @@ public class Controller {
 
     @FXML
     private TextArea textTarget;
+
+    public void initialize() {
+        System.out.println("Test");
+    }
+
     @FXML
     private void closeApp(ActionEvent e) {
         System.exit(0);
@@ -25,7 +28,7 @@ public class Controller {
     private void tick50() {
         //call simulator object to run for 50 ticks
         for(int i=0;i<50;i++) {
-            //sim.run();
+            sim.run();
         }
         setText("I should be running for 50 ticks now");
     }
@@ -33,28 +36,28 @@ public class Controller {
     @FXML
     private void tick1() {
         //call the simulator object to run for 1 tick
-        //sim.run();
+        sim.run();
         setText("I should be running for 1 tick now");
     }
 
     @FXML
     private void tick1000() {
-        //call the simulator object to run indefinitly
+        //call the simulator object to run indefinitely
         for(int i=0;i<1000;i++) {
-            //sim.run();
+            sim.run();
         }
         setText("I should just be running now");
     }
+
     @FXML
     private void showAbout() {
         //show about information
-        setText("Parking Simulator is a program that lets city parking Gronningen see how some changes to their Parking Garage might affect business.");
+        setText("Parking Simulator is a program that lets city parking Groningen see how some changes to their Parking Garage might affect business.");
     }
 
     private void setText(String txt) {
         textTarget.setText(txt);
     }
-
 
     @FXML
     private Rectangle car(Object car) {
@@ -75,6 +78,5 @@ public class Controller {
             Color col = ((ParkingPassCar) car).getColor();
         }
         return null;
-
     }
 }
