@@ -2,8 +2,11 @@ package Models;
 
 import java.util.Random;
 
+import javafx.scene.paint.Color;
+
 public class AdHocCar extends Car {
-	private static final javafx.scene.paint.Color COLOR = javafx.scene.paint.Color.RED;
+
+	private static final Color COLOR = Color.RED;
 	
     public AdHocCar() {
     	Random random = new Random();

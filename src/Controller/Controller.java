@@ -39,7 +39,7 @@ public class Controller {
 
     @FXML
     private void tick1000() {
-        //call the simulator object to run indefinitly
+        //call the simulator object to run indefinitely
         for(int i=0;i<1000;i++) {
             //sim.run();
         }
@@ -48,7 +48,7 @@ public class Controller {
     @FXML
     private void showAbout() {
         //show about information
-        setText("Parking Simulator is a program that lets city parking Gronningen see how some changes to their Parking Garage might affect business.");
+        setText("Parking Simulator is a program that lets city parking Groningen see how some changes to their Parking Garage might affect business.");
     }
 
     private void setText(String txt) {
