@@ -1,12 +1,18 @@
 package View;
 
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+
 public class CarParkView {
 
-    public CarParkView() {
+    private GraphicsContext _graphicsContext;
 
+    public CarParkView(GraphicsContext graphicsContext) {
+        _graphicsContext = graphicsContext;
     }
 
     public void updateView() {
-        System.out.println("We're updating.");
+        //_graphicsContext.setFill(Color.BLUE);
+        //_graphicsContext.fillRect(75, 75, 100, 100);
     }
 }

@@ -35,14 +35,15 @@ public class Simulator {
     int paymentSpeed = 7; // number of cars that can pay per minute
     int exitSpeed = 5; // number of cars that can leave per minute
 
-    public Simulator() {
+    public Simulator(Canvas canvas) {
         entranceCarQueue = new CarQueue();
         entrancePassQueue = new CarQueue();
         paymentCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
         simulatorView = new SimulatorView(3, 6, 30);
 
-        _carPark = new CarPark();
+        _carPark = new CarPark(canvas);
+        _carPark.update();
     }
 
     public void run() {
