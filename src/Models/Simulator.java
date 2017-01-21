@@ -1,15 +1,10 @@
 package Models;
 
-import View.CarParkView;
-import javafx.fxml.FXML;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-
 import java.util.Random;
 
-public class Simulator {
+import javafx.scene.canvas.Canvas;
 
-    private CarPark _carPark;
+public class Simulator {
 
 	private static final String AD_HOC = "1";
 	private static final String PASS = "2";
@@ -35,14 +30,13 @@ public class Simulator {
     int paymentSpeed = 7; // number of cars that can pay per minute
     int exitSpeed = 5; // number of cars that can leave per minute
 
-    public Simulator() {
+    public Simulator(Canvas canvas) {
         entranceCarQueue = new CarQueue();
         entrancePassQueue = new CarQueue();
         paymentCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
-        simulatorView = new SimulatorView(3, 6, 30);
-
-        _carPark = new CarPark();
+        simulatorView = new SimulatorView(canvas, 3, 6, 30);
+        updateViews();
     }
 
     public void run() {
@@ -98,7 +92,7 @@ public class Simulator {
     private void updateViews(){
     	simulatorView.tick();
         // Update the car park view.
-        _carPark.update();
+        simulatorView.updateView();
     }
     
     private void carsArriving(){
@@ -109,7 +103,7 @@ public class Simulator {
     }
 
     private void carsEntering(CarQueue queue){
-        int i=0;
+        int i = 0;
         // Remove car from the front of the queue and assign to a parking space.
     	while (queue.carsInQueue() > 0 && simulatorView.getNumberOfOpenSpots() > 0 && i < enterSpeed) {
             Car car = queue.removeCar();
@@ -169,16 +163,16 @@ public class Simulator {
     private void addArrivingCars(int numberOfCars, String type){
         // Add the cars to the back of the queue.
     	switch(type) {
-    	case AD_HOC: 
-            for (int i = 0; i < numberOfCars; i++) {
-            	entranceCarQueue.addCar(new AdHocCar());
-            }
-            break;
-    	case PASS:
-            for (int i = 0; i < numberOfCars; i++) {
-            	entrancePassQueue.addCar(new ParkingPassCar());
-            }
-            break;	            
+            case AD_HOC:
+                for (int i = 0; i < numberOfCars; i++) {
+                    entranceCarQueue.addCar(new AdHocCar());
+                }
+                break;
+            case PASS:
+                for (int i = 0; i < numberOfCars; i++) {
+                    entrancePassQueue.addCar(new ParkingPassCar());
+                }
+                break;
     	}
     }
     
