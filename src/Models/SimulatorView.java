@@ -120,5 +120,4 @@ public class SimulatorView {
         }
         return true;
     }
-
 }
