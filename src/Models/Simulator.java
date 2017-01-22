@@ -1,8 +1,8 @@
 package Models;
 
-import java.util.Random;
-
 import javafx.scene.canvas.Canvas;
+
+import java.util.Random;
 
 public class Simulator {
 
@@ -179,5 +179,20 @@ public class Simulator {
     private void carLeavesSpot(Car car){
     	simulatorView.removeCarAt(car.getLocation());
         exitCarQueue.addCar(car);
+    }
+    public int getNumberOfFloors() {
+        return simulatorView.getNumberOfFloors();
+    }
+
+    public int getNumberOfRows() {
+        return simulatorView.getNumberOfRows();
+    }
+
+    public int getNumberOfPlaces() {
+        return simulatorView.getNumberOfPlaces();
+    }
+
+    public int getNumberOfOpenSpots() {
+        return simulatorView.getNumberOfOpenSpots();
     }
 }
