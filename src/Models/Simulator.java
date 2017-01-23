@@ -39,16 +39,13 @@ public class Simulator {
         updateViews();
     }
 
-    public void run() {
-        tick();
-    }
 
 
     public SimulatorView getView() {
         return simulatorView;
     }
 
-    private void tick() {
+    public void tick() {
     	advanceTime();
     	handleExit();
     	updateViews();

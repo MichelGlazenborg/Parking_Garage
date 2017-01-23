@@ -1,18 +1,20 @@
 package Controller;
 
+import Models.Simulator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.TextArea;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-
-import Models.*;
+import javafx.scene.control.TextField;
 
 public class Controller {
 
     @FXML
     private Canvas _canvas;
+    @FXML
+    private TextField tickField;
+
+
 
     //make simulator object
     private Simulator sim;
@@ -33,7 +35,7 @@ public class Controller {
     private void tick50() {
         //call simulator object to run for 50 ticks
         for(int i=0;i<50;i++) {
-            sim.run();
+            sim.tick();
         }
         setText("I should be running for 50 ticks now");
     }
@@ -41,7 +43,7 @@ public class Controller {
     @FXML
     private void tick1() {
         //call the simulator object to run for 1 tick
-        sim.run();
+        sim.tick();
         setText("I should be running for 1 tick now");
     }
 
@@ -49,7 +51,7 @@ public class Controller {
     private void tick1000() {
         //call the simulator object to run indefinitely
         for(int i=0;i<1000;i++) {
-            sim.run();
+            sim.tick();
         }
         setText("I should just be running now");
     }
@@ -57,7 +59,7 @@ public class Controller {
     @FXML
     private void tickFor(int Ticks) {
         for(int i=0;i<Ticks;i++) {
-            sim.run();
+            sim.tick();
         }
         setText("I should be running for"+Ticks+"now");
     }
@@ -68,11 +70,17 @@ public class Controller {
         setText("Parking Simulator is a program that lets city parking Groningen see how some changes to their Parking Garage might affect business.");
     }
 
+    @FXML
+    private void submit() {
+        setText("I should be opening a popup window now");
+    }
+
+
     private void setText(String txt) {
         textTarget.setText(txt);
     }
 
-    @FXML
+    /*@FXML
     private Rectangle car(Object car) {
         int floor;
         int row;
@@ -135,5 +143,5 @@ public class Controller {
 
         }
         return null;
-    }
+    }*/
 }

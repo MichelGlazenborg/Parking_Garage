@@ -8,11 +8,9 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.TextFlow?>
-
-
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.shape.Rectangle?>
+
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.GridPane?>
 <BorderPane fx:controller="Controller.Controller"
             maxHeight="-Infinity"
@@ -45,7 +43,7 @@
       </MenuBar>
    </top>
    <left>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="200.0" prefWidth="300.0" BorderPane.alignment="CENTER_LEFT">
          <children>
             <Button mnemonicParsing="false" prefWidth="40.0" text="1" onAction="#tick1">
                <VBox.margin>
@@ -62,6 +60,11 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </Button>
+             <Button  prefWidth="100" text="Run for ..." onAction="#submit">
+                 <VBox.margin>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                 </VBox.margin>
+             </Button>
          </children>
       </VBox>
    </left>

@@ -164,6 +164,7 @@ public class SimulatorView {
                     }
                 }
             }
+
         }
 
         private void drawParkingSpot(Location location, Color color) {
