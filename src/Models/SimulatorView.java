@@ -21,6 +21,10 @@ public class SimulatorView {
         _numberOfOpenSpots = numberOfFloors * numberOfRows * numberOfPlaces;
         _cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         _carParkView = new CarParkView(canvas);
+        for(int i=0; i<30; i++) {
+            setReservation(new Location(0, 0, i), new Reservation());
+            setReservation(new Location(0, 1, i), new Reservation());
+        }
     }
 
     public void updateView() {
@@ -54,11 +58,26 @@ public class SimulatorView {
         if (!locationIsValid(location)) {
             return false;
         }
+            Car oldCar = getCarAt(location);
+            if (oldCar == null) {
+                _cars[location.getFloor()][location.getRow()][location.getPlace()] = car;
+                car.setLocation(location);
+                _numberOfOpenSpots--;
+                return true;
+            }
 
-        Car oldCar = getCarAt(location);
-        if (oldCar == null) {
-            _cars[location.getFloor()][location.getRow()][location.getPlace()] = car;
-            car.setLocation(location);
+        return false;
+    }
+
+    public boolean setCarAtReservedSpot(Location loc, Car car) {
+        if(!locationIsValid(loc)) {
+            return false;
+        }
+        Reservation reservation  = (Reservation) removeCarAt(loc);
+        Car oldCar = getCarAt(loc);
+        if(oldCar == null) {
+            _cars[loc.getFloor()][loc.getRow()][loc.getPlace()] = car;
+            car.setLocation(loc);
             _numberOfOpenSpots--;
             return true;
         }
@@ -97,7 +116,7 @@ public class SimulatorView {
             for (int row = 0; row < getNumberOfRows(); row++) {
                 for (int place = 0; place < getNumberOfPlaces(); place++) {
                     Location location = new Location(floor, row, place);
-                    if (getCarAt(location) == null) {
+                    if (getCarAt(location) == null ) {
                         return location;
                     }
                 }
@@ -105,6 +124,7 @@ public class SimulatorView {
         }
         return null;
     }
+
 
     public Car getFirstLeavingCar() {
         for (int floor = 0; floor < getNumberOfFloors(); floor++) {

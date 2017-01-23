@@ -1,8 +1,8 @@
 package Models;
 
-import java.util.Random;
-
 import javafx.scene.paint.Color;
+
+import java.util.Random;
 
 public class ParkingPassCar extends Car {
 
@@ -18,4 +18,6 @@ public class ParkingPassCar extends Car {
     public javafx.scene.paint.Color getColor(){
     	return COLOR;
     }
+
+
 }

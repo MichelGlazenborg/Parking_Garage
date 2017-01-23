@@ -103,10 +103,10 @@ public class Simulator {
         int i = 0;
         // Remove car from the front of the queue and assign to a parking space.
     	while (queue.carsInQueue() > 0 && simulatorView.getNumberOfOpenSpots() > 0 && i < enterSpeed) {
-            Car car = queue.removeCar();
-            Location freeLocation = simulatorView.getFirstFreeLocation();
-            simulatorView.setCarAt(freeLocation, car);
-            i++;
+                Car car = queue.removeCar();
+                Location freeLocation = simulatorView.getFirstFreeLocation();
+                simulatorView.setCarAt(freeLocation, car);
+                i++;
         }
     }
     
