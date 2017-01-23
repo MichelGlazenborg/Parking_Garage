@@ -68,6 +68,14 @@ public class Controller {
     }
 
     @FXML
+    private void tickFor(int Ticks) {
+        for(int i=0;i<Ticks;i++) {
+            sim.run();
+        }
+        setText("I should be running for"+Ticks+"now");
+    }
+
+    @FXML
     private void showAbout() {
         //show about information
         setText("Parking Simulator is a program that lets city parking Groningen see how some changes to their Parking Garage might affect business.");
