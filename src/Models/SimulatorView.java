@@ -54,11 +54,25 @@ public class SimulatorView {
         if (!locationIsValid(location)) {
             return false;
         }
+
         Car oldCar = getCarAt(location);
         if (oldCar == null) {
             _cars[location.getFloor()][location.getRow()][location.getPlace()] = car;
             car.setLocation(location);
             _numberOfOpenSpots--;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean setReservation(Location loc, Reservation res) {
+        if (!locationIsValid(loc)) {
+            return false;
+        }
+        Car oldcar = getCarAt(loc);
+        if(oldcar == null) {
+            _cars[loc.getFloor()][loc.getRow()][loc.getPlace()] = res;
+            res.setLocation(loc);
             return true;
         }
         return false;

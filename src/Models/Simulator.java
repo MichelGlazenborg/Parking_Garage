@@ -53,11 +53,11 @@ public class Simulator {
     	handleExit();
     	updateViews();
     	// Pause.
-        try {
+        /*try {
             Thread.sleep(tickPause);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
     	handleEntrance();
     }
 
