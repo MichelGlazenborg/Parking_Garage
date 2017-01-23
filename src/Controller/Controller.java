@@ -1,15 +1,12 @@
 package Controller;
 
+import Models.Simulator;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.TextArea;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-
-import Models.*;
 import javafx.util.Duration;
 
 public class Controller {
@@ -35,7 +32,7 @@ public class Controller {
     @FXML
     private void tick1() {
         //call the simulator object to run for 1 tick
-        sim.run();
+        sim.tick();
         setText("I should be running for 1 tick now");
     }
 
@@ -47,7 +44,7 @@ public class Controller {
         Timeline timeline = new Timeline();
         timeline.setCycleCount(50);
         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100), e -> {
-            sim.run();
+            sim.tick();
         }));
 
         timeline.play();
@@ -61,18 +58,23 @@ public class Controller {
         Timeline timeline = new Timeline();
         timeline.setCycleCount(1000);
         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100), e -> {
-            sim.run();
+            sim.tick();
         }));
 
         timeline.play();
     }
 
     @FXML
-    private void tickFor(int Ticks) {
-        for(int i=0;i<Ticks;i++) {
-            sim.run();
+    private void tickFor(int ticks) {
+        for(int i=0;i<ticks;i++) {
+            sim.tick();
         }
-        setText("I should be running for"+Ticks+"now");
+        setText("I should be running for"+ticks+"now");
+    }
+
+    @FXML
+    private void submit() {
+        setText("I should be opening a popup window now.");
     }
 
     @FXML
@@ -85,8 +87,8 @@ public class Controller {
         textTarget.setText(txt);
     }
 
-    @FXML
-    private Rectangle car(Object car) {
+
+    /*private Rectangle car(Object car) {
         int floor;
         int row;
         int place;
@@ -148,5 +150,5 @@ public class Controller {
 
         }
         return null;
-    }
+    }*/
 }
