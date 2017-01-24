@@ -73,7 +73,7 @@ public class SimulatorView {
         if(!locationIsValid(loc)) {
             return false;
         }
-        Reservation reservation  = (Reservation) removeCarAt(loc);
+        Reservation reservation = (Reservation) removeCarAt(loc);
         Car oldCar = getCarAt(loc);
         if(oldCar == null) {
             _cars[loc.getFloor()][loc.getRow()][loc.getPlace()] = car;

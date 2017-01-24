@@ -15,9 +15,7 @@ public class AdHocCar extends Car {
         this.setHasToPay(true);
     }
     
-    public javafx.scene.paint.Color getColor(){
+    public Color getColor(){
     	return COLOR;
     }
-
-
 }
