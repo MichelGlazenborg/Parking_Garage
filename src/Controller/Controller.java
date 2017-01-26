@@ -19,7 +19,7 @@ public class Controller {
 
 	//make simulator object
 	private Simulator sim;
-  private SimulatorView simView;
+    private SimulatorView simView;
 
     @FXML
     private Canvas _canvas;
@@ -59,8 +59,8 @@ public class Controller {
     }
 
     @FXML
-    private void makeReservations(){
-        simView.makeReservations();
+    private void makePassHolderPlaces(){
+        simView.makePassHolderPlaces();
     }
 
     @FXML
@@ -104,7 +104,7 @@ public class Controller {
         timeline.setCycleCount(ticks);
         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100), e -> sim.tick()));
 
-            setText("I should be running for"+ticks+"now");
+            setText("I should be running for" + ticks + "now");
 
         timeline.play();
         timeline.setOnFinished(e -> disableButtons(false));

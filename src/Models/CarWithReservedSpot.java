@@ -9,7 +9,7 @@ import java.util.Random;
  */
 public class CarWithReservedSpot extends Car {
     private Location reservedSpot;
-    private static final Color COLOR = Color.GREEN;
+    private static final Color COLOR = Color.YELLOW;
 
     public CarWithReservedSpot(Location reservation) {
         reservedSpot = reservation;

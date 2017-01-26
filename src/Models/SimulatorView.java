@@ -65,10 +65,10 @@ public class SimulatorView {
         return false;
     }
 
-    public void makeReservations() {
+    public void makePassHolderPlaces() {
         for(int i=0; i<30; i++) {
-            setReservation(new Location(0, 0, i), new Reservation());
-            setReservation(new Location(0, 1, i), new Reservation());
+            setPassHolderSpace(new Location(0, 0, i), new PassHolderSpace());
+            setPassHolderSpace(new Location(0, 1, i), new PassHolderSpace());
         }
         updateView();
     }
@@ -78,10 +78,22 @@ public class SimulatorView {
         Reservation res = new Reservation();
         setReservation(loc, res);
         updateView();
-
     }
 
 
+
+    public boolean setPassHolderSpace(Location loc, PassHolderSpace phs) {
+        if (!locationIsValid(loc)) {
+            return false;
+        }
+        Car oldcar = getCarAt(loc);
+        if(oldcar == null) {
+            _cars[loc.getFloor()][loc.getRow()][loc.getPlace()] = phs;
+            phs.setLocation(loc);
+            return true;
+        }
+        return false;
+    }
 
     public boolean setReservation(Location loc, Reservation res) {
         if (!locationIsValid(loc)) {
@@ -125,23 +137,6 @@ public class SimulatorView {
     }
 
     public Location getFirstPassSpot() {
-        for (int floor = 0; floor < getNumberOfFloors(); floor++) {
-            for (int row = 0; row < getNumberOfRows(); row++) {
-                for (int place = 0; place < getNumberOfPlaces(); place++) {
-                    Location location = new Location(floor, row, place);
-                    if(getCarAt(location) != null) {
-                        if(getCarAt(location).getColor() == Color.BLACK) {
-                            removeCarAt(location);
-                            return location;
-                        }
-                    }
-                }
-            }
-        }
-        return null;
-    }
-
-    public Location getFirsReservedSpot() {
         for (int floor = 0; floor < getNumberOfFloors(); floor++) {
             for (int row = 0; row < getNumberOfRows(); row++) {
                 for (int place = 0; place < getNumberOfPlaces(); place++) {
