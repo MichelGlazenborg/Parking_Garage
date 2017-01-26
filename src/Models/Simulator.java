@@ -148,6 +148,7 @@ public class Simulator {
         }
     }
 
+
     /*private void PassCarsEntering(CarQueue queue) {
         int i = 0;
         // Remove car from the front of the queue and assign to a parking space.
@@ -249,6 +250,10 @@ public class Simulator {
     private void carLeavesSpot(Car car){
     	simulatorView.removeCarAt(car.getLocation());
         exitCarQueue.addCar(car);
+    }
+
+    public SimulatorView getSimulatorView() {
+        return simulatorView;
     }
 
    /* public int getNumberOfFloors() {

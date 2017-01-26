@@ -21,10 +21,7 @@ public class SimulatorView {
         _numberOfOpenSpots = numberOfFloors * numberOfRows * numberOfPlaces;
         _cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         _carParkView = new CarParkView(canvas);
-        for(int i=0; i<30; i++) {
-            setReservation(new Location(0, 0, i), new Reservation());
-            setReservation(new Location(0, 1, i), new Reservation());
-        }
+        makeReservations(5);
     }
 
     public void updateView() {
@@ -69,9 +66,24 @@ public class SimulatorView {
         return false;
     }
 
+    public void makeReservations() {
+        for(int i=0; i<30; i++) {
+            setReservation(new Location(0, 0, i), new Reservation());
+            setReservation(new Location(0, 1, i), new Reservation());
+        }
+        updateView();
+    }
+
+    public void makeReservations(int numberOfReservations) {
+        for(int i=0; i< numberOfReservations; i++) {
+            setReservation(new Location(0, 0, i), new Reservation());
+            setReservation(new Location(0, 1, i), new Reservation());
+        }
+    }
 
 
-    public boolean setReservation(Location loc, Reservation res) {
+
+    private boolean setReservation(Location loc, Reservation res) {
         if (!locationIsValid(loc)) {
             return false;
         }

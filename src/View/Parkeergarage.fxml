@@ -24,16 +24,15 @@
    <top>
       <MenuBar>
         <menus>
-          <Menu mnemonicParsing="false" text="_Simulator">
+          <Menu mnemonicParsing="false" text="Simulator">
             <items>
               <MenuItem mnemonicParsing="false" text="Close" onAction="#closeApp" />
             </items>
+              <items>
+                  <MenuItem text="Make Reservations" onAction="#makeReservations" />
+              </items>
           </Menu>
-          <!--<Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>-->
+
           <Menu mnemonicParsing="false" text="_Help">
             <items>
               <MenuItem mnemonicParsing="false" text="About" onAction="#showAbout"/>

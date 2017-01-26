@@ -1,6 +1,7 @@
 package Controller;
 
 import Models.Simulator;
+import Models.SimulatorView;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -16,12 +17,14 @@ public class Controller {
 
     //make simulator object
     private Simulator sim;
+    private SimulatorView simView;
 
     @FXML
     private TextArea textTarget;
 
     public void initialize() {
         sim = new Simulator(_canvas);
+        simView = sim.getSimulatorView();
     }
 
     @FXML
@@ -34,6 +37,11 @@ public class Controller {
         //call the simulator object to run for 1 tick
         sim.tick();
         setText("I should be running for 1 tick now");
+    }
+
+    @FXML
+    private void makeReservations(){
+        simView.makeReservations();
     }
 
     @FXML
