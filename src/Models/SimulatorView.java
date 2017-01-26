@@ -74,9 +74,8 @@ public class SimulatorView {
     }
 
 
-    public void makeReservationsAt(Location loc, int entryCode) {
+    public void makeReservationsAt(Location loc) {
         Reservation res = new Reservation();
-        res.setEntryCode(entryCode);
         setReservation(loc, res);
         updateView();
 

@@ -50,7 +50,7 @@ public class Controller {
 
     @FXML
     private void makeReservationsAt(){
-        simView.makeReservationsAt(new Location(2,2,17), 123);
+        simView.makeReservationsAt(new Location(2,2,17));
     }
 
     @FXML

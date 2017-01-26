@@ -28,8 +28,8 @@ public class Simulator {
     int weekendArrivals = 200; // average number of arriving cars per hour
     int weekDayPassArrivals= 50; // average number of arriving cars per hour
     int weekendPassArrivals = 5; // average number of arriving cars per hour
-    int weekDayResArrivals = 75;
-    int weekendResArrivals = 30;
+    int weekDayResArrivals = 20;
+    int weekendResArrivals = 4;
 
     int enterSpeed = 3; // number of cars that can enter per minute
     int paymentSpeed = 7; // number of cars that can pay per minute
@@ -142,7 +142,6 @@ public class Simulator {
                     simulatorView.setCarAt(freeLocation, car);
                 }else {
     	            CarWithReservedSpot car = (CarWithReservedSpot) queue.removeCar();
-    	            int entryCode = car.getEntryCode();
                     Location freeLocation = simulatorView.getFirstFreeLocation();
                     simulatorView.setCarAt(freeLocation, car);
                 }
@@ -240,7 +239,9 @@ public class Simulator {
                 break;
             case RES:
                 for(int i = 0; i < numberOfCars; i++) {
-
+                    Random rand = new Random();
+                    Location loc = new Location(rand.nextInt(2), rand.nextInt(1), rand.nextInt(30) );
+                    entranceResQueue.addCar(new CarWithReservedSpot(loc));
                 }
     	}
     }
