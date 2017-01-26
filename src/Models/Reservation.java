@@ -8,6 +8,7 @@ import javafx.scene.paint.Color;
  */
 public class Reservation extends Car {
     private static final Color COLOR = Color.BLACK;
+    private int entryCode;
 
     public Reservation() {
 
@@ -17,5 +18,13 @@ public class Reservation extends Car {
     }
 
     public Color getColor() {return COLOR;}
+
+    public void setEntryCode(int entryCode){
+        this.entryCode = entryCode;
+    }
+
+    public int getEntryCode(){
+        return entryCode;
+    }
 
 }

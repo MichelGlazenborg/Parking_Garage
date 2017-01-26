@@ -1,5 +1,6 @@
 package Controller;
 
+import Models.Location;
 import Models.Simulator;
 import Models.SimulatorView;
 import javafx.animation.KeyFrame;
@@ -11,7 +12,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextInputDialog;
 import javafx.util.Duration;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
 
 public class Controller {
@@ -46,6 +46,11 @@ public class Controller {
     @FXML
     private void makeReservations(){
         simView.makeReservations();
+    }
+
+    @FXML
+    private void makeReservationsAt(){
+        simView.makeReservationsAt(new Location(2,2,17), 123);
     }
 
     @FXML

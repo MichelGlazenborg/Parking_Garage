@@ -15,7 +15,7 @@ public class ParkingPassCar extends Car {
         this.setHasToPay(false);
     }
     
-    public javafx.scene.paint.Color getColor(){
+    public Color getColor(){
     	return COLOR;
     }
 
