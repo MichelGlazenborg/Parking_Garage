@@ -64,7 +64,6 @@ public class Simulator {
     	advanceTime();
     	handleExit();
     	updateViews();
-    	// Pause.
     	handleEntrance();
     }
 
@@ -120,7 +119,7 @@ public class Simulator {
      */
     private void carsArriving(){
     	int numberOfCars = getNumberOfCars(weekDayArrivals, weekendArrivals);
-        addArrivingCars(numberOfCars, AD_HOC);    	
+        addArrivingCars(numberOfCars, AD_HOC);
     	numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
         addArrivingCars(numberOfCars, PASS);
         numberOfCars = getNumberOfCars(weekDayResArrivals, weekendResArrivals);
@@ -199,7 +198,7 @@ public class Simulator {
     	while (exitCarQueue.carsInQueue()>0 && i < exitSpeed){
             exitCarQueue.removeCar();
             i++;
-    	}	
+    	}
     }
 
     /**
@@ -217,7 +216,7 @@ public class Simulator {
         // Calculate the number of cars that arrive this minute.
         double standardDeviation = averageNumberOfCarsPerHour * 0.3;
         double numberOfCarsPerHour = averageNumberOfCarsPerHour + random.nextGaussian() * standardDeviation;
-        return (int)Math.round(numberOfCarsPerHour / 60);	
+        return (int)Math.round(numberOfCarsPerHour / 60);
     }
 
     /**
