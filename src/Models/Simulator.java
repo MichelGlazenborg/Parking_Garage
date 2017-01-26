@@ -92,8 +92,8 @@ public class Simulator {
      */
     private void handleEntrance(){
     	carsArriving();
-    	PassCarsEntering(entrancePassQueue);
-    	carsEntering(entranceCarQueue);  	
+    	carsEntering(entrancePassQueue,true);
+    	carsEntering(entranceCarQueue,false);
     }
 
     /**
@@ -128,18 +128,27 @@ public class Simulator {
      * removes a car from the carQueue and assigns it a parking space
      * @param queue the carQueue a car enters from
      */
-    private void carsEntering(CarQueue queue){
+    private void carsEntering(CarQueue queue, boolean passHolder){
         int i = 0;
         // Remove car from the front of the queue and assign to a parking space.
     	while (queue.carsInQueue() > 0 && simulatorView.getNumberOfOpenSpots() > 0 && i < enterSpeed) {
-                Car car = queue.removeCar();
+    	    if(!passHolder) {
+                AdHocCar car = (AdHocCar) queue.removeCar();
                 Location freeLocation = simulatorView.getFirstFreeLocation();
                 simulatorView.setCarAt(freeLocation, car);
+            } else {
+    	        ParkingPassCar car = (ParkingPassCar) queue.removeCar();
+    	        Location freeLocation = simulatorView.getFirstReservedSpot();
+    	        if(freeLocation == null) {
+                    freeLocation = simulatorView.getFirstFreeLocation();
+                }
+    	        simulatorView.setCarAt(freeLocation, car);
+            }
                 i++;
         }
     }
 
-    private void PassCarsEntering(CarQueue queue) {
+    /*private void PassCarsEntering(CarQueue queue) {
         int i = 0;
         // Remove car from the front of the queue and assign to a parking space.
         while (queue.carsInQueue() > 0 && simulatorView.getNumberOfOpenSpots() > 0 && i < enterSpeed) {
@@ -148,7 +157,7 @@ public class Simulator {
             simulatorView.setCarAtReservedSpot(freeLocation, car);
             i++;
         }
-    }
+    }*/
 
     /**
      * adds leaving cars to the payment queue
