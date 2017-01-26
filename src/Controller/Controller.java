@@ -65,14 +65,119 @@ public class Controller {
     }
 
     @FXML
-    private void makeReservationsAt(){
-        Random rand = new Random();
-        int floor = rand.nextInt(2);
-        if(floor == 0) {
-            floor = 1;
+    private void makeReservationsAt() {
+        // make reservations at a prompted location
+        int floor = insertFloor();
+        int row = insertRow();
+        int place = insertPlace();
+
+        if (floor == -1 || row == -1 || place == -1) {
+            setText("One or more arguments were not filled in correctly!");
+        } else {
+            simView.makeReservationsAt(new Location(floor, row, place));
         }
-        simView.makeReservationsAt(new Location(floor,rand.nextInt(2),rand.nextInt(30)));
-        //simView.makeReservationsAt(new Location(2,2,30));
+    }
+
+    private int insertFloor() {
+        // input a floor
+        int floor = -1;
+
+        TextInputDialog floorDialog = new TextInputDialog("0");
+        floorDialog.setTitle("Floor Input Dialog");
+        floorDialog.setContentText("Floor:");
+        Optional<String> floorResult = floorDialog.showAndWait();
+
+        if (floorResult.isPresent()) {
+            // Turns Optional<String> into a normal String
+            String floorResult2 = floorResult.get();
+            // Parses a integer from a String and tries to catch errors.
+            try {
+                floor = Integer.parseInt(floorResult2);
+            } catch (NumberFormatException exception) {
+                setText("Please enter an positive whole number!");
+            } finally {
+                if (floor < 1) {
+                    setText("Please enter an positive whole number!");
+                } else {
+                    // check if the entered integer is actually in this garage
+                    if (floor > simView.getNumberOfFloors()) {
+                        return(floor);
+                    } else {
+                        return(-1);
+                    }
+                }
+            }
+        }
+        // if no acceptable input was found, this will return -1 and stop the method
+        return(floor);
+    }
+
+    private int insertRow() {
+        // input a row
+        int row = -1;
+
+        TextInputDialog rowDialog = new TextInputDialog("0");
+        rowDialog.setTitle("Row Input Dialog");
+        rowDialog.setContentText("Row:");
+        Optional<String> rowResult = rowDialog.showAndWait();
+
+        if (rowResult.isPresent()) {
+            // Turns Optional<String> into a normal String
+            String rowResult2 = rowResult.get();
+            // Parses a integer from a String and tries to catch errors.
+            try {
+                row = Integer.parseInt(rowResult2);
+            } catch (NumberFormatException exception) {
+                setText("Please enter an positive whole number!");
+            } finally {
+                if (row < 1) {
+                    setText("Please enter an positive whole number!");
+                } else {
+                    // check if the entered integer is actually in this garage
+                    if (row > simView.getNumberOfRows()) {
+                        return(row);
+                    } else {
+                        return(-1);
+                    }
+                }
+            }
+        }
+        // if no acceptable input was found, this will return -1 and stop the method
+        return(row);
+    }
+
+    private int insertPlace() {
+        // input a place
+        int place = -1;
+
+        TextInputDialog placeDialog = new TextInputDialog("0");
+        placeDialog.setTitle("Place Input Dialog");
+        placeDialog.setContentText("Place:");
+        Optional<String> placeResult = placeDialog.showAndWait();
+
+        if (placeResult.isPresent()) {
+            // Turns Optional<String> into a normal String
+            String placeResult2 = placeResult.get();
+            // Parses a integer from a String and tries to catch errors.
+            try {
+                place = Integer.parseInt(placeResult2);
+            } catch (NumberFormatException exception) {
+                setText("Please enter an positive whole number!");
+            } finally {
+                if (place < 1) {
+                    setText("Please enter an positive whole number!");
+                } else {
+                    // check if the entered integer is actually in this garage
+                    if (place > simView.getNumberOfPlaces()) {
+                        return (place);
+                    } else {
+                        return (-1);
+                    }
+                }
+            }
+        }
+        // if no acceptable input was found, this will return -1 and stop the method
+        return (place);
     }
 
     @FXML
