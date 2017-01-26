@@ -7,7 +7,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextInputDialog;
 import javafx.util.Duration;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.Optional;
 
 public class Controller {
 
@@ -66,15 +70,47 @@ public class Controller {
 
     @FXML
     private void tickFor(int ticks) {
-        for(int i=0;i<ticks;i++) {
+        // call the simulator to run for an prompted amount of ticks
+        setText("I should be running for "+ticks+" ticks now");
+
+        Timeline timeline = new Timeline();
+        timeline.setCycleCount(ticks);
+        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100), e -> {
             sim.tick();
-        }
-        setText("I should be running for"+ticks+"now");
+        }));
+
+        timeline.play();
+
     }
 
     @FXML
     private void submit() {
+        // Opening a pop-up dialog window to ask for the amount of ticks, converting it to integer and calling on tickFor
         setText("I should be opening a popup window now.");
+
+        TextInputDialog dialog = new TextInputDialog("0");
+        dialog.setTitle("Number Input Dialog");
+        dialog.setContentText("Number of ticks:");
+        Optional<String> result = dialog.showAndWait();
+
+        // Checking if something was filled in. No answer does nothing.
+        if (result.isPresent()){
+            // Turns Optional<String> into a normal String
+            String result2 = result.get();
+            // Parses a integer from a String and tries to catch errors.
+            int ticksAmount = -1;
+            try {
+                ticksAmount = Integer.parseInt(result2);
+            } catch(NumberFormatException exception) {
+                setText("Please enter an positive whole number!");
+            } finally {
+                if(ticksAmount < 1) {
+                    setText("Please enter an positive whole number!");
+                } else {
+                    tickFor(ticksAmount);
+                }
+            }
+        }
     }
 
     @FXML
