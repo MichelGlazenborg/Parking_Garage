@@ -73,9 +73,9 @@ public class SimulatorView {
         if(!locationIsValid(loc)) {
             return false;
         }
-        Reservation reservation = (Reservation) removeCarAt(loc);
+        Reservation reservation  = (Reservation) removeCarAt(loc);
         Car oldCar = getCarAt(loc);
-        if(oldCar == null) {
+        if(oldCar != null && oldCar.getColor() == Color.BLACK ) {
             _cars[loc.getFloor()][loc.getRow()][loc.getPlace()] = car;
             car.setLocation(loc);
             _numberOfOpenSpots--;
@@ -118,6 +118,22 @@ public class SimulatorView {
                     Location location = new Location(floor, row, place);
                     if (getCarAt(location) == null ) {
                         return location;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    public Location getFirstReservedSpot() {
+        for (int floor = 0; floor < getNumberOfFloors(); floor++) {
+            for (int row = 0; row < getNumberOfRows(); row++) {
+                for (int place = 0; place < getNumberOfPlaces(); place++) {
+                    Location location = new Location(floor, row, place);
+                    if(getCarAt(location) != null) {
+                        if(getCarAt(location).getColor() == Color.BLACK) {
+                            return location;
+                        }
                     }
                 }
             }

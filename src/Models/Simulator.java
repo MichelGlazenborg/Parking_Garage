@@ -4,6 +4,7 @@ import javafx.scene.canvas.Canvas;
 
 import java.util.Random;
 
+
 public class Simulator {
 
 	private static final String AD_HOC = "1";
@@ -30,6 +31,9 @@ public class Simulator {
     int paymentSpeed = 7; // number of cars that can pay per minute
     int exitSpeed = 5; // number of cars that can leave per minute
 
+    /**
+     * The constructor of the class Simulator, runs the main simulator by handeling arriving/leaving cars, keeps count of the time and Payments
+     */
     public Simulator(Canvas canvas) {
         entranceCarQueue = new CarQueue();
         entrancePassQueue = new CarQueue();
@@ -40,11 +44,17 @@ public class Simulator {
     }
 
 
-
+    /**
+     * returns the current instance of simulatorView
+     * @return the current instance of the class simulatorView
+     */
     public SimulatorView getView() {
         return simulatorView;
     }
 
+    /**
+     * Ticks the simulation forward by calling other methods like advanceTime(), updateViews() and handles the entering and leaving of cars
+     */
     public void tick() {
     	advanceTime();
     	handleExit();
@@ -58,6 +68,9 @@ public class Simulator {
     	handleEntrance();
     }
 
+    /**
+     * advances the time forward by 1 minute
+     */
     private void advanceTime(){
         // Advance the time by one minute.
         minute++;
@@ -74,24 +87,36 @@ public class Simulator {
         }
     }
 
+    /**
+     * takes cars from the carQueue and lets them enter the garage
+     */
     private void handleEntrance(){
     	carsArriving();
-    	carsEntering(entrancePassQueue);
+    	PassCarsEntering(entrancePassQueue);
     	carsEntering(entranceCarQueue);  	
     }
-    
+
+    /**
+     * Makes cars leave and pay the parking garage
+     */
     private void handleExit(){
         carsReadyToLeave();
         carsPaying();
         carsLeaving();
     }
-    
+
+    /**
+     * updates the simulator view
+     */
     private void updateViews(){
     	simulatorView.tick();
         // Update the car park view.
         simulatorView.updateView();
     }
-    
+
+    /**
+     * adds new cars to the carQueue's
+     */
     private void carsArriving(){
     	int numberOfCars = getNumberOfCars(weekDayArrivals, weekendArrivals);
         addArrivingCars(numberOfCars, AD_HOC);    	
@@ -99,6 +124,10 @@ public class Simulator {
         addArrivingCars(numberOfCars, PASS);    	
     }
 
+    /**
+     * removes a car from the carQueue and assigns it a parking space
+     * @param queue the carQueue a car enters from
+     */
     private void carsEntering(CarQueue queue){
         int i = 0;
         // Remove car from the front of the queue and assign to a parking space.
@@ -109,7 +138,21 @@ public class Simulator {
                 i++;
         }
     }
-    
+
+    private void PassCarsEntering(CarQueue queue) {
+        int i = 0;
+        // Remove car from the front of the queue and assign to a parking space.
+        while (queue.carsInQueue() > 0 && simulatorView.getNumberOfOpenSpots() > 0 && i < enterSpeed) {
+            ParkingPassCar car = (ParkingPassCar) queue.removeCar();
+            Location freeLocation = simulatorView.getFirstReservedSpot();
+            simulatorView.setCarAtReservedSpot(freeLocation, car);
+            i++;
+        }
+    }
+
+    /**
+     * adds leaving cars to the payment queue
+     */
     private void carsReadyToLeave(){
         // Add leaving cars to the payment queue.
         Car car = simulatorView.getFirstLeavingCar();
@@ -125,6 +168,9 @@ public class Simulator {
         }
     }
 
+    /**
+     * Makes the cars pay
+     */
     private void carsPaying(){
         // Let cars pay.
     	int i = 0;
@@ -135,7 +181,10 @@ public class Simulator {
             i++;
     	}
     }
-    
+
+    /**
+     * Makes the cars leave the parking garage
+     */
     private void carsLeaving(){
         // Let cars leave.
     	int i = 0;
@@ -144,7 +193,13 @@ public class Simulator {
             i++;
     	}	
     }
-    
+
+    /**
+     *
+     * @param weekDay The number of cars on an weekDay
+     * @param weekend The number of cars on a weekend
+     * @return int the number of cars per hour on the current day
+     */
     private int getNumberOfCars(int weekDay, int weekend){
         Random random = new Random();
 
@@ -156,7 +211,12 @@ public class Simulator {
         double numberOfCarsPerHour = averageNumberOfCarsPerHour + random.nextGaussian() * standardDeviation;
         return (int)Math.round(numberOfCarsPerHour / 60);	
     }
-    
+
+    /**
+     * Add cars to the arriving Queue's
+     * @param numberOfCars numbers of cars to be added to the queue of arriving cars
+     * @param type the type of the car
+     */
     private void addArrivingCars(int numberOfCars, String type){
         // Add the cars to the back of the queue.
     	switch(type) {
@@ -172,12 +232,17 @@ public class Simulator {
                 break;
     	}
     }
-    
+
+    /**
+     * Makes the car leaves the spot
+     * @param car the car that has to leave the spot
+     */
     private void carLeavesSpot(Car car){
     	simulatorView.removeCarAt(car.getLocation());
         exitCarQueue.addCar(car);
     }
-    public int getNumberOfFloors() {
+
+   /* public int getNumberOfFloors() {
         return simulatorView.getNumberOfFloors();
     }
 
@@ -191,5 +256,5 @@ public class Simulator {
 
     public int getNumberOfOpenSpots() {
         return simulatorView.getNumberOfOpenSpots();
-    }
+    }*/
 }
