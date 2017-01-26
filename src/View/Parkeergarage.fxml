@@ -45,22 +45,22 @@
    <left>
       <VBox prefHeight="200.0" prefWidth="300.0" BorderPane.alignment="CENTER_LEFT">
          <children>
-            <Button mnemonicParsing="false" prefWidth="40.0" text="1" onAction="#tick1">
+            <Button fx:id="button_operate1" mnemonicParsing="false" prefWidth="40.0" text="1" onAction="#tick1">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </Button>
-             <Button mnemonicParsing="false" prefWidth="40.0" text="50" onAction="#tick50">
+             <Button fx:id="button_operate2" mnemonicParsing="false" prefWidth="40.0" text="50" onAction="#tick50">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </Button>
-            <Button  mnemonicParsing="false" prefWidth="53.0" text="1000" onAction="#tick1000">
+            <Button fx:id="button_operate3" mnemonicParsing="false" prefWidth="53.0" text="1000" onAction="#tick1000">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </Button>
-             <Button  prefWidth="100" text="Run for ..." onAction="#submit">
+             <Button fx:id="button_operate4" prefWidth="100" text="Run for ..." onAction="#submit">
                  <VBox.margin>
                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                  </VBox.margin>
