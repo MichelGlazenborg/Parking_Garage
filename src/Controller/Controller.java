@@ -8,6 +8,7 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextInputDialog;
 import javafx.util.Duration;
@@ -16,12 +17,24 @@ import java.util.Optional;
 
 public class Controller {
 
+	//make simulator object
+	private Simulator sim;
+  private SimulatorView simView;
+
     @FXML
     private Canvas _canvas;
 
-    //make simulator object
-    private Simulator sim;
-    private SimulatorView simView;
+    @FXML
+    private Button button_operate1;
+
+    @FXML
+    private Button button_operate2;
+
+    @FXML
+    private Button button_operate3;
+
+    @FXML
+    private Button button_operate4;
 
     @FXML
     private TextArea textTarget;
@@ -39,8 +52,10 @@ public class Controller {
     @FXML
     private void tick1() {
         //call the simulator object to run for 1 tick
+        disableButtons(true);
         sim.tick();
         setText("I should be running for 1 tick now");
+        disableButtons(false);
     }
 
     @FXML
@@ -58,13 +73,13 @@ public class Controller {
         //call simulator object to run for 50 ticks
         setText("I should be running for 50 ticks now");
 
+        disableButtons(true);
         Timeline timeline = new Timeline();
         timeline.setCycleCount(50);
-        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100), e -> {
-            sim.tick();
-        }));
+        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100), e -> sim.tick()));
 
         timeline.play();
+		timeline.setOnFinished(e -> disableButtons(false));
     }
 
     @FXML
@@ -72,28 +87,27 @@ public class Controller {
         //call the simulator object to run for 1000 ticks
         setText("I should be running for 1000 ticks now");
 
+        disableButtons(true);
         Timeline timeline = new Timeline();
         timeline.setCycleCount(1000);
-        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100), e -> {
-            sim.tick();
-        }));
+        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100), e -> sim.tick()));
 
         timeline.play();
+        timeline.setOnFinished(e -> disableButtons(false));
     }
 
     @FXML
     private void tickFor(int ticks) {
-        // call the simulator to run for an prompted amount of ticks
-        setText("I should be running for "+ticks+" ticks now");
+        disableButtons(true);
 
         Timeline timeline = new Timeline();
         timeline.setCycleCount(ticks);
-        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100), e -> {
-            sim.tick();
-        }));
+        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100), e -> sim.tick()));
+
+            setText("I should be running for"+ticks+"now");
 
         timeline.play();
-
+        timeline.setOnFinished(e -> disableButtons(false));
     }
 
     @FXML
@@ -136,6 +150,12 @@ public class Controller {
         textTarget.setText(txt);
     }
 
+    private void disableButtons(boolean doDisable) {
+        button_operate1.setDisable(doDisable);
+        button_operate2.setDisable(doDisable);
+        button_operate3.setDisable(doDisable);
+        button_operate4.setDisable(doDisable);
+    }
 
     /*private Rectangle car(Object car) {
         int floor;
