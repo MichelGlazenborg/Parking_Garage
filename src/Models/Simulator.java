@@ -144,7 +144,7 @@ public class Simulator {
                 }
     	        simulatorView.setCarAt(freeLocation, car);
             }
-                i++;
+			i++;
         }
     }
 
@@ -172,7 +172,7 @@ public class Simulator {
 	            paymentCarQueue.addCar(car);
         	}
         	else {
-        		carLeavesSpot(car);
+        		carLeavesSpot(car, (car instanceof ParkingPassCar));
         	}
             car = simulatorView.getFirstLeavingCar();
         }
@@ -187,7 +187,7 @@ public class Simulator {
     	while (paymentCarQueue.carsInQueue()>0 && i < paymentSpeed){
             Car car = paymentCarQueue.removeCar();
             // TODO Handle payment.
-            carLeavesSpot(car);
+            carLeavesSpot(car, (car instanceof ParkingPassCar));
             i++;
     	}
     }
@@ -247,8 +247,13 @@ public class Simulator {
      * Makes the car leaves the spot
      * @param car the car that has to leave the spot
      */
-    private void carLeavesSpot(Car car){
-    	simulatorView.removeCarAt(car.getLocation());
+    private void carLeavesSpot(Car car, boolean hasParkingPass){
+		Location location = car.getLocation();
+    	simulatorView.removeCarAt(location);
+
+    	if (hasParkingPass)
+    		simulatorView.setReservation(location, new Reservation());
+    	
         exitCarQueue.addCar(car);
     }
 
