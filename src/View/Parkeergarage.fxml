@@ -26,7 +26,7 @@
               <MenuItem mnemonicParsing="false" text="Close" onAction="#closeApp" />
             </items>
               <items>
-                  <MenuItem text="Make Reservations" onAction="#makePassHolderPlaces" />
+                  <MenuItem text="Make Passholder places" onAction="#makePassHolderPlaces" />
               </items>
               <items>
                   <MenuItem text="Make Reservation at" onAction="#makeReservationsAt"/>
