@@ -1,6 +1,8 @@
 package Controller;
 
+import Models.Location;
 import Models.Simulator;
+import Models.SimulatorView;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -8,12 +10,16 @@ import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextInputDialog;
 import javafx.util.Duration;
+
+import java.util.Optional;
 
 public class Controller {
 
 	//make simulator object
 	private Simulator sim;
+  private SimulatorView simView;
 
     @FXML
     private Canvas _canvas;
@@ -22,19 +28,20 @@ public class Controller {
     private Button button_operate1;
 
     @FXML
-	private Button button_operate2;
+    private Button button_operate2;
 
-	@FXML
-	private Button button_operate3;
+    @FXML
+    private Button button_operate3;
 
-	@FXML
-	private Button button_operate4;
+    @FXML
+    private Button button_operate4;
 
     @FXML
     private TextArea textTarget;
 
     public void initialize() {
         sim = new Simulator(_canvas);
+        simView = sim.getSimulatorView();
     }
 
     @FXML
@@ -49,6 +56,16 @@ public class Controller {
         sim.tick();
         setText("I should be running for 1 tick now");
         disableButtons(false);
+    }
+
+    @FXML
+    private void makeReservations(){
+        simView.makeReservations();
+    }
+
+    @FXML
+    private void makeReservationsAt(){
+        simView.makeReservationsAt(new Location(2,2,17), 123);
     }
 
     @FXML
@@ -83,19 +100,44 @@ public class Controller {
     private void tickFor(int ticks) {
         disableButtons(true);
 
-		Timeline timeline = new Timeline();
-		timeline.setCycleCount(ticks);
-		timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100), e -> sim.tick()));
+        Timeline timeline = new Timeline();
+        timeline.setCycleCount(ticks);
+        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100), e -> sim.tick()));
 
-        setText("I should be running for"+ticks+"now");
+            setText("I should be running for"+ticks+"now");
 
-		timeline.play();
-		timeline.setOnFinished(e -> disableButtons(false));
+        timeline.play();
+        timeline.setOnFinished(e -> disableButtons(false));
     }
 
     @FXML
     private void submit() {
+        // Opening a pop-up dialog window to ask for the amount of ticks, converting it to integer and calling on tickFor
         setText("I should be opening a popup window now.");
+
+        TextInputDialog dialog = new TextInputDialog("0");
+        dialog.setTitle("Number Input Dialog");
+        dialog.setContentText("Number of ticks:");
+        Optional<String> result = dialog.showAndWait();
+
+        // Checking if something was filled in. No answer does nothing.
+        if (result.isPresent()){
+            // Turns Optional<String> into a normal String
+            String result2 = result.get();
+            // Parses a integer from a String and tries to catch errors.
+            int ticksAmount = -1;
+            try {
+                ticksAmount = Integer.parseInt(result2);
+            } catch(NumberFormatException exception) {
+                setText("Please enter an positive whole number!");
+            } finally {
+                if(ticksAmount < 1) {
+                    setText("Please enter an positive whole number!");
+                } else {
+                    tickFor(ticksAmount);
+                }
+            }
+        }
     }
 
     @FXML

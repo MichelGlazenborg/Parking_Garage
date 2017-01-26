@@ -21,10 +21,6 @@ public class SimulatorView {
         _numberOfOpenSpots = numberOfFloors * numberOfRows * numberOfPlaces;
         _cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         _carParkView = new CarParkView(canvas);
-        for(int i=0; i<30; i++) {
-            setReservation(new Location(0, 0, i), new Reservation());
-            setReservation(new Location(0, 1, i), new Reservation());
-        }
     }
 
     public void updateView() {
@@ -67,6 +63,23 @@ public class SimulatorView {
             }
 
         return false;
+    }
+
+    public void makeReservations() {
+        for(int i=0; i<30; i++) {
+            setReservation(new Location(0, 0, i), new Reservation());
+            setReservation(new Location(0, 1, i), new Reservation());
+        }
+        updateView();
+    }
+
+
+    public void makeReservationsAt(Location loc, int entryCode) {
+        Reservation res = new Reservation();
+        res.setEntryCode(entryCode);
+        setReservation(loc, res);
+        updateView();
+
     }
 
 
@@ -112,7 +125,24 @@ public class SimulatorView {
         return null;
     }
 
-    public Location getFirstReservedSpot() {
+    public Location getFirstPassSpot() {
+        for (int floor = 0; floor < getNumberOfFloors(); floor++) {
+            for (int row = 0; row < getNumberOfRows(); row++) {
+                for (int place = 0; place < getNumberOfPlaces(); place++) {
+                    Location location = new Location(floor, row, place);
+                    if(getCarAt(location) != null) {
+                        if(getCarAt(location).getColor() == Color.BLACK) {
+                            removeCarAt(location);
+                            return location;
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    public Location getFirsReservedSpot() {
         for (int floor = 0; floor < getNumberOfFloors(); floor++) {
             for (int row = 0; row < getNumberOfRows(); row++) {
                 for (int place = 0; place < getNumberOfPlaces(); place++) {

@@ -9,9 +9,6 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.TextArea?>
-
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.GridPane?>
 <BorderPane fx:controller="Controller.Controller"
             maxHeight="-Infinity"
             maxWidth="-Infinity"
@@ -24,16 +21,18 @@
    <top>
       <MenuBar>
         <menus>
-          <Menu mnemonicParsing="false" text="_Simulator">
+          <Menu mnemonicParsing="false" text="Simulator">
             <items>
               <MenuItem mnemonicParsing="false" text="Close" onAction="#closeApp" />
             </items>
+              <items>
+                  <MenuItem text="Make Reservations" onAction="#makeReservations" />
+              </items>
+              <items>
+                  <MenuItem text="Make Reservation at" onAction="#makeReservationsAt"/>
+              </items>
           </Menu>
-          <!--<Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>-->
+
           <Menu mnemonicParsing="false" text="_Help">
             <items>
               <MenuItem mnemonicParsing="false" text="About" onAction="#showAbout"/>

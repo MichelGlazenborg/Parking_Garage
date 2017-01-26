@@ -9,9 +9,11 @@ public class Simulator {
 
 	private static final String AD_HOC = "1";
 	private static final String PASS = "2";
+	private static final String RES = "3";
 
 	private CarQueue entranceCarQueue;
     private CarQueue entrancePassQueue;
+    private CarQueue entranceResQueue;
     private CarQueue paymentCarQueue;
     private CarQueue exitCarQueue;
     private SimulatorView simulatorView;
@@ -20,12 +22,14 @@ public class Simulator {
     private int hour = 0;
     private int minute = 0;
 
-    private int tickPause = 100;
+    //private int tickPause = 100;
 
     int weekDayArrivals= 100; // average number of arriving cars per hour
     int weekendArrivals = 200; // average number of arriving cars per hour
     int weekDayPassArrivals= 50; // average number of arriving cars per hour
     int weekendPassArrivals = 5; // average number of arriving cars per hour
+    int weekDayResArrivals = 75;
+    int weekendResArrivals = 30;
 
     int enterSpeed = 3; // number of cars that can enter per minute
     int paymentSpeed = 7; // number of cars that can pay per minute
@@ -37,6 +41,7 @@ public class Simulator {
     public Simulator(Canvas canvas) {
         entranceCarQueue = new CarQueue();
         entrancePassQueue = new CarQueue();
+        entranceResQueue = new CarQueue();
         paymentCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
         simulatorView = new SimulatorView(canvas, 3, 6, 30);
@@ -86,8 +91,9 @@ public class Simulator {
      */
     private void handleEntrance(){
     	carsArriving();
-    	carsEntering(entrancePassQueue,true);
-    	carsEntering(entranceCarQueue,false);
+    	carsEntering(entrancePassQueue,true, false);
+    	carsEntering(entranceCarQueue,false, false);
+    	carsEntering(entranceResQueue,false, true);
     }
 
     /**
@@ -116,23 +122,32 @@ public class Simulator {
         addArrivingCars(numberOfCars, AD_HOC);
     	numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
         addArrivingCars(numberOfCars, PASS);
+        numberOfCars = getNumberOfCars(weekDayResArrivals, weekendResArrivals);
+        addArrivingCars(numberOfCars, RES);
     }
 
     /**
      * removes a car from the carQueue and assigns it a parking space
      * @param queue the carQueue a car enters from
      */
-    private void carsEntering(CarQueue queue, boolean passHolder){
+    private void carsEntering(CarQueue queue, boolean passHolder, boolean hasReservation){
         int i = 0;
         // Remove car from the front of the queue and assign to a parking space.
     	while (queue.carsInQueue() > 0 && simulatorView.getNumberOfOpenSpots() > 0 && i < enterSpeed) {
     	    if(!passHolder) {
-                AdHocCar car = (AdHocCar) queue.removeCar();
-                Location freeLocation = simulatorView.getFirstFreeLocation();
-                simulatorView.setCarAt(freeLocation, car);
-            } else {
+    	        if(!hasReservation) {
+                    AdHocCar car = (AdHocCar) queue.removeCar();
+                    Location freeLocation = simulatorView.getFirstFreeLocation();
+                    simulatorView.setCarAt(freeLocation, car);
+                }else {
+    	            CarWithReservedSpot car = (CarWithReservedSpot) queue.removeCar();
+    	            int entryCode = car.getEntryCode();
+                    Location freeLocation = simulatorView.getFirstFreeLocation();
+                    simulatorView.setCarAt(freeLocation, car);
+                }
+            } else if(passHolder) {
     	        ParkingPassCar car = (ParkingPassCar) queue.removeCar();
-    	        Location freeLocation = simulatorView.getFirstReservedSpot();
+    	        Location freeLocation = simulatorView.getFirstPassSpot();
     	        if(freeLocation == null) {
                     freeLocation = simulatorView.getFirstFreeLocation();
                 }
@@ -141,17 +156,6 @@ public class Simulator {
 			i++;
         }
     }
-
-    /*private void PassCarsEntering(CarQueue queue) {
-        int i = 0;
-        // Remove car from the front of the queue and assign to a parking space.
-        while (queue.carsInQueue() > 0 && simulatorView.getNumberOfOpenSpots() > 0 && i < enterSpeed) {
-            ParkingPassCar car = (ParkingPassCar) queue.removeCar();
-            Location freeLocation = simulatorView.getFirstReservedSpot();
-            simulatorView.setCarAtReservedSpot(freeLocation, car);
-            i++;
-        }
-    }*/
 
     /**
      * adds leaving cars to the payment queue
@@ -233,6 +237,10 @@ public class Simulator {
                     entrancePassQueue.addCar(new ParkingPassCar());
                 }
                 break;
+            case RES:
+                for(int i = 0; i < numberOfCars; i++) {
+
+                }
     	}
     }
 
@@ -254,19 +262,8 @@ public class Simulator {
         exitCarQueue.addCar(car);
     }
 
-   /* public int getNumberOfFloors() {
-        return simulatorView.getNumberOfFloors();
+    public SimulatorView getSimulatorView() {
+        return simulatorView;
     }
 
-    public int getNumberOfRows() {
-        return simulatorView.getNumberOfRows();
-    }
-
-    public int getNumberOfPlaces() {
-        return simulatorView.getNumberOfPlaces();
-    }
-
-    public int getNumberOfOpenSpots() {
-        return simulatorView.getNumberOfOpenSpots();
-    }*/
 }
