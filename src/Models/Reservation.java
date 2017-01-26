@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
  * Created by Jelmer on 23-Jan-17.
  */
 public class Reservation extends Car {
-    private static final Color COLOR = Color.BLACK;
+    private static final Color COLOR = Color.GREEN;
 
     public Reservation() {
 
