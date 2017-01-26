@@ -250,9 +250,13 @@ public class Simulator {
 		Location location = car.getLocation();
     	simulatorView.removeCarAt(location);
 
-    	if (hasParkingPass)
+    	/**
+		 * Temporary fix, this should be changed as soon as the manager can decide where he/she wants the reserved
+		 * spots to be
+		 */
+    	if (hasParkingPass && location.getFloor() == 0 && (location.getRow() == 0 || location.getRow() == 1))
     		simulatorView.setReservation(location, new Reservation());
-    	
+
         exitCarQueue.addCar(car);
     }
 
