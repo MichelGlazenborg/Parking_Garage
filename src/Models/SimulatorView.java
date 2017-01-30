@@ -75,10 +75,20 @@ public class SimulatorView {
     }
 
     public void makePassHolderRows(int numberOfRows) {
-        for(int x=0; x<numberOfRows; x++) {
-            for (int i = 0; i < 30; i++) {
-                setPassHolderSpace(new Location(0, x, i), new PassHolderSpace());
+        int y,x,o;
+        y=0;
+        x=0;
+        o=6;
+        for(int q=0; q<numberOfRows; q++) {
+            if(x==o) {
+                y+=1;
+                o+=6;
+                x-=6;
             }
+            for (int i = 0; i < 30; i++) {
+                setPassHolderSpace(new Location(y, x, i), new PassHolderSpace());
+            }
+            x++;
         }
         updateView();
     }
