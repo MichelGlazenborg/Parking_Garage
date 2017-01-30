@@ -29,6 +29,9 @@
                   <MenuItem text="Make Passholder places" onAction="#makePassHolderPlaces" />
               </items>
               <items>
+                  <MenuItem text="Make Passholder rows" onAction="#MakePassHolderRows" />
+              </items>
+              <items>
                   <MenuItem text="Make Reservation at" onAction="#makeReservationsAt"/>
               </items>
           </Menu>

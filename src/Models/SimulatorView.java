@@ -74,6 +74,15 @@ public class SimulatorView {
         updateView();
     }
 
+    public void makePassHolderRows(int numberOfRows) {
+        for(int x=0; x<numberOfRows; x++) {
+            for (int i = 0; i < 30; i++) {
+                setPassHolderSpace(new Location(0, x, i), new PassHolderSpace());
+            }
+        }
+        updateView();
+    }
+
 
     public void makeReservationsAt(Location loc) {
         Reservation res = new Reservation();
