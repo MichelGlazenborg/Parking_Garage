@@ -18,4 +18,8 @@ public class Payment {
         totalRevenue += cost * (double) stayTime;
     }
 
+    public void reset() {
+        totalRevenue = 0;
+    }
+
 }
