@@ -38,6 +38,9 @@ public class Controller {
     private Button button_operate4;
 
     @FXML
+    private Button button_operate5;
+
+    @FXML
     private Button button_operate6;
 
     @FXML
@@ -276,4 +279,19 @@ public class Controller {
         button_operate4.setDisable(doDisable);
     }
 
+    public Button getButton_operate5() {
+        return button_operate5;
+    }
+
+    public void setButton_operate5(Button button_operate5) {
+        this.button_operate5 = button_operate5;
+    }
+
+    public Button getButton_operate6() {
+        return button_operate6;
+    }
+
+    public void setButton_operate6(Button button_operate6) {
+        this.button_operate6 = button_operate6;
+    }
 }
