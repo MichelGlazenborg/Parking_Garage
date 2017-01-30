@@ -86,6 +86,13 @@ public class Simulator {
             day -= 7;
         }
     }
+    public int[] getTime() {
+        int[] time = new int[3];
+        time[0] = minute;
+        time[1] = hour;
+        time[2] = day;
+        return time;
+    }
 
     /**
      * takes cars from the carQueue and lets them enter the garage
@@ -189,7 +196,9 @@ public class Simulator {
     	int i = 0;
     	while (paymentCarQueue.carsInQueue()>0 && i < paymentSpeed){
             Car car = paymentCarQueue.removeCar();
-            pay.pay(0.15, car.getStayMinutes());
+            if(car.getHasToPay()) {
+                pay.pay(0.15, car.getStayMinutes());
+            }
             carLeavesSpot(car, (car instanceof ParkingPassCar));
             i++;
     	}
