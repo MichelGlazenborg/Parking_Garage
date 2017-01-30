@@ -10,7 +10,9 @@ public class SimulatorView {
     private int _numberOfRows;
     private int _numberOfPlaces;
     private int _numberOfOpenSpots;
+
     private int _numberOfReservations=0;
+
     private Car[][][] _cars;
 
     private CarParkView _carParkView;

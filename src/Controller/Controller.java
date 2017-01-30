@@ -17,7 +17,8 @@ import java.util.Optional;
 
 public class Controller {
 
-	//make simulator object
+
+    //make simulator object
 	private Simulator sim;
     private SimulatorView simView;
 
@@ -37,6 +38,12 @@ public class Controller {
     private Button button_operate4;
 
     @FXML
+    private Button button_operate5;
+
+    @FXML
+    private Button button_operate6;
+
+    @FXML
     private TextArea textTarget;
 
     public void initialize() {
@@ -52,9 +59,9 @@ public class Controller {
     @FXML
     private void tick1() {
         //call the simulator object to run for 1 tick
+        setText("I should be running for 1 tick now");
         disableButtons(true);
         sim.tick();
-        setText("I should be running for 1 tick now");
         disableButtons(false);
     }
 
@@ -98,6 +105,7 @@ public class Controller {
         int row = insertRow();
         int place = insertPlace();
 
+        // illegal answers return -1
         if (floor == -1 || row == -1 || place == -1) {
             setText("One or more arguments were not filled in correctly!");
         } else {
@@ -111,6 +119,7 @@ public class Controller {
 
         TextInputDialog floorDialog = new TextInputDialog("0");
         floorDialog.setTitle("Floor Input Dialog");
+        floorDialog.setHeaderText("Please enter the floor number for your reservation below. Between 0 and " + simView.getNumberOfFloors());
         floorDialog.setContentText("Floor:");
         Optional<String> floorResult = floorDialog.showAndWait();
 
@@ -123,7 +132,7 @@ public class Controller {
             } catch (NumberFormatException exception) {
                 setText("Please enter an positive whole number!");
             } finally {
-                if (floor < 1) {
+                if (floor < 0) {
                     setText("Please enter an positive whole number!");
                 } else {
                     // check if the entered integer is actually in this garage
@@ -145,6 +154,7 @@ public class Controller {
 
         TextInputDialog rowDialog = new TextInputDialog("0");
         rowDialog.setTitle("Row Input Dialog");
+        rowDialog.setHeaderText("Please enter the row number for your reservation below. Between 0 and " + simView.getNumberOfRows());
         rowDialog.setContentText("Row:");
         Optional<String> rowResult = rowDialog.showAndWait();
 
@@ -157,7 +167,7 @@ public class Controller {
             } catch (NumberFormatException exception) {
                 setText("Please enter an positive whole number!");
             } finally {
-                if (row < 1) {
+                if (row < 0) {
                     setText("Please enter an positive whole number!");
                 } else {
                     // check if the entered integer is actually in this garage
@@ -179,6 +189,7 @@ public class Controller {
 
         TextInputDialog placeDialog = new TextInputDialog("0");
         placeDialog.setTitle("Place Input Dialog");
+        placeDialog.setHeaderText("Please enter the floor number for your reservation below. Between 0 and " + simView.getNumberOfPlaces());
         placeDialog.setContentText("Place:");
         Optional<String> placeResult = placeDialog.showAndWait();
 
@@ -191,7 +202,7 @@ public class Controller {
             } catch (NumberFormatException exception) {
                 setText("Please enter an positive whole number!");
             } finally {
-                if (place < 1) {
+                if (place < 0) {
                     setText("Please enter an positive whole number!");
                 } else {
                     // check if the entered integer is actually in this garage
@@ -210,40 +221,23 @@ public class Controller {
     @FXML
     private void tick50() {
         //call simulator object to run for 50 ticks
-        setText("I should be running for 50 ticks now");
-
-        disableButtons(true);
-        Timeline timeline = new Timeline();
-        timeline.setCycleCount(50);
-        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100), e -> sim.tick()));
-
-        timeline.play();
-		timeline.setOnFinished(e -> disableButtons(false));
+        tickFor(50);
     }
 
     @FXML
     private void tick1000() {
         //call the simulator object to run for 1000 ticks
-        setText("I should be running for 1000 ticks now");
-
-        disableButtons(true);
-        Timeline timeline = new Timeline();
-        timeline.setCycleCount(1000);
-        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100), e -> sim.tick()));
-
-        timeline.play();
-        timeline.setOnFinished(e -> disableButtons(false));
+        tickFor(1000);
     }
 
     @FXML
     private void tickFor(int ticks) {
+        setText("I should be running for " + ticks + " ticks now");
         disableButtons(true);
 
         Timeline timeline = new Timeline();
         timeline.setCycleCount(ticks);
         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100), e -> sim.tick()));
-
-            setText("I should be running for" + ticks + "now");
 
         timeline.play();
         timeline.setOnFinished(e -> disableButtons(false));
@@ -256,6 +250,7 @@ public class Controller {
 
         TextInputDialog dialog = new TextInputDialog("0");
         dialog.setTitle("Number Input Dialog");
+        dialog.setHeaderText("Please enter the amount of ticks this program should be running for below.");
         dialog.setContentText("Number of ticks:");
         Optional<String> result = dialog.showAndWait();
 
@@ -282,6 +277,22 @@ public class Controller {
 
 
     @FXML
+    private void reset() {
+        // resets all parking spots to empty on click
+        setText("I should be removing cars now.");
+        for (int i = 0; i < simView.getNumberOfFloors(); i++) {
+            for (int j = 0; j < simView.getNumberOfRows(); j++) {
+                for (int k = 0; k < simView.getNumberOfPlaces(); k++) {
+                    Location location = new Location(i,j,k);
+                    simView.removeCarAt(location);
+                    simView.updateView();
+                }
+            }
+        }
+        setText("All cars should be gone now");
+    }
+
+    @FXML
     private void showAbout() {
         //show about information
         setText("Parking Simulator is a program that lets city parking Groningen see how some changes to their Parking Garage might affect business.");
@@ -298,4 +309,19 @@ public class Controller {
         button_operate4.setDisable(doDisable);
     }
 
+    public Button getButton_operate5() {
+        return button_operate5;
+    }
+
+    public void setButton_operate5(Button button_operate5) {
+        this.button_operate5 = button_operate5;
+    }
+
+    public Button getButton_operate6() {
+        return button_operate6;
+    }
+
+    public void setButton_operate6(Button button_operate6) {
+        this.button_operate6 = button_operate6;
+    }
 }
