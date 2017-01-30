@@ -46,6 +46,9 @@ public class Controller {
     @FXML
     private TextArea textTarget;
 
+    @FXML
+    private Timeline timeline;
+
     public void initialize() {
         sim = new Simulator(_canvas);
         simView = sim.getSimulatorView();
@@ -235,7 +238,7 @@ public class Controller {
         setText("I should be running for " + ticks + " ticks now");
         disableButtons(true);
 
-        Timeline timeline = new Timeline();
+        timeline = new Timeline();
         timeline.setCycleCount(ticks);
         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100), e -> sim.tick()));
 
@@ -307,6 +310,15 @@ public class Controller {
         button_operate2.setDisable(doDisable);
         button_operate3.setDisable(doDisable);
         button_operate4.setDisable(doDisable);
+        button_operate5.setDisable(!doDisable);
+    }
+
+    @FXML
+    private void stop() {
+        if (timeline != null) {
+            timeline.stop();
+            disableButtons(false);
+        }
     }
 
     public Button getButton_operate5() {
