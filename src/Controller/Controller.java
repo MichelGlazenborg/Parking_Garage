@@ -62,10 +62,32 @@ public class Controller {
     @FXML
     private void tick1() {
         //call the simulator object to run for 1 tick
-        setText("I should be running for 1 tick now");
+        tickFor(1);
+    }
+
+    @FXML
+    private void tick50() {
+        //call simulator object to run for 50 ticks
+        tickFor(50);
+    }
+
+    @FXML
+    private void tick1000() {
+        //call the simulator object to run for 1000 ticks
+        tickFor(1000);
+    }
+
+    @FXML
+    private void tickFor(int ticks) {
+        setText("I should be running for " + ticks + " ticks now");
         disableButtons(true);
-        sim.tick();
-        disableButtons(false);
+
+        timeline = new Timeline();
+        timeline.setCycleCount(ticks);
+        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100), e -> sim.tick()));
+
+        timeline.play();
+        timeline.setOnFinished(e -> disableButtons(false));
     }
 
     @FXML
@@ -120,7 +142,7 @@ public class Controller {
 
         TextInputDialog floorDialog = new TextInputDialog("0");
         floorDialog.setTitle("Floor Input Dialog");
-        floorDialog.setHeaderText("Please enter the floor number for your reservation below. Between 0 and " + simView.getNumberOfFloors());
+        floorDialog.setHeaderText("Please enter the floor number for your reservation below. Between 0 and " + (simView.getNumberOfFloors() - 1));
         floorDialog.setContentText("Floor:");
         Optional<String> floorResult = floorDialog.showAndWait();
 
@@ -155,7 +177,7 @@ public class Controller {
 
         TextInputDialog rowDialog = new TextInputDialog("0");
         rowDialog.setTitle("Row Input Dialog");
-        rowDialog.setHeaderText("Please enter the row number for your reservation below. Between 0 and " + simView.getNumberOfRows());
+        rowDialog.setHeaderText("Please enter the row number for your reservation below. Between 0 and " + (simView.getNumberOfRows() - 1));
         rowDialog.setContentText("Row:");
         Optional<String> rowResult = rowDialog.showAndWait();
 
@@ -190,7 +212,7 @@ public class Controller {
 
         TextInputDialog placeDialog = new TextInputDialog("0");
         placeDialog.setTitle("Place Input Dialog");
-        placeDialog.setHeaderText("Please enter the floor number for your reservation below. Between 0 and " + simView.getNumberOfPlaces());
+        placeDialog.setHeaderText("Please enter the floor number for your reservation below. Between 0 and " + (simView.getNumberOfPlaces() - 1));
         placeDialog.setContentText("Place:");
         Optional<String> placeResult = placeDialog.showAndWait();
 
@@ -217,31 +239,6 @@ public class Controller {
         }
         // if no acceptable input was found, this will return -1 and stop the method
         return (place);
-    }
-
-    @FXML
-    private void tick50() {
-        //call simulator object to run for 50 ticks
-        tickFor(50);
-    }
-
-    @FXML
-    private void tick1000() {
-        //call the simulator object to run for 1000 ticks
-        tickFor(1000);
-    }
-
-    @FXML
-    private void tickFor(int ticks) {
-        setText("I should be running for " + ticks + " ticks now");
-        disableButtons(true);
-
-        timeline = new Timeline();
-        timeline.setCycleCount(ticks);
-        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100), e -> sim.tick()));
-
-        timeline.play();
-        timeline.setOnFinished(e -> disableButtons(false));
     }
 
     @FXML
@@ -280,22 +277,13 @@ public class Controller {
         setText("Day " + time[2] + " Hour " + time[1] + " Minute " + time[0] );
     }
 
-
-
     @FXML
     private void reset() {
         // resets all parking spots to empty on click
         setText("I should be removing cars now.");
-        for (int i = 0; i < simView.getNumberOfFloors(); i++) {
-            for (int j = 0; j < simView.getNumberOfRows(); j++) {
-                for (int k = 0; k < simView.getNumberOfPlaces(); k++) {
-                    Location location = new Location(i,j,k);
-                    simView.removeCarAt(location);
-                    simView.updateView();
-                }
-            }
-        }
+        simView.reset();
         setText("All cars should be gone now");
+        button_operate6.setDisable(true);
     }
 
     @FXML
@@ -319,6 +307,7 @@ public class Controller {
         button_operate3.setDisable(doDisable);
         button_operate4.setDisable(doDisable);
         button_operate5.setDisable(!doDisable);
+        button_operate6.setDisable(doDisable);
     }
 
     @FXML
@@ -327,21 +316,5 @@ public class Controller {
             timeline.stop();
             disableButtons(false);
         }
-    }
-
-    public Button getButton_operate5() {
-        return button_operate5;
-    }
-
-    public void setButton_operate5(Button button_operate5) {
-        this.button_operate5 = button_operate5;
-    }
-
-    public Button getButton_operate6() {
-        return button_operate6;
-    }
-
-    public void setButton_operate6(Button button_operate6) {
-        this.button_operate6 = button_operate6;
     }
 }

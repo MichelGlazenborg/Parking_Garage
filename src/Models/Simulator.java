@@ -276,7 +276,7 @@ public class Simulator {
 		 * spots to be
 		 */
     	if (hasParkingPass && location.getFloor() == 0)
-    	    if(location.getRow() == 0 || location.getRow() == 1) {
+    	    if(location.getRow() <= simulatorView.getPassHolderRows()) {
                 simulatorView.setPassHolderSpace(location, new PassHolderSpace());
             }
 
@@ -287,4 +287,15 @@ public class Simulator {
         return simulatorView;
     }
 
+    public int getDay() {
+        return day;
+    }
+
+    public int getHour() {
+        return hour;
+    }
+
+    public int getMinute() {
+        return minute;
+    }
 }

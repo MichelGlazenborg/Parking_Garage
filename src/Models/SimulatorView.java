@@ -11,6 +11,7 @@ public class SimulatorView {
     private int _numberOfPlaces;
     private int _numberOfOpenSpots;
     private int _numberOfReservations;
+    private int _numberOfPassHolderRows;
     private Car[][][] _cars;
 
     private CarParkView _carParkView;
@@ -20,6 +21,7 @@ public class SimulatorView {
         _numberOfRows = numberOfRows;
         _numberOfPlaces = numberOfPlaces;
         _numberOfOpenSpots = numberOfFloors * numberOfRows * numberOfPlaces;
+        _numberOfPassHolderRows = -1;
         _cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         _carParkView = new CarParkView(canvas);
     }
@@ -66,6 +68,18 @@ public class SimulatorView {
         return false;
     }
 
+    public void reset() {
+        for (int i = 0; i < getNumberOfFloors(); i++) {
+            for (int j = 0; j < getNumberOfRows(); j++) {
+                for (int k = 0; k < getNumberOfPlaces(); k++) {
+                    Location location = new Location(i,j,k);
+                    removeCarAt(location);
+                    updateView();
+                }
+            }
+        }
+    }
+
     public void makePassHolderPlaces() {
         for(int i=0; i<30; i++) {
             setPassHolderSpace(new Location(0, 0, i), new PassHolderSpace());
@@ -75,11 +89,13 @@ public class SimulatorView {
     }
 
     public void makePassHolderRows(int numberOfRows) {
+        reset();
+        _numberOfPassHolderRows = numberOfRows;
         int y,x,o;
         y=0;
         x=0;
         o=6;
-        for(int q=0; q<numberOfRows; q++) {
+        for(int q=0; q<_numberOfPassHolderRows; q++) {
             if(x==o) {
                 y+=1;
                 o+=6;
@@ -93,6 +109,9 @@ public class SimulatorView {
         updateView();
     }
 
+    public int getPassHolderRows() {
+        return _numberOfPassHolderRows;
+    }
 
     public void makeReservationsAt(Location loc) {
         Reservation res = new Reservation();
