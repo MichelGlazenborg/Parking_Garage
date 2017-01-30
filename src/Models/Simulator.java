@@ -36,7 +36,7 @@ public class Simulator {
     int exitSpeed = 5; // number of cars that can leave per minute
 
     /**
-     * The constructor of the class Simulator, runs the main simulator by handeling arriving/leaving cars, keeps count of the time and Payments
+     * The constructor of the class Simulator, runs the main simulator by handling arriving/leaving cars, keeps count of the time and Payments
      */
     public Simulator(Canvas canvas) {
         entranceCarQueue = new CarQueue();
