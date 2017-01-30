@@ -166,7 +166,7 @@ public class SimulatorView {
                 for (int place = 0; place < getNumberOfPlaces(); place++) {
                     Location location = new Location(floor, row, place);
                     if(getCarAt(location) != null) {
-                        if(getCarAt(location).getColor() == new Reservation().getColor()) {
+                        if(getCarAt(location).getColor() == Reservation.COLOR) {
                             removeCarAt(location);
                             return location;
                         }
@@ -183,7 +183,7 @@ public class SimulatorView {
                 for (int place = 0; place < getNumberOfPlaces(); place++) {
                     Location location = new Location(floor, row, place);
                     if(getCarAt(location) != null) {
-                        if(getCarAt(location).getColor() == new PassHolderSpace().getColor()) {
+                        if(getCarAt(location).getColor() == PassHolderSpace.COLOR) {
                             removeCarAt(location);
                             return location;
                         }

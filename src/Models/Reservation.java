@@ -2,12 +2,11 @@ package Models;
 
 import javafx.scene.paint.Color;
 
-
 /**
  * Created by Jelmer on 23-Jan-17.
  */
 public class Reservation extends Car {
-    private static final Color COLOR = Color.GREEN;
+    public static final Color COLOR = Color.GREEN;
 
     public Reservation() {
 
@@ -16,6 +15,9 @@ public class Reservation extends Car {
         this.setHasToPay(false);
     }
 
+    /**
+     * Although the COLOR constant is public, we still need a getter since we're extending the Car class.
+     * @todo Remove this method
+     */
     public Color getColor() {return COLOR;}
-
 }
