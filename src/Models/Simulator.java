@@ -287,6 +287,10 @@ public class Simulator {
         return simulatorView;
     }
 
+    public void resetRevenue() {
+        pay.reset();
+    }
+
     public int getDay() {
         return day;
     }
