@@ -278,4 +278,15 @@ public class Simulator {
         return simulatorView;
     }
 
+    public int getDay() {
+        return day;
+    }
+
+    public int getHour() {
+        return hour;
+    }
+
+    public int getMinute() {
+        return minute;
+    }
 }
