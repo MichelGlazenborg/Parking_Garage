@@ -7,7 +7,7 @@ public class Payment {
     private double totalRevenue;
 
     public Payment() {
-        totalRevenue = 0;
+        totalRevenue = 0.0;
     }
 
     public double getTotalRevenue() {
@@ -17,5 +17,7 @@ public class Payment {
     public void pay(double cost, int stayTime) {
         totalRevenue += cost * (double) stayTime;
     }
+
+
 
 }
