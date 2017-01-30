@@ -123,15 +123,7 @@ public class Simulator {
     	numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
         addArrivingCars(numberOfCars, PASS);
         numberOfCars = getNumberOfCars(weekDayResArrivals, weekendResArrivals);
-        boolean finished = false;
-        while(!finished) {
-            if (numberOfCars < simulatorView.getNumberOfReservations()) {
-                addArrivingCars(numberOfCars, RES);
-                finished = true;
-            } else {
-                numberOfCars--;
-            }
-        }
+        addArrivingCars(numberOfCars, RES);
     }
 
     /**
@@ -263,7 +255,7 @@ public class Simulator {
 		 * Temporary fix, this should be changed as soon as the manager can decide where he/she wants the reserved
 		 * spots to be
 		 */
-    	if (hasParkingPass && location.getFloor() == 0 && (location.getRow() == 0 || location.getRow() == 1))
+    	if (hasParkingPass)
     		simulatorView.setPassHolderSpace(location, new PassHolderSpace());
 
         exitCarQueue.addCar(car);
