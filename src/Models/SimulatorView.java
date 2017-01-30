@@ -10,6 +10,7 @@ public class SimulatorView {
     private int _numberOfRows;
     private int _numberOfPlaces;
     private int _numberOfOpenSpots;
+    private int _numberOfReservatoins;
     private Car[][][] _cars;
 
     private CarParkView _carParkView;
@@ -77,9 +78,13 @@ public class SimulatorView {
     public void makeReservationsAt(Location loc) {
         Reservation res = new Reservation();
         setReservation(loc, res);
+        _numberOfReservatoins++;
         updateView();
     }
 
+    public int getNumberOfReservations() {
+        return _numberOfReservatoins;
+    }
 
 
     public boolean setPassHolderSpace(Location loc, PassHolderSpace phs) {
@@ -136,13 +141,30 @@ public class SimulatorView {
         return null;
     }
 
+    public Location getFirstReservation() {
+        for (int floor = 0; floor < getNumberOfFloors(); floor++) {
+            for (int row = 0; row < getNumberOfRows(); row++) {
+                for (int place = 0; place < getNumberOfPlaces(); place++) {
+                    Location location = new Location(floor, row, place);
+                    if(getCarAt(location) != null) {
+                        if(getCarAt(location).getColor() == new Reservation().getColor()) {
+                            removeCarAt(location);
+                            return location;
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
     public Location getFirstPassSpot() {
         for (int floor = 0; floor < getNumberOfFloors(); floor++) {
             for (int row = 0; row < getNumberOfRows(); row++) {
                 for (int place = 0; place < getNumberOfPlaces(); place++) {
                     Location location = new Location(floor, row, place);
                     if(getCarAt(location) != null) {
-                        if(getCarAt(location).getColor() == Color.BLACK) {
+                        if(getCarAt(location).getColor() == new PassHolderSpace().getColor()) {
                             removeCarAt(location);
                             return location;
                         }

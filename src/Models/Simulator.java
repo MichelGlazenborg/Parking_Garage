@@ -123,7 +123,15 @@ public class Simulator {
     	numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
         addArrivingCars(numberOfCars, PASS);
         numberOfCars = getNumberOfCars(weekDayResArrivals, weekendResArrivals);
-        addArrivingCars(numberOfCars, RES);
+        boolean finished = false;
+        while(!finished) {
+            if (numberOfCars < simulatorView.getNumberOfReservations()) {
+                addArrivingCars(numberOfCars, RES);
+                finished = true;
+            } else {
+                numberOfCars--;
+            }
+        }
     }
 
     /**
@@ -141,7 +149,7 @@ public class Simulator {
                     simulatorView.setCarAt(freeLocation, car);
                 }else {
     	            CarWithReservedSpot car = (CarWithReservedSpot) queue.removeCar();
-                    Location freeLocation = simulatorView.getFirstFreeLocation();
+                    Location freeLocation = simulatorView.getFirstReservation();
                     simulatorView.setCarAt(freeLocation, car);
                 }
             } else if(passHolder) {
@@ -238,9 +246,7 @@ public class Simulator {
                 break;
             case RES:
                 for(int i = 0; i < numberOfCars; i++) {
-                    Random rand = new Random();
-                    Location loc = new Location(rand.nextInt(2), rand.nextInt(1), rand.nextInt(30) );
-                    entranceResQueue.addCar(new CarWithReservedSpot(loc));
+                    entranceResQueue.addCar(new CarWithReservedSpot());
                 }
     	}
     }
@@ -258,7 +264,7 @@ public class Simulator {
 		 * spots to be
 		 */
     	if (hasParkingPass && location.getFloor() == 0 && (location.getRow() == 0 || location.getRow() == 1))
-    		simulatorView.setReservation(location, new Reservation());
+    		simulatorView.setPassHolderSpace(location, new PassHolderSpace());
 
         exitCarQueue.addCar(car);
     }

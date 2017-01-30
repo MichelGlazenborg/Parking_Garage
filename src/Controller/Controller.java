@@ -14,7 +14,6 @@ import javafx.scene.control.TextInputDialog;
 import javafx.util.Duration;
 
 import java.util.Optional;
-import java.util.Random;
 
 public class Controller {
 
@@ -100,7 +99,7 @@ public class Controller {
                     setText("Please enter an positive whole number!");
                 } else {
                     // check if the entered integer is actually in this garage
-                    if (floor > simView.getNumberOfFloors()) {
+                    if (floor < simView.getNumberOfFloors()) {
                         return(floor);
                     } else {
                         return(-1);
@@ -134,7 +133,7 @@ public class Controller {
                     setText("Please enter an positive whole number!");
                 } else {
                     // check if the entered integer is actually in this garage
-                    if (row > simView.getNumberOfRows()) {
+                    if (row < simView.getNumberOfRows()) {
                         return(row);
                     } else {
                         return(-1);
@@ -168,7 +167,7 @@ public class Controller {
                     setText("Please enter an positive whole number!");
                 } else {
                     // check if the entered integer is actually in this garage
-                    if (place > simView.getNumberOfPlaces()) {
+                    if (place < simView.getNumberOfPlaces()) {
                         return (place);
                     } else {
                         return (-1);
