@@ -271,6 +271,11 @@ public class Controller {
             }
         }
     }
+    @FXML
+    private void getTime(){
+        int[] time = sim.getTime();
+        setText("Day " + time[2] + " Hour " + time[1] + " Minute " + time[0] );
+    }
 
     @FXML
     private void reset() {
