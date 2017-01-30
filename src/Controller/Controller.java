@@ -37,7 +37,13 @@ public class Controller {
     private Button button_operate4;
 
     @FXML
+    private Button button_operate5;
+
+    @FXML
     private TextArea textTarget;
+
+    @FXML
+    private Timeline timeline;
 
     public void initialize() {
         sim = new Simulator(_canvas);
@@ -181,37 +187,25 @@ public class Controller {
 
     @FXML
     private void tick50() {
-        //call simulator object to run for 50 ticks
+        //call tickfor method to run for 50 ticks
         setText("I should be running for 50 ticks now");
 
-        disableButtons(true);
-        Timeline timeline = new Timeline();
-        timeline.setCycleCount(50);
-        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100), e -> sim.tick()));
-
-        timeline.play();
-		timeline.setOnFinished(e -> disableButtons(false));
+		tickFor(50);
     }
 
     @FXML
     private void tick1000() {
-        //call the simulator object to run for 1000 ticks
+        //call tickfor method to run for 1000 ticks
         setText("I should be running for 1000 ticks now");
 
-        disableButtons(true);
-        Timeline timeline = new Timeline();
-        timeline.setCycleCount(1000);
-        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100), e -> sim.tick()));
-
-        timeline.play();
-        timeline.setOnFinished(e -> disableButtons(false));
+        tickFor(1000);
     }
 
     @FXML
     private void tickFor(int ticks) {
         disableButtons(true);
 
-        Timeline timeline = new Timeline();
+        timeline = new Timeline();
         timeline.setCycleCount(ticks);
         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100), e -> sim.tick()));
 
@@ -266,6 +260,15 @@ public class Controller {
         button_operate2.setDisable(doDisable);
         button_operate3.setDisable(doDisable);
         button_operate4.setDisable(doDisable);
+        button_operate5.setDisable(!doDisable);
+    }
+
+    @FXML
+    private void stop() {
+        if (timeline != null) {
+            timeline.stop();
+            disableButtons(false);
+        }
     }
 
 }
