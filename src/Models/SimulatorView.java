@@ -74,6 +74,15 @@ public class SimulatorView {
         updateView();
     }
 
+    public void makePassHolderRows(int numberOfRows) {
+        for(int x=0; x<numberOfRows; x++) {
+            for (int i = 0; i < 30; i++) {
+                setPassHolderSpace(new Location(0, x, i), new PassHolderSpace());
+            }
+        }
+        updateView();
+    }
+
 
     public void makeReservationsAt(Location loc) {
         Reservation res = new Reservation();
@@ -147,7 +156,7 @@ public class SimulatorView {
                 for (int place = 0; place < getNumberOfPlaces(); place++) {
                     Location location = new Location(floor, row, place);
                     if(getCarAt(location) != null) {
-                        if(getCarAt(location).getColor() == new Reservation().getColor()) {
+                        if(getCarAt(location).getColor() == Reservation.COLOR) {
                             removeCarAt(location);
                             return location;
                         }
@@ -164,7 +173,7 @@ public class SimulatorView {
                 for (int place = 0; place < getNumberOfPlaces(); place++) {
                     Location location = new Location(floor, row, place);
                     if(getCarAt(location) != null) {
-                        if(getCarAt(location).getColor() == new PassHolderSpace().getColor()) {
+                        if(getCarAt(location).getColor() == PassHolderSpace.COLOR) {
                             removeCarAt(location);
                             return location;
                         }

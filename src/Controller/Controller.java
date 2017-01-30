@@ -64,6 +64,32 @@ public class Controller {
     }
 
     @FXML
+    private void MakePassHolderRows() {
+        setText("I should be opening a popup window now.");
+
+        TextInputDialog dialog = new TextInputDialog("0");
+        dialog.setTitle("Number Input Dialog");
+        dialog.setContentText("Number of rows:");
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()){
+            String result2 = result.get();
+            // Parses a integer from a String and tries to catch errors.
+            int rowAmount = 0;
+            try {
+                rowAmount = Integer.parseInt(result2);
+            } catch(NumberFormatException exception) {
+                setText("Please enter an positive whole number!");
+            } finally {
+                if(rowAmount < 1) {
+                    setText("Please enter an positive whole number!");
+                } else {
+                    simView.makePassHolderRows(rowAmount);
+                }
+            }
+        }
+    }
+
+    @FXML
     private void makeReservationsAt() {
         // make reservations at a prompted location
         int floor = insertFloor();
@@ -250,6 +276,8 @@ public class Controller {
             }
         }
     }
+
+
 
     @FXML
     private void showAbout() {

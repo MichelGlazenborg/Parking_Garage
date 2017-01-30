@@ -6,7 +6,7 @@ import javafx.scene.paint.Color;
  * Created by Jelmer on 26-Jan-17.
  */
 public class PassHolderSpace extends Car{
-    private static final Color COLOR = Color.BLACK;
+    public static final Color COLOR = Color.BLACK;
 
     public PassHolderSpace() {
 
@@ -14,7 +14,11 @@ public class PassHolderSpace extends Car{
         this.setMinutesLeft(stayMinutes);
         this.setHasToPay(false);
     }
-
+    
+    /**
+     * Although the COLOR constant is public, we still need a getter since we're extending the Car class.
+     * @todo Remove this method
+     */
     public Color getColor() {return COLOR;}
 
 }
