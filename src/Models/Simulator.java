@@ -28,8 +28,8 @@ public class Simulator {
     int weekendArrivals = 200; // average number of arriving cars per hour
     int weekDayPassArrivals= 50; // average number of arriving cars per hour
     int weekendPassArrivals = 5; // average number of arriving cars per hour
-    int weekDayResArrivals = 20;
-    int weekendResArrivals = 4;
+    int weekDayResArrivals = 10;
+    int weekendResArrivals = 1;
 
     int enterSpeed = 3; // number of cars that can enter per minute
     int paymentSpeed = 7; // number of cars that can pay per minute
@@ -142,6 +142,9 @@ public class Simulator {
                 }else {
     	            CarWithReservedSpot car = (CarWithReservedSpot) queue.removeCar();
                     Location freeLocation = simulatorView.getFirstReservation();
+                    if(freeLocation == null) {
+                        freeLocation = simulatorView.getFirstFreeLocation();
+                    }
                     simulatorView.setCarAt(freeLocation, car);
                 }
             } else if(passHolder) {
@@ -237,7 +240,7 @@ public class Simulator {
                 }
                 break;
             case RES:
-                for(int i = 0; i < numberOfCars; i++) {
+                for(int i = 0; i < simulatorView.getNumberOfReservations(); i++) {
                     entranceResQueue.addCar(new CarWithReservedSpot());
                 }
     	}
@@ -255,8 +258,10 @@ public class Simulator {
 		 * Temporary fix, this should be changed as soon as the manager can decide where he/she wants the reserved
 		 * spots to be
 		 */
-    	if (hasParkingPass)
-    		simulatorView.setPassHolderSpace(location, new PassHolderSpace());
+    	if (hasParkingPass && location.getFloor() == 0)
+    	    if(location.getRow() == 0 || location.getRow() == 1) {
+                simulatorView.setPassHolderSpace(location, new PassHolderSpace());
+            }
 
         exitCarQueue.addCar(car);
     }
