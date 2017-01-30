@@ -245,7 +245,7 @@ public class Controller {
 
     @FXML
     private void reset() {
-        // resets all parking spots to empty on use
+        // resets all parking spots to empty on click
         setText("I should be removing cars now.");
         for (int i = 0; i < simView.getNumberOfFloors(); i++) {
             for (int j = 0; j < simView.getNumberOfRows(); j++) {
