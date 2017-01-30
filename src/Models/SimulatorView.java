@@ -10,7 +10,7 @@ public class SimulatorView {
     private int _numberOfRows;
     private int _numberOfPlaces;
     private int _numberOfOpenSpots;
-    private int _numberOfReservatoins;
+    private int _numberOfReservations=0;
     private Car[][][] _cars;
 
     private CarParkView _carParkView;
@@ -87,12 +87,12 @@ public class SimulatorView {
     public void makeReservationsAt(Location loc) {
         Reservation res = new Reservation();
         setReservation(loc, res);
-        _numberOfReservatoins++;
+        _numberOfReservations++;
         updateView();
     }
 
     public int getNumberOfReservations() {
-        return _numberOfReservatoins;
+        return _numberOfReservations;
     }
 
 

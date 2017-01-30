@@ -65,7 +65,7 @@ public class Controller {
 
     @FXML
     private void MakePassHolderRows() {
-        setText("I should be opening a popup window now.");
+        //setText("I should be opening a popup window now.");
 
         TextInputDialog dialog = new TextInputDialog("0");
         dialog.setTitle("Number Input Dialog");
@@ -82,6 +82,8 @@ public class Controller {
             } finally {
                 if(rowAmount < 1) {
                     setText("Please enter an positive whole number!");
+                } else if(rowAmount > simView.getNumberOfRows()) {
+                    setText("There aren't that many rows");
                 } else {
                     simView.makePassHolderRows(rowAmount);
                 }

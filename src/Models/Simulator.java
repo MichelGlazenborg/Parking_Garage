@@ -28,8 +28,7 @@ public class Simulator {
     int weekendArrivals = 200; // average number of arriving cars per hour
     int weekDayPassArrivals= 50; // average number of arriving cars per hour
     int weekendPassArrivals = 5; // average number of arriving cars per hour
-    int weekDayResArrivals = 10;
-    int weekendResArrivals = 1;
+
 
     int enterSpeed = 3; // number of cars that can enter per minute
     int paymentSpeed = 7; // number of cars that can pay per minute
@@ -122,7 +121,7 @@ public class Simulator {
         addArrivingCars(numberOfCars, AD_HOC);
     	numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
         addArrivingCars(numberOfCars, PASS);
-        numberOfCars = getNumberOfCars(weekDayResArrivals, weekendResArrivals);
+        numberOfCars = getNumberOfCars(1, 1);
         addArrivingCars(numberOfCars, RES);
     }
 
@@ -143,9 +142,10 @@ public class Simulator {
     	            CarWithReservedSpot car = (CarWithReservedSpot) queue.removeCar();
                     Location freeLocation = simulatorView.getFirstReservation();
                     if(freeLocation == null) {
-                        freeLocation = simulatorView.getFirstFreeLocation();
+                        car = null;
+                    } else {
+                        simulatorView.setCarAt(freeLocation, car);
                     }
-                    simulatorView.setCarAt(freeLocation, car);
                 }
             } else if(passHolder) {
     	        ParkingPassCar car = (ParkingPassCar) queue.removeCar();
