@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <BorderPane fx:controller="Controller.Controller"
             maxHeight="-Infinity"
             maxWidth="-Infinity"
@@ -23,9 +24,6 @@
       <MenuBar>
         <menus>
           <Menu mnemonicParsing="false" text="Simulator">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" onAction="#closeApp" />
-            </items>
               <items>
                   <MenuItem text="Make Passholder places" onAction="#makePassHolderPlaces" />
               </items>
@@ -34,6 +32,12 @@
               </items>
               <items>
                   <MenuItem text="Make Reservation at" onAction="#makeReservationsAt"/>
+              </items>
+              <items>
+                  <SeparatorMenuItem />
+              </items>
+              <items>
+                  <MenuItem mnemonicParsing="false" text="Close" onAction="#closeApp" />
               </items>
           </Menu>
 

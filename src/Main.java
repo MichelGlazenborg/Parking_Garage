@@ -11,7 +11,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("View/Parkeergarage.fxml"));
         primaryStage.setMaximized(true);
         primaryStage.setTitle("Parking simulator");
-        primaryStage.setScene(new Scene(root, 1200, 800));
+        primaryStage.setScene(new Scene(root, primaryStage.getWidth(), primaryStage.getHeight()));
         primaryStage.show();
     }
 
