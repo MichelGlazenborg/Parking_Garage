@@ -92,8 +92,6 @@ public class Controller {
             } finally {
                 if(rowAmount < 1) {
                     setText("Please enter an positive whole number!");
-                } else if(rowAmount > simView.getNumberOfRows()) {
-                    setText("There aren't that many rows");
                 } else {
                     simView.makePassHolderRows(rowAmount);
                 }
@@ -293,6 +291,11 @@ public class Controller {
             }
         }
         setText("All cars should be gone now");
+    }
+
+    @FXML
+    private void getRevenue(){
+        setText("The total revenue since the start is: €" + sim.getRevenue());
     }
 
     @FXML
