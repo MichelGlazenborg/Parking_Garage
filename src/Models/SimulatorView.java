@@ -10,7 +10,9 @@ public class SimulatorView {
     private int _numberOfRows;
     private int _numberOfPlaces;
     private int _numberOfOpenSpots;
-    private int _numberOfReservatoins;
+
+    private int _numberOfReservations=0;
+
     private Car[][][] _cars;
 
     private CarParkView _carParkView;
@@ -74,16 +76,35 @@ public class SimulatorView {
         updateView();
     }
 
+    public void makePassHolderRows(int numberOfRows) {
+        int y,x,o;
+        y=0;
+        x=0;
+        o=6;
+        for(int q=0; q<numberOfRows; q++) {
+            if(x==o) {
+                y+=1;
+                o+=6;
+                x-=6;
+            }
+            for (int i = 0; i < 30; i++) {
+                setPassHolderSpace(new Location(y, x, i), new PassHolderSpace());
+            }
+            x++;
+        }
+        updateView();
+    }
+
 
     public void makeReservationsAt(Location loc) {
         Reservation res = new Reservation();
         setReservation(loc, res);
-        _numberOfReservatoins++;
+        _numberOfReservations++;
         updateView();
     }
 
     public int getNumberOfReservations() {
-        return _numberOfReservatoins;
+        return _numberOfReservations;
     }
 
 
@@ -147,7 +168,7 @@ public class SimulatorView {
                 for (int place = 0; place < getNumberOfPlaces(); place++) {
                     Location location = new Location(floor, row, place);
                     if(getCarAt(location) != null) {
-                        if(getCarAt(location).getColor() == new Reservation().getColor()) {
+                        if(getCarAt(location).getColor() == Reservation.COLOR) {
                             removeCarAt(location);
                             return location;
                         }
@@ -164,7 +185,7 @@ public class SimulatorView {
                 for (int place = 0; place < getNumberOfPlaces(); place++) {
                     Location location = new Location(floor, row, place);
                     if(getCarAt(location) != null) {
-                        if(getCarAt(location).getColor() == new PassHolderSpace().getColor()) {
+                        if(getCarAt(location).getColor() == PassHolderSpace.COLOR) {
                             removeCarAt(location);
                             return location;
                         }
