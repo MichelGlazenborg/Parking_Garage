@@ -2,7 +2,6 @@ package Models;
 
 import javafx.scene.paint.Color;
 
-
 /**
  * Created by Jelmer on 23-Jan-17.
  */
