@@ -120,7 +120,7 @@ public class Controller {
 
         TextInputDialog floorDialog = new TextInputDialog("0");
         floorDialog.setTitle("Floor Input Dialog");
-        floorDialog.setHeaderText("Please enter the floor number for your reservation below. Between 0 and " + simView.getNumberOfFloors());
+        floorDialog.setHeaderText("Please enter the floor number for your reservation below. Between 0 and " + (simView.getNumberOfFloors() - 1));
         floorDialog.setContentText("Floor:");
         Optional<String> floorResult = floorDialog.showAndWait();
 
@@ -155,7 +155,7 @@ public class Controller {
 
         TextInputDialog rowDialog = new TextInputDialog("0");
         rowDialog.setTitle("Row Input Dialog");
-        rowDialog.setHeaderText("Please enter the row number for your reservation below. Between 0 and " + simView.getNumberOfRows());
+        rowDialog.setHeaderText("Please enter the row number for your reservation below. Between 0 and " + (simView.getNumberOfRows() - 1));
         rowDialog.setContentText("Row:");
         Optional<String> rowResult = rowDialog.showAndWait();
 
@@ -190,7 +190,7 @@ public class Controller {
 
         TextInputDialog placeDialog = new TextInputDialog("0");
         placeDialog.setTitle("Place Input Dialog");
-        placeDialog.setHeaderText("Please enter the floor number for your reservation below. Between 0 and " + simView.getNumberOfPlaces());
+        placeDialog.setHeaderText("Please enter the floor number for your reservation below. Between 0 and " + (simView.getNumberOfPlaces() - 1));
         placeDialog.setContentText("Place:");
         Optional<String> placeResult = placeDialog.showAndWait();
 
@@ -275,8 +275,6 @@ public class Controller {
         }
     }
 
-
-
     @FXML
     private void reset() {
         // resets all parking spots to empty on click
@@ -322,21 +320,5 @@ public class Controller {
             timeline.stop();
             disableButtons(false);
         }
-    }
-
-    public Button getButton_operate5() {
-        return button_operate5;
-    }
-
-    public void setButton_operate5(Button button_operate5) {
-        this.button_operate5 = button_operate5;
-    }
-
-    public Button getButton_operate6() {
-        return button_operate6;
-    }
-
-    public void setButton_operate6(Button button_operate6) {
-        this.button_operate6 = button_operate6;
     }
 }
