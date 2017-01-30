@@ -66,6 +66,18 @@ public class SimulatorView {
         return false;
     }
 
+    public void reset() {
+        for (int i = 0; i < getNumberOfFloors(); i++) {
+            for (int j = 0; j < getNumberOfRows(); j++) {
+                for (int k = 0; k < getNumberOfPlaces(); k++) {
+                    Location location = new Location(i,j,k);
+                    removeCarAt(location);
+                    updateView();
+                }
+            }
+        }
+    }
+
     public void makePassHolderPlaces() {
         for(int i=0; i<30; i++) {
             setPassHolderSpace(new Location(0, 0, i), new PassHolderSpace());
@@ -75,6 +87,7 @@ public class SimulatorView {
     }
 
     public void makePassHolderRows(int numberOfRows) {
+        reset();
         int y,x,o;
         y=0;
         x=0;

@@ -66,6 +66,31 @@ public class Controller {
     }
 
     @FXML
+    private void tick50() {
+        //call simulator object to run for 50 ticks
+        tickFor(50);
+    }
+
+    @FXML
+    private void tick1000() {
+        //call the simulator object to run for 1000 ticks
+        tickFor(1000);
+    }
+
+    @FXML
+    private void tickFor(int ticks) {
+        setText("I should be running for " + ticks + " ticks now");
+        disableButtons(true);
+
+        timeline = new Timeline();
+        timeline.setCycleCount(ticks);
+        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100), e -> sim.tick()));
+
+        timeline.play();
+        timeline.setOnFinished(e -> disableButtons(false));
+    }
+
+    @FXML
     private void makePassHolderPlaces(){
         simView.makePassHolderPlaces();
     }
@@ -89,8 +114,6 @@ public class Controller {
             } finally {
                 if(rowAmount < 1) {
                     setText("Please enter an positive whole number!");
-                } else if(rowAmount > simView.getNumberOfRows()) {
-                    setText("There aren't that many rows");
                 } else {
                     simView.makePassHolderRows(rowAmount);
                 }
@@ -219,31 +242,6 @@ public class Controller {
     }
 
     @FXML
-    private void tick50() {
-        //call simulator object to run for 50 ticks
-        tickFor(50);
-    }
-
-    @FXML
-    private void tick1000() {
-        //call the simulator object to run for 1000 ticks
-        tickFor(1000);
-    }
-
-    @FXML
-    private void tickFor(int ticks) {
-        setText("I should be running for " + ticks + " ticks now");
-        disableButtons(true);
-
-        timeline = new Timeline();
-        timeline.setCycleCount(ticks);
-        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100), e -> sim.tick()));
-
-        timeline.play();
-        timeline.setOnFinished(e -> disableButtons(false));
-    }
-
-    @FXML
     private void submit() {
         // Opening a pop-up dialog window to ask for the amount of ticks, converting it to integer and calling on tickFor
         setText("I should be opening a popup window now.");
@@ -280,16 +278,9 @@ public class Controller {
     private void reset() {
         // resets all parking spots to empty on click
         setText("I should be removing cars now.");
-        for (int i = 0; i < simView.getNumberOfFloors(); i++) {
-            for (int j = 0; j < simView.getNumberOfRows(); j++) {
-                for (int k = 0; k < simView.getNumberOfPlaces(); k++) {
-                    Location location = new Location(i,j,k);
-                    simView.removeCarAt(location);
-                    simView.updateView();
-                }
-            }
-        }
+        simView.reset();
         setText("All cars should be gone now");
+        button_operate6.setDisable(true);
     }
 
     @FXML
@@ -308,6 +299,7 @@ public class Controller {
         button_operate3.setDisable(doDisable);
         button_operate4.setDisable(doDisable);
         button_operate5.setDisable(!doDisable);
+        button_operate6.setDisable(doDisable);
     }
 
     @FXML
