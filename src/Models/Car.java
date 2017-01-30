@@ -3,6 +3,7 @@ package Models;
 public abstract class Car {
 
     private Location _location;
+    private int _stayMinutes;
     private int _minutesLeft;
     private boolean _isPaying;
     private boolean _hasToPay;
@@ -61,6 +62,11 @@ public abstract class Car {
     public void setIsPaying(boolean isPaying) {
         _isPaying = isPaying;
     }
+    public int getStayMinutes(){
+        return _stayMinutes;
+    }
+
+    public void setStayMinutes(int time) {_stayMinutes = time;}
 
     /**
      * Return if the car has to pay

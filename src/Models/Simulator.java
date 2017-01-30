@@ -17,6 +17,7 @@ public class Simulator {
     private CarQueue paymentCarQueue;
     private CarQueue exitCarQueue;
     private SimulatorView simulatorView;
+    private Payment pay;
 
     private int day = 0;
     private int hour = 0;
@@ -43,6 +44,7 @@ public class Simulator {
         entranceResQueue = new CarQueue();
         paymentCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
+        pay = new Payment();
         simulatorView = new SimulatorView(canvas, 3, 6, 30);
         updateViews();
     }
@@ -89,6 +91,8 @@ public class Simulator {
      * takes cars from the carQueue and lets them enter the garage
      */
     private void handleEntrance(){
+        Random ran = new Random();
+        simulatorView.makeReservationsAt(new Location(ran.nextInt(3),ran.nextInt(6),ran.nextInt(30)));
     	carsArriving();
     	carsEntering(entrancePassQueue,true, false);
     	carsEntering(entranceCarQueue,false, false);
@@ -185,10 +189,14 @@ public class Simulator {
     	int i = 0;
     	while (paymentCarQueue.carsInQueue()>0 && i < paymentSpeed){
             Car car = paymentCarQueue.removeCar();
-            // TODO Handle payment.
+            pay.pay(0.15, car.getStayMinutes());
             carLeavesSpot(car, (car instanceof ParkingPassCar));
             i++;
     	}
+    }
+
+    public double getRevenue() {
+        return pay.getTotalRevenue();
     }
 
     /**
@@ -259,7 +267,7 @@ public class Simulator {
 		 * spots to be
 		 */
     	if (hasParkingPass && location.getFloor() == 0)
-    	    if(location.getRow() == 0 || location.getRow() == 1) {
+    	    if(location.getRow() <= simulatorView.getPassHolderRows()) {
                 simulatorView.setPassHolderSpace(location, new PassHolderSpace());
             }
 
@@ -270,4 +278,15 @@ public class Simulator {
         return simulatorView;
     }
 
+    public int getDay() {
+        return day;
+    }
+
+    public int getHour() {
+        return hour;
+    }
+
+    public int getMinute() {
+        return minute;
+    }
 }
