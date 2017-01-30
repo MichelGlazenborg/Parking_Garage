@@ -62,10 +62,7 @@ public class Controller {
     @FXML
     private void tick1() {
         //call the simulator object to run for 1 tick
-        setText("I should be running for 1 tick now");
-        disableButtons(true);
-        sim.tick();
-        disableButtons(false);
+        tickFor(1);
     }
 
     @FXML
