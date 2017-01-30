@@ -21,6 +21,7 @@ public class SimulatorView {
         _numberOfRows = numberOfRows;
         _numberOfPlaces = numberOfPlaces;
         _numberOfOpenSpots = numberOfFloors * numberOfRows * numberOfPlaces;
+        _numberOfPassHolderRows = -1;
         _cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         _carParkView = new CarParkView(canvas);
     }
