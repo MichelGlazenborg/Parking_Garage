@@ -1,23 +1,11 @@
-.root {
-
-}
-
 .button {
-    -fx-background-color: orange;
-    -fx-min-width: 200px;
-    -fx-border: none;
-    -fx-color: white;
-    -fx-padding: 14px 40px;
-    -fx-text-align: center;
-    -fx-text-decoration: none;
-    -fx-display: inline-block;
+    -fx-min-width: 150px;
+    -fx-min-height: 40px;
+    -fx-font-family: Arial;
     -fx-font-size: 14px;
+    -fx-font-weight: bold;
 }
 
 #button_operate5 {
-    -fx-background-color: red;
-}
-
-#_canvas {
     -fx-background-color: red;
 }
