@@ -37,6 +37,9 @@
                   <SeparatorMenuItem />
               </items>
               <items>
+                  <MenuItem text="Set the time at" onAction="#setTime"/>
+              </items>
+              <items>
                   <MenuItem mnemonicParsing="false" text="Close" onAction="#closeApp" />
               </items>
           </Menu>

@@ -7,7 +7,6 @@ import Models.StatsPie;
 import View.StatsGraph;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -17,7 +16,6 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
-import java.util.ArrayList;
 import java.util.Optional;
 
 public class Controller {
@@ -153,6 +151,152 @@ public class Controller {
             simView.makeReservationsAt(new Location(floor, row, place));
         }
     }
+    @FXML
+    private void setTime() {
+        int week = givinWeek();
+        int day = givinDay();
+        int hour = givinHour();
+        int minute = givinMinute();
+
+        if(week == -1 || day == -1 || hour == -1 || minute == -1) {
+            setText("Please enter positive numbers.");
+        } else {
+            sim.setTime(week,day,hour,minute);
+        }
+    }
+
+    private  int givinWeek() {
+        int week = -1;
+
+        TextInputDialog WeekDialog = new TextInputDialog("0");
+        WeekDialog.setTitle("Week Input Dialog");
+        WeekDialog.setHeaderText("Please enter any week number Between 1 and 52");
+        WeekDialog.setContentText("Week:");
+        Optional<String> WeekResult = WeekDialog.showAndWait();
+        if (WeekResult.isPresent()) {
+            // Turns Optional<String> into a normal String
+            String WeekResult2 = WeekResult.get();
+            // Parses a integer from a String and tries to catch errors.
+            try {
+                week = Integer.parseInt(WeekResult2);
+            } catch (NumberFormatException exception) {
+                setText("Please enter an positive whole number!");
+            } finally {
+                if (week <= 0) {
+                    setText("Please enter an positive whole number bigger than 0.");
+                } else {
+                    // check if the entered integer is between bounds
+                    if (week <= 52) {
+                        return (week - 1);
+                    } else {
+                        return (-1);
+                    }
+                }
+            }
+        }
+        // if no acceptable input was found, this will return -1 and stop the method
+        return (week);
+    }
+
+    private  int givinDay() {
+        int day = -1;
+
+        TextInputDialog DayDialog = new TextInputDialog("0");
+        DayDialog.setTitle("Day Input Dialog");
+        DayDialog.setHeaderText("Please enter any day number Between 1 and 7");
+        DayDialog.setContentText("Day:");
+        Optional<String> DayResult = DayDialog.showAndWait();
+        if (DayResult.isPresent()) {
+            // Turns Optional<String> into a normal String
+            String DayResult2 = DayResult.get();
+            // Parses a integer from a String and tries to catch errors.
+            try {
+                day = Integer.parseInt(DayResult2);
+            } catch (NumberFormatException exception) {
+                setText("Please enter an positive whole number!");
+            } finally {
+                if (day <= 0) {
+                    setText("Please enter an positive whole number bigger than 0.");
+                } else {
+                    // check if the entered integer is between bounds
+                    if (day <= 7) {
+                        return(day - 1);
+                    } else {
+                        return(-1);
+                    }
+                }
+            }
+        }
+        // if no acceptable input was found, this will return -1 and stop the method
+        return(day);
+    }
+
+    private  int givinHour() {
+        int hour = -1;
+
+        TextInputDialog HourDialog = new TextInputDialog("0");
+        HourDialog.setTitle("Hour Input Dialog");
+        HourDialog.setHeaderText("Please enter any Hour between 1 and 24");
+        HourDialog.setContentText("Hour:");
+        Optional<String> HourResult = HourDialog.showAndWait();
+        if (HourResult.isPresent()) {
+            // Turns Optional<String> into a normal String
+            String HourResult2 = HourResult.get();
+            // Parses a integer from a String and tries to catch errors.
+            try {
+                hour = Integer.parseInt(HourResult2);
+            } catch (NumberFormatException exception) {
+                setText("Please enter an positive whole number!");
+            } finally {
+                if (hour <= 0) {
+                    setText("Please enter an positive whole number bigger than 0.");
+                } else {
+                    // check if the entered integer is between bounds
+                    if (hour <= 24) {
+                        return(hour - 1);
+                    } else {
+                        return(-1);
+                    }
+                }
+            }
+        }
+        // if no acceptable input was found, this will return -1 and stop the method
+        return(hour);
+    }
+
+    private  int givinMinute() {
+        int minute = -1;
+
+        TextInputDialog MinuteDialog = new TextInputDialog("0");
+        MinuteDialog.setTitle("Minute Input Dialog");
+        MinuteDialog.setHeaderText("Please enter any minute between 1 and 60");
+        MinuteDialog.setContentText("Minute:");
+        Optional<String> MinuteResult = MinuteDialog.showAndWait();
+        if (MinuteResult.isPresent()) {
+            // Turns Optional<String> into a normal String
+            String MinuteResult2 = MinuteResult.get();
+            // Parses a integer from a String and tries to catch errors.
+            try {
+                minute = Integer.parseInt(MinuteResult2);
+            } catch (NumberFormatException exception) {
+                setText("Please enter an positive whole number!");
+            } finally {
+                if (minute <= 0) {
+                    setText("Please enter an positive whole number bigger than 0.");
+                } else {
+                    // check if the entered integer is between bounds
+                    if (minute <= 60) {
+                        return(minute - 1);
+                    } else {
+                        return(-1);
+                    }
+                }
+            }
+        }
+        // if no acceptable input was found, this will return -1 and stop the method
+        return(minute);
+    }
+
 
     private int insertFloor() {
         // input a floor
@@ -224,6 +368,8 @@ public class Controller {
         return(row);
     }
 
+
+
     private int insertPlace() {
         // input a place
         int place = -1;
@@ -292,8 +438,38 @@ public class Controller {
     @FXML
     private void getTime(){
         int[] time = sim.getTime();
-        setText("Week " + time[3] + " Day " + time[2] + " Hour " + time[1] + " Minute " + time[0] );
+        String day = "";
+        switch (time[2]) {
+            case 0 : {
+                day = "Monday";
+                break;
+            }
+            case 1 : {
+                day = "Thuesday";
+                break;
+            }
+            case 2 : {
+                day = "Wednesday";
+                break;
+            }
+            case 3 : {
+                day = "Thursday";
+                break;
+            }
+            case 4 : {
+                day = "Friday";
+            }
+            case 5 : {
+                day = "Saturday";
+            }
+            case 6 : {
+                day = "Zondag";
+            }
+        }
+        setText("Week " + time[3] + " " + day + " Hour " + time[1] + " Minute " + time[0] );
     }
+
+
 
     @FXML
     private void reset() {
