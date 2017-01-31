@@ -66,4 +66,8 @@ public class StatsPie {
     public StatsData getReservations() {
         return _reservations;
     }
+
+    public StatsData getReservationsUnoccupied() {
+        return _reservationsUnoccupied;
+    }
 }
