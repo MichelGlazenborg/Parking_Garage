@@ -64,11 +64,11 @@ public class Controller {
         sim = new Simulator(_canvas);
         simView = sim.getSimulatorView();
 
-        _statsGraph = new StatsGraph();
         _statsPie = new StatsPie();
+        _statsGraph = new StatsGraph(_statsPie);
 
+        _statsGraph.setData();
         _statsGraph.generate();
-        _statsGraph.setData(_statsPie.getData());
         _sidebarRight.getChildren().add(_statsGraph.getChart());
     }
 
@@ -105,7 +105,10 @@ public class Controller {
         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100), e -> sim.tick()));
 
         timeline.play();
-        timeline.setOnFinished(e -> disableButtons(false));
+        timeline.setOnFinished(e -> {
+            updateGraph();
+            disableButtons(false);
+        });
     }
 
     @FXML
@@ -340,7 +343,13 @@ public class Controller {
     }
 
     private void updateGraph() {
-        _statsPie.update(simView.getNumberOfPlaces(), simView.getNumberOfOpenSpots(), simView.getNumberOfPassHolders(), simView.getNumberOfAdHoc(), simView.getNumberOfCarsWithReservation());
-        _statsGraph.setData(_statsPie.getData());
+        _statsPie.update(
+                simView.getNumberOfFloors() * simView.getNumberOfRows() * simView.getNumberOfPlaces(),
+                simView.getNumberOfOpenSpots(),
+                simView.getNumberOfPassHolders(),
+                simView.getNumberOfAdHoc(),
+                simView.getNumberOfCarsWithReservation()
+        );
+        _statsGraph.setData();
     }
 }
