@@ -198,6 +198,7 @@ public class Simulator {
                     AdHocCar car = (AdHocCar) queue.removeCar();
                     Location freeLocation = simulatorView.getFirstFreeLocation();
                     simulatorView.setCarAt(freeLocation, car);
+                    simulatorView.addOneCarToCount("AdHoc");
                 }else {
     	            CarWithReservedSpot car = (CarWithReservedSpot) queue.removeCar();
                     Location freeLocation = simulatorView.getFirstReservation();
@@ -205,6 +206,7 @@ public class Simulator {
                         car = null;
                     } else {
                         simulatorView.setCarAt(freeLocation, car);
+                        simulatorView.addOneCarToCount("Reservation");
                     }
                 }
             } else if(passHolder) {
@@ -214,6 +216,7 @@ public class Simulator {
                     freeLocation = simulatorView.getFirstFreeLocation();
                 }
     	        simulatorView.setCarAt(freeLocation, car);
+                simulatorView.addOneCarToCount("ParkingPassCar");
             }
 			i++;
         }
@@ -302,19 +305,16 @@ public class Simulator {
             case AD_HOC:
                 for (int i = 0; i < numberOfCars; i++) {
                     entranceCarQueue.addCar(new AdHocCar());
-                    simulatorView.addOneCarToCount("AdHocCar");
                 }
                 break;
             case PASS:
                 for (int i = 0; i < numberOfCars; i++) {
                     entrancePassQueue.addCar(new ParkingPassCar());
-                    simulatorView.addOneCarToCount("ParkingPassCar");
                 }
                 break;
             case RES:
                 for(int i = 0; i < simulatorView.getNumberOfReservations(); i++) {
                     entranceResQueue.addCar(new CarWithReservedSpot());
-                    simulatorView.addOneCarToCount("Reservation");
                 }
     	}
     }

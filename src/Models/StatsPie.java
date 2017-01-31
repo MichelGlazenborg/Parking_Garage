@@ -26,6 +26,11 @@ public class StatsPie {
     }
 
     public void update(int total, int unoccupied, int passHolders, int adhoc, int reservations) {
+        System.out.println(unoccupied);
+        System.out.println(passHolders);
+        System.out.println(adhoc);
+        System.out.println(reservations);
+
         double percentageUnoccupied = (unoccupied / total) * 100;
         double percentagePassHolders = (passHolders / total) * 100;
         double percentageAdHoc = (adhoc / total) * 100;
