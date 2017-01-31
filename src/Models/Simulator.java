@@ -142,35 +142,48 @@ public class Simulator {
      * adds new cars to the carQueue's
      */
     private void carsArriving(){
-        int numberOfCars = getNumberOfCars(weekDayArrivals, weekendArrivals);
-        switch(day) {
+        int numberOfCars = getNumberOfCars(weekDayArrivals, weekendArrivals,1);
+        addArrivingCars(numberOfCars, AD_HOC);
+        numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals,1);
+        addArrivingCars(numberOfCars, PASS);
+        numberOfCars = getNumberOfCars(weekDayResArrivals, weekendResArivals,1);
+        addArrivingCars(numberOfCars, RES);
+        /*switch(day) {
+            case 0 :
             case 1 :
             case 2 :
             case 3 : {
                 addArrivingCars(numberOfCars, AD_HOC);
-                numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
+                numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals,1);
                 addArrivingCars(numberOfCars, PASS);
-                numberOfCars = getNumberOfCars(weekDayResArrivals, weekendResArivals);
+                numberOfCars = getNumberOfCars(weekDayResArrivals, weekendResArivals,1);
                 addArrivingCars(numberOfCars, RES);
                 break;
             }
             case 4 :
             case 5 : {
                 if(hour > 18 && hour < 23) {
-                numberOfCars *= 1.9;
-                addArrivingCars(numberOfCars, AD_HOC);
-                numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
-                numberOfCars *= 1.5;
-                addArrivingCars(numberOfCars, PASS);
-                numberOfCars = getNumberOfCars(weekDayResArrivals, weekendResArivals);
-                numberOfCars *= 2;
-                addArrivingCars(numberOfCars, RES);
+                    numberOfCars = getNumberOfCars(weekDayArrivals, weekendArrivals,1.9);
+                    addArrivingCars(numberOfCars, AD_HOC);
+                    numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals,1.5);
+                    addArrivingCars(numberOfCars, PASS);
+                    numberOfCars = getNumberOfCars(weekDayResArrivals, weekendResArivals,2);
+                    addArrivingCars(numberOfCars, RES);
                 }
                 break;
             }
+            case 6 : {
+                numberOfCars = getNumberOfCars(weekDayArrivals, weekendArrivals,0.8);
+                addArrivingCars(numberOfCars, AD_HOC);
+                numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals,0.5);
+                addArrivingCars(numberOfCars, PASS);
+                numberOfCars = getNumberOfCars(weekDayResArrivals, weekendResArivals,1);
+                addArrivingCars(numberOfCars, RES);
+            }
+            break;
+            }*/
         }
 
-    }
 
     /**
      * removes a car from the carQueue and assigns it a parking space
@@ -269,7 +282,7 @@ public class Simulator {
      * @param weekend The number of cars on a weekend
      * @return int the number of cars per hour on the current day
      */
-    private int getNumberOfCars(int weekDay, int weekend){
+    private int getNumberOfCars(int weekDay, int weekend, double modifier){
         Random random = new Random();
 
         // Get the average number of cars that arrive per hour.
@@ -277,7 +290,7 @@ public class Simulator {
 
         // Calculate the number of cars that arrive this minute.
         double standardDeviation = averageNumberOfCarsPerHour * 0.3;
-        double numberOfCarsPerHour = averageNumberOfCarsPerHour + random.nextGaussian() * standardDeviation;
+        double numberOfCarsPerHour = averageNumberOfCarsPerHour + random.nextGaussian() * standardDeviation * modifier;
         return (int)Math.round(numberOfCarsPerHour / 60);
     }
 
