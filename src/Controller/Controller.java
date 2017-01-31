@@ -343,7 +343,13 @@ public class Controller {
     }
 
     private void updateGraph() {
-        _statsPie.update(simView.getNumberOfPlaces(), simView.getNumberOfOpenSpots(), simView.getNumberOfPassHolders(), simView.getNumberOfAdHoc(), simView.getNumberOfCarsWithReservation());
+        _statsPie.update(
+                simView.getNumberOfFloors() * simView.getNumberOfRows() * simView.getNumberOfPlaces(),
+                simView.getNumberOfOpenSpots(),
+                simView.getNumberOfPassHolders(),
+                simView.getNumberOfAdHoc(),
+                simView.getNumberOfCarsWithReservation()
+        );
         _statsGraph.setData();
     }
 }

@@ -3,13 +3,13 @@ package Models;
 public class StatsData {
 
     private String _label;
-    private int _percentage;
+    private double _percentage;
 
     public StatsData(String label) {
         _label = label;
     }
 
-    public StatsData(String label, int percentage) {
+    public StatsData(String label, double percentage) {
         _label = label;
         _percentage = percentage;
     }
@@ -18,11 +18,11 @@ public class StatsData {
         return _label;
     }
 
-    public int getPercentage() {
+    public double getPercentage() {
         return _percentage;
     }
 
-    public void setPercentage(int percentage) {
+    public void setPercentage(double percentage) {
         _percentage = percentage;
     }
 }

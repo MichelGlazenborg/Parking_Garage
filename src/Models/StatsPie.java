@@ -26,14 +26,14 @@ public class StatsPie {
     }
 
     public void update(int total, int unoccupied, int passHolders, int adhoc, int reservations) {
-        int percentageUnoccupied = (int) (unoccupied / total) * 100;
-        int percentagePassHolders = (int) (passHolders / total) * 100;
-        int percentageAdHoc = (int) (adhoc / total) * 100;
-        int percentageReservations = (int) (reservations / total) * 100;
-        int percentageTotal = percentageAdHoc + percentagePassHolders + percentageReservations + percentageUnoccupied;
+        double percentageUnoccupied = (unoccupied / total) * 100;
+        double percentagePassHolders = (passHolders / total) * 100;
+        double percentageAdHoc = (adhoc / total) * 100;
+        double percentageReservations = (reservations / total) * 100;
+        double percentageTotal = percentageAdHoc + percentagePassHolders + percentageReservations + percentageUnoccupied;
 
         if (percentageTotal < 100)
-            percentageUnoccupied += (100 - percentageTotal);
+            percentageUnoccupied += (double) (100 - percentageTotal);
 
         _unoccupied.setPercentage(percentageUnoccupied);
         _passholders.setPercentage(percentagePassHolders);
@@ -45,7 +45,7 @@ public class StatsPie {
         return _unoccupied;
     }
 
-    public StatsData getPassholders() {
+    public StatsData getPassHolders() {
         return _passholders;
     }
 
