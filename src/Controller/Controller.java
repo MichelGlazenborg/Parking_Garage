@@ -171,7 +171,7 @@ public class Controller {
     private  int givinWeek() {
         int week = -1;
 
-        TextInputDialog WeekDialog = new TextInputDialog("0");
+        TextInputDialog WeekDialog = new TextInputDialog("1");
         WeekDialog.setTitle("Week Input Dialog");
         WeekDialog.setHeaderText("Please enter any week number Between 1 and 52");
         WeekDialog.setContentText("Week:");
@@ -190,7 +190,7 @@ public class Controller {
                 } else {
                     // check if the entered integer is between bounds
                     if (week <= 52) {
-                        return (week - 1);
+                        return (week);
                     } else {
                         return (-1);
                     }
@@ -204,7 +204,7 @@ public class Controller {
     private  int givinDay() {
         int day = -1;
 
-        TextInputDialog DayDialog = new TextInputDialog("0");
+        TextInputDialog DayDialog = new TextInputDialog("1");
         DayDialog.setTitle("Day Input Dialog");
         DayDialog.setHeaderText("Please enter any day number Between 1 and 7");
         DayDialog.setContentText("Day:");
@@ -223,7 +223,7 @@ public class Controller {
                 } else {
                     // check if the entered integer is between bounds
                     if (day <= 7) {
-                        return(day - 1);
+                        return(day );
                     } else {
                         return(-1);
                     }
@@ -237,7 +237,7 @@ public class Controller {
     private  int givinHour() {
         int hour = -1;
 
-        TextInputDialog HourDialog = new TextInputDialog("0");
+        TextInputDialog HourDialog = new TextInputDialog("1");
         HourDialog.setTitle("Hour Input Dialog");
         HourDialog.setHeaderText("Please enter any Hour between 1 and 24");
         HourDialog.setContentText("Hour:");
@@ -256,7 +256,7 @@ public class Controller {
                 } else {
                     // check if the entered integer is between bounds
                     if (hour <= 24) {
-                        return(hour - 1);
+                        return(hour);
                     } else {
                         return(-1);
                     }
@@ -270,7 +270,7 @@ public class Controller {
     private  int givinMinute() {
         int minute = -1;
 
-        TextInputDialog MinuteDialog = new TextInputDialog("0");
+        TextInputDialog MinuteDialog = new TextInputDialog("1");
         MinuteDialog.setTitle("Minute Input Dialog");
         MinuteDialog.setHeaderText("Please enter any minute between 1 and 60");
         MinuteDialog.setContentText("Minute:");
@@ -289,7 +289,7 @@ public class Controller {
                 } else {
                     // check if the entered integer is between bounds
                     if (minute <= 60) {
-                        return(minute - 1);
+                        return(minute);
                     } else {
                         return(-1);
                     }
