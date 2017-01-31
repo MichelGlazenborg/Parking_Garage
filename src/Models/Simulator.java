@@ -291,15 +291,9 @@ public class Simulator {
         pay.reset();
     }
 
-    public int getDay() {
-        return day;
-    }
-
-    public int getHour() {
-        return hour;
-    }
-
-    public int getMinute() {
-        return minute;
+    public void resetTime() {
+        day = 0;
+        hour = 0;
+        minute = 0;
     }
 }
