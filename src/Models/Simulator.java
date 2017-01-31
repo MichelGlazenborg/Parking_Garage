@@ -30,6 +30,8 @@ public class Simulator {
     int weekendArrivals = 200; // average number of arriving cars per hour
     int weekDayPassArrivals= 50; // average number of arriving cars per hour
     int weekendPassArrivals = 5; // average number of arriving cars per hour
+    int weekDayResArrivals = 10;
+    int weekendResArivals = 20;
 
 
     int enterSpeed = 3; // number of cars that can enter per minute
@@ -89,6 +91,14 @@ public class Simulator {
             week++;
         }
     }
+    public void setTime(int week, int day, int hour, int minute) {
+        this.week = week;
+        this.day = day;
+        this.hour = hour;
+        this.minute = minute;
+
+
+    }
     public int[] getTime() {
         int[] time = new int[4];
         time[0] = minute;
@@ -132,12 +142,34 @@ public class Simulator {
      * adds new cars to the carQueue's
      */
     private void carsArriving(){
-    	int numberOfCars = getNumberOfCars(weekDayArrivals, weekendArrivals);
-        addArrivingCars(numberOfCars, AD_HOC);
-    	numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
-        addArrivingCars(numberOfCars, PASS);
-        numberOfCars = getNumberOfCars(1, 1);
-        addArrivingCars(numberOfCars, RES);
+        int numberOfCars = getNumberOfCars(weekDayArrivals, weekendArrivals);
+        switch(day) {
+            case 1 :
+            case 2 :
+            case 3 : {
+                addArrivingCars(numberOfCars, AD_HOC);
+                numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
+                addArrivingCars(numberOfCars, PASS);
+                numberOfCars = getNumberOfCars(weekDayResArrivals, weekendResArivals);
+                addArrivingCars(numberOfCars, RES);
+                break;
+            }
+            case 4 :
+            case 5 : {
+                if(hour > 18 && hour < 23) {
+                numberOfCars *= 1.9;
+                addArrivingCars(numberOfCars, AD_HOC);
+                numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
+                numberOfCars *= 1.5;
+                addArrivingCars(numberOfCars, PASS);
+                numberOfCars = getNumberOfCars(weekDayResArrivals, weekendResArivals);
+                numberOfCars *= 2;
+                addArrivingCars(numberOfCars, RES);
+                }
+                break;
+            }
+        }
+
     }
 
     /**
