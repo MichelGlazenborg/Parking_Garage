@@ -3,14 +3,17 @@ package Controller;
 import Models.Location;
 import Models.Simulator;
 import Models.SimulatorView;
+import View.StatsGraph;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 import java.util.Optional;
@@ -21,6 +24,10 @@ public class Controller {
     //make simulator object
 	private Simulator sim;
     private SimulatorView simView;
+    private StatsGraph _statsGraph;
+
+    @FXML
+    private VBox _sidebarRight;
 
     @FXML
     private Canvas _canvas;
@@ -52,6 +59,10 @@ public class Controller {
     public void initialize() {
         sim = new Simulator(_canvas);
         simView = sim.getSimulatorView();
+
+        _statsGraph = new StatsGraph();
+        _statsGraph.generate();
+        _sidebarRight.getChildren().add(_statsGraph.getChart());
     }
 
     @FXML
@@ -318,5 +329,9 @@ public class Controller {
             timeline.stop();
             disableButtons(false);
         }
+    }
+
+    private void updateGraph(ObservableList graphData) {
+        _statsGraph.setData(graphData);
     }
 }
