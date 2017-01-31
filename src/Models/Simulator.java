@@ -22,6 +22,7 @@ public class Simulator {
     private int day = 0;
     private int hour = 0;
     private int minute = 0;
+    private int week = 0;
 
     //private int tickPause = 100;
 
@@ -46,6 +47,7 @@ public class Simulator {
         exitCarQueue = new CarQueue();
         pay = new Payment();
         simulatorView = new SimulatorView(canvas, 3, 6, 30);
+        pay.setCost(0.067);
         updateViews();
     }
 
@@ -84,13 +86,15 @@ public class Simulator {
         }
         while (day > 6) {
             day -= 7;
+            week++;
         }
     }
     public int[] getTime() {
-        int[] time = new int[3];
+        int[] time = new int[4];
         time[0] = minute;
         time[1] = hour;
         time[2] = day;
+        time[3] = week;
         return time;
     }
 
@@ -197,7 +201,7 @@ public class Simulator {
     	while (paymentCarQueue.carsInQueue()>0 && i < paymentSpeed){
             Car car = paymentCarQueue.removeCar();
             if(car.getHasToPay()) {
-                pay.pay(0.15, car.getStayMinutes());
+                pay.pay(car.getStayMinutes());
             }
             carLeavesSpot(car, (car instanceof ParkingPassCar));
             i++;
