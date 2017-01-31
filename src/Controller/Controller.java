@@ -282,6 +282,7 @@ public class Controller {
         // resets all parking spots to empty on click
         setText("I should be removing cars now.");
         sim.resetRevenue();
+        sim.resetTime();
         simView.reset();
         setText("All cars should be gone now");
         button_operate6.setDisable(true);

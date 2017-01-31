@@ -99,7 +99,7 @@
       <Canvas fx:id="_canvas" height="600.0" width="800.0" BorderPane.alignment="CENTER" />
    </center>
     <right>
-        <VBox>
+        <VBox fx:id="_sidebarRight" prefWidth="300.0">
             <Text>test</Text>
         </VBox>
     </right>
