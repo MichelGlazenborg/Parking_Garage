@@ -206,7 +206,8 @@ public class Simulator {
                         car = null;
                     } else {
                         simulatorView.setCarAt(freeLocation, car);
-                        simulatorView.addOneCarToCount("Reservation");
+                        simulatorView.addOneCarToCount("CarWithReservation");
+                        simulatorView.removeCarFromCount("Reservation");
                     }
                 }
             } else if(passHolder) {
