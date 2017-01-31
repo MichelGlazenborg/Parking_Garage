@@ -461,12 +461,15 @@ public class Controller {
             }
             case 4 : {
                 day = "Friday";
+                break;
             }
             case 5 : {
                 day = "Saturday";
+                break;
             }
             case 6 : {
                 day = "Zondag";
+                break;
             }
         }
         setText("Week " + time[3] + " " + day + " Hour " + time[1] + " Minute " + time[0] );
