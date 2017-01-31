@@ -193,7 +193,7 @@ public class Simulator {
                         car = null;
                     } else {
                         simulatorView.setCarAt(freeLocation, car);
-                        simulatorView.addOneCarToCount("Reservation");
+                        simulatorView.removeCarFromCount("Reservation");
                     }
                 }
             } else if(passHolder) {
@@ -301,6 +301,7 @@ public class Simulator {
                 break;
             case RES:
                 for(int i = 0; i < simulatorView.getNumberOfReservations(); i++) {
+                    simulatorView.removeCarFromCount("Reservation");
                     entranceResQueue.addCar(new CarWithReservedSpot());
                 }
     	}
