@@ -182,7 +182,6 @@ public class Simulator {
         Car car = simulatorView.getFirstLeavingCar();
         while (car != null) {
             simulatorView.removeCarFromCount(car.getClass().getSimpleName());
-
         	if (car.getHasToPay()){
 	            car.setIsPaying(true);
 	            paymentCarQueue.addCar(car);
@@ -203,6 +202,9 @@ public class Simulator {
     	while (paymentCarQueue.carsInQueue()>0 && i < paymentSpeed){
             Car car = paymentCarQueue.removeCar();
             if(car.getHasToPay()) {
+                if(car.getHasReservation()) {
+                    pay.payExtra(5);
+                }
                 pay.pay(car.getStayMinutes());
             }
             carLeavesSpot(car, (car instanceof ParkingPassCar));

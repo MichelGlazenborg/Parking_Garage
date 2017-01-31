@@ -19,6 +19,10 @@ public class Payment {
     public void pay(int stayTime) {
         totalRevenue += cost * (double) stayTime;
     }
+
+    public void payExtra(double extra) {
+        totalRevenue += extra;
+    }
   
     public void reset() {
         totalRevenue = 0;
