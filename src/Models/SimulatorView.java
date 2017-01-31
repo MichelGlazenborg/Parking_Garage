@@ -146,7 +146,6 @@ public class SimulatorView {
         for(int q=0; q<_numberOfPassHolderRows; q++) {
             if(x==o) {
                 y+=1;
-                o+=6;
                 x-=6;
             }
             for (int i = 0; i < 30; i++) {
