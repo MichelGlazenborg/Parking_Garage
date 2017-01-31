@@ -23,7 +23,7 @@
    <top>
       <MenuBar>
         <menus>
-          <Menu mnemonicParsing="false" text="Simulator">
+          <Menu mnemonicParsing="false" text="_Simulator">
               <items>
                   <MenuItem text="Make Passholder places" onAction="#makePassHolderPlaces" />
               </items>
