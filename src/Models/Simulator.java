@@ -29,9 +29,9 @@ public class Simulator {
     int weekDayArrivals= 100; // average number of arriving cars per hour
     int weekendArrivals = 200; // average number of arriving cars per hour
     int weekDayPassArrivals= 50; // average number of arriving cars per hour
-    int weekendPassArrivals = 5; // average number of arriving cars per hour
-    int weekDayResArrivals = 10;
-    int weekendResArivals = 20;
+    int weekendPassArrivals = 100; // average number of arriving cars per hour
+    int weekDayResArrivals = 25;
+    int weekendResArivals = 50;
 
 
     int enterSpeed = 3; // number of cars that can enter per minute
@@ -112,8 +112,6 @@ public class Simulator {
      * takes cars from the carQueue and lets them enter the garage
      */
     private void handleEntrance(){
-        Random ran = new Random();
-        simulatorView.makeReservationsAt(new Location(ran.nextInt(3),ran.nextInt(6),ran.nextInt(30)));
     	carsArriving();
     	carsEntering(entrancePassQueue,true, false);
     	carsEntering(entranceCarQueue,false, false);
@@ -142,12 +140,6 @@ public class Simulator {
      * adds new cars to the carQueue's
      */
     private void carsArriving(){
-        /*int numberOfCars = getNumberOfCars(weekDayArrivals, weekendArrivals,1);
-        addArrivingCars(numberOfCars, AD_HOC);
-        numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals,1);
-        addArrivingCars(numberOfCars, PASS);
-        numberOfCars = getNumberOfCars(weekDayResArrivals, weekendResArivals,1);
-        addArrivingCars(numberOfCars, RES);*/
         switch(day) {
             case 0 :
             case 1 :
@@ -171,13 +163,21 @@ public class Simulator {
                     numberOfCars = getNumberOfCars(weekDayResArrivals, weekendResArivals,2);
                     addArrivingCars(numberOfCars, RES);
                     break;
+                } else {
+                    int numberOfCars = getNumberOfCars(weekDayArrivals, weekendArrivals,1.1);
+                    addArrivingCars(numberOfCars, AD_HOC);
+                    numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals,1.2);
+                    addArrivingCars(numberOfCars, PASS);
+                    numberOfCars = getNumberOfCars(weekDayResArrivals, weekendResArivals,0.9);
+                    addArrivingCars(numberOfCars, RES);
+                    break;
                 }
 
             }
             case 6 : {
                 int numberOfCars = getNumberOfCars(weekDayArrivals, weekendArrivals,0.8);
                 addArrivingCars(numberOfCars, AD_HOC);
-                numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals,0.5);
+                numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals,0.8);
                 addArrivingCars(numberOfCars, PASS);
                 numberOfCars = getNumberOfCars(weekDayResArrivals, weekendResArivals,1);
                 addArrivingCars(numberOfCars, RES);
@@ -201,13 +201,18 @@ public class Simulator {
                     AdHocCar car = (AdHocCar) queue.removeCar();
                     Location freeLocation = simulatorView.getFirstFreeLocation();
                     simulatorView.setCarAt(freeLocation, car);
+                    i++;
                 }else {
+                    int cMinute = minute;
+                    int cHour = hour;
     	            CarWithReservedSpot car = (CarWithReservedSpot) queue.removeCar();
                     Location freeLocation = simulatorView.getFirstReservation();
                     if(freeLocation == null) {
                         car = null;
+
                     } else {
                         simulatorView.setCarAt(freeLocation, car);
+                        i++;
                     }
                 }
             } else if(passHolder) {
@@ -217,8 +222,9 @@ public class Simulator {
                     freeLocation = simulatorView.getFirstFreeLocation();
                 }
     	        simulatorView.setCarAt(freeLocation, car);
+                i++;
             }
-			i++;
+
         }
     }
 
@@ -315,9 +321,11 @@ public class Simulator {
                 }
                 break;
             case RES:
-                for(int i = 0; i < simulatorView.getNumberOfReservations(); i++) {
+                for(int i = 0; i < numberOfCars; i++) {
                     entranceResQueue.addCar(new CarWithReservedSpot());
                     simulatorView.addOneCarToCount("Reservation");
+                    Random ran = new Random();
+                    simulatorView.makeReservationsAt(new Location(ran.nextInt(3),ran.nextInt(6),ran.nextInt(30)), minute, hour);
                 }
     	}
     }
@@ -355,4 +363,5 @@ public class Simulator {
         hour = 0;
         minute = 0;
     }
+
 }

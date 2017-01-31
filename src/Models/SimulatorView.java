@@ -160,8 +160,8 @@ public class SimulatorView {
         return _numberOfPassHolderRows;
     }
 
-    public void makeReservationsAt(Location loc) {
-        Reservation res = new Reservation();
+    public void makeReservationsAt(Location loc, int minute, int hour) {
+        Reservation res = new Reservation(minute, hour);
         setReservation(loc, res);
         _numberOfReservations++;
         updateView();
@@ -232,7 +232,7 @@ public class SimulatorView {
                 for (int place = 0; place < getNumberOfPlaces(); place++) {
                     Location location = new Location(floor, row, place);
                     if(getCarAt(location) != null) {
-                        if(getCarAt(location).getColor() == Reservation.COLOR) {
+                        if(getCarAt(location).getColor() == Reservation.COLOR && getCarAt(location).checkReadyToEnter()) {
                             removeCarAt(location);
                             return location;
                         }

@@ -7,10 +7,13 @@ import javafx.scene.paint.Color;
  */
 public class Reservation extends Car {
     public static final Color COLOR = Color.GREEN;
+    private int madeAtMinute;
+    private int madeAtHour;
 
-    public Reservation() {
-
-        int stayMinutes = (200);
+    public Reservation(int madeAtMinute, int madeAtHour ) {
+        this.madeAtMinute = madeAtMinute;
+        this.madeAtHour = madeAtHour;
+        int stayMinutes = (60);
         this.setMinutesLeft(stayMinutes);
         this.setHasToPay(false);
     }
@@ -20,4 +23,11 @@ public class Reservation extends Car {
      * @todo Remove this method
      */
     public Color getColor() {return COLOR;}
+
+    public boolean checkReadyToEnter(int cMinute, int cHour) {
+        if(cMinute >= madeAtMinute + 30 || cHour > madeAtHour) {
+            set_readyToEnter(true);
+        }
+        return checkReadyToEnter();
+    }
 }

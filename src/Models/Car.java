@@ -8,12 +8,13 @@ public abstract class Car {
     private boolean _isPaying;
     private boolean _hasToPay;
     private boolean _hasReservation;
+    private boolean _readyToEnter;
 
     /**
      * Constructor for objects of class controllers.Car
      */
     public Car() {
-
+        _readyToEnter = false;
     }
 
     /**
@@ -30,6 +31,14 @@ public abstract class Car {
      */
     public void setLocation(Location location) {
         _location = location;
+    }
+
+    public boolean checkReadyToEnter() {
+        return _readyToEnter;
+    }
+
+    public void set_readyToEnter(boolean b) {
+        _readyToEnter = b;
     }
 
     /**
@@ -79,7 +88,6 @@ public abstract class Car {
 
     public boolean getHasReservation() {return  _hasReservation; }
     public void setHasReservation(boolean hasReservation) {_hasReservation = hasReservation; }
-
     /**
      * Sets if the car has to pay
      * @param hasToPay does the car need to pay
