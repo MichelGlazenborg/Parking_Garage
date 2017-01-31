@@ -3,6 +3,7 @@ package Controller;
 import Models.Location;
 import Models.Simulator;
 import Models.SimulatorView;
+import Models.StatsPie;
 import View.StatsGraph;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -16,6 +17,7 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 public class Controller {
@@ -24,7 +26,9 @@ public class Controller {
     //make simulator object
 	private Simulator sim;
     private SimulatorView simView;
+
     private StatsGraph _statsGraph;
+    private StatsPie _statsPie;
 
     @FXML
     private VBox _sidebarRight;
@@ -61,7 +65,10 @@ public class Controller {
         simView = sim.getSimulatorView();
 
         _statsGraph = new StatsGraph();
+        _statsPie = new StatsPie();
+
         _statsGraph.generate();
+        _statsGraph.setData(_statsPie.getData());
         _sidebarRight.getChildren().add(_statsGraph.getChart());
     }
 
@@ -294,6 +301,7 @@ public class Controller {
         setText("I should be removing cars now.");
         sim.resetRevenue();
         sim.resetTime();
+        _statsPie.reset();
         simView.reset();
         setText("All cars should be gone now");
         button_operate6.setDisable(true);
@@ -331,7 +339,8 @@ public class Controller {
         }
     }
 
-    private void updateGraph(ObservableList graphData) {
-        _statsGraph.setData(graphData);
+    private void updateGraph() {
+        _statsPie.update(simView.getNumberOfPlaces(), simView.getNumberOfOpenSpots(), simView.getNumberOfPassHolders(), simView.getNumberOfAdHoc(), simView.getNumberOfCarsWithReservation());
+        _statsGraph.setData(_statsPie.getData());
     }
 }

@@ -15,9 +15,10 @@ public class StatsPie {
 
     public StatsPie() {
         _statsData = new ArrayList<>();
+        reset();
     }
 
-    public void setData() {
+    public void reset() {
         _statsData.add(_unoccupied = new StatsData("Unoccupied", 100));
         _statsData.add(_passholders = new StatsData("Pass holders", 0));
         _statsData.add(_adhoc = new StatsData("Adhoc", 0));

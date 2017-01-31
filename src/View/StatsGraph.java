@@ -1,7 +1,10 @@
 package View;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.*;
+
+import java.util.ArrayList;
 
 public class StatsGraph {
 
@@ -12,8 +15,8 @@ public class StatsGraph {
 
     }
 
-    public void setData(ObservableList graphData) {
-        _graphData = graphData;
+    public void setData(ArrayList graphData) {
+        _graphData = FXCollections.observableArrayList(graphData);
     }
 
     public void generate() {

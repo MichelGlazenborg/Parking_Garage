@@ -16,6 +16,10 @@ public class SimulatorView {
 
     private CarParkView _carParkView;
 
+    private int _currentPassHolders;
+    private int _currentAdHoc;
+    private int _currentCarsWithReservation;
+
     public SimulatorView(Canvas canvas, int numberOfFloors, int numberOfRows, int numberOfPlaces) {
         _numberOfFloors = numberOfFloors;
         _numberOfRows = numberOfRows;
@@ -24,6 +28,10 @@ public class SimulatorView {
         _numberOfPassHolderRows = -1;
         _cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         _carParkView = new CarParkView(canvas);
+
+        _currentPassHolders = 0;
+        _currentAdHoc = 0;
+        _currentCarsWithReservation = 0;
     }
 
     public void updateView() {
@@ -42,8 +50,48 @@ public class SimulatorView {
         return _numberOfPlaces;
     }
 
+    public int getNumberOfAdHoc() {
+        return _currentAdHoc;
+    }
+
+    public int getNumberOfPassHolders() {
+        return _currentPassHolders;
+    }
+
+    public int getNumberOfCarsWithReservation() {
+        return _currentCarsWithReservation;
+    }
+
     public int getNumberOfOpenSpots() {
         return _numberOfOpenSpots;
+    }
+
+    public void removeCarFromCount(String type) {
+        switch (type) {
+            case "AdHocCar":
+                _currentAdHoc--;
+                break;
+            case "Reservation":
+                _currentCarsWithReservation--;
+                break;
+            case "ParkingPassCar":
+                _currentPassHolders--;
+                break;
+        }
+    }
+
+    public void addOneCarToCount(String type) {
+        switch (type) {
+            case "AdHocCar":
+                _currentAdHoc--;
+                break;
+            case "Reservation":
+                _currentCarsWithReservation--;
+                break;
+            case "ParkingPassCar":
+                _currentPassHolders--;
+                break;
+        }
     }
 
     public Car getCarAt(Location location) {
@@ -272,7 +320,6 @@ public class SimulatorView {
                     }
                 }
             }
-
         }
 
         private void drawParkingSpot(Location location, Color color) {
