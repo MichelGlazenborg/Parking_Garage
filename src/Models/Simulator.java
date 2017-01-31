@@ -177,6 +177,8 @@ public class Simulator {
         // Add leaving cars to the payment queue.
         Car car = simulatorView.getFirstLeavingCar();
         while (car != null) {
+            simulatorView.removeCarFromCount(car.getClass().getSimpleName());
+
         	if (car.getHasToPay()){
 	            car.setIsPaying(true);
 	            paymentCarQueue.addCar(car);
@@ -249,16 +251,19 @@ public class Simulator {
             case AD_HOC:
                 for (int i = 0; i < numberOfCars; i++) {
                     entranceCarQueue.addCar(new AdHocCar());
+                    simulatorView.addOneCarToCount("AdHocCar");
                 }
                 break;
             case PASS:
                 for (int i = 0; i < numberOfCars; i++) {
                     entrancePassQueue.addCar(new ParkingPassCar());
+                    simulatorView.addOneCarToCount("ParkingPassCar");
                 }
                 break;
             case RES:
                 for(int i = 0; i < simulatorView.getNumberOfReservations(); i++) {
                     entranceResQueue.addCar(new CarWithReservedSpot());
+                    simulatorView.addOneCarToCount("Reservation");
                 }
     	}
     }
