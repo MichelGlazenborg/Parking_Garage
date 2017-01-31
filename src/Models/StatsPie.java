@@ -19,22 +19,42 @@ public class StatsPie {
     }
 
     public void reset() {
-        _statsData.add(_unoccupied = new StatsData("Unoccupied", 100));
-        _statsData.add(_passholders = new StatsData("Pass holders", 0));
-        _statsData.add(_adhoc = new StatsData("Adhoc", 0));
-        _statsData.add(_reservations = new StatsData("Reservations", 0));
+        _unoccupied = new StatsData("Unoccupied", 100);
+        _passholders = new StatsData("Pass holders", 0);
+        _adhoc = new StatsData("Adhoc", 0);
+        _reservations = new StatsData("Reservations", 0);
     }
 
     public void update(int total, int unoccupied, int passHolders, int adhoc, int reservations) {
-        // Calculate percentages here
+        int percentageUnoccupied = (int) (unoccupied / total) * 100;
+        int percentagePassHolders = (int) (passHolders / total) * 100;
+        int percentageAdHoc = (int) (adhoc / total) * 100;
+        int percentageReservations = (int) (reservations / total) * 100;
+        int percentageTotal = percentageAdHoc + percentagePassHolders + percentageReservations + percentageUnoccupied;
 
-        _unoccupied.setPercentage(unoccupied);
-        _passholders.setPercentage(passHolders);
-        _adhoc.setPercentage(adhoc);
-        _reservations.setPercentage(reservations);
+        if (percentageTotal < 100) {
+            percentageUnoccupied += (100 - percentageTotal);
+        }
+
+        _unoccupied.setPercentage(percentageUnoccupied);
+        _passholders.setPercentage(percentagePassHolders);
+        _adhoc.setPercentage(percentageAdHoc);
+        _reservations.setPercentage(percentageReservations);
     }
 
-    public ArrayList getData() {
-        return _statsData;
+    public StatsData getUnoccupied() {
+        return _unoccupied;
+    }
+
+    public StatsData getPassholders() {
+        return _passholders;
+    }
+
+    public StatsData getAdHoc() {
+        return _adhoc;
+    }
+
+    public StatsData getReservations() {
+        return _reservations;
     }
 }
