@@ -16,6 +16,8 @@ public class CarWithReservedSpot extends Car {
         this.setStayMinutes(stayMinutes);
         this.setMinutesLeft(stayMinutes);
         this.setHasToPay(false);
+        this.setHasReservation(true);
+
     }
 
     public Color getColor(){

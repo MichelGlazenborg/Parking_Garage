@@ -15,6 +15,8 @@ public class AdHocCar extends Car {
     	this.setStayMinutes(time);
         this.setMinutesLeft(time);
         this.setHasToPay(true);
+        this.setHasReservation(false);
+
     }
     
     public Color getColor(){

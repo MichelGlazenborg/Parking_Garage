@@ -7,6 +7,7 @@ public abstract class Car {
     private int _minutesLeft;
     private boolean _isPaying;
     private boolean _hasToPay;
+    private boolean _hasReservation;
 
     /**
      * Constructor for objects of class controllers.Car
@@ -75,6 +76,9 @@ public abstract class Car {
     public boolean getHasToPay() {
         return _hasToPay;
     }
+
+    public boolean getHasReservation() {return  _hasReservation; }
+    public void setHasReservation(boolean hasReservation) {_hasReservation = hasReservation; }
 
     /**
      * Sets if the car has to pay
