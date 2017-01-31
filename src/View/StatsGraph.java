@@ -25,9 +25,9 @@ public class StatsGraph {
         _graphData.clear();
 
         _graphData = FXCollections.observableArrayList(
+            new PieChart.Data(_statsPie.getUnoccupied().getLabel(), _statsPie.getUnoccupied().getPercentage()),
             new PieChart.Data(_statsPie.getAdHoc().getLabel(), _statsPie.getAdHoc().getPercentage()),
             new PieChart.Data(_statsPie.getPassHolders().getLabel(), _statsPie.getPassHolders().getPercentage()),
-            new PieChart.Data(_statsPie.getReservations().getLabel(), _statsPie.getReservations().getPercentage()),
             new PieChart.Data(_statsPie.getReservations().getLabel(), _statsPie.getReservations().getPercentage()),
             new PieChart.Data(_statsPie.getReservationsUnoccupied().getLabel(), _statsPie.getReservationsUnoccupied().getPercentage())
         );

@@ -39,7 +39,7 @@ public class StatsPie {
         double percentageAdHoc = (adhoc / total) * 100;
         double percentageReservations = (reservations / total) * 100;
         double percentageReservationsUnoccupied = (reservationsUnoccupied / total) * 100;
-        double percentageTotal = percentageAdHoc + percentagePassHolders + percentageReservations + percentageUnoccupied;
+        double percentageTotal = percentageAdHoc + percentagePassHolders + percentageReservations;
 
         if (percentageTotal < 100)
             percentageUnoccupied += (100 - percentageTotal);
