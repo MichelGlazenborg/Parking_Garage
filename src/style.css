@@ -1,0 +1,23 @@
+.root {
+
+}
+
+.button {
+    -fx-background-color: orange;
+    -fx-min-width: 200px;
+    -fx-border: none;
+    -fx-color: white;
+    -fx-padding: 14px 40px;
+    -fx-text-align: center;
+    -fx-text-decoration: none;
+    -fx-display: inline-block;
+    -fx-font-size: 14px;
+}
+
+#button_operate5 {
+    -fx-background-color: red;
+}
+
+#_canvas {
+    -fx-background-color: red;
+}
