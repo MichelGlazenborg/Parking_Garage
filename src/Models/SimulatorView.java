@@ -83,13 +83,13 @@ public class SimulatorView {
     public void addOneCarToCount(String type) {
         switch (type) {
             case "AdHocCar":
-                _currentAdHoc--;
+                _currentAdHoc++;
                 break;
             case "Reservation":
-                _currentCarsWithReservation--;
+                _currentCarsWithReservation++;
                 break;
             case "ParkingPassCar":
-                _currentPassHolders--;
+                _currentPassHolders++;
                 break;
         }
     }

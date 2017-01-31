@@ -33,7 +33,7 @@ public class StatsPie {
         double percentageTotal = percentageAdHoc + percentagePassHolders + percentageReservations + percentageUnoccupied;
 
         if (percentageTotal < 100)
-            percentageUnoccupied += (double) (100 - percentageTotal);
+            percentageUnoccupied += (100 - percentageTotal);
 
         _unoccupied.setPercentage(percentageUnoccupied);
         _passholders.setPercentage(percentagePassHolders);
