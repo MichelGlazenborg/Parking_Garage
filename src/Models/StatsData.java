@@ -3,13 +3,15 @@ package Models;
 public class StatsData {
 
     private String _label;
-    private int _amount;
     private int _percentage;
 
-    public StatsData(String label, int amount) {
+    public StatsData(String label) {
         _label = label;
-        _amount = amount;
-        _percentage = 0;
+    }
+
+    public StatsData(String label, int percentage) {
+        _label = label;
+        _percentage = percentage;
     }
 
     public String getLabel() {

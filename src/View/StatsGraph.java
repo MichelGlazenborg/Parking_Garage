@@ -17,9 +17,13 @@ public class StatsGraph {
         _statsPie = pie;
         _chart = new PieChart();
         _chart.setTitle("Statistics");
+
+        _graphData = FXCollections.observableArrayList();
     }
 
     public void setData() {
+        _graphData.clear();
+
         _graphData = FXCollections.observableArrayList(
             new PieChart.Data(_statsPie.getAdHoc().getLabel(), _statsPie.getAdHoc().getPercentage()),
             new PieChart.Data(_statsPie.getPassholders().getLabel(), _statsPie.getPassholders().getPercentage()),
@@ -30,7 +34,7 @@ public class StatsGraph {
     }
 
     public void generate() {
-        //
+        // !!
     }
 
     public PieChart getChart() {
