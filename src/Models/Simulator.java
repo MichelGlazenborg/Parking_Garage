@@ -331,7 +331,7 @@ public class Simulator {
 		 * spots to be
 		 */
     	if (hasParkingPass && location.getFloor() == 0)
-    	    if(location.getRow() <= simulatorView.getPassHolderRows()) {
+    	    if(location.getRow() <= simulatorView.getPassHolderSpots()) {
                 simulatorView.setPassHolderSpace(location, new PassHolderSpace());
             }
 
