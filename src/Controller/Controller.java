@@ -4,6 +4,7 @@ import Models.Location;
 import Models.Simulator;
 import Models.SimulatorView;
 import Models.StatsPie;
+import Models.Payment;
 import View.StatsGraph;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -79,6 +80,7 @@ public class Controller {
     private void tick1() {
         //call the simulator object to run for 1 tick
         tickFor(1);
+        getRevenue();
     }
 
     @FXML
@@ -135,6 +137,32 @@ public class Controller {
                     setText("Please enter an positive whole number!");
                 } else {
                     simView.makePassHolderSpots(spotAmount);
+                }
+            }
+        }
+    }
+
+    @FXML
+    private void setPricePerMinute() {
+        //setText("I should be opening a popup window now.");
+
+        TextInputDialog dialog = new TextInputDialog("0");
+        dialog.setTitle("Number Input Dialog");
+        dialog.setContentText("Price per minute:");
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()){
+            String result2 = result.get();
+            // Parses a integer from a String and tries to catch errors.
+            double priceAmount = 0;
+            try {
+                priceAmount = Double.parseDouble(result2);
+            } catch(NumberFormatException exception) {
+                setText("Please enter an positive whole number!");
+            } finally {
+                if(priceAmount==0) {
+                    setText("Please enter an positive whole number!");
+                } else {
+                    sim.setCost(priceAmount);
                 }
             }
         }

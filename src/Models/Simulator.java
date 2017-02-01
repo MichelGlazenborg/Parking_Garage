@@ -132,7 +132,11 @@ public class Simulator {
         // Update the car park view.
         simulatorView.updateView();
     }
-
+  
+    public void setCost(double price) {
+        pay.setCost(price);
+    }
+  
     private void modifyArrivalNumbers(double modifier) {
         weekDayArrivals *= modifier;
         weekendArrivals *= modifier;
