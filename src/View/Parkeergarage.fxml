@@ -24,8 +24,11 @@
       <MenuBar>
         <menus>
           <Menu mnemonicParsing="false" text="_Simulator">
-              <items>
+              <!--<items>
                   <MenuItem text="Make Passholder places" onAction="#makePassHolderPlaces" />
+              </items>-->
+              <items>
+                  <MenuItem text="Set price per minute" onAction="#setPricePerMinute" />
               </items>
               <items>
                   <MenuItem text="Make Passholder spots" onAction="#makePassHolderSpots" />

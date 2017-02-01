@@ -137,6 +137,10 @@ public class Simulator {
         simulatorView.updateView();
     }
 
+    public void setCost(double price) {
+        pay.setCost(price);
+    }
+
     /**
      * adds new cars to the carQueue's
      */
