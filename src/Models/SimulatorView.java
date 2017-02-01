@@ -18,6 +18,7 @@ public class SimulatorView {
 
     private int _currentPassHolders;
     private int _currentAdHoc;
+    // Replace the two properties below. The second is redundant, while the first one should be renamed.
     private int _currentCarsWithReservation;
     private int _currentReservationsWithoutCars;
 
@@ -77,11 +78,8 @@ public class SimulatorView {
             case "AdHocCar":
                 _currentAdHoc--;
                 break;
-            case "CarWithReservation":
+            case "CarWithReservedSpot":
                 _currentCarsWithReservation--;
-                break;
-            case "Reservation":
-                _currentReservationsWithoutCars--;
                 break;
             case "ParkingPassCar":
                 _currentPassHolders--;
@@ -94,11 +92,8 @@ public class SimulatorView {
             case "AdHocCar":
                 _currentAdHoc++;
                 break;
-            case "CarWithReservation":
+            case "CarWithReservedSpot":
                 _currentCarsWithReservation++;
-                break;
-            case "Reservation":
-                _currentReservationsWithoutCars++;
                 break;
             case "ParkingPassCar":
                 _currentPassHolders++;
@@ -181,6 +176,8 @@ public class SimulatorView {
         Reservation res = new Reservation();
         setReservation(loc, res);
         _numberOfReservations++;
+
+        addOneCarToCount("Reservation");
         updateView();
     }
 

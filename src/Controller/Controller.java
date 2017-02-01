@@ -441,14 +441,14 @@ public class Controller {
     @FXML
     private void getTime(){
         int[] time = sim.getTime();
-        String day = "";
+        String day = null;
         switch (time[2]) {
             case 0 : {
                 day = "Monday";
                 break;
             }
             case 1 : {
-                day = "Thuesday";
+                day = "Tuesday";
                 break;
             }
             case 2 : {
@@ -468,7 +468,7 @@ public class Controller {
                 break;
             }
             case 6 : {
-                day = "Zondag";
+                day = "Sunday";
                 break;
             }
         }
@@ -527,8 +527,7 @@ public class Controller {
             simView.getNumberOfOpenSpots(),
             simView.getNumberOfPassHolders(),
             simView.getNumberOfAdHoc(),
-            simView.getNumberOfCarsWithReservation(),
-            simView.getNumberOfReservationsWithoutCars()
+            simView.getNumberOfCarsWithReservation()
         );
 
         _statsGraph.setData();
