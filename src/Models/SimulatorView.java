@@ -171,7 +171,7 @@ public class SimulatorView {
         return _numberOfPassHolderRows;
     }
 
-    public void makeReservationsAt(Location loc, int minute, int hour) {
+    public void makeReservationsAt(Location loc , int minute, int hour) {
         Reservation res = new Reservation(minute, hour);
         setReservation(loc, res);
         _numberOfReservations++;
@@ -237,15 +237,18 @@ public class SimulatorView {
         return null;
     }
 
-    public Location getFirstReservation() {
+    public Location getFirstReservation(int[] cTime) {
         for (int floor = 0; floor < getNumberOfFloors(); floor++) {
             for (int row = 0; row < getNumberOfRows(); row++) {
                 for (int place = 0; place < getNumberOfPlaces(); place++) {
                     Location location = new Location(floor, row, place);
                     if(getCarAt(location) != null) {
-                        if(getCarAt(location).getColor() == Reservation.COLOR && getCarAt(location).checkReadyToEnter()) {
-                            removeCarAt(location);
-                            return location;
+                        if(getCarAt(location).getColor() == Reservation.COLOR) {
+                            Reservation car = (Reservation) getCarAt(location);
+                            if(car.checkReadyToEnter(cTime[0],cTime[1])) {
+                                removeCarAt(location);
+                                return location;
+                            }
                         }
                     }
                 }

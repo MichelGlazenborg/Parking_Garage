@@ -10,7 +10,8 @@ public class Reservation extends Car {
     private int madeAtMinute;
     private int madeAtHour;
 
-    public Reservation(int madeAtMinute, int madeAtHour ) {
+    public Reservation(int madeAtMinute, int madeAtHour) {
+        set_readyToEnter(false);
         this.madeAtMinute = madeAtMinute;
         this.madeAtHour = madeAtHour;
         int stayMinutes = (60);
@@ -25,9 +26,18 @@ public class Reservation extends Car {
     public Color getColor() {return COLOR;}
 
     public boolean checkReadyToEnter(int cMinute, int cHour) {
-        if(cMinute >= madeAtMinute + 30 || cHour > madeAtHour) {
-            set_readyToEnter(true);
+
+        if(madeAtMinute > 29) {
+            if(cHour > madeAtHour) {
+                set_readyToEnter(true);
+            }
+        } else {
+            int timeTaken = madeAtMinute + 30;
+            if (cMinute >= timeTaken) {
+                    set_readyToEnter(true);
+            }
+
         }
-        return checkReadyToEnter();
+        return super.returnReadyToEnter();
     }
 }

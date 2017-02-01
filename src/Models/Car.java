@@ -33,7 +33,7 @@ public abstract class Car {
         _location = location;
     }
 
-    public boolean checkReadyToEnter() {
+    public boolean returnReadyToEnter() {
         return _readyToEnter;
     }
 

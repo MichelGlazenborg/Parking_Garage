@@ -416,8 +416,8 @@ public class Controller {
 
         TextInputDialog dialog = new TextInputDialog("0");
         dialog.setTitle("Number Input Dialog");
-        dialog.setHeaderText("Please enter the amount of ticks this program should be running for below.");
-        dialog.setContentText("Number of ticks:");
+        dialog.setHeaderText("Please enter the amount of minutes this program should be running for below.");
+        dialog.setContentText("Number of minutes:");
         Optional<String> result = dialog.showAndWait();
 
         // Checking if something was filled in. No answer does nothing.
@@ -469,7 +469,7 @@ public class Controller {
                 break;
             }
             case 6 : {
-                day = "Zondag";
+                day = "Sunday";
                 break;
             }
         }
