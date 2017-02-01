@@ -19,6 +19,7 @@ public class SimulatorView {
     private int _currentPassHolders;
     private int _currentAdHoc;
     private int _currentCarsWithReservation;
+    private int _currentReservationsWithoutCars;
 
     public SimulatorView(Canvas canvas, int numberOfFloors, int numberOfRows, int numberOfPlaces) {
         _numberOfFloors = numberOfFloors;
@@ -32,6 +33,7 @@ public class SimulatorView {
         _currentPassHolders = 0;
         _currentAdHoc = 0;
         _currentCarsWithReservation = 0;
+        _currentReservationsWithoutCars = 0;
     }
 
     public void updateView() {
@@ -62,6 +64,10 @@ public class SimulatorView {
         return _currentCarsWithReservation;
     }
 
+    public int getNumberOfReservationsWithoutCars() {
+        return _currentReservationsWithoutCars;
+    }
+
     public int getNumberOfOpenSpots() {
         return _numberOfOpenSpots;
     }
@@ -71,8 +77,11 @@ public class SimulatorView {
             case "AdHocCar":
                 _currentAdHoc--;
                 break;
-            case "Reservation":
+            case "CarWithReservation":
                 _currentCarsWithReservation--;
+                break;
+            case "Reservation":
+                _currentReservationsWithoutCars--;
                 break;
             case "ParkingPassCar":
                 _currentPassHolders--;
@@ -85,8 +94,11 @@ public class SimulatorView {
             case "AdHocCar":
                 _currentAdHoc++;
                 break;
-            case "Reservation":
+            case "CarWithReservation":
                 _currentCarsWithReservation++;
+                break;
+            case "Reservation":
+                _currentReservationsWithoutCars++;
                 break;
             case "ParkingPassCar":
                 _currentPassHolders++;
@@ -142,11 +154,10 @@ public class SimulatorView {
         int y,x,o;
         y=0;
         x=0;
-        o=6;
         for(int q=0; q<_numberOfPassHolderRows; q++) {
-            if(x==o) {
+            if(x==6) {
                 y+=1;
-                x-=6;
+                x=0;
             }
             for (int i = 0; i < 30; i++) {
                 setPassHolderSpace(new Location(y, x, i), new PassHolderSpace());

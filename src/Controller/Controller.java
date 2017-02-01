@@ -82,15 +82,15 @@ public class Controller {
     }
 
     @FXML
-    private void tick50() {
+    private void tick60() {
         //call simulator object to run for 50 ticks
-        tickFor(50);
+        tickFor(60);
     }
 
     @FXML
-    private void tick1000() {
+    private void tickDay() {
         //call the simulator object to run for 1000 ticks
-        tickFor(1000);
+        tickFor(1440);
     }
 
     @FXML
@@ -524,12 +524,14 @@ public class Controller {
 
     private void updateGraph() {
         _statsPie.update(
-                simView.getNumberOfFloors() * simView.getNumberOfRows() * simView.getNumberOfPlaces(),
-                simView.getNumberOfOpenSpots(),
-                simView.getNumberOfPassHolders(),
-                simView.getNumberOfAdHoc(),
-                simView.getNumberOfCarsWithReservation()
+            simView.getNumberOfFloors() * simView.getNumberOfRows() * simView.getNumberOfPlaces(),
+            simView.getNumberOfOpenSpots(),
+            simView.getNumberOfPassHolders(),
+            simView.getNumberOfAdHoc(),
+            simView.getNumberOfCarsWithReservation(),
+            simView.getNumberOfReservationsWithoutCars()
         );
+
         _statsGraph.setData();
     }
 }

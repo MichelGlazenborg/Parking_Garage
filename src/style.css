@@ -1,0 +1,11 @@
+.button {
+    -fx-min-width: 150px;
+    -fx-min-height: 40px;
+    -fx-font-family: Arial;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+#button_operate5 {
+    -fx-background-color: red;
+}
