@@ -154,11 +154,10 @@ public class SimulatorView {
         int y,x,o;
         y=0;
         x=0;
-        o=6;
         for(int q=0; q<_numberOfPassHolderRows; q++) {
-            if(x==o) {
+            if(x==6) {
                 y+=1;
-                x-=6;
+                x=0;
             }
             for (int i = 0; i < 30; i++) {
                 setPassHolderSpace(new Location(y, x, i), new PassHolderSpace());
