@@ -27,19 +27,12 @@ public class StatsPie {
         _reservationsUnoccupied = new StatsData("Reserved spots");
     }
 
-    public void update(int total, int unoccupied, int passHolders, int adhoc, int reservations, int reservationsUnoccupied) {
-        System.out.println(unoccupied);
-        System.out.println(passHolders);
-        System.out.println(adhoc);
-        System.out.println(reservations);
-        System.out.println(reservationsUnoccupied);
-
-        double percentageUnoccupied = (unoccupied / total) * 100;
-        double percentagePassHolders = (passHolders / total) * 100;
-        double percentageAdHoc = (adhoc / total) * 100;
-        double percentageReservations = (reservations / total) * 100;
-        double percentageReservationsUnoccupied = (reservationsUnoccupied / total) * 100;
-        double percentageTotal = percentageAdHoc + percentagePassHolders + percentageReservations;
+    public void update(int total, int unoccupied, int passHolders, int adHoc, int reservations) {
+        double percentageUnoccupied = (double) unoccupied / total * 100;
+        double percentagePassHolders = (double) passHolders / total * 100;
+        double percentageAdHoc = (double) adHoc / total * 100;
+        double percentageReservations = (double) reservations / total * 100;
+        double percentageTotal = percentageUnoccupied + percentageAdHoc + percentagePassHolders + percentageReservations;
 
         if (percentageTotal < 100)
             percentageUnoccupied += (100 - percentageTotal);
@@ -48,7 +41,6 @@ public class StatsPie {
         _passholders.setPercentage(percentagePassHolders);
         _adhoc.setPercentage(percentageAdHoc);
         _reservations.setPercentage(percentageReservations);
-        _reservationsUnoccupied.setPercentage(percentageReservationsUnoccupied);
     }
 
     public StatsData getUnoccupied() {
@@ -65,9 +57,5 @@ public class StatsPie {
 
     public StatsData getReservations() {
         return _reservations;
-    }
-
-    public StatsData getReservationsUnoccupied() {
-        return _reservationsUnoccupied;
     }
 }

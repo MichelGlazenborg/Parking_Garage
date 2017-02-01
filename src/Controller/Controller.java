@@ -527,8 +527,7 @@ public class Controller {
             simView.getNumberOfOpenSpots(),
             simView.getNumberOfPassHolders(),
             simView.getNumberOfAdHoc(),
-            simView.getNumberOfCarsWithReservation(),
-            simView.getNumberOfReservationsWithoutCars()
+            simView.getNumberOfCarsWithReservation()
         );
 
         _statsGraph.setData();

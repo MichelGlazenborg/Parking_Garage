@@ -96,9 +96,8 @@ public class Simulator {
         this.day = day;
         this.hour = hour;
         this.minute = minute;
-
-
     }
+
     public int[] getTime() {
         int[] time = new int[4];
         time[0] = minute;
@@ -206,8 +205,7 @@ public class Simulator {
                         car = null;
                     } else {
                         simulatorView.setCarAt(freeLocation, car);
-                        simulatorView.removeCarFromCount("Reservation");
-                        simulatorView.addOneCarToCount("CarWithReservation");
+                        simulatorView.addOneCarToCount("CarWithReservedSpot");
                     }
                 }
             } else if(passHolder) {

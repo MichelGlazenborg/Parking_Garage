@@ -81,9 +81,6 @@ public class SimulatorView {
             case "CarWithReservedSpot":
                 _currentCarsWithReservation--;
                 break;
-            case "Reservation":
-                _currentReservationsWithoutCars--;
-                break;
             case "ParkingPassCar":
                 _currentPassHolders--;
                 break;
@@ -97,9 +94,6 @@ public class SimulatorView {
                 break;
             case "CarWithReservedSpot":
                 _currentCarsWithReservation++;
-                break;
-            case "Reservation":
-                _currentReservationsWithoutCars++;
                 break;
             case "ParkingPassCar":
                 _currentPassHolders++;
