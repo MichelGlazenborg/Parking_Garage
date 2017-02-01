@@ -115,26 +115,26 @@ public class Controller {
     }
 
     @FXML
-    private void MakePassHolderRows() {
+    private void makePassHolderSpots() {
         //setText("I should be opening a popup window now.");
 
         TextInputDialog dialog = new TextInputDialog("0");
         dialog.setTitle("Number Input Dialog");
-        dialog.setContentText("Number of rows:");
+        dialog.setContentText("Number of spots:");
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()){
             String result2 = result.get();
             // Parses a integer from a String and tries to catch errors.
-            int rowAmount = 0;
+            int spotAmount = 0;
             try {
-                rowAmount = Integer.parseInt(result2);
+                spotAmount = Integer.parseInt(result2);
             } catch(NumberFormatException exception) {
                 setText("Please enter an positive whole number!");
             } finally {
-                if(rowAmount < 1) {
+                if(spotAmount < 1) {
                     setText("Please enter an positive whole number!");
                 } else {
-                    simView.makePassHolderRows(rowAmount);
+                    simView.makePassHolderSpots(spotAmount);
                 }
             }
         }
@@ -151,16 +151,16 @@ public class Controller {
         if (floor == -1 || row == -1 || place == -1) {
             setText("One or more arguments were not filled in correctly!");
         } else {
-            int time[] = sim.getTime();
-            simView.makeReservationsAt(new Location(floor, row, place),time[0],time[1]);
+            simView.makeReservationsAt(new Location(floor, row, place));
         }
     }
+
     @FXML
     private void setTime() {
         int week = givinWeek();
-        int day = givinDay();
-        int hour = givinHour();
-        int minute = givinMinute();
+        int day = givenDay();
+        int hour = givenHour();
+        int minute = givenMinute();
 
         if(week == -1 || day == -1 || hour == -1 || minute == -1) {
             setText("Please enter positive numbers.");
@@ -174,7 +174,7 @@ public class Controller {
 
         TextInputDialog WeekDialog = new TextInputDialog("0");
         WeekDialog.setTitle("Week Input Dialog");
-        WeekDialog.setHeaderText("Please enter any week number Between 0 and 51");
+        WeekDialog.setHeaderText("Please enter any week number Between 1 and 52");
         WeekDialog.setContentText("Week:");
         Optional<String> WeekResult = WeekDialog.showAndWait();
         if (WeekResult.isPresent()) {
@@ -186,12 +186,12 @@ public class Controller {
             } catch (NumberFormatException exception) {
                 setText("Please enter an positive whole number!");
             } finally {
-                if (week < 0) {
+                if (week <= 0) {
                     setText("Please enter an positive whole number bigger than 0.");
                 } else {
                     // check if the entered integer is between bounds
-                    if (week < 52) {
-                        return (week);
+                    if (week <= 52) {
+                        return (week - 1);
                     } else {
                         return (-1);
                     }
@@ -202,10 +202,10 @@ public class Controller {
         return (week);
     }
 
-    private  int givinDay() {
+    private  int givenDay() {
         int day = -1;
 
-        TextInputDialog DayDialog = new TextInputDialog("1");
+        TextInputDialog DayDialog = new TextInputDialog("0");
         DayDialog.setTitle("Day Input Dialog");
         DayDialog.setHeaderText("Please enter any day number Between 1 and 7");
         DayDialog.setContentText("Day:");
@@ -219,12 +219,12 @@ public class Controller {
             } catch (NumberFormatException exception) {
                 setText("Please enter an positive whole number!");
             } finally {
-                if (day < 0) {
+                if (day <= 0) {
                     setText("Please enter an positive whole number bigger than 0.");
                 } else {
                     // check if the entered integer is between bounds
                     if (day <= 7) {
-                        return(day -1);
+                        return(day - 1);
                     } else {
                         return(-1);
                     }
@@ -235,12 +235,12 @@ public class Controller {
         return(day);
     }
 
-    private  int givinHour() {
+    private  int givenHour() {
         int hour = -1;
 
         TextInputDialog HourDialog = new TextInputDialog("0");
         HourDialog.setTitle("Hour Input Dialog");
-        HourDialog.setHeaderText("Please enter any Hour between 0 and 23");
+        HourDialog.setHeaderText("Please enter any Hour between 1 and 24");
         HourDialog.setContentText("Hour:");
         Optional<String> HourResult = HourDialog.showAndWait();
         if (HourResult.isPresent()) {
@@ -252,12 +252,12 @@ public class Controller {
             } catch (NumberFormatException exception) {
                 setText("Please enter an positive whole number!");
             } finally {
-                if (hour < 0) {
+                if (hour <= 0) {
                     setText("Please enter an positive whole number bigger than 0.");
                 } else {
                     // check if the entered integer is between bounds
-                    if (hour < 24) {
-                        return(hour);
+                    if (hour <= 24) {
+                        return(hour - 1);
                     } else {
                         return(-1);
                     }
@@ -268,12 +268,12 @@ public class Controller {
         return(hour);
     }
 
-    private  int givinMinute() {
+    private  int givenMinute() {
         int minute = -1;
 
         TextInputDialog MinuteDialog = new TextInputDialog("0");
         MinuteDialog.setTitle("Minute Input Dialog");
-        MinuteDialog.setHeaderText("Please enter any minute between 0 and 59");
+        MinuteDialog.setHeaderText("Please enter any minute between 1 and 60");
         MinuteDialog.setContentText("Minute:");
         Optional<String> MinuteResult = MinuteDialog.showAndWait();
         if (MinuteResult.isPresent()) {
@@ -285,12 +285,12 @@ public class Controller {
             } catch (NumberFormatException exception) {
                 setText("Please enter an positive whole number!");
             } finally {
-                if (minute < 0) {
+                if (minute <= 0) {
                     setText("Please enter an positive whole number bigger than 0.");
                 } else {
                     // check if the entered integer is between bounds
-                    if (minute < 60) {
-                        return(minute);
+                    if (minute <= 60) {
+                        return(minute - 1);
                     } else {
                         return(-1);
                     }
@@ -300,7 +300,6 @@ public class Controller {
         // if no acceptable input was found, this will return -1 and stop the method
         return(minute);
     }
-
 
     private int insertFloor() {
         // input a floor
@@ -372,8 +371,6 @@ public class Controller {
         return(row);
     }
 
-
-
     private int insertPlace() {
         // input a place
         int place = -1;
@@ -415,7 +412,7 @@ public class Controller {
         setText("I should be opening a popup window now.");
 
         TextInputDialog dialog = new TextInputDialog("0");
-        dialog.setTitle("Number Input Dialog");
+        dialog.setTitle("Minute Input Dialog");
         dialog.setHeaderText("Please enter the amount of minutes this program should be running for below.");
         dialog.setContentText("Number of minutes:");
         Optional<String> result = dialog.showAndWait();
@@ -439,17 +436,18 @@ public class Controller {
             }
         }
     }
+
     @FXML
     private void getTime(){
         int[] time = sim.getTime();
-        String day = "";
+        String day = null;
         switch (time[2]) {
             case 0 : {
                 day = "Monday";
                 break;
             }
             case 1 : {
-                day = "Thuesday";
+                day = "Tuesday";
                 break;
             }
             case 2 : {
@@ -475,8 +473,6 @@ public class Controller {
         }
         setText("Week " + time[3] + " " + day + " Hour " + time[1] + " Minute " + time[0] );
     }
-
-
 
     @FXML
     private void reset() {
@@ -528,8 +524,7 @@ public class Controller {
             simView.getNumberOfOpenSpots(),
             simView.getNumberOfPassHolders(),
             simView.getNumberOfAdHoc(),
-            simView.getNumberOfCarsWithReservation(),
-            simView.getNumberOfReservationsWithoutCars()
+            simView.getNumberOfCarsWithReservation()
         );
 
         _statsGraph.setData();

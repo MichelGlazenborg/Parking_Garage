@@ -11,13 +11,14 @@ public class SimulatorView {
     private int _numberOfPlaces;
     private int _numberOfOpenSpots;
     private int _numberOfReservations;
-    private int _numberOfPassHolderRows;
+    private int _numberOfPassHolderSpots;
     private Car[][][] _cars;
 
     private CarParkView _carParkView;
 
     private int _currentPassHolders;
     private int _currentAdHoc;
+    // Replace the two properties below. The second is redundant, while the first one should be renamed.
     private int _currentCarsWithReservation;
     private int _currentReservationsWithoutCars;
 
@@ -26,7 +27,7 @@ public class SimulatorView {
         _numberOfRows = numberOfRows;
         _numberOfPlaces = numberOfPlaces;
         _numberOfOpenSpots = numberOfFloors * numberOfRows * numberOfPlaces;
-        _numberOfPassHolderRows = -1;
+        _numberOfPassHolderSpots = -1;
         _cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         _carParkView = new CarParkView(canvas);
 
@@ -77,11 +78,8 @@ public class SimulatorView {
             case "AdHocCar":
                 _currentAdHoc--;
                 break;
-            case "CarWithReservation":
+            case "CarWithReservedSpot":
                 _currentCarsWithReservation--;
-                break;
-            case "Reservation":
-                _currentReservationsWithoutCars--;
                 break;
             case "ParkingPassCar":
                 _currentPassHolders--;
@@ -94,11 +92,8 @@ public class SimulatorView {
             case "AdHocCar":
                 _currentAdHoc++;
                 break;
-            case "CarWithReservation":
+            case "CarWithReservedSpot":
                 _currentCarsWithReservation++;
-                break;
-            case "Reservation":
-                _currentReservationsWithoutCars++;
                 break;
             case "ParkingPassCar":
                 _currentPassHolders++;
@@ -148,33 +143,41 @@ public class SimulatorView {
         updateView();
     }
 
-    public void makePassHolderRows(int numberOfRows) {
+    public void makePassHolderSpots(int numberOfSpots) {
         reset();
-        _numberOfPassHolderRows = numberOfRows;
-        int y,x,o;
-        y=0;
+        _numberOfPassHolderSpots = numberOfSpots;
+        int x,z,y;
         x=0;
-        for(int q=0; q<_numberOfPassHolderRows; q++) {
-            if(x==6) {
-                y+=1;
-                x=0;
+        z=0;
+        y=0;
+        for (int i=0; i<numberOfSpots; i++) {
+            if(z==30) {
+                if(x==5) {
+                    y++;
+                    x=0;
+                    z=0;
+                } else {
+                    x+=1;
+                    z=0;
+                }
             }
-            for (int i = 0; i < 30; i++) {
-                setPassHolderSpace(new Location(y, x, i), new PassHolderSpace());
-            }
-            x++;
+            setPassHolderSpace(new Location(y, x, z), new PassHolderSpace());
+            z++;
+            System.out.println("test");
         }
         updateView();
     }
 
-    public int getPassHolderRows() {
-        return _numberOfPassHolderRows;
+    public int getPassHolderSpots() {
+        return _numberOfPassHolderSpots;
     }
 
     public void makeReservationsAt(Location loc , int minute, int hour) {
         Reservation res = new Reservation(minute, hour);
         setReservation(loc, res);
         _numberOfReservations++;
+
+        addOneCarToCount("Reservation");
         updateView();
     }
 

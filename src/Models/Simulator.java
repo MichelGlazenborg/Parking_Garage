@@ -94,9 +94,8 @@ public class Simulator {
         this.day = day;
         this.hour = hour;
         this.minute = minute;
-
-
     }
+
     public int[] getTime() {
         int[] time = new int[4];
         time[0] = minute;
@@ -219,7 +218,7 @@ public class Simulator {
                         car = null;
                     }
                     simulatorView.setCarAt(freeLocation, car);
-                    simulatorView.addOneCarToCount("AdHoc");
+                    simulatorView.addOneCarToCount("AdHocCar");
                 }else {
     	            CarWithReservedSpot car = (CarWithReservedSpot) queue.removeCar();
                     Location freeLocation = simulatorView.getFirstReservation(getTime());
@@ -227,8 +226,7 @@ public class Simulator {
                         car = null;
                     } else {
                         simulatorView.setCarAt(freeLocation, car);
-                        simulatorView.addOneCarToCount("CarWithReservation");
-                        simulatorView.removeCarFromCount("Reservation");
+                        simulatorView.addOneCarToCount("CarWithReservedSpot");
                     }
                 }
             } else if(passHolder) {
@@ -359,7 +357,7 @@ public class Simulator {
 		 * spots to be
 		 */
     	if (hasParkingPass && location.getFloor() == 0)
-    	    if(location.getRow() <= simulatorView.getPassHolderRows()) {
+    	    if(location.getRow() <= simulatorView.getPassHolderSpots()) {
                 simulatorView.setPassHolderSpace(location, new PassHolderSpace());
             }
 
