@@ -151,7 +151,8 @@ public class Controller {
         if (floor == -1 || row == -1 || place == -1) {
             setText("One or more arguments were not filled in correctly!");
         } else {
-            simView.makeReservationsAt(new Location(floor, row, place));
+            int[] time = sim.getTime();
+            simView.makeReservationsAt(new Location(floor, row, place),time[0], time[1]);
         }
     }
 
