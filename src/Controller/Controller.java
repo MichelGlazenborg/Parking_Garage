@@ -158,7 +158,7 @@ public class Controller {
 
     @FXML
     private void setTime() {
-        int week = givinWeek();
+        int week = givenWeek();
         int day = givenDay();
         int hour = givenHour();
         int minute = givenMinute();
@@ -170,10 +170,10 @@ public class Controller {
         }
     }
 
-    private  int givinWeek() {
+    private  int givenWeek() {
         int week = -1;
 
-        TextInputDialog WeekDialog = new TextInputDialog("0");
+        TextInputDialog WeekDialog = new TextInputDialog("1");
         WeekDialog.setTitle("Week Input Dialog");
         WeekDialog.setHeaderText("Please enter any week number Between 1 and 52");
         WeekDialog.setContentText("Week:");
@@ -206,7 +206,7 @@ public class Controller {
     private  int givenDay() {
         int day = -1;
 
-        TextInputDialog DayDialog = new TextInputDialog("0");
+        TextInputDialog DayDialog = new TextInputDialog("1");
         DayDialog.setTitle("Day Input Dialog");
         DayDialog.setHeaderText("Please enter any day number Between 1 and 7");
         DayDialog.setContentText("Day:");
@@ -239,7 +239,7 @@ public class Controller {
     private  int givenHour() {
         int hour = -1;
 
-        TextInputDialog HourDialog = new TextInputDialog("0");
+        TextInputDialog HourDialog = new TextInputDialog("1");
         HourDialog.setTitle("Hour Input Dialog");
         HourDialog.setHeaderText("Please enter any Hour between 1 and 24");
         HourDialog.setContentText("Hour:");
@@ -272,7 +272,7 @@ public class Controller {
     private  int givenMinute() {
         int minute = -1;
 
-        TextInputDialog MinuteDialog = new TextInputDialog("0");
+        TextInputDialog MinuteDialog = new TextInputDialog("1");
         MinuteDialog.setTitle("Minute Input Dialog");
         MinuteDialog.setHeaderText("Please enter any minute between 1 and 60");
         MinuteDialog.setContentText("Minute:");
