@@ -11,7 +11,7 @@ public class SimulatorView {
     private int _numberOfPlaces;
     private int _numberOfOpenSpots;
     private int _numberOfReservations;
-    private int _numberOfPassHolderRows;
+    private int _numberOfPassHolderSpots;
     private Car[][][] _cars;
 
     private CarParkView _carParkView;
@@ -27,7 +27,7 @@ public class SimulatorView {
         _numberOfRows = numberOfRows;
         _numberOfPlaces = numberOfPlaces;
         _numberOfOpenSpots = numberOfFloors * numberOfRows * numberOfPlaces;
-        _numberOfPassHolderRows = -1;
+        _numberOfPassHolderSpots = -1;
         _cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         _carParkView = new CarParkView(canvas);
 
@@ -143,28 +143,33 @@ public class SimulatorView {
         updateView();
     }
 
-    public void makePassHolderRows(int numberOfRows) {
+    public void makePassHolderSpots(int numberOfSpots) {
         reset();
-        _numberOfPassHolderRows = numberOfRows;
-        int y,x,o;
-        y=0;
+        _numberOfPassHolderSpots = numberOfSpots;
+        int x,z,y;
         x=0;
-        o=6;
-        for(int q=0; q<_numberOfPassHolderRows; q++) {
-            if(x==o) {
-                y+=1;
-                x-=6;
+        z=0;
+        y=0;
+        for (int i=0; i<numberOfSpots; i++) {
+            if(z==30) {
+                if(x==5) {
+                    y++;
+                    x=0;
+                    z=0;
+                } else {
+                    x+=1;
+                    z=0;
+                }
             }
-            for (int i = 0; i < 30; i++) {
-                setPassHolderSpace(new Location(y, x, i), new PassHolderSpace());
-            }
-            x++;
+            setPassHolderSpace(new Location(y, x, z), new PassHolderSpace());
+            z++;
+            System.out.println("test");
         }
         updateView();
     }
 
-    public int getPassHolderRows() {
-        return _numberOfPassHolderRows;
+    public int getPassHolderSpots() {
+        return _numberOfPassHolderSpots;
     }
 
     public void makeReservationsAt(Location loc) {
