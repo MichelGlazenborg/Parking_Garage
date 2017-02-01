@@ -163,7 +163,6 @@ public class SimulatorView {
             }
             setPassHolderSpace(new Location(y, x, z), new PassHolderSpace());
             z++;
-            System.out.println("test");
         }
         updateView();
     }
