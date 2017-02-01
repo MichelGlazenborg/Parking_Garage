@@ -154,12 +154,13 @@ public class Controller {
             simView.makeReservationsAt(new Location(floor, row, place));
         }
     }
+
     @FXML
     private void setTime() {
         int week = givinWeek();
-        int day = givinDay();
-        int hour = givinHour();
-        int minute = givinMinute();
+        int day = givenDay();
+        int hour = givenHour();
+        int minute = givenMinute();
 
         if(week == -1 || day == -1 || hour == -1 || minute == -1) {
             setText("Please enter positive numbers.");
@@ -201,7 +202,7 @@ public class Controller {
         return (week);
     }
 
-    private  int givinDay() {
+    private  int givenDay() {
         int day = -1;
 
         TextInputDialog DayDialog = new TextInputDialog("0");
@@ -234,7 +235,7 @@ public class Controller {
         return(day);
     }
 
-    private  int givinHour() {
+    private  int givenHour() {
         int hour = -1;
 
         TextInputDialog HourDialog = new TextInputDialog("0");
@@ -267,7 +268,7 @@ public class Controller {
         return(hour);
     }
 
-    private  int givinMinute() {
+    private  int givenMinute() {
         int minute = -1;
 
         TextInputDialog MinuteDialog = new TextInputDialog("0");
@@ -299,7 +300,6 @@ public class Controller {
         // if no acceptable input was found, this will return -1 and stop the method
         return(minute);
     }
-
 
     private int insertFloor() {
         // input a floor
@@ -371,8 +371,6 @@ public class Controller {
         return(row);
     }
 
-
-
     private int insertPlace() {
         // input a place
         int place = -1;
@@ -414,9 +412,9 @@ public class Controller {
         setText("I should be opening a popup window now.");
 
         TextInputDialog dialog = new TextInputDialog("0");
-        dialog.setTitle("Number Input Dialog");
-        dialog.setHeaderText("Please enter the amount of ticks this program should be running for below.");
-        dialog.setContentText("Number of ticks:");
+        dialog.setTitle("Minute Input Dialog");
+        dialog.setHeaderText("Please enter the amount of minutes this program should be running for below.");
+        dialog.setContentText("Number of minutes:");
         Optional<String> result = dialog.showAndWait();
 
         // Checking if something was filled in. No answer does nothing.
@@ -438,6 +436,7 @@ public class Controller {
             }
         }
     }
+
     @FXML
     private void getTime(){
         int[] time = sim.getTime();
@@ -474,8 +473,6 @@ public class Controller {
         }
         setText("Week " + time[3] + " " + day + " Hour " + time[1] + " Minute " + time[0] );
     }
-
-
 
     @FXML
     private void reset() {
