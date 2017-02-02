@@ -24,17 +24,17 @@ public class Simulator {
     private int minute = 0;
     private int week = 0;
 
-    int weekDayArrivals= 50; // average number of arriving cars per hour
-    int weekendArrivals = 100; // average number of arriving cars per hour
-    int weekDayPassArrivals= 30; // average number of arriving cars per hour
-    int weekendPassArrivals = 40; // average number of arriving cars per hour
-    int weekDayResArrivals = 40;
-    int weekendResArivals = 25;
+    private int weekDayArrivals= 50; // average number of arriving cars per hour
+    private int weekendArrivals = 100; // average number of arriving cars per hour
+    private int weekDayPassArrivals= 30; // average number of arriving cars per hour
+    private int weekendPassArrivals = 40; // average number of arriving cars per hour
+    private int weekDayResArrivals = 40;
+    private int weekendResArivals = 25;
 
 
-    int enterSpeed = 3; // number of cars that can enter per minute
-    int paymentSpeed = 7; // number of cars that can pay per minute
-    int exitSpeed = 5; // number of cars that can leave per minute
+    private int enterSpeed = 3; // number of cars that can enter per minute
+    private int paymentSpeed = 7; // number of cars that can pay per minute
+    private int exitSpeed = 5; // number of cars that can leave per minute
 
     /**
      * The constructor of the class Simulator, runs the main simulator by handling arriving/leaving cars, keeps count of the time and Payments
@@ -220,9 +220,10 @@ public class Simulator {
                     Location freeLocation = simulatorView.getFirstFreeLocation();
                     if(freeLocation == null) {
                         car = null;
+                    } else {
+                        simulatorView.setCarAt(freeLocation, car);
+                        simulatorView.addOneCarToCount("AdHocCar");
                     }
-                    simulatorView.setCarAt(freeLocation, car);
-                    simulatorView.addOneCarToCount("AdHocCar");
                 }else {
     	            CarWithReservedSpot car = (CarWithReservedSpot) queue.removeCar();
                     Location freeLocation = simulatorView.getFirstReservation(getTime());
@@ -232,6 +233,7 @@ public class Simulator {
                         simulatorView.setCarAt(freeLocation, car);
                         simulatorView.addOneCarToCount("CarWithReservedSpot");
                     }
+
                 }
             } else if(passHolder) {
     	        ParkingPassCar car = (ParkingPassCar) queue.removeCar();
@@ -240,10 +242,14 @@ public class Simulator {
                     freeLocation = simulatorView.getFirstFreeLocation();
                     if(freeLocation == null) {
                         car = null;
+                    }else {
+                        simulatorView.setCarAt(freeLocation, car);
+                        simulatorView.addOneCarToCount("ParkingPassCar");
                     }
+                } else {
+                    simulatorView.setCarAt(freeLocation, car);
+                    simulatorView.addOneCarToCount("ParkingPassCar");
                 }
-    	        simulatorView.setCarAt(freeLocation, car);
-                simulatorView.addOneCarToCount("ParkingPassCar");
             }
 			i++;
         }

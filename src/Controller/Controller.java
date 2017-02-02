@@ -4,7 +4,6 @@ import Models.Location;
 import Models.Simulator;
 import Models.SimulatorView;
 import Models.StatsPie;
-import Models.Payment;
 import View.StatsGraph;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -12,7 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
@@ -54,7 +53,11 @@ public class Controller {
     private Button button_operate6;
 
     @FXML
-    private TextArea textTarget;
+    private Label textTarget;
+    @FXML
+    private Label time;
+    @FXML
+    private Label revenue;
 
     @FXML
     private Timeline timeline;
@@ -102,7 +105,9 @@ public class Controller {
 
         timeline = new Timeline();
         timeline.setCycleCount(ticks);
-        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100), e -> sim.tick()));
+        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100), e -> {sim.tick();
+                                                                             getTime();
+                                                                             getRevenue(); }));
 
         timeline.play();
         timeline.setOnFinished(e -> {
@@ -500,7 +505,7 @@ public class Controller {
                 break;
             }
         }
-        setText("Week " + time[3] + " " + day + " Hour " + time[1] + " Minute " + time[0] );
+        showTime("Week " + time[3] + " " + day + " Hour " + time[1] + " Minute " + time[0] );
     }
 
     @FXML
@@ -517,7 +522,7 @@ public class Controller {
 
     @FXML
     private void getRevenue(){
-        setText("The total revenue since the start is: €" + sim.getRevenue());
+        showRevenue("The total revenue since the start is: €" + sim.getRevenue());
     }
 
     @FXML
@@ -529,6 +534,9 @@ public class Controller {
     private void setText(String txt) {
         textTarget.setText(txt);
     }
+
+    private void showTime(String t) {time.setText(t); }
+    private void showRevenue(String r) {revenue.setText(r);}
 
     private void disableButtons(boolean doDisable) {
         button_operate1.setDisable(doDisable);
