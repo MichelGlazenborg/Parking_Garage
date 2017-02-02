@@ -349,14 +349,5 @@ public class SimulatorView {
                     20 - 1,
                     10 - 1); // TODO use dynamic size or constants
         }
-
-        private void clearParkingSpot(Location location, Color color) {
-            _graphicsContext.clearRect(
-                location.getFloor() * 260 + (1 + (int)Math.floor(location.getRow() * 0.5)) * 75 + (location.getRow() % 2) * 20,
-                60 + location.getPlace() * 10,
-                20 - 1,
-                10 - 1
-            );
-        }
     }
 }
