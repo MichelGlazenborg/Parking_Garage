@@ -1,11 +1,9 @@
-package View;
+package view;
 
-import Models.StatsPie;
+import models.StatsPie;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.*;
-
-import java.util.ArrayList;
 
 public class StatsGraph {
 

@@ -1,10 +1,10 @@
-package Controller;
+package controller;
 
-import Models.Location;
-import Models.Simulator;
-import Models.SimulatorView;
-import Models.StatsPie;
-import View.StatsGraph;
+import models.Location;
+import models.Simulator;
+import models.SimulatorView;
+import models.StatsPie;
+import view.StatsGraph;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
