@@ -160,11 +160,6 @@ public class Simulator {
      */
     private void carsArriving(){
 
-        /*addArrivingCars(numberOfCars, AD_HOC);
-        numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals,1);
-        addArrivingCars(numberOfCars, PASS);
-        numberOfCars = getNumberOfCars(weekDayResArrivals, weekendResArivals,1);
-        addArrivingCars(numberOfCars, RES);*/
         switch(day) {
             case 0 :
             case 1 :
@@ -181,7 +176,7 @@ public class Simulator {
             case 4 :
             case 5 : {
                 if(hour > 18 && hour < 23) {
-                    modifyArrivalNumbers(1.02);
+                    modifyArrivalNumbers(1.1);
                     int numberOfCars = getNumberOfCars(weekDayArrivals, weekendArrivals);
                     addArrivingCars(numberOfCars, AD_HOC);
                     numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
