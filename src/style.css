@@ -4,6 +4,13 @@
     -fx-font-family: Arial;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
+    -fx-background-color: #d9dce0;
+    -fx-border: none;
+    -fx-background-radius: 0!important;
+}
+
+.button:hover {
+    -fx-background-color: #f4f7fc;
 }
 
 #button_operate5 {
