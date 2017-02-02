@@ -1,4 +1,4 @@
-package Controller;
+package controller;
 
 import javafx.fxml.*;
 import javafx.scene.Parent;
@@ -22,7 +22,7 @@ public abstract class Popup {
 
     public void init(boolean isResizable, boolean closeBeforeContinue, String filename) {
         try {
-            _root = FXMLLoader.load(getClass().getResource("../View/" + filename));
+            _root = FXMLLoader.load(getClass().getResource("../view/" + filename));
         }
         catch (IOException e) {
             e.printStackTrace();

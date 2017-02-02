@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.Label?>
-<BorderPane fx:controller="Controller.Controller"
+<BorderPane fx:controller="controller.Controller"
             maxHeight="-Infinity"
             maxWidth="-Infinity"
             minHeight="-Infinity"
