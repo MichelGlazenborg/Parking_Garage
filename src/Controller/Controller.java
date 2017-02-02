@@ -66,7 +66,6 @@ public class Controller {
         _statsGraph = new StatsGraph(_statsPie);
 
         _statsGraph.setData();
-        _statsGraph.generate();
         _sidebarRight.getChildren().add(_statsGraph.getChart());
     }
 
@@ -100,7 +99,10 @@ public class Controller {
 
         timeline = new Timeline();
         timeline.setCycleCount(ticks);
-        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100), e -> sim.tick()));
+        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100), e -> {
+            sim.tick();
+            updateGraph();
+        }));
 
         timeline.play();
         timeline.setOnFinished(e -> {
@@ -479,8 +481,11 @@ public class Controller {
         // resets all parking spots to empty on click
         setText("I should be removing cars now.");
         sim.resetRevenue();
-        sim.resetTime();
+
         _statsPie.reset();
+        updateGraph();
+
+        sim.resetTime();
         simView.reset();
         setText("All cars should be gone now");
         button_operate6.setDisable(true);
@@ -527,6 +532,6 @@ public class Controller {
             simView.getNumberOfCarsWithReservation()
         );
 
-        _statsGraph.setData();
+        _statsGraph.update();
     }
 }
