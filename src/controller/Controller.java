@@ -132,7 +132,7 @@ public class Controller {
 
         timeline = new Timeline();
         timeline.setCycleCount(ticks);
-        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(10), e -> {sim.tick();
+        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100), e -> {sim.tick();
                                                                              getDate();
                                                                              getRevenue();
                                                                              clock(); }));
@@ -625,7 +625,8 @@ public class Controller {
      * Gets the total revenue from the simulation and displays it
      */
     private void getRevenue(){
-        showRevenue("The total revenue since the start is:\n€" + sim.getRevenue());
+        showRevenue("The total revenue since the start is:\n€" + sim.getRevenue() + "\n\n" +
+                    "The expected revenue of all the cars\n still in the garage is:\n€" + sim.getExpectedRevenue() + "\n");
     }
 
     @FXML

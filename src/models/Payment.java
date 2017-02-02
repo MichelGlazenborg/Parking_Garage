@@ -31,4 +31,10 @@ public class Payment {
     public void setCost(double cost) {
         this.cost = cost;
     }
+
+    public double getExpectedRevenue(int normalCarsStillInGarage,int carsWithReservationStillInGarage) {
+        double expectedRevenue = normalCarsStillInGarage * cost;
+        expectedRevenue += carsWithReservationStillInGarage * cost + (carsWithReservationStillInGarage * 5);
+        return Math.round(expectedRevenue);
+    }
 }

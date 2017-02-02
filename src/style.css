@@ -27,6 +27,9 @@
     -fx-background-color: red;
 }
 
+#title{
+    -fx-font-size: 30 ;
+}
 .default-color0.chart-pie { -fx-pie-color: #c7c9cc; }
 .default-color1.chart-pie { -fx-pie-color: #f22809; }
 .default-color2.chart-pie { -fx-pie-color: #0d09ef; }

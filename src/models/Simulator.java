@@ -292,6 +292,14 @@ public class Simulator {
         return pay.getTotalRevenue();
     }
 
+    public double getExpectedRevenue() {
+        int adHocCars = simulatorView.getNumberOfAdHoc();
+        int carsWithReservations = simulatorView.getNumberOfCarsWithReservation();
+        double expectedRevenue = pay.getExpectedRevenue(adHocCars, carsWithReservations);
+        return expectedRevenue;
+
+    }
+
     /**
      * Makes the cars leave the parking garage
      */
