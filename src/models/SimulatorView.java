@@ -319,23 +319,22 @@ public class SimulatorView {
     private class CarParkView {
 
         private GraphicsContext _graphicsContext;
+        private Canvas _canvas;
 
         public CarParkView(Canvas canvas) {
+            _canvas = canvas;
             _graphicsContext = canvas.getGraphicsContext2D();
         }
 
         public void update() {
+            _graphicsContext.clearRect(0, 0, _canvas.getWidth(), _canvas.getHeight());
+
             for (int floor = 0; floor <getNumberOfFloors(); floor++) {
                 for (int row = 0; row < getNumberOfRows(); row++) {
                     for (int place = 0; place < getNumberOfPlaces(); place++) {
                         Location location = new Location(floor, row, place);
                         Car car = getCarAt(location);
                         Color color = (car == null ? Color.WHITE : car.getColor());
-
-                        // If this results in slowing down the simulator, remove the two lines below
-                        if (car != null)
-                            clearParkingSpot(location, color);
-
                         drawParkingSpot(location, color);
                     }
                 }
