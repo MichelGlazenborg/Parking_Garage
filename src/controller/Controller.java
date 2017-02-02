@@ -1,20 +1,21 @@
 package controller;
 
-import models.Location;
-import models.Simulator;
-import models.SimulatorView;
-import models.StatsPie;
-import view.StatsGraph;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import models.Location;
+import models.Simulator;
+import models.SimulatorView;
+import models.StatsPie;
+import view.StatsGraph;
 
 import java.util.Optional;
 
@@ -26,6 +27,9 @@ public class Controller {
 
     private StatsGraph _statsGraph;     //makes the statistics graph
     private StatsPie _statsPie;         //makes the pie graph
+
+    private double speed = 1;
+    private static final String version = "1.0";
 
     @FXML
     private VBox _sidebarRight;         //makes the sidebar on the right
@@ -138,7 +142,7 @@ public class Controller {
 
         timeline = new Timeline();
         timeline.setCycleCount(ticks);
-        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100), e -> {sim.tick();
+        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100 * speed), e -> {sim.tick();
                                                                              getDate();
                                                                              getRevenue();
                                                                              getDayRevenue();
@@ -149,6 +153,35 @@ public class Controller {
             updateGraph();
             disableButtons(false);
         });
+    }
+
+    @FXML
+    private void setSpeed(){
+        TextInputDialog dialog = new TextInputDialog("1");
+        dialog.setTitle("Set Simulator Speed");
+        dialog.setContentText("Speed of the simulation: ");
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()){
+            String result2 = result.get();
+            // Parses a integer from a String and tries to catch errors.
+            int a = 0;
+            try {
+                a = Integer.parseInt(result2);
+            } catch(NumberFormatException exception) {
+                setText("Please enter an positive whole number!");
+            } finally {
+                if(a <= 0) {
+                    setText("Please enter an positive whole number!");
+                } else {
+                    speed = a;
+                }
+            }
+        }
+    }
+
+    @FXML
+    private void resetSpeed(){
+        speed = 1;
     }
 
     @FXML
@@ -653,6 +686,15 @@ public class Controller {
      */
     private void showAbout() {
         //show about information
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setWidth(100);
+        alert.setHeaderText(null);
+        alert.setTitle("About Parking Garage");
+        alert.setContentText("Parking Simulator is a program that lets city parking Groningen see how some changes to their Parking Garage might affect business.\n\n" +
+                             "It was developed by: Robbert Monden, Job Hilts, Michel Glazenborg, Willem Slager en Jelmer Haarman.\n\n" +
+                             "Version " + version);
+
+        alert.showAndWait();
         setText("Parking Simulator is a program that lets city parking Groningen see how some changes to their Parking Garage might affect business.");
     }
 

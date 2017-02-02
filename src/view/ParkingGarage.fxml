@@ -25,9 +25,6 @@
       <MenuBar>
         <menus>
           <Menu mnemonicParsing="false" text="_Simulator">
-              <!--<items>
-                  <MenuItem text="Make passHolder places" onAction="#makePassHolderPlaces" />
-              </items>-->
               <items>
                   <MenuItem text="Set price per minute" onAction="#setPricePerMinute" />
               </items>
@@ -42,6 +39,12 @@
               </items>
               <items>
                   <MenuItem text="Set the time at" onAction="#setTime"/>
+              </items>
+              <items>
+                  <MenuItem text="Set simulator speed" onAction="#setSpeed"/>
+              </items>
+              <items>
+                  <MenuItem text="Reset simulator speed" onAction="#resetSpeed"/>
               </items>
               <items>
                   <MenuItem mnemonicParsing="false" text="Close" onAction="#closeApp" />
