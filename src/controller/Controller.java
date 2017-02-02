@@ -203,6 +203,7 @@ public class Controller {
         } else {
             sim.setTime(week,day,hour,minute);
         }
+        getTime();
     }
 
     private  int givenWeek() {
@@ -507,7 +508,13 @@ public class Controller {
                 break;
             }
         }
-        showTime("Week " + time[3] + " " + day + " Hour " + time[1] + " Minute " + time[0] );
+        // makes sure minutes are displayed with 2 numbers
+        int minutes = time[0];
+        if (minutes < 10) {
+            showTime("Week " + time[3] + ", " + day + ", " + time[1] + ":0" + time[0] );
+        } else {
+            showTime("Week " + time[3] + ", " + day + ", " + time[1] + ":" + time[0] );
+        }
     }
 
     @FXML
@@ -515,11 +522,14 @@ public class Controller {
         // resets all parking spots to empty on click
         setText("I should be removing cars now.");
         sim.resetRevenue();
+        getRevenue();
 
         _statsPie.reset();
         updateGraph();
 
         sim.resetTime();
+        getTime();
+
         simView.reset();
         setText("All cars should be gone now");
         button_operate6.setDisable(true);
@@ -527,7 +537,7 @@ public class Controller {
 
     @FXML
     private void getRevenue(){
-        showRevenue("The total revenue since the start is: €" + sim.getRevenue());
+        showRevenue("The total revenue since the start is: €" + sim.getRevenue() + "0");
     }
 
     @FXML
