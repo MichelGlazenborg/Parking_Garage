@@ -24,12 +24,12 @@ public class Simulator {
     private int minute = 0;
     private int week = 0;
 
-    private int weekDayArrivals = 100; // average number of arriving cars per hour
-    private int weekendArrivals = 200; // average number of arriving cars per hour
-    private int weekDayPassArrivals = 60; // average number of arriving cars per hour
-    private int weekendPassArrivals = 40; // average number of arriving cars per hour
-    private int weekDayResArrivals = 40;
-    private int weekendResArivals = 25;
+    private int weekDayArrivals= 25; // average number of arriving cars per hour
+    private int weekendArrivals = 50; // average number of arriving cars per hour
+    private int weekDayPassArrivals= 15; // average number of arriving cars per hour
+    private int weekendPassArrivals = 20; // average number of arriving cars per hour
+    private int weekDayResArrivals = 20;
+    private int weekendResArrivals = 12;
 
 
     private int enterSpeed = 3; // number of cars that can enter per minute
@@ -143,7 +143,7 @@ public class Simulator {
         weekDayPassArrivals *= modifier;
         weekendPassArrivals *= modifier;
         weekDayResArrivals *= modifier;
-        weekendResArivals *= modifier;
+        weekendResArrivals *= modifier;
     }
 
     private void setArrivalNumbersBack(){
@@ -152,7 +152,7 @@ public class Simulator {
         weekDayPassArrivals= 30;
         weekendPassArrivals = 40;
         weekDayResArrivals = 40;
-        weekendResArivals = 25;
+        weekendResArrivals = 25;
     }
 
     /**
@@ -160,6 +160,11 @@ public class Simulator {
      */
     private void carsArriving(){
 
+        /*addArrivingCars(numberOfCars, AD_HOC);
+        numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals,1);
+        addArrivingCars(numberOfCars, PASS);
+        numberOfCars = getNumberOfCars(weekDayResArrivals, weekendResArivals,1);
+        addArrivingCars(numberOfCars, RES);*/
         switch(day) {
             case 0 :
             case 1 :
@@ -169,7 +174,7 @@ public class Simulator {
                 addArrivingCars(numberOfCars, AD_HOC);
                 numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
                 addArrivingCars(numberOfCars, PASS);
-                numberOfCars = getNumberOfCars(weekDayResArrivals, weekendResArivals);
+                numberOfCars = getNumberOfCars(weekDayResArrivals, weekendResArrivals);
                 addArrivingCars(numberOfCars, RES);
                 break;
             }
@@ -181,7 +186,7 @@ public class Simulator {
                     addArrivingCars(numberOfCars, AD_HOC);
                     numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
                     addArrivingCars(numberOfCars, PASS);
-                    numberOfCars = getNumberOfCars(weekDayResArrivals, weekendResArivals);
+                    numberOfCars = getNumberOfCars(weekDayResArrivals, weekendResArrivals);
                     addArrivingCars(numberOfCars, RES);
                     setArrivalNumbersBack();
                     break;
@@ -193,7 +198,7 @@ public class Simulator {
                 addArrivingCars(numberOfCars, AD_HOC);
                 numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
                 addArrivingCars(numberOfCars, PASS);
-                numberOfCars = getNumberOfCars(weekDayResArrivals, weekendResArivals);
+                numberOfCars = getNumberOfCars(weekDayResArrivals, weekendResArrivals);
                 addArrivingCars(numberOfCars, RES);
             }
             break;
@@ -378,7 +383,6 @@ public class Simulator {
     }
 
     public void resetTime() {
-        week = 0;
         day = 0;
         hour = 0;
         minute = 0;
