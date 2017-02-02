@@ -13,6 +13,26 @@
     -fx-background-color: #f4f7fc;
 }
 
+#button_operate1 {
+    -fx-background-color: lightgreen;
+}
+
+#button_operate2 {
+    -fx-background-color: lightgreen;
+}
+
+#button_operate3 {
+    -fx-background-color: lightgreen;
+}
+
+#button_operate4 {
+    -fx-background-color: lightgreen;
+}
+
 #button_operate5 {
+    -fx-background-color: red;
+}
+
+#button_operate6 {
     -fx-background-color: red;
 }
