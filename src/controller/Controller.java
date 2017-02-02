@@ -132,7 +132,7 @@ public class Controller {
 
         timeline = new Timeline();
         timeline.setCycleCount(ticks);
-        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100), e -> {sim.tick();
+        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(10), e -> {sim.tick();
                                                                              getDate();
                                                                              getRevenue();
                                                                              clock(); }));
@@ -238,6 +238,7 @@ public class Controller {
         } else {
             sim.setTime(week,day,hour,minute);
             getDate();
+            clock();
         }
     }
 
