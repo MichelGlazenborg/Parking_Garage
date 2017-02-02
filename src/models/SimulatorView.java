@@ -1,4 +1,4 @@
-package Models;
+package models;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -311,12 +311,16 @@ public class SimulatorView {
     private class CarParkView {
 
         private GraphicsContext _graphicsContext;
+        private Canvas _canvas;
 
         public CarParkView(Canvas canvas) {
+            _canvas = canvas;
             _graphicsContext = canvas.getGraphicsContext2D();
         }
 
         public void update() {
+            _graphicsContext.clearRect(0, 0, _canvas.getWidth(), _canvas.getHeight());
+
             for (int floor = 0; floor <getNumberOfFloors(); floor++) {
                 for (int row = 0; row < getNumberOfRows(); row++) {
                     for (int place = 0; place < getNumberOfPlaces(); place++) {
@@ -336,6 +340,15 @@ public class SimulatorView {
                     60 + location.getPlace() * 10,
                     20 - 1,
                     10 - 1); // TODO use dynamic size or constants
+        }
+
+        private void clearParkingSpot(Location location, Color color) {
+            _graphicsContext.clearRect(
+                location.getFloor() * 260 + (1 + (int)Math.floor(location.getRow() * 0.5)) * 75 + (location.getRow() % 2) * 20,
+                60 + location.getPlace() * 10,
+                20 - 1,
+                10 - 1
+            );
         }
     }
 }

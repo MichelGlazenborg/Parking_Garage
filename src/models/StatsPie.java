@@ -1,6 +1,4 @@
-package Models;
-
-import javafx.collections.ObservableList;
+package models;
 
 import java.util.ArrayList;
 
@@ -33,9 +31,9 @@ public class StatsPie {
         double percentageAdHoc = (double) adHoc / total * 100;
         double percentageReservations = (double) reservations / total * 100;
         double percentageTotal = percentageUnoccupied + percentageAdHoc + percentagePassHolders + percentageReservations;
-
-        if (percentageTotal < 100)
-            percentageUnoccupied += (100 - percentageTotal);
+        
+        //if (percentageTotal < 100)
+            //percentageUnoccupied += (100 - percentageTotal);
 
         _unoccupied.setPercentage(percentageUnoccupied);
         _passholders.setPercentage(percentagePassHolders);

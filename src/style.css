@@ -4,8 +4,25 @@
     -fx-font-family: Arial;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
+    -fx-background-color: #d9dce0;
+    -fx-border: none;
+    -fx-background-radius: 0!important;
 }
 
-#button_operate5 {
+#button_operate1, #button_operate2, #button_operate3,
+#button_operate4 {
+    -fx-background-color: lightgreen;
+}
+
+#button_operate1:hover, #button_operate2:hover, #button_operate3:hover,
+#button_operate4:hover {
+    -fx-background-color: limegreen;
+}
+
+#button_operate5, #button_operate6 {
+    -fx-background-color: lightcoral;
+}
+
+#button_operate5:hover, #button_operate6:hover {
     -fx-background-color: red;
 }
