@@ -401,7 +401,7 @@ public class Simulator {
 		 * Temporary fix, this should be changed as soon as the manager can decide where he/she wants the reserved
 		 * spots to be
 		 */
-    	if (hasParkingPass && location.getFloor() == 0)
+    	if (hasParkingPass)
     	    if(location.getRow() <= simulatorView.getPassHolderSpots()) {
                 simulatorView.setPassHolderSpace(location, new PassHolderSpace());
             }
