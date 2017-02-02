@@ -36,3 +36,8 @@
 #button_operate6 {
     -fx-background-color: red;
 }
+
+.default-color0.chart-pie { -fx-pie-color: #c7c9cc; }
+.default-color1.chart-pie { -fx-pie-color: #1109ef; }
+.default-color2.chart-pie { -fx-pie-color: #ef1509; }
+.default-color3.chart-pie { -fx-pie-color: #efc909; }

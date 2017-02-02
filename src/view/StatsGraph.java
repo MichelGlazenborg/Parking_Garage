@@ -14,7 +14,7 @@ public class StatsGraph {
     private PieChart.Data _statsPieUnoccupied;
     private PieChart.Data _statsPieAdHoc;
     private PieChart.Data _statsPiePassHolders;
-    private PieChart.Data _statsPieReservations;
+    private PieChart.Data _statsPieCarWithReservations;
 
     public StatsGraph(StatsPie pie) {
         _statsPie = pie;
@@ -31,7 +31,7 @@ public class StatsGraph {
             _statsPieUnoccupied = new PieChart.Data(_statsPie.getUnoccupied().getLabel(), _statsPie.getUnoccupied().getPercentage()),
             _statsPieAdHoc = new PieChart.Data(_statsPie.getAdHoc().getLabel(), _statsPie.getAdHoc().getPercentage()),
             _statsPiePassHolders = new PieChart.Data(_statsPie.getPassHolders().getLabel(), _statsPie.getPassHolders().getPercentage()),
-            _statsPieReservations = new PieChart.Data(_statsPie.getReservations().getLabel(), _statsPie.getReservations().getPercentage())
+            _statsPieCarWithReservations = new PieChart.Data(_statsPie.getCarsWithReservation().getLabel(), _statsPie.getCarsWithReservation().getPercentage())
         );
         _chart.setData(_graphData);
     }
@@ -40,7 +40,7 @@ public class StatsGraph {
         _statsPieUnoccupied.setPieValue(_statsPie.getUnoccupied().getPercentage());
         _statsPieAdHoc.setPieValue(_statsPie.getAdHoc().getPercentage());
         _statsPiePassHolders.setPieValue(_statsPie.getPassHolders().getPercentage());
-        _statsPieReservations.setPieValue(_statsPie.getReservations().getPercentage());
+        _statsPieCarWithReservations.setPieValue(_statsPie.getCarsWithReservation().getPercentage());
     }
 
     public PieChart getChart() {
