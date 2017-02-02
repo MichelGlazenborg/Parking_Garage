@@ -4,15 +4,12 @@ import java.util.ArrayList;
 
 public class StatsPie {
 
-    private ArrayList<StatsData> _statsData;
-
     private StatsData _unoccupied;
     private StatsData _passholders;
     private StatsData _adhoc;
     private StatsData _carsWithReservations;
 
     public StatsPie() {
-        _statsData = new ArrayList<>();
         reset();
     }
 
