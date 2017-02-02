@@ -64,6 +64,9 @@ public class Controller {
     private Label revenue;              //makes the label with the total revenue
 
     @FXML
+    private Label dayRevenue;           //makes the label with the total day revenue
+
+    @FXML
     private Timeline timeline;          //makes the timelime object
 
     /**
@@ -83,6 +86,7 @@ public class Controller {
         getDate();
         clock();
         getRevenue();
+        getDayRevenue();
     }
 
     @FXML
@@ -137,6 +141,7 @@ public class Controller {
         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100), e -> {sim.tick();
                                                                              getDate();
                                                                              getRevenue();
+                                                                             getDayRevenue();
                                                                              clock(); }));
 
         timeline.play();
@@ -638,6 +643,11 @@ public class Controller {
     }
 
     @FXML
+    private void getDayRevenue(){
+        showDayRevenue("The total day revenue of this day is:\n€" + sim.getDayRevenue());
+    }
+
+    @FXML
     /**
      * Opens up a text dialog that displays program information to the user
      */
@@ -665,6 +675,8 @@ public class Controller {
      * @param r:    A string that will be shown in revenue
      */
     private void showRevenue(String r) {revenue.setText(r);}
+
+    private void showDayRevenue(String r) {dayRevenue.setText(r);}
 
     /**
      * Disables or enables the buttons

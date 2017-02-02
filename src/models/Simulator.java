@@ -89,6 +89,9 @@ public class Simulator {
         while (hour > 23) {
             hour -= 24;
             day++;
+            if(day >= 2) {
+                pay.resetDayRevenue();
+            }
         }
         while (day > 6) {
             day -= 7;
@@ -167,7 +170,6 @@ public class Simulator {
      * adds new cars to the carQueue's
      */
     private void carsArriving(){
-
         switch(day) {
             case 0 :
             case 1 :
@@ -324,6 +326,10 @@ public class Simulator {
         return pay.getTotalRevenue();
     }
 
+    public double getDayRevenue() {
+        return pay.getDayRevenue();
+    }
+
     public double getExpectedRevenue() {
         int adHocCars = simulatorView.getNumberOfAdHoc();
         int carsWithReservations = simulatorView.getNumberOfCarsWithReservation();
@@ -415,6 +421,7 @@ public class Simulator {
 
     public void resetRevenue() {
         pay.reset();
+        pay.resetDayRevenue();
     }
 
     public void resetTime() {

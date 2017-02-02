@@ -29,9 +29,8 @@
 
 #button_operate6 {-fx-graphic: url('http://icons.iconarchive.com/icons/capital18/ethereal/48/Misc-Rewind-icon.png');}
 
-#title{
-    -fx-font-size: 30 ;
-}
+#titleRev{  -fx-font-size: 30;  }
+#titleTime{ -fx-font-size: 30;  }
 .default-color0.chart-pie { -fx-pie-color: #c7c9cc; }
 .default-color1.chart-pie { -fx-pie-color: #f22809; }
 .default-color2.chart-pie { -fx-pie-color: #0d09ef; }

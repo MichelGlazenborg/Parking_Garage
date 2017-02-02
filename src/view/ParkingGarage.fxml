@@ -108,18 +108,24 @@
     <right>
         <VBox fx:id="_sidebarRight" prefWidth="300.0">
             <children>
-                <Label fx:id="title" prefHeight="20" prefWidth="300" text="Time and Revenue" BorderPane.alignment="TOP_CENTER"/>
+                <Label fx:id="titleRev" prefHeight="20" prefWidth="300" text="Revenue" BorderPane.alignment="TOP_CENTER"/>
+                <Label fx:id="dayRevenue" prefHeight="40" prefWidth="300" BorderPane.alignment="TOP_LEFT">
+                    <VBox.margin>
+                        <Insets left="15.0" right="15.0"/>
+                    </VBox.margin>
+                </Label>
+                <Label fx:id="revenue" prefHeight="200" prefWidth="320" BorderPane.alignment="TOP_RIGHT">
+                    <VBox.margin>
+                        <Insets bottom="5.0" left="15.0" right="15.0"/>
+                    </VBox.margin>
+                </Label>
+                <Label fx:id="titleTime" prefHeight="20" prefWidth="300" text="Time" BorderPane.alignment="CENTER"/>
                 <Label fx:id="date" prefHeight="50" prefWidth="300" BorderPane.alignment="TOP_LEFT">
                     <VBox.margin>
                         <Insets bottom="5.0" left="15.0" right="15.0" top="5.0"/>
                     </VBox.margin>
                 </Label>
                 <Label fx:id="clock" prefHeight="50" prefWidth="300">
-                    <VBox.margin>
-                        <Insets bottom="5.0" left="15.0" right="15.0" top="5.0"/>
-                    </VBox.margin>
-                </Label>
-                <Label fx:id="revenue" prefHeight="130" prefWidth="320" BorderPane.alignment="TOP_RIGHT">
                     <VBox.margin>
                         <Insets bottom="5.0" left="15.0" right="15.0" top="5.0"/>
                     </VBox.margin>
