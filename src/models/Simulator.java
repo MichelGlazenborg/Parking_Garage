@@ -4,7 +4,6 @@ import javafx.scene.canvas.Canvas;
 
 import java.util.Random;
 
-
 public class Simulator {
 
 	private static final String AD_HOC = "1";
@@ -31,10 +30,17 @@ public class Simulator {
     private int weekDayResArrivals = 50;
     private int weekendResArrivals = 30;
 
-
     private int enterSpeed = 3; // number of cars that can enter per minute
     private int paymentSpeed = 7; // number of cars that can pay per minute
     private int exitSpeed = 5; // number of cars that can leave per minute
+
+    private int _arrivalsOnMonday = 0;
+    private int _arrivalsOnTuesday = 0;
+    private int _arrivalsOnWednesday = 0;
+    private int _arrivalsOnThursday = 0;
+    private int _arrivalsOnFriday = 0;
+    private int _arrivalsOnSaturday = 0;
+    private int _arrivalsOnSunday = 0;
 
     /**
      * The constructor of the class Simulator, runs the main simulator by handling arriving/leaving cars, keeps count of the time and Payments
@@ -87,8 +93,10 @@ public class Simulator {
         while (day > 6) {
             day -= 7;
             week++;
+            resetArrivalCounter();
         }
     }
+
     public void setTime(int week, int day, int hour, int minute) {
         this.week = week;
         this.day = day;
@@ -147,9 +155,9 @@ public class Simulator {
     }
 
     private void setArrivalNumbersBack(){
-        weekDayArrivals= 50;
+        weekDayArrivals = 50;
         weekendArrivals = 100;
-        weekDayPassArrivals= 30;
+        weekDayPassArrivals = 30;
         weekendPassArrivals = 40;
         weekDayResArrivals = 40;
         weekendResArrivals = 25;
@@ -247,6 +255,30 @@ public class Simulator {
                 }
             }
 			i++;
+
+    	    switch (getTime()[2]) {
+                case 1:
+                    _arrivalsOnMonday++;
+                    break;
+                case 2:
+                    _arrivalsOnTuesday++;
+                    break;
+                case 3:
+                    _arrivalsOnWednesday++;
+                    break;
+                case 4:
+                    _arrivalsOnThursday++;
+                    break;
+                case 5:
+                    _arrivalsOnFriday++;
+                    break;
+                case 6:
+                    _arrivalsOnSaturday++;
+                    break;
+                case 7:
+                    _arrivalsOnSunday++;
+                    break;
+            }
         }
     }
 
@@ -389,5 +421,15 @@ public class Simulator {
         day = 0;
         hour = 0;
         minute = 0;
+    }
+
+    public void resetArrivalCounter() {
+        _arrivalsOnMonday = 0;
+        _arrivalsOnTuesday = 0;
+        _arrivalsOnWednesday = 0;
+        _arrivalsOnThursday = 0;
+        _arrivalsOnFriday = 0;
+        _arrivalsOnSaturday = 0;
+        _arrivalsOnSunday = 0;
     }
 }

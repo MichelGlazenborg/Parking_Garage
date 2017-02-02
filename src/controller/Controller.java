@@ -20,7 +20,6 @@ import java.util.Optional;
 
 public class Controller {
 
-
     //make simulator object
 	private Simulator sim;              //makes the central simulator object
     private SimulatorView simView;      //makes the central simulatorview object
@@ -54,10 +53,13 @@ public class Controller {
 
     @FXML
     private Label textTarget;           //makes the label textTarget used for debugging
+  
     @FXML
     private Label date;                 //makes the label with the week and day
+
     @FXML
     private Label clock;                //makes the label with the hours and minutes
+  
     @FXML
     private Label revenue;              //makes the label with the total revenue
 
@@ -610,9 +612,15 @@ public class Controller {
         // resets all parking spots to empty on click
         setText("I should be removing cars now.");
         sim.resetRevenue();
+
         sim.resetTime();
+      
         _statsPie.reset();
         simView.reset();
+      
+        sim.resetArrivalCounter();
+        updateGraph();
+      
         setText("All cars should be gone now");
         getDate();
         clock();

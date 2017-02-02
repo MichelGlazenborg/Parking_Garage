@@ -19,13 +19,15 @@
     -fx-background-color: limegreen;
 }
 
-#button_operate5, #button_operate6 {
-    -fx-background-color: lightcoral;
+#button_operate5 {
+    -fx-graphic: url('http://icons.iconarchive.com/icons/custom-icon-design/flatastic-9/48/Stop-red-icon.png');
 }
 
-#button_operate5:hover, #button_operate6:hover {
-    -fx-background-color: red;
-}
+/*#button_operate5:hover, #button_operate6:hover {
+    -fx-graphic: url('http://icons.iconarchive.com/icons/custom-icon-design/flatastic-9/24/Stop-red-icon.png');
+}*/
+
+#button_operate6 {-fx-graphic: url('http://icons.iconarchive.com/icons/capital18/ethereal/48/Misc-Rewind-icon.png');}
 
 #title{
     -fx-font-size: 30 ;
