@@ -19,7 +19,7 @@
     -fx-background-color: limegreen;
 }
 
-#button_operate5, #button_operate6 {
+#button_operate5{
     -fx-graphic: url('http://icons.iconarchive.com/icons/custom-icon-design/flatastic-9/48/Stop-red-icon.png');
 }
 
