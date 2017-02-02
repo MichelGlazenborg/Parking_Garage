@@ -235,7 +235,7 @@ public class Simulator {
                     }
 
                 }
-            } else if(passHolder) {
+            } else if(passHolder && simulatorView.getNumberOfPassHolders() < simulatorView.getPassHolderSpots()) {
     	        ParkingPassCar car = (ParkingPassCar) queue.removeCar();
     	        Location freeLocation = simulatorView.getFirstPassSpot();
     	        if(freeLocation == null) {
@@ -256,7 +256,7 @@ public class Simulator {
     }
 
     /**
-     * adds leaving cars to the payment queue
+     * adds leaving cars to the payment queue.
      */
     private void carsReadyToLeave(){
         // Add leaving cars to the payment queue.
