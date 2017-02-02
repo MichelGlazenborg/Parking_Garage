@@ -65,10 +65,6 @@ public class SimulatorView {
         return _currentCarsWithReservation;
     }
 
-    public int getNumberOfReservationsWithoutCars() {
-        return _currentReservationsWithoutCars;
-    }
-
     public int getNumberOfOpenSpots() {
         return _numberOfOpenSpots;
     }
