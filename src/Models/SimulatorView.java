@@ -135,14 +135,6 @@ public class SimulatorView {
         }
     }
 
-    public void makePassHolderPlaces() {
-        for(int i=0; i<30; i++) {
-            setPassHolderSpace(new Location(0, 0, i), new PassHolderSpace());
-            setPassHolderSpace(new Location(0, 1, i), new PassHolderSpace());
-        }
-        updateView();
-    }
-
     public void makePassHolderSpots(int numberOfSpots) {
         reset();
         _numberOfPassHolderSpots = numberOfSpots;

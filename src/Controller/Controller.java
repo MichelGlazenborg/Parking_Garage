@@ -22,46 +22,51 @@ public class Controller {
 
 
     //make simulator object
-	private Simulator sim;
-    private SimulatorView simView;
+	private Simulator sim;              //makes the central simulator object
+    private SimulatorView simView;      //makes the central simulatorview object
 
-    private StatsGraph _statsGraph;
-    private StatsPie _statsPie;
-
-    @FXML
-    private VBox _sidebarRight;
+    private StatsGraph _statsGraph;     //makes the statistics graph
+    private StatsPie _statsPie;         //makes the pie graph
 
     @FXML
-    private Canvas _canvas;
+    private VBox _sidebarRight;         //makes the sidebar on the right
 
     @FXML
-    private Button button_operate1;
+    private Canvas _canvas;             //makes the canvas where the garage whil be drawn
 
     @FXML
-    private Button button_operate2;
+    private Button button_operate1;     //makes button 1
 
     @FXML
-    private Button button_operate3;
+    private Button button_operate2;     //makes button 2
 
     @FXML
-    private Button button_operate4;
+    private Button button_operate3;     //makes button 3
 
     @FXML
-    private Button button_operate5;
+    private Button button_operate4;     //makes button 4
 
     @FXML
-    private Button button_operate6;
+    private Button button_operate5;     //makes button 5
 
     @FXML
-    private Label textTarget;
-    @FXML
-    private Label time;
-    @FXML
-    private Label revenue;
+    private Button button_operate6;     //makes button 6
 
     @FXML
-    private Timeline timeline;
+    private Label textTarget;           //makes the label textTarget used for debugging
+    @FXML
+    private Label date;                 //makes the label with the week and day
+    @FXML
+    private Label clock;                //makes the label with the hours and minutes
+    @FXML
+    private Label revenue;              //makes the label with the total revenue
 
+    @FXML
+    private Timeline timeline;          //makes the timelime object
+
+    /**
+     * Initializes all the atributes
+     */
     public void initialize() {
         sim = new Simulator(_canvas);
         simView = sim.getSimulatorView();
@@ -72,33 +77,55 @@ public class Controller {
         _statsGraph.setData();
         _statsGraph.generate();
         _sidebarRight.getChildren().add(_statsGraph.getChart());
+
+        getDate();
+        clock();
+        getRevenue();
     }
 
     @FXML
+    /**
+     * Closes the app
+     * @param ActionEvent e     The action event
+     */
     private void closeApp(ActionEvent e) {
         System.exit(0);
     }
 
     @FXML
+    /**
+     * Makes the simulator tick once
+     * Uses tickFor method
+     */
     private void tick1() {
         //call the simulator object to run for 1 tick
         tickFor(1);
-        getRevenue();
     }
 
+
     @FXML
+    /**
+     * Makes the simulator tick 60 times (1 hour)
+     */
     private void tick60() {
         //call simulator object to run for 50 ticks
         tickFor(60);
     }
 
     @FXML
+    /**
+     * Makes the simulator tick 1440 times (1 day)
+     */
     private void tickDay() {
         //call the simulator object to run for 1000 ticks
         tickFor(1440);
     }
 
     @FXML
+    /**
+     * Makes the simulator tick for any number of ticks
+     * @param int ticks     The number of ticks the simulation should do
+     */
     private void tickFor(int ticks) {
         setText("I should be running for " + ticks + " ticks now");
         disableButtons(true);
@@ -106,8 +133,9 @@ public class Controller {
         timeline = new Timeline();
         timeline.setCycleCount(ticks);
         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100), e -> {sim.tick();
-                                                                             getTime();
-                                                                             getRevenue(); }));
+                                                                             getDate();
+                                                                             getRevenue();
+                                                                             clock(); }));
 
         timeline.play();
         timeline.setOnFinished(e -> {
@@ -117,11 +145,9 @@ public class Controller {
     }
 
     @FXML
-    private void makePassHolderPlaces(){
-        simView.makePassHolderPlaces();
-    }
-
-    @FXML
+    /**
+     * Opens a dialog that lets you enter an integer which corresponds to the number of placeholder spots that will be assigned
+     */
     private void makePassHolderSpots() {
         //setText("I should be opening a popup window now.");
 
@@ -148,6 +174,9 @@ public class Controller {
     }
 
     @FXML
+    /**
+     * Opens op a dialog which lets you enter a double. The price per minute of the parking garage will be set to that double
+     */
     private void setPricePerMinute() {
         //setText("I should be opening a popup window now.");
 
@@ -164,7 +193,7 @@ public class Controller {
             } catch(NumberFormatException exception) {
                 setText("Please enter an positive whole number!");
             } finally {
-                if(priceAmount==0) {
+                if(priceAmount<=0) {
                     setText("Please enter an positive whole number!");
                 } else {
                     sim.setCost(priceAmount);
@@ -174,6 +203,10 @@ public class Controller {
     }
 
     @FXML
+    /**
+     * Sets a reservation at a specific location;
+     * uses insertFloor(), insertRow() and insertPlace()
+     */
     private void makeReservationsAt() {
         // make reservations at a prompted location
         int floor = insertFloor();
@@ -190,6 +223,10 @@ public class Controller {
     }
 
     @FXML
+    /**
+     * Sets the time by letting the user specify the week, day, hour and minute
+     * uses givenWeek(), givenDay(), givenHour() and givenMinute()
+     */
     private void setTime() {
         int week = givenWeek();
         int day = givenDay();
@@ -200,10 +237,15 @@ public class Controller {
             setText("Please enter positive numbers.");
         } else {
             sim.setTime(week,day,hour,minute);
+            getDate();
         }
     }
 
-    private  int givenWeek() {
+    /**
+     * Opens up a dialog that lets the user enter an integer which will become the new week number
+     * @return int:     the new week number that the user entered or -1 if the number is invalid
+     */
+    private int givenWeek() {
         int week = -1;
 
         TextInputDialog WeekDialog = new TextInputDialog("1");
@@ -225,7 +267,7 @@ public class Controller {
                 } else {
                     // check if the entered integer is between bounds
                     if (week <= 52) {
-                        return (week - 1);
+                        return (week);
                     } else {
                         return (-1);
                     }
@@ -236,6 +278,10 @@ public class Controller {
         return (week);
     }
 
+    /**
+     * Opens up a dialog that lets the user enter an integer which will become the new day number
+     * @return int:     the new day number that the user entered or -1 if the number is invalid
+     */
     private  int givenDay() {
         int day = -1;
 
@@ -269,6 +315,10 @@ public class Controller {
         return(day);
     }
 
+    /**
+     * Opens up a dialog that lets the user enter an integer which will become the new hour number
+     * @return int:     the new hour number that the user entered or -1 if the number is invalid
+     */
     private  int givenHour() {
         int hour = -1;
 
@@ -302,6 +352,10 @@ public class Controller {
         return(hour);
     }
 
+    /**
+     * Opens up a dialog that lets the user enter an integer which will become the new minute number
+     * @return int:     the new minute number that the user entered or -1 if the number is invalid
+     */
     private  int givenMinute() {
         int minute = -1;
 
@@ -335,6 +389,10 @@ public class Controller {
         return(minute);
     }
 
+    /**
+     * Opens op a dialog that lets the user enter an integer that is used as the floor for setting passholderspaces and making reservations
+     * @return int:     The number of the floor or -1 if the number is invalid
+     */
     private int insertFloor() {
         // input a floor
         int floor = -1;
@@ -370,6 +428,10 @@ public class Controller {
         return(floor);
     }
 
+    /**
+     * Opens op a dialog that lets the user enter an integer that is used as the row for setting passholderspaces and making reservations
+     * @return int:     The number of the row or -1 if the number is invalid
+     */
     private int insertRow() {
         // input a row
         int row = -1;
@@ -405,6 +467,10 @@ public class Controller {
         return(row);
     }
 
+    /**
+     * Opens op a dialog that lets the user enter an integer that is used as the place for setting passholderspaces and making reservations
+     * @return int:     The number of the place or -1 if the number is invalid
+     */
     private int insertPlace() {
         // input a place
         int place = -1;
@@ -441,6 +507,9 @@ public class Controller {
     }
 
     @FXML
+    /**
+     * Opens up a dialog that lets the user enter an integer to choose the amount of ticks the simulator must run
+     */
     private void submit() {
         // Opening a pop-up dialog window to ask for the amount of ticks, converting it to integer and calling on tickFor
         setText("I should be opening a popup window now.");
@@ -472,7 +541,10 @@ public class Controller {
     }
 
     @FXML
-    private void getTime(){
+    /**
+     * gets the current time from simulator, assigns the right day name to the day number and displays the date
+     */
+    private void getDate(){
         int[] time = sim.getTime();
         String day = null;
         switch (time[2]) {
@@ -505,10 +577,34 @@ public class Controller {
                 break;
             }
         }
-        showTime("Week " + time[3] + " " + day + " Hour " + time[1] + " Minute " + time[0] );
+        showDate("Week " + time[3] + "\nDay: " + day);
+    }
+    @FXML
+    /**
+     * gets the current date from the simulator and displays the hours and minutes in digital clock form
+     */
+    private void clock(){
+        int time[] = sim.getTime();
+        String hours;
+        String minutes;
+        if(time[1] < 10) {
+            hours = "0" + time[1];
+        } else {
+            hours = "" + time[1];
+        }
+        if(time[0] < 10) {
+            minutes = "0" + time[0];
+        } else {
+            minutes = "" +  time[0];
+        }
+        clock.setText("CLOCK" + "\n" + hours + " " + minutes);
+
     }
 
     @FXML
+    /**
+     * Resets the simulation
+     */
     private void reset() {
         // resets all parking spots to empty on click
         setText("I should be removing cars now.");
@@ -517,27 +613,53 @@ public class Controller {
         _statsPie.reset();
         simView.reset();
         setText("All cars should be gone now");
+        getDate();
+        clock();
+        getRevenue();
         button_operate6.setDisable(true);
     }
 
     @FXML
+    /**
+     * Gets the total revenue from the simulation and displays it
+     */
     private void getRevenue(){
-        showRevenue("The total revenue since the start is: €" + sim.getRevenue());
+        showRevenue("The total revenue since the start is:\n€" + sim.getRevenue());
     }
 
     @FXML
+    /**
+     * Opens up a text dialog that displays program information to the user
+     */
     private void showAbout() {
         //show about information
         setText("Parking Simulator is a program that lets city parking Groningen see how some changes to their Parking Garage might affect business.");
     }
 
+    /**
+     * sets the text in textTarget
+     * @param txt:  A string that will be shown in the textTarget
+     */
     private void setText(String txt) {
         textTarget.setText(txt);
     }
 
-    private void showTime(String t) {time.setText(t); }
+    /**
+     * sets the text in the label date
+     * @param t:    A string that will be shown in date
+     */
+    private void showDate(String t) {date.setText(t); }
+
+    /**
+     * sets the text in the label revenue
+     * @param r:    A string that will be shown in revenue
+     */
     private void showRevenue(String r) {revenue.setText(r);}
 
+    /**
+     * Disables or enables the buttons
+     * @param doDisable:    A boolean that dictates to whether dis- or enable a button
+     */
     private void disableButtons(boolean doDisable) {
         button_operate1.setDisable(doDisable);
         button_operate2.setDisable(doDisable);
@@ -548,6 +670,9 @@ public class Controller {
     }
 
     @FXML
+    /**
+     * Stops the current running simulation.
+     */
     private void stop() {
         if (timeline != null) {
             timeline.stop();
@@ -555,6 +680,9 @@ public class Controller {
         }
     }
 
+    /**
+     * updates the statistics graph
+     */
     private void updateGraph() {
         _statsPie.update(
             simView.getNumberOfFloors() * simView.getNumberOfRows() * simView.getNumberOfPlaces(),

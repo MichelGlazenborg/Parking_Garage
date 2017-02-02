@@ -383,6 +383,7 @@ public class Simulator {
     }
 
     public void resetTime() {
+        week = 0;
         day = 0;
         hour = 0;
         minute = 0;
