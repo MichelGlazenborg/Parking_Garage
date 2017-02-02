@@ -22,7 +22,7 @@ public class Controller {
 
     //make simulator object
 	private Simulator sim;              //makes the central simulator object
-    private SimulatorView simView;      //makes the central simulatorview object
+    private SimulatorView simView;      //makes the central simulatorView object
 
     private StatsGraph _statsGraph;     //makes the statistics graph
     private StatsPie _statsPie;         //makes the pie graph
@@ -31,7 +31,7 @@ public class Controller {
     private VBox _sidebarRight;         //makes the sidebar on the right
 
     @FXML
-    private Canvas _canvas;             //makes the canvas where the garage whil be drawn
+    private Canvas _canvas;             //makes the canvas where the garage will be drawn
 
     @FXML
     private Button button_operate1;     //makes button 1
@@ -64,10 +64,10 @@ public class Controller {
     private Label revenue;              //makes the label with the total revenue
 
     @FXML
-    private Timeline timeline;          //makes the timelime object
+    private Timeline timeline;          //makes the timeline object
 
     /**
-     * Initializes all the atributes
+     * Initializes all the attributes
      */
     public void initialize() {
         sim = new Simulator(_canvas);
@@ -110,7 +110,7 @@ public class Controller {
      * Makes the simulator tick 60 times (1 hour)
      */
     private void tick60() {
-        //call simulator object to run for 50 ticks
+        //call simulator object to run for 60 ticks
         tickFor(60);
     }
 
@@ -119,7 +119,7 @@ public class Controller {
      * Makes the simulator tick 1440 times (1 day)
      */
     private void tickDay() {
-        //call the simulator object to run for 1000 ticks
+        //call the simulator object to run for 1440 ticks
         tickFor(1440);
     }
 
