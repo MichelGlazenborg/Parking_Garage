@@ -21,7 +21,6 @@ public class Reservation extends Car {
 
     /**
      * Although the COLOR constant is public, we still need a getter since we're extending the Car class.
-     * @todo Remove this method
      */
     public Color getColor() {return COLOR;}
 
