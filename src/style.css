@@ -9,30 +9,20 @@
     -fx-background-radius: 0!important;
 }
 
-.button:hover {
-    -fx-background-color: #f4f7fc;
-}
-
-#button_operate1 {
-    -fx-background-color: lightgreen;
-}
-
-#button_operate2 {
-    -fx-background-color: lightgreen;
-}
-
-#button_operate3 {
-    -fx-background-color: lightgreen;
-}
-
+#button_operate1, #button_operate2, #button_operate3,
 #button_operate4 {
     -fx-background-color: lightgreen;
 }
 
-#button_operate5 {
-    -fx-background-color: red;
+#button_operate1:hover, #button_operate2:hover, #button_operate3:hover,
+#button_operate4:hover {
+    -fx-background-color: limegreen;
 }
 
-#button_operate6 {
+#button_operate5, #button_operate6 {
+    -fx-background-color: lightcoral;
+}
+
+#button_operate5:hover, #button_operate6:hover {
     -fx-background-color: red;
 }
