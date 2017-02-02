@@ -24,12 +24,12 @@ public class Simulator {
     private int minute = 0;
     private int week = 0;
 
-    private int weekDayArrivals= 25; // average number of arriving cars per hour
-    private int weekendArrivals = 50; // average number of arriving cars per hour
-    private int weekDayPassArrivals= 15; // average number of arriving cars per hour
-    private int weekendPassArrivals = 20; // average number of arriving cars per hour
-    private int weekDayResArrivals = 20;
-    private int weekendResArrivals = 12;
+    private int weekDayArrivals= 100; // average number of arriving cars per hour
+    private int weekendArrivals = 200; // average number of arriving cars per hour
+    private int weekDayPassArrivals= 80; // average number of arriving cars per hour
+    private int weekendPassArrivals = 40; // average number of arriving cars per hour
+    private int weekDayResArrivals = 50;
+    private int weekendResArrivals = 30;
 
 
     private int enterSpeed = 3; // number of cars that can enter per minute
