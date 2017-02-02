@@ -11,6 +11,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.Label?>
 <BorderPane fx:controller="Controller.Controller"
             maxHeight="-Infinity"
             maxWidth="-Infinity"
@@ -24,8 +25,11 @@
       <MenuBar>
         <menus>
           <Menu mnemonicParsing="false" text="_Simulator">
-              <items>
+              <!--<items>
                   <MenuItem text="Make Passholder places" onAction="#makePassHolderPlaces" />
+              </items>-->
+              <items>
+                  <MenuItem text="Set price per minute" onAction="#setPricePerMinute" />
               </items>
               <items>
                   <MenuItem text="Make Passholder spots" onAction="#makePassHolderSpots" />
@@ -85,7 +89,7 @@
                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                  </VBox.margin>
              </Button>
-             <Button fx:id="button_operate7" text="Get Revenue" onAction="#getRevenue">
+             <!--<Button fx:id="button_operate7" text="Get Revenue" onAction="#getRevenue">
                  <VBox.margin>
                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                  </VBox.margin>
@@ -94,7 +98,7 @@
                  <VBox.margin>
                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                  </VBox.margin>
-             </Button>
+             </Button>-->
          </children>
       </VBox>
    </left>
@@ -102,9 +106,15 @@
       <Canvas fx:id="_canvas" height="600.0" width="800.0" BorderPane.alignment="CENTER" />
    </center>
     <right>
-        <VBox fx:id="_sidebarRight" prefWidth="300.0"></VBox>
+        <VBox fx:id="_sidebarRight" prefWidth="300.0">
+            <children>
+                <Label prefHeight="20" prefWidth="300" text="Time and Revenue" BorderPane.alignment="TOP_CENTER"/>
+                <Label fx:id="time" prefHeight="50" prefWidth="300" BorderPane.alignment="TOP_LEFT"/>
+                <Label fx:id="revenue" prefHeight="50" prefWidth="300" BorderPane.alignment="TOP_RIGHT"/>
+            </children>
+        </VBox>
     </right>
    <bottom>
-      <TextArea fx:id="textTarget" prefHeight="50.0" prefWidth="1000.0" BorderPane.alignment="CENTER" />
+       <Label fx:id="textTarget" prefHeight="50" prefWidth="1000" BorderPane.alignment="CENTER_LEFT"/>
    </bottom>
 </BorderPane>

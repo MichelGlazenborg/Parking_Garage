@@ -163,7 +163,6 @@ public class SimulatorView {
             }
             setPassHolderSpace(new Location(y, x, z), new PassHolderSpace());
             z++;
-            System.out.println("test");
         }
         updateView();
     }
@@ -172,8 +171,8 @@ public class SimulatorView {
         return _numberOfPassHolderSpots;
     }
 
-    public void makeReservationsAt(Location loc) {
-        Reservation res = new Reservation();
+    public void makeReservationsAt(Location loc , int minute, int hour) {
+        Reservation res = new Reservation(minute, hour);
         setReservation(loc, res);
         _numberOfReservations++;
 
@@ -240,15 +239,18 @@ public class SimulatorView {
         return null;
     }
 
-    public Location getFirstReservation() {
+    public Location getFirstReservation(int[] cTime) {
         for (int floor = 0; floor < getNumberOfFloors(); floor++) {
             for (int row = 0; row < getNumberOfRows(); row++) {
                 for (int place = 0; place < getNumberOfPlaces(); place++) {
                     Location location = new Location(floor, row, place);
                     if(getCarAt(location) != null) {
                         if(getCarAt(location).getColor() == Reservation.COLOR) {
-                            removeCarAt(location);
-                            return location;
+                            Reservation car = (Reservation) getCarAt(location);
+                            if(car.checkReadyToEnter(cTime[0],cTime[1])) {
+                                removeCarAt(location);
+                                return location;
+                            }
                         }
                     }
                 }

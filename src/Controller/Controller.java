@@ -11,7 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
@@ -53,7 +53,11 @@ public class Controller {
     private Button button_operate6;
 
     @FXML
-    private TextArea textTarget;
+    private Label textTarget;
+    @FXML
+    private Label time;
+    @FXML
+    private Label revenue;
 
     @FXML
     private Timeline timeline;
@@ -78,6 +82,7 @@ public class Controller {
     private void tick1() {
         //call the simulator object to run for 1 tick
         tickFor(1);
+        getRevenue();
     }
 
     @FXML
@@ -101,7 +106,9 @@ public class Controller {
         timeline.setCycleCount(ticks);
         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100), e -> {
             sim.tick();
+            getTime();
             updateGraph();
+            getRevenue();
         }));
 
         timeline.play();
@@ -143,6 +150,32 @@ public class Controller {
     }
 
     @FXML
+    private void setPricePerMinute() {
+        //setText("I should be opening a popup window now.");
+
+        TextInputDialog dialog = new TextInputDialog("0");
+        dialog.setTitle("Number Input Dialog");
+        dialog.setContentText("Price per minute:");
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()){
+            String result2 = result.get();
+            // Parses a integer from a String and tries to catch errors.
+            double priceAmount = 0;
+            try {
+                priceAmount = Double.parseDouble(result2);
+            } catch(NumberFormatException exception) {
+                setText("Please enter an positive whole number!");
+            } finally {
+                if(priceAmount==0) {
+                    setText("Please enter an positive whole number!");
+                } else {
+                    sim.setCost(priceAmount);
+                }
+            }
+        }
+    }
+
+    @FXML
     private void makeReservationsAt() {
         // make reservations at a prompted location
         int floor = insertFloor();
@@ -153,13 +186,14 @@ public class Controller {
         if (floor == -1 || row == -1 || place == -1) {
             setText("One or more arguments were not filled in correctly!");
         } else {
-            simView.makeReservationsAt(new Location(floor, row, place));
+            int[] time = sim.getTime();
+            simView.makeReservationsAt(new Location(floor, row, place),time[0], time[1]);
         }
     }
 
     @FXML
     private void setTime() {
-        int week = givinWeek();
+        int week = givenWeek();
         int day = givenDay();
         int hour = givenHour();
         int minute = givenMinute();
@@ -171,10 +205,10 @@ public class Controller {
         }
     }
 
-    private  int givinWeek() {
+    private  int givenWeek() {
         int week = -1;
 
-        TextInputDialog WeekDialog = new TextInputDialog("0");
+        TextInputDialog WeekDialog = new TextInputDialog("1");
         WeekDialog.setTitle("Week Input Dialog");
         WeekDialog.setHeaderText("Please enter any week number Between 1 and 52");
         WeekDialog.setContentText("Week:");
@@ -207,7 +241,7 @@ public class Controller {
     private  int givenDay() {
         int day = -1;
 
-        TextInputDialog DayDialog = new TextInputDialog("0");
+        TextInputDialog DayDialog = new TextInputDialog("1");
         DayDialog.setTitle("Day Input Dialog");
         DayDialog.setHeaderText("Please enter any day number Between 1 and 7");
         DayDialog.setContentText("Day:");
@@ -240,7 +274,7 @@ public class Controller {
     private  int givenHour() {
         int hour = -1;
 
-        TextInputDialog HourDialog = new TextInputDialog("0");
+        TextInputDialog HourDialog = new TextInputDialog("1");
         HourDialog.setTitle("Hour Input Dialog");
         HourDialog.setHeaderText("Please enter any Hour between 1 and 24");
         HourDialog.setContentText("Hour:");
@@ -273,7 +307,7 @@ public class Controller {
     private  int givenMinute() {
         int minute = -1;
 
-        TextInputDialog MinuteDialog = new TextInputDialog("0");
+        TextInputDialog MinuteDialog = new TextInputDialog("1");
         MinuteDialog.setTitle("Minute Input Dialog");
         MinuteDialog.setHeaderText("Please enter any minute between 1 and 60");
         MinuteDialog.setContentText("Minute:");
@@ -473,7 +507,7 @@ public class Controller {
                 break;
             }
         }
-        setText("Week " + time[3] + " " + day + " Hour " + time[1] + " Minute " + time[0] );
+        showTime("Week " + time[3] + " " + day + " Hour " + time[1] + " Minute " + time[0] );
     }
 
     @FXML
@@ -493,7 +527,7 @@ public class Controller {
 
     @FXML
     private void getRevenue(){
-        setText("The total revenue since the start is: €" + sim.getRevenue());
+        showRevenue("The total revenue since the start is: €" + sim.getRevenue());
     }
 
     @FXML
@@ -505,6 +539,9 @@ public class Controller {
     private void setText(String txt) {
         textTarget.setText(txt);
     }
+
+    private void showTime(String t) {time.setText(t); }
+    private void showRevenue(String r) {revenue.setText(r);}
 
     private void disableButtons(boolean doDisable) {
         button_operate1.setDisable(doDisable);
