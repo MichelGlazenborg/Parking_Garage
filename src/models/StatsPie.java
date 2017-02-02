@@ -1,10 +1,6 @@
 package models;
 
-import java.util.ArrayList;
-
 public class StatsPie {
-
-    private ArrayList<StatsData> _statsData;
 
     private StatsData _unoccupied;
     private StatsData _passholders;
@@ -12,7 +8,6 @@ public class StatsPie {
     private StatsData _carsWithReservations;
 
     public StatsPie() {
-        _statsData = new ArrayList<>();
         reset();
     }
 

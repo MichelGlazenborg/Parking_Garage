@@ -26,7 +26,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="_Simulator">
               <!--<items>
-                  <MenuItem text="Make Passholder places" onAction="#makePassHolderPlaces" />
+                  <MenuItem text="Make passHolder places" onAction="#makePassHolderPlaces" />
               </items>-->
               <items>
                   <MenuItem text="Set price per minute" onAction="#setPricePerMinute" />
@@ -89,16 +89,6 @@
                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                  </VBox.margin>
              </Button>
-             <!--<Button fx:id="button_operate7" text="Get Revenue" onAction="#getRevenue">
-                 <VBox.margin>
-                     <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
-                 </VBox.margin>
-             </Button>
-             <Button fx:id="button_operate8" text="get Current Time" onAction="#getTime">
-                 <VBox.margin>
-                     <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
-                 </VBox.margin>
-             </Button>-->
          </children>
       </VBox>
    </left>

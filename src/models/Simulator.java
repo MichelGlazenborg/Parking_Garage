@@ -223,18 +223,14 @@ public class Simulator {
     	        if(!hasReservation) {
                     AdHocCar car = (AdHocCar) queue.removeCar();
                     Location freeLocation = simulatorView.getFirstFreeLocation();
-                    if(freeLocation == null) {
-                        car = null;
-                    } else {
+                    if(freeLocation != null) {
                         simulatorView.setCarAt(freeLocation, car);
                         simulatorView.addOneCarToCount("AdHocCar");
                     }
                 }else {
     	            CarWithReservedSpot car = (CarWithReservedSpot) queue.removeCar();
                     Location freeLocation = simulatorView.getFirstReservation(getTime());
-                    if(freeLocation == null) {
-                        car = null;
-                    } else {
+                    if(freeLocation != null) {
                         simulatorView.setCarAt(freeLocation, car);
                         simulatorView.addOneCarToCount("CarWithReservedSpot");
                     }
@@ -245,9 +241,7 @@ public class Simulator {
     	        Location freeLocation = simulatorView.getFirstPassSpot();
     	        if(freeLocation == null) {
                     freeLocation = simulatorView.getFirstFreeLocation();
-                    if(freeLocation == null) {
-                        car = null;
-                    }else {
+                    if(freeLocation != null) {
                         simulatorView.setCarAt(freeLocation, car);
                         simulatorView.addOneCarToCount("ParkingPassCar");
                     }
@@ -407,7 +401,7 @@ public class Simulator {
 		 * Temporary fix, this should be changed as soon as the manager can decide where he/she wants the reserved
 		 * spots to be
 		 */
-    	if (hasParkingPass && location.getFloor() == 0)
+    	if (hasParkingPass)
     	    if(location.getRow() <= simulatorView.getPassHolderSpots()) {
                 simulatorView.setPassHolderSpace(location, new PassHolderSpace());
             }
