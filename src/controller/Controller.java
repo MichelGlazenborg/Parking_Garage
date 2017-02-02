@@ -20,7 +20,6 @@ import java.util.Optional;
 
 public class Controller {
 
-
     //make simulator object
 	private Simulator sim;
     private SimulatorView simView;
@@ -54,8 +53,10 @@ public class Controller {
 
     @FXML
     private Label textTarget;
+
     @FXML
     private Label time;
+
     @FXML
     private Label revenue;
 
@@ -518,6 +519,8 @@ public class Controller {
 
         _statsPie.reset();
         updateGraph();
+
+        sim.resetArrivalCounter();
 
         sim.resetTime();
         simView.reset();
