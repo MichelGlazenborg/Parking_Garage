@@ -252,25 +252,25 @@ public class Simulator {
 			i++;
 
     	    switch (getTime()[2]) {
-                case 1:
+                case 0:
                     _arrivalsOnMonday++;
                     break;
-                case 2:
+                case 1:
                     _arrivalsOnTuesday++;
                     break;
-                case 3:
+                case 2:
                     _arrivalsOnWednesday++;
                     break;
-                case 4:
+                case 3:
                     _arrivalsOnThursday++;
                     break;
-                case 5:
+                case 4:
                     _arrivalsOnFriday++;
                     break;
-                case 6:
+                case 5:
                     _arrivalsOnSaturday++;
                     break;
-                case 7:
+                case 6:
                     _arrivalsOnSunday++;
                     break;
             }
