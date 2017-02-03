@@ -85,7 +85,7 @@
       </VBox>
    </left>
    <center>
-      <Canvas fx:id="_canvas" height="600.0" width="800.0" BorderPane.alignment="CENTER" />
+      <Canvas fx:id="_canvas" height="600.0" width="800.0" BorderPane.alignment="TOP_LEFT" />
    </center>
     <right>
         <VBox fx:id="_sidebarRight" prefWidth="300.0">

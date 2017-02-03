@@ -300,10 +300,7 @@ public class SimulatorView {
         int floor = location.getFloor();
         int row = location.getRow();
         int place = location.getPlace();
-        if (floor < 0 || floor >= _numberOfFloors || row < 0 || row > _numberOfRows || place < 0 || place > _numberOfPlaces) {
-            return false;
-        }
-        return true;
+        return !(floor < 0 || floor >= _numberOfFloors || row < 0 || row > _numberOfRows || place < 0 || place > _numberOfPlaces);
     }
 
     private class CarParkView {
@@ -334,8 +331,8 @@ public class SimulatorView {
         private void drawParkingSpot(Location location, Color color) {
             _graphicsContext.setFill(color);
             _graphicsContext.fillRect(
-                    location.getFloor() * 260 + (1 + (int)Math.floor(location.getRow() * 0.5)) * 75 + (location.getRow() % 2) * 20,
-                    60 + location.getPlace() * 10,
+                    (location.getFloor() * 200 + (1 + (int)Math.floor(location.getRow() * 0.5)) * 55 + (location.getRow() % 2) * 20) - 50,
+                    30 + location.getPlace() * 10,
                     20 - 1,
                     10 - 1); // TODO use dynamic size or constants
         }
