@@ -467,12 +467,28 @@ public class Simulator {
     public void resetRevenue() {
         pay.reset();
         pay.resetDayRevenue();
+        pay.resetExpectedRevenue();
     }
 
     public void resetTime() {
         day = 0;
         hour = 0;
         minute = 0;
+        week = 0;
+    }
+    public void resetStats() {
+        while(entranceCarQueue.carsInQueue() > 0) {
+            entranceCarQueue.removeCar();
+        }
+        while(entrancePassQueue.carsInQueue() > 0) {
+            entrancePassQueue.removeCar();
+        }
+        while(entranceResQueue.carsInQueue() > 0) {
+            entranceResQueue.removeCar();
+        }
+        while(paymentCarQueue.carsInQueue() > 0) {
+            paymentCarQueue.removeCar();
+        }
     }
 
     public void resetArrivalCounter() {
