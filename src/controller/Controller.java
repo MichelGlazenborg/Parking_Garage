@@ -11,11 +11,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
-import models.Location;
-import models.Simulator;
-import models.SimulatorView;
-import models.StatsPie;
-import view.StatsGraph;
+import models.*;
+import view.DailyCarsChartView;
+import view.OccupationChartView;
 
 import java.util.Optional;
 
@@ -25,11 +23,17 @@ public class Controller {
 	private Simulator sim;              //makes the central simulator object
     private SimulatorView simView;      //makes the central simulatorview object
 
-    private StatsGraph _statsGraph;     //makes the statistics graph
-    private StatsPie _statsPie;         //makes the pie graph
+    private OccupationChartView _currentOccupationChart;     //makes the statistics graph
+    private OccupationChart _statsPie;         //makes the pie graph
+
+    private DailyCarsChartView _dailyCarsChartView;
+    private DailyCarsChart _dailyCarsChart;
 
     private double speed = 1;
     private static final String version = "1.0";
+
+    @FXML
+    private VBox _statistics;
 
     @FXML
     private VBox _sidebarRight;         //makes the sidebar on the right
@@ -83,12 +87,16 @@ public class Controller {
         sim = new Simulator(_canvas);
         simView = sim.getSimulatorView();
 
-        _statsPie = new StatsPie();
-        _statsGraph = new StatsGraph(_statsPie);
+        _statsPie = new OccupationChart();
+        _dailyCarsChart = new DailyCarsChart();
 
-        _statsGraph.setData();
-        _statsGraph.update();
-        _sidebarRight.getChildren().add(_statsGraph.getChart());
+        _currentOccupationChart = new OccupationChartView(_statsPie);
+        _dailyCarsChartView = new DailyCarsChartView(_dailyCarsChart);
+
+        _currentOccupationChart.setData();
+        _currentOccupationChart.update();
+        _sidebarRight.getChildren().add(_currentOccupationChart.getChart());
+        _statistics.getChildren().add(_dailyCarsChartView.getChart());
 
         getDate();
         clock();
@@ -766,6 +774,17 @@ public class Controller {
             simView.getNumberOfCarsWithReservation()
         );
 
-        _statsGraph.update();
+        _dailyCarsChart.update(
+            sim.getArrivalsOnMonday(),
+            sim.getArrivalsOnTuesday(),
+            sim.getArrivalsOnWednesday(),
+            sim.getArrivalsOnThursday(),
+            sim.getArrivalsOnFriday(),
+            sim.getArrivalsOnSaturday(),
+            sim.getArrivalsOnSunday()
+        );
+
+        _currentOccupationChart.update();
+        _dailyCarsChartView.update();
     }
 }
