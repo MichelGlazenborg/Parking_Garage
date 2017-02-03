@@ -23,11 +23,11 @@ public class Controller {
 	private Simulator sim;              //makes the central simulator object
     private SimulatorView simView;      //makes the central simulatorview object
 
-    private OccupationChartView _currentOccupationChart;     //makes the statistics graph
+    private OccupationChartView _occupationChartView;     //makes the statistics graph
     private OccupationChart _statsPie;         //makes the pie graph
 
-    private DailyCarsChartView _dailyCarsChartView;
     private DailyCarsChart _dailyCarsChart;
+    private DailyCarsChartView _dailyCarsChartView;
 
     private double speed = 1;
     private static final String version = "1.0";
@@ -93,18 +93,20 @@ public class Controller {
         _statsPie = new OccupationChart();
         _dailyCarsChart = new DailyCarsChart();
 
-        _currentOccupationChart = new OccupationChartView(_statsPie);
+        _occupationChartView = new OccupationChartView(_statsPie);
         _dailyCarsChartView = new DailyCarsChartView(_dailyCarsChart);
 
-        _currentOccupationChart.setData();
-        _currentOccupationChart.update();
-        _sidebarRight.getChildren().add(_currentOccupationChart.getChart());
-        //_statistics.getChildren().add(_dailyCarsChartView.getChart());
+        _occupationChartView.setData();
+        _dailyCarsChartView.setData();
+        _sidebarRight.getChildren().add(_occupationChartView.getChart());
+        _statistics.getChildren().add(_dailyCarsChartView.getChart());
 
         getDate();
         clock();
         getRevenue();
         getDayRevenue();
+        showQueueStats();
+        showStatistics();
     }
 
     /**
@@ -163,10 +165,10 @@ public class Controller {
                                                                              clock();
                                                                              showStatistics();
                                                                              showQueueStats();
+                                                                             updateGraph();
                                                                             }));
         timeline.play();
         timeline.setOnFinished(e -> {
-            updateGraph();
             disableButtons(false);
         });
     }
@@ -698,6 +700,7 @@ public class Controller {
         sim.resetTime();
 
         _statsPie.reset();
+        _dailyCarsChart.reset();
         simView.reset();
 
         sim.resetArrivalCounter();
@@ -805,7 +808,7 @@ public class Controller {
             sim.getArrivalsOnSunday()
         );
 
-        _currentOccupationChart.update();
+        _occupationChartView.update();
         _dailyCarsChartView.update();
     }
 }
