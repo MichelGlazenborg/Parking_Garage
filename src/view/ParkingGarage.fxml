@@ -44,7 +44,7 @@
       </MenuBar>
    </top>
    <left>
-      <VBox prefHeight="200.0" prefWidth="300.0" BorderPane.alignment="CENTER_LEFT">
+      <VBox prefHeight="800.0" prefWidth="500.0" BorderPane.alignment="CENTER_LEFT">
          <children>
             <Button fx:id="button_operate1" mnemonicParsing="false" onAction="#tick1" text="Run for 1 minute">
                <VBox.margin>
@@ -102,7 +102,7 @@
                         <Insets left="15.0" right="15.0" />
                     </VBox.margin>
                 </Label>
-                <Label fx:id="clock" prefHeight="60" prefWidth="300">
+                <Label fx:id="clock" prefHeight="70" prefWidth="300">
                     <VBox.margin>
                         <Insets left="15.0" right="15.0" />
                     </VBox.margin>
@@ -111,19 +111,13 @@
         </VBox>
     </right>
    <bottom>
-       <HBox fx:id="bottomBar" prefWidth="1000">
+       <VBox fx:id="_statistics" prefHeight="50" prefWidth="1000" BorderPane.alignment="BOTTOM_LEFT">
            <children>
-               <Label fx:id="statistics" prefHeight="200" prefWidth="350" alignment="TOP_LEFT">
-                   <HBox.margin>
-                       <Insets left="15" right="5"/>
-                   </HBox.margin>
+               <Label fx:id="statistics" prefHeight="100" prefWidth="350" alignment="TOP_LEFT">
                </Label>
-               <Label fx:id="queueStats" prefHeight="200" alignment="TOP_LEFT">
-                   <HBox.margin>
-                       <Insets left="5" right="5"/>
-                   </HBox.margin>
+               <Label fx:id="queueStats" prefHeight="100" alignment="TOP_LEFT">
                </Label>
            </children>
-       </HBox>
+       </VBox>
    </bottom>
 </BorderPane>
