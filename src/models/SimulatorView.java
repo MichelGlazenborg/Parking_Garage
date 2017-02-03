@@ -67,6 +67,10 @@ public class SimulatorView {
         return _numberOfOpenSpots;
     }
 
+    public int getnumberOfPassHolderSpots() {
+        return _numberOfPassHolderSpots;
+    }
+
     public void removeCarFromCount(String type) {
         switch (type) {
             case "AdHocCar":
