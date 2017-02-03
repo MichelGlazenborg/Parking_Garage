@@ -26,25 +26,28 @@
         <menus>
           <Menu mnemonicParsing="false" text="_Simulator">
               <items>
-                  <MenuItem text="Set price per minute" onAction="#setPricePerMinute" />
+                  <MenuItem text="Set price per minute..." onAction="#setPricePerMinute" />
               </items>
               <items>
-                  <MenuItem text="Make Passholder spots" onAction="#makePassHolderSpots" />
+                  <MenuItem text="Make pass holder spots..." onAction="#makePassHolderSpots" />
               </items>
               <items>
-                  <MenuItem text="Make Reservation at" onAction="#makeReservationsAt"/>
+                  <MenuItem text="Make reservation at..." onAction="#makeReservationsAt"/>
               </items>
               <items>
                   <SeparatorMenuItem />
               </items>
               <items>
-                  <MenuItem text="Set the time at" onAction="#setTime"/>
+                  <MenuItem text="Set the time at..." onAction="#setTime"/>
               </items>
               <items>
-                  <MenuItem text="Set simulator speed" onAction="#setSpeed"/>
+                  <MenuItem text="Set simulator speed..." onAction="#setSpeed"/>
               </items>
               <items>
                   <MenuItem text="Reset simulator speed" onAction="#resetSpeed"/>
+              </items>
+              <items>
+                  <SeparatorMenuItem />
               </items>
               <items>
                   <MenuItem mnemonicParsing="false" text="Close" onAction="#closeApp" />
@@ -53,7 +56,7 @@
 
           <Menu mnemonicParsing="false" text="_Help">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" onAction="#showAbout"/>
+              <MenuItem mnemonicParsing="false" text="About..." onAction="#showAbout"/>
             </items>
           </Menu>
         </menus>
