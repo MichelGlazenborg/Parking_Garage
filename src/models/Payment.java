@@ -6,6 +6,7 @@ package models;
 public class Payment {
     private double totalRevenue;
     private double dayRevenue;
+    private double lastDayRevenue;
     private double cost;        //cost in euro's per minute
 
     public Payment() {
@@ -19,7 +20,11 @@ public class Payment {
 
     public double getDayRevenue() {return Math.round(dayRevenue);}
 
+    public double getLastDayRevenue() {return Math.round(lastDayRevenue);}
+
     public void resetDayRevenue() {dayRevenue = 0;}
+
+    public void setLasDayRevenue(double a) {lastDayRevenue = a;}
 
     public void pay(int stayTime) {
         totalRevenue += cost * (double) stayTime;
