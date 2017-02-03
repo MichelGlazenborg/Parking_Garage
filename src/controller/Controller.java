@@ -91,7 +91,7 @@ public class Controller {
         _dailyCarsChartView = new DailyCarsChartView(_dailyCarsChart);
 
         _occupationChartView.setData();
-        _occupationChartView.update();
+        _dailyCarsChartView.setData();
         _sidebarRight.getChildren().add(_occupationChartView.getChart());
         _statistics.getChildren().add(_dailyCarsChartView.getChart());
 
@@ -154,13 +154,11 @@ public class Controller {
             getRevenue();
             getDayRevenue();
             clock();
+            updateGraph();
         }));
 
         timeline.play();
-        timeline.setOnFinished(e -> {
-            updateGraph();
-            disableButtons(false);
-        });
+        timeline.setOnFinished(e -> disableButtons(false));
     }
 
     @FXML
