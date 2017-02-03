@@ -155,7 +155,8 @@ public class Controller {
 
         timeline = new Timeline();
         timeline.setCycleCount(ticks);
-        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100 * speed), e -> {sim.tick();
+        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(Math.round(100/speed)), e -> {
+                                                                             sim.tick();
                                                                              getDate();
                                                                              getRevenue();
                                                                              getDayRevenue();
@@ -163,7 +164,6 @@ public class Controller {
                                                                              showStatistics();
                                                                              showQueueStats();
                                                                             }));
-
         timeline.play();
         timeline.setOnFinished(e -> {
             updateGraph();
@@ -187,7 +187,9 @@ public class Controller {
                 showError();
             } finally {
                 if(a <= 0) {
-                    showError();
+                    speed = 1;
+                } else if(a > 100) {
+                    speed = 100;
                 } else {
                     speed = a;
                 }
@@ -712,13 +714,14 @@ public class Controller {
      */
     @FXML
     private void getRevenue(){
-        showRevenue("The total revenue since the start is:\n€" + sim.getRevenue() + "\n\n" +
-                    "The expected revenue of all the cars\n still in the garage is:\n€" + sim.getExpectedRevenue());
+        showRevenue("The total revenue since the start is:\n€" + sim.getRevenue() + "0\n\n" +
+                    "The expected revenue of all the cars\n still in the garage is:\n€" + sim.getExpectedRevenue() + "0\n");
     }
 
     @FXML
     private void getDayRevenue(){
-        showDayRevenue("The total day revenue of last day is:\n€" + sim.getDayRevenue());
+        showDayRevenue("The total daily revenue is:\n€" + sim.getDayRevenue() + "0\n\n");
+
     }
 
     /**
