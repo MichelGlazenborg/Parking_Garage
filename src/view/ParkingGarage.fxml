@@ -8,8 +8,6 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.text.Text?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.Label?>
 <BorderPane fx:controller="controller.Controller"
