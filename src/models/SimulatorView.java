@@ -129,6 +129,7 @@ public class SimulatorView {
                 }
             }
         }
+        _numberOfPassHolderSpots=0;
     }
 
     public void makePassHolderSpots(int numberOfSpots) {
