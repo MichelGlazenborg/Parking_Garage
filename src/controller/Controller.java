@@ -638,6 +638,7 @@ public class Controller {
         sim.resetRevenue();
         sim.resetTime();
         _statsPie.reset();
+        _dailyCarsChart.reset();
         simView.reset();
         sim.resetArrivalCounter();
         updateGraph();
