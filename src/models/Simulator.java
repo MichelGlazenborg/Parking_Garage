@@ -425,8 +425,10 @@ public class Simulator {
                 }
                 break;
             case PASS:
-                for (int i = 0; i < numberOfCars; i++) {
-                    entrancePassQueue.addCar(new ParkingPassCar());
+                if (simulatorView.getNumberOfPassHolders() < simulatorView.getnumberOfPassHolderSpots()-5){
+                    for (int i = 0; i < numberOfCars; i++) {
+                        entrancePassQueue.addCar(new ParkingPassCar());
+                    }
                 }
                 break;
             case RES:
