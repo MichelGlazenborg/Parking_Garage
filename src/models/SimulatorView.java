@@ -18,9 +18,8 @@ public class SimulatorView {
 
     private int _currentPassHolders;
     private int _currentAdHoc;
-    // Replace the two properties below. The second is redundant, while the first one should be renamed.
+    // Rename the variable below
     private int _currentCarsWithReservation;
-    private int _currentReservationsWithoutCars;
 
     public SimulatorView(Canvas canvas, int numberOfFloors, int numberOfRows, int numberOfPlaces) {
         _numberOfFloors = numberOfFloors;
@@ -34,7 +33,6 @@ public class SimulatorView {
         _currentPassHolders = 0;
         _currentAdHoc = 0;
         _currentCarsWithReservation = 0;
-        _currentReservationsWithoutCars = 0;
     }
 
     public void updateView() {
@@ -129,7 +127,7 @@ public class SimulatorView {
                 }
             }
         }
-        _numberOfPassHolderSpots=0;
+        _numberOfPassHolderSpots = 0;
     }
 
     public void makePassHolderSpots(int numberOfSpots) {
@@ -172,7 +170,6 @@ public class SimulatorView {
     public int getNumberOfReservations() {
         return _numberOfReservations;
     }
-
 
     public boolean setPassHolderSpace(Location loc, PassHolderSpace phs) {
         if (!locationIsValid(loc)) {

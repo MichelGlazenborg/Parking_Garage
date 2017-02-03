@@ -152,11 +152,13 @@ public class Controller {
 
         timeline = new Timeline();
         timeline.setCycleCount(ticks);
-        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100 * speed), e -> {sim.tick();
-                                                                             getDate();
-                                                                             getRevenue();
-                                                                             getDayRevenue();
-                                                                             clock(); }));
+        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100 * speed), e -> {
+            sim.tick();
+            getDate();
+            getRevenue();
+            getDayRevenue();
+            clock();
+        }));
 
         timeline.play();
         timeline.setOnFinished(e -> {
