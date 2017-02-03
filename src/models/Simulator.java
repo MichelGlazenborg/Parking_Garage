@@ -30,9 +30,9 @@ public class Simulator {
     private int weekDayResArrivals = 50;
     private int weekendResArrivals = 30;
 
-    private int enterSpeed = 3; // number of cars that can enter per minute
-    private int paymentSpeed = 7; // number of cars that can pay per minute
-    private int exitSpeed = 5; // number of cars that can leave per minute
+    private int enterSpeed = 2; // number of cars that can enter per minute
+    private int paymentSpeed = 5; // number of cars that can pay per minute
+    private int exitSpeed = 2; // number of cars that can leave per minute
 
     private int _arrivalsOnMonday = 0;
     private int _arrivalsOnTuesday = 0;
@@ -297,14 +297,23 @@ public class Simulator {
         return paymentCarQueue;
     }
 
-    public CarQueue[] getQueues() {
-        CarQueue[] queues = new CarQueue[4];
+    public int[] getQueues() {
+        int[] queues = new int[5];
 
-        queues[0] = getEntranceCarQueue();
-        queues[1] = getEntrancePassQueue();
-        queues[2] = getEntranceResQueue();
-        queues[3] = getExitCarQueue();
-        queues[4] = getPaymentCarQueue();
+        CarQueue queue = getEntranceCarQueue();
+        queues[0] = queue.carsInQueue();
+
+        queue = getEntrancePassQueue();
+        queues[1] = queue.carsInQueue();
+
+        queue = getEntranceResQueue();
+        queues[2] = queue.carsInQueue();
+
+        queue = getExitCarQueue();
+        queues[3] = queue.carsInQueue();
+
+        queue = getPaymentCarQueue();
+        queues[4] = queue.carsInQueue();
 
         return queues;
     }

@@ -64,6 +64,9 @@ public class Controller {
 
     @FXML
     private Label statistics;
+
+    @FXML
+    private Label queueStats;
   
     @FXML
     private Label date;                 //makes the label with the week and day
@@ -158,6 +161,7 @@ public class Controller {
                                                                              getDayRevenue();
                                                                              clock();
                                                                              showStatistics();
+                                                                             showQueueStats();
                                                                             }));
 
         timeline.play();
@@ -644,7 +648,19 @@ public class Controller {
     @FXML
     private void showStatistics() {
         int[] stats = sim.getStatistics();
-        statistics.setText("Number of regular cars: " + stats[1] + "\nNumber of cars with a reservation: " + stats[0] + "\nNumber of passholder cars: " + stats[2]);
+        statistics.setText("Number of regular cars: " + stats[1] +
+                "\nNumber of cars with a reservation: " + stats[0] +
+                "\nNumber of passholder cars: " + stats[2]);
+    }
+
+    @FXML
+    private void showQueueStats() {
+        int[] queues = sim.getQueues();
+        queueStats.setText("Number of cars in regular entrance queue: " + queues[0] +
+                         "\nNumber of cars in passholder entrance queue: " + queues[1] +
+                         "\nNumber of cars in reservations entrance queue: " + queues[2] +
+                         "\nNumber of cars in exit queue: " + queues[3] +
+                         "\nNumber of cars in the payment queue: " + queues[4]);
     }
   
     /**
@@ -675,7 +691,6 @@ public class Controller {
     @FXML
     private void reset() {
         // resets all parking spots to empty on click
-        //setText("I should be removing cars now.");
         sim.resetRevenue();
 
         sim.resetTime();
@@ -685,8 +700,7 @@ public class Controller {
       
         sim.resetArrivalCounter();
         updateGraph();
-      
-        //setText("All cars should be gone now");
+
         getDate();
         clock();
         getRevenue();
