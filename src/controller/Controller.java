@@ -77,7 +77,7 @@ public class Controller {
     private Timeline timeline;          //makes the timelime object
 
     /**
-     * Initializes all the atributes
+     * Initializes all the attributes
      */
     public void initialize() {
         sim = new Simulator(_canvas);
@@ -96,49 +96,48 @@ public class Controller {
         getDayRevenue();
     }
 
-    @FXML
     /**
      * Closes the app
      * @param ActionEvent e     The action event
      */
+    @FXML
     private void closeApp(ActionEvent e) {
         System.exit(0);
     }
 
-    @FXML
     /**
      * Makes the simulator tick once
      * Uses tickFor method
      */
+    @FXML
     private void tick1() {
         //call the simulator object to run for 1 tick
         tickFor(1);
     }
 
-
-    @FXML
     /**
      * Makes the simulator tick 60 times (1 hour)
      */
+    @FXML
     private void tick60() {
         //call simulator object to run for 50 ticks
         tickFor(60);
     }
 
-    @FXML
     /**
      * Makes the simulator tick 1440 times (1 day)
      */
+    @FXML
     private void tickDay() {
         //call the simulator object to run for 1000 ticks
         tickFor(1440);
     }
 
-    @FXML
     /**
      * Makes the simulator tick for any number of ticks
      * @param int ticks     The number of ticks the simulation should do
      */
+    @FXML
     private void tickFor(int ticks) {
         setText("I should be running for " + ticks + " ticks now");
         disableButtons(true);
@@ -189,10 +188,10 @@ public class Controller {
         speed = 1;
     }
 
-    @FXML
     /**
      * Opens a dialog that lets you enter an integer which corresponds to the number of placeholder spots that will be assigned
      */
+    @FXML
     private void makePassHolderSpots() {
         //setText("I should be opening a popup window now.");
 
@@ -218,10 +217,10 @@ public class Controller {
         }
     }
 
-    @FXML
     /**
      * Opens op a dialog which lets you enter a double. The price per minute of the parking garage will be set to that double
      */
+    @FXML
     private void setPricePerMinute() {
         //setText("I should be opening a popup window now.");
 
@@ -247,11 +246,11 @@ public class Controller {
         }
     }
 
-    @FXML
     /**
      * Sets a reservation at a specific location;
      * uses insertFloor(), insertRow() and insertPlace()
      */
+    @FXML
     private void makeReservationsAt() {
         // make reservations at a prompted location
         int floor = insertFloor();
@@ -267,11 +266,11 @@ public class Controller {
         }
     }
 
-    @FXML
     /**
      * Sets the time by letting the user specify the week, day, hour and minute
      * uses givenWeek(), givenDay(), givenHour() and givenMinute()
      */
+    @FXML
     private void setTime() {
         int week = givenWeek();
         int day = givenDay();
@@ -552,10 +551,10 @@ public class Controller {
         return (place);
     }
 
-    @FXML
     /**
      * Opens up a dialog that lets the user enter an integer to choose the amount of ticks the simulator must run
      */
+    @FXML
     private void submit() {
         // Opening a pop-up dialog window to ask for the amount of ticks, converting it to integer and calling on tickFor
         setText("I should be opening a popup window now.");
@@ -586,10 +585,10 @@ public class Controller {
         }
     }
 
-    @FXML
     /**
      * gets the current time from simulator, assigns the right day name to the day number and displays the date
      */
+    @FXML
     private void getDate(){
         int[] time = sim.getTime();
         String day = null;
@@ -631,11 +630,11 @@ public class Controller {
         int[] stats = sim.getStatistics();
         statistics.setText("Number of regular cars: " + stats[1] + " Number of cars with a reservation: " + stats[0] + " Number of passholder cars: " + stats[3]);
     }
-
-    @FXML
+  
     /**
      * gets the current date from the simulator and displays the hours and minutes in digital clock form
      */
+    @FXML
     private void clock(){
         int time[] = sim.getTime();
         String hours;
@@ -654,10 +653,10 @@ public class Controller {
 
     }
 
-    @FXML
     /**
      * Resets the simulation
      */
+    @FXML
     private void reset() {
         // resets all parking spots to empty on click
         setText("I should be removing cars now.");
@@ -678,10 +677,10 @@ public class Controller {
         button_operate6.setDisable(true);
     }
 
-    @FXML
     /**
      * Gets the total revenue from the simulation and displays it
      */
+    @FXML
     private void getRevenue(){
         showRevenue("The total revenue since the start is:\n€" + sim.getRevenue() + "\n\n" +
                     "The expected revenue of all the cars\n still in the garage is:\n€" + sim.getExpectedRevenue());
@@ -692,10 +691,11 @@ public class Controller {
         showDayRevenue("The total day revenue of last day is:\n€" + sim.getDayRevenue());
     }
 
-    @FXML
     /**
      * Opens up a text dialog that displays program information to the user
      */
+    @FXML
+
     private void showAbout() {
         //show about information
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -745,10 +745,10 @@ public class Controller {
         button_operate6.setDisable(doDisable);
     }
 
-    @FXML
     /**
      * Stops the current running simulation.
      */
+    @FXML
     private void stop() {
         if (timeline != null) {
             timeline.stop();
