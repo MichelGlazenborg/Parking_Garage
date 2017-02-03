@@ -408,7 +408,7 @@ public class Controller {
                 } else {
                     // check if the entered integer is between bounds
                     if (hour <= 24) {
-                        return(hour - 1);
+                        return(hour);
                     } else {
                         return(-1);
                     }
@@ -694,18 +694,21 @@ public class Controller {
     private void reset() {
         // resets all parking spots to empty on click
         sim.resetRevenue();
-
+        sim.resetStats();
         sim.resetTime();
-      
+
         _statsPie.reset();
         simView.reset();
-      
+
         sim.resetArrivalCounter();
         updateGraph();
 
         getDate();
         clock();
         getRevenue();
+        getDayRevenue();
+        showStatistics();
+        showQueueStats();
         button_operate6.setDisable(true);
     }
 
