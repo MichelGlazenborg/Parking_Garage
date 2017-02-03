@@ -103,7 +103,7 @@ public class Controller {
 
     /**
      * Closes the app
-     * @param ActionEvent e     The action event
+     * @param: ActionEvent e     The action event
      */
     @FXML
     private void closeApp(ActionEvent e) {
@@ -140,7 +140,7 @@ public class Controller {
 
     /**
      * Makes the simulator tick for any number of ticks
-     * @param int ticks     The number of ticks the simulation should do
+     * @param: int ticks     The number of ticks the simulation should do
      */
     @FXML
     private void tickFor(int ticks) {
@@ -646,6 +646,7 @@ public class Controller {
         getDate();
         clock();
         getRevenue();
+        getDayRevenue();
         button_operate6.setDisable(true);
     }
 
