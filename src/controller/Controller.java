@@ -23,11 +23,11 @@ public class Controller {
 	private Simulator sim;              //makes the central simulator object
     private SimulatorView simView;      //makes the central simulatorview object
 
-    private OccupationChartView _currentOccupationChart;     //makes the statistics graph
+    private OccupationChartView _occupationChartView;     //makes the statistics graph
     private OccupationChart _statsPie;         //makes the pie graph
 
-    private DailyCarsChartView _dailyCarsChartView;
     private DailyCarsChart _dailyCarsChart;
+    private DailyCarsChartView _dailyCarsChartView;
 
     private double speed = 1;
     private static final String version = "1.0";
@@ -78,7 +78,7 @@ public class Controller {
     private Label dayRevenue;           //makes the label with the total day revenue
 
     @FXML
-    private Timeline timeline;          //makes the timelime object
+    private Timeline timeline;          //makes the timeline object
 
     /**
      * Initializes all the attributes
@@ -90,12 +90,12 @@ public class Controller {
         _statsPie = new OccupationChart();
         _dailyCarsChart = new DailyCarsChart();
 
-        _currentOccupationChart = new OccupationChartView(_statsPie);
+        _occupationChartView = new OccupationChartView(_statsPie);
         _dailyCarsChartView = new DailyCarsChartView(_dailyCarsChart);
 
-        _currentOccupationChart.setData();
-        _currentOccupationChart.update();
-        _sidebarRight.getChildren().add(_currentOccupationChart.getChart());
+        _occupationChartView.setData();
+        _occupationChartView.update();
+        _sidebarRight.getChildren().add(_occupationChartView.getChart());
         _statistics.getChildren().add(_dailyCarsChartView.getChart());
 
         getDate();
@@ -786,7 +786,7 @@ public class Controller {
             sim.getArrivalsOnSunday()
         );
 
-        _currentOccupationChart.update();
+        _occupationChartView.update();
         _dailyCarsChartView.update();
     }
 }
