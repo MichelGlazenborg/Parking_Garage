@@ -55,8 +55,8 @@ public class Controller {
     @FXML
     private Button button_operate6;     //makes button 6
 
-    @FXML
-    private Label textTarget;           //makes the label textTarget used for debugging
+    //@FXML
+    //private Label textTarget;           //makes the label textTarget used for debugging
 
     @FXML
     private Label statistics;
@@ -98,7 +98,7 @@ public class Controller {
 
     /**
      * Closes the app
-     * @param ActionEvent e     The action event
+     * @paramActionEvent e     The action event
      */
     @FXML
     private void closeApp(ActionEvent e) {
@@ -135,7 +135,7 @@ public class Controller {
 
     /**
      * Makes the simulator tick for any number of ticks
-     * @param int ticks     The number of ticks the simulation should do
+     * @paramint ticks     The number of ticks the simulation should do
      */
     @FXML
     private void tickFor(int ticks) {
@@ -222,7 +222,7 @@ public class Controller {
      */
     @FXML
     private void setPricePerMinute() {
-        //setText("I should be opening a popup window now.");
+        setText("I should be opening a popup window now.");
 
         TextInputDialog dialog = new TextInputDialog("0");
         dialog.setTitle("Number Input Dialog");
@@ -628,7 +628,7 @@ public class Controller {
     @FXML
     private void showStatistics() {
         int[] stats = sim.getStatistics();
-        statistics.setText("Number of regular cars: " + stats[1] + " Number of cars with a reservation: " + stats[0] + " Number of passholder cars: " + stats[3]);
+        statistics.setText("Number of regular cars: " + stats[1] + "\nNumber of cars with a reservation: " + stats[0] + "\nNumber of passholder cars: " + stats[2]);
     }
   
     /**
@@ -715,7 +715,7 @@ public class Controller {
      * @param txt:  A string that will be shown in the textTarget
      */
     private void setText(String txt) {
-        textTarget.setText(txt);
+        //textTarget.setText(txt);
     }
 
     /**

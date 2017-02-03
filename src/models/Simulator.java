@@ -277,6 +277,37 @@ public class Simulator {
         }
     }
 
+    public CarQueue getEntranceCarQueue() {
+        return entranceCarQueue;
+    }
+
+    public CarQueue getEntrancePassQueue() {
+        return entrancePassQueue;
+    }
+
+    public CarQueue getEntranceResQueue() {
+        return entranceResQueue;
+    }
+
+    public CarQueue getExitCarQueue() {
+        return exitCarQueue;
+    }
+
+    public CarQueue getPaymentCarQueue() {
+        return paymentCarQueue;
+    }
+
+    public CarQueue[] getQueues() {
+        CarQueue[] queues = new CarQueue[4];
+
+        queues[0] = getEntranceCarQueue();
+        queues[1] = getEntrancePassQueue();
+        queues[2] = getEntranceResQueue();
+        queues[3] = getExitCarQueue();
+        queues[4] = getPaymentCarQueue();
+
+        return queues;
+    }
     /**
      * adds leaving cars to the payment queue.
      */

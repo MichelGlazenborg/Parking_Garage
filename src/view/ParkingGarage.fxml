@@ -125,11 +125,11 @@
         </VBox>
     </right>
    <bottom>
-       <Label fx:id="statistics" prefHeight="200" prefWidth="1000" BorderPane.alignment="BOTTOM_RIGHT"/>
-       <Label fx:id="textTarget" prefHeight="200" prefWidth="1000" BorderPane.alignment="BASELINE_LEFT">
+       <Label fx:id="statistics" prefHeight="200" prefWidth="1000" BorderPane.alignment="BASELINE_CENTER"/>
+       <!--<Label fx:id="textTarget" prefHeight="200" prefWidth="250" BorderPane.alignment="BASELINE_LEFT">
            <BorderPane.margin>
                <Insets left="25"/>
            </BorderPane.margin>
-       </Label>
+       </Label>-->
    </bottom>
 </BorderPane>
