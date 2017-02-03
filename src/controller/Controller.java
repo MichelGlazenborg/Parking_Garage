@@ -96,7 +96,7 @@ public class Controller {
         _currentOccupationChart.setData();
         _currentOccupationChart.update();
         _sidebarRight.getChildren().add(_currentOccupationChart.getChart());
-        _statistics.getChildren().add(_dailyCarsChartView.getChart());
+        //_statistics.getChildren().add(_dailyCarsChartView.getChart());
 
         getDate();
         clock();
@@ -147,7 +147,7 @@ public class Controller {
      */
     @FXML
     private void tickFor(int ticks) {
-        setText("I should be running for " + ticks + " ticks now");
+        //setText("I should be running for " + ticks + " ticks now");
         disableButtons(true);
 
         timeline = new Timeline();
@@ -180,15 +180,23 @@ public class Controller {
             try {
                 a = Integer.parseInt(result2);
             } catch(NumberFormatException exception) {
-                setText("Please enter an positive whole number!");
+                showError();
             } finally {
                 if(a <= 0) {
-                    setText("Please enter an positive whole number!");
+                    showError();
                 } else {
                     speed = a;
                 }
             }
         }
+    }
+
+    private void showError() {
+        Alert error = new Alert(Alert.AlertType.WARNING);
+        error.setTitle("Input error");
+        error.setHeaderText(null);
+        error.setContentText("Please enter an positive whole number!");
+        error.showAndWait();
     }
 
     @FXML
@@ -214,10 +222,10 @@ public class Controller {
             try {
                 spotAmount = Integer.parseInt(result2);
             } catch(NumberFormatException exception) {
-                setText("Please enter an positive whole number!");
+                showError();
             } finally {
                 if(spotAmount < 1) {
-                    setText("Please enter an positive whole number!");
+                    showError();
                 } else {
                     simView.makePassHolderSpots(spotAmount);
                 }
@@ -230,7 +238,7 @@ public class Controller {
      */
     @FXML
     private void setPricePerMinute() {
-        setText("I should be opening a popup window now.");
+        //setText("I should be opening a popup window now.");
 
         TextInputDialog dialog = new TextInputDialog("0");
         dialog.setTitle("Number Input Dialog");
@@ -243,10 +251,10 @@ public class Controller {
             try {
                 priceAmount = Double.parseDouble(result2);
             } catch(NumberFormatException exception) {
-                setText("Please enter an positive whole number!");
+                showError();
             } finally {
                 if(priceAmount<=0) {
-                    setText("Please enter an positive whole number!");
+                    showError();
                 } else {
                     sim.setCost(priceAmount);
                 }
@@ -267,7 +275,7 @@ public class Controller {
 
         // illegal answers return -1
         if (floor == -1 || row == -1 || place == -1) {
-            setText("One or more arguments were not filled in correctly!");
+            showError();
         } else {
             int[] time = sim.getTime();
             simView.makeReservationsAt(new Location(floor, row, place),time[0], time[1]);
@@ -286,7 +294,7 @@ public class Controller {
         int minute = givenMinute();
 
         if(week == -1 || day == -1 || hour == -1 || minute == -1) {
-            setText("Please enter positive numbers.");
+            showError();
         } else {
             sim.setTime(week,day,hour,minute);
             getDate();
@@ -313,10 +321,10 @@ public class Controller {
             try {
                 week = Integer.parseInt(WeekResult2);
             } catch (NumberFormatException exception) {
-                setText("Please enter an positive whole number!");
+                showError();
             } finally {
                 if (week <= 0) {
-                    setText("Please enter an positive whole number bigger than 0.");
+                    showError();
                 } else {
                     // check if the entered integer is between bounds
                     if (week <= 52) {
@@ -350,10 +358,10 @@ public class Controller {
             try {
                 day = Integer.parseInt(DayResult2);
             } catch (NumberFormatException exception) {
-                setText("Please enter an positive whole number!");
+                showError();
             } finally {
                 if (day <= 0) {
-                    setText("Please enter an positive whole number bigger than 0.");
+                    showError();
                 } else {
                     // check if the entered integer is between bounds
                     if (day <= 7) {
@@ -387,10 +395,10 @@ public class Controller {
             try {
                 hour = Integer.parseInt(HourResult2);
             } catch (NumberFormatException exception) {
-                setText("Please enter an positive whole number!");
+                showError();
             } finally {
                 if (hour <= 0) {
-                    setText("Please enter an positive whole number bigger than 0.");
+                    showError();
                 } else {
                     // check if the entered integer is between bounds
                     if (hour <= 24) {
@@ -424,10 +432,10 @@ public class Controller {
             try {
                 minute = Integer.parseInt(MinuteResult2);
             } catch (NumberFormatException exception) {
-                setText("Please enter an positive whole number!");
+                showError();
             } finally {
                 if (minute <= 0) {
-                    setText("Please enter an positive whole number bigger than 0.");
+                    showError();
                 } else {
                     // check if the entered integer is between bounds
                     if (minute <= 60) {
@@ -463,10 +471,10 @@ public class Controller {
             try {
                 floor = Integer.parseInt(floorResult2);
             } catch (NumberFormatException exception) {
-                setText("Please enter an positive whole number!");
+                showError();
             } finally {
                 if (floor < 0) {
-                    setText("Please enter an positive whole number!");
+                    showError();
                 } else {
                     // check if the entered integer is actually in this garage
                     if (floor < simView.getNumberOfFloors()) {
@@ -502,10 +510,10 @@ public class Controller {
             try {
                 row = Integer.parseInt(rowResult2);
             } catch (NumberFormatException exception) {
-                setText("Please enter an positive whole number!");
+                showError();
             } finally {
                 if (row < 0) {
-                    setText("Please enter an positive whole number!");
+                    showError();
                 } else {
                     // check if the entered integer is actually in this garage
                     if (row < simView.getNumberOfRows()) {
@@ -541,10 +549,10 @@ public class Controller {
             try {
                 place = Integer.parseInt(placeResult2);
             } catch (NumberFormatException exception) {
-                setText("Please enter an positive whole number!");
+                showError();
             } finally {
                 if (place < 0) {
-                    setText("Please enter an positive whole number!");
+                    showError();
                 } else {
                     // check if the entered integer is actually in this garage
                     if (place < simView.getNumberOfPlaces()) {
@@ -565,7 +573,7 @@ public class Controller {
     @FXML
     private void submit() {
         // Opening a pop-up dialog window to ask for the amount of ticks, converting it to integer and calling on tickFor
-        setText("I should be opening a popup window now.");
+        //setText("I should be opening a popup window now.");
 
         TextInputDialog dialog = new TextInputDialog("0");
         dialog.setTitle("Minute Input Dialog");
@@ -582,10 +590,10 @@ public class Controller {
             try {
                 ticksAmount = Integer.parseInt(result2);
             } catch(NumberFormatException exception) {
-                setText("Please enter an positive whole number!");
+                showError();
             } finally {
                 if(ticksAmount < 1) {
-                    setText("Please enter an positive whole number!");
+                    showError();
                 } else {
                     tickFor(ticksAmount);
                 }
@@ -667,7 +675,7 @@ public class Controller {
     @FXML
     private void reset() {
         // resets all parking spots to empty on click
-        setText("I should be removing cars now.");
+        //setText("I should be removing cars now.");
         sim.resetRevenue();
 
         sim.resetTime();
@@ -678,7 +686,7 @@ public class Controller {
         sim.resetArrivalCounter();
         updateGraph();
       
-        setText("All cars should be gone now");
+        //setText("All cars should be gone now");
         getDate();
         clock();
         getRevenue();
@@ -715,15 +723,6 @@ public class Controller {
                              "Version " + version);
 
         alert.showAndWait();
-        setText("Parking Simulator is a program that lets city parking Groningen see how some changes to their Parking Garage might affect business.");
-    }
-
-    /**
-     * sets the text in textTarget
-     * @param txt:  A string that will be shown in the textTarget
-     */
-    private void setText(String txt) {
-        //textTarget.setText(txt);
     }
 
     /**
