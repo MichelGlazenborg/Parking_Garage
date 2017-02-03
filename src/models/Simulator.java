@@ -30,9 +30,9 @@ public class Simulator {
     private int weekDayResArrivals = 50;
     private int weekendResArrivals = 30;
 
-    private int enterSpeed = 3; // number of cars that can enter per minute
-    private int paymentSpeed = 7; // number of cars that can pay per minute
-    private int exitSpeed = 5; // number of cars that can leave per minute
+    private int enterSpeed = 2; // number of cars that can enter per minute
+    private int paymentSpeed = 5; // number of cars that can pay per minute
+    private int exitSpeed = 2; // number of cars that can leave per minute
 
     private int _arrivalsOnMonday = 0;
     private int _arrivalsOnTuesday = 0;
@@ -89,9 +89,8 @@ public class Simulator {
         while (hour > 23) {
             hour -= 24;
             day++;
-            if(day >= 2) {
+                pay.setLasDayRevenue(pay.getDayRevenue());
                 pay.resetDayRevenue();
-            }
         }
         while (day > 6) {
             day -= 7;
@@ -278,6 +277,46 @@ public class Simulator {
         }
     }
 
+    public CarQueue getEntranceCarQueue() {
+        return entranceCarQueue;
+    }
+
+    public CarQueue getEntrancePassQueue() {
+        return entrancePassQueue;
+    }
+
+    public CarQueue getEntranceResQueue() {
+        return entranceResQueue;
+    }
+
+    public CarQueue getExitCarQueue() {
+        return exitCarQueue;
+    }
+
+    public CarQueue getPaymentCarQueue() {
+        return paymentCarQueue;
+    }
+
+    public int[] getQueues() {
+        int[] queues = new int[5];
+
+        CarQueue queue = getEntranceCarQueue();
+        queues[0] = queue.carsInQueue();
+
+        queue = getEntrancePassQueue();
+        queues[1] = queue.carsInQueue();
+
+        queue = getEntranceResQueue();
+        queues[2] = queue.carsInQueue();
+
+        queue = getExitCarQueue();
+        queues[3] = queue.carsInQueue();
+
+        queue = getPaymentCarQueue();
+        queues[4] = queue.carsInQueue();
+
+        return queues;
+    }
     /**
      * adds leaving cars to the payment queue.
      */
@@ -321,7 +360,7 @@ public class Simulator {
     }
 
     public double getDayRevenue() {
-        return pay.getDayRevenue();
+        return pay.getLastDayRevenue();
     }
 
     public double getExpectedRevenue() {

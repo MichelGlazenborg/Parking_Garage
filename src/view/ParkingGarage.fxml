@@ -1,60 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.canvas.Canvas?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.control.Label?>
-<BorderPane fx:controller="controller.Controller"
-            maxHeight="-Infinity"
-            maxWidth="-Infinity"
-            minHeight="-Infinity"
-            minWidth="-Infinity"
-            prefHeight="750.0"
-            prefWidth="1000.0"
-            xmlns="http://javafx.com/javafx/8.0.102"
-            xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
    <top>
       <MenuBar>
         <menus>
           <Menu mnemonicParsing="false" text="_Simulator">
               <items>
-                  <MenuItem text="Set price per minute..." onAction="#setPricePerMinute" />
+                  <MenuItem onAction="#setPricePerMinute" text="Set price per minute" />
               </items>
               <items>
-                  <MenuItem text="Make pass holder spots..." onAction="#makePassHolderSpots" />
+                  <MenuItem onAction="#makePassHolderSpots" text="Make Passholder spots" />
               </items>
               <items>
-                  <MenuItem text="Make reservation at..." onAction="#makeReservationsAt"/>
-              </items>
-              <items>
-                  <SeparatorMenuItem />
-              </items>
-              <items>
-                  <MenuItem text="Set the time at..." onAction="#setTime"/>
-              </items>
-              <items>
-                  <MenuItem text="Set simulator speed..." onAction="#setSpeed"/>
-              </items>
-              <items>
-                  <MenuItem text="Reset simulator speed" onAction="#resetSpeed"/>
+                  <MenuItem onAction="#makeReservationsAt" text="Make Reservation at" />
               </items>
               <items>
                   <SeparatorMenuItem />
               </items>
               <items>
-                  <MenuItem mnemonicParsing="false" text="Close" onAction="#closeApp" />
+                  <MenuItem onAction="#setTime" text="Set the time at" />
+              </items>
+              <items>
+                  <MenuItem onAction="#setSpeed" text="Set simulator speed" />
+              </items>
+              <items>
+                  <MenuItem onAction="#resetSpeed" text="Reset simulator speed" />
+              </items>
+              <items>
+                  <MenuItem mnemonicParsing="false" onAction="#closeApp" text="Close" />
               </items>
           </Menu>
 
           <Menu mnemonicParsing="false" text="_Help">
             <items>
-              <MenuItem mnemonicParsing="false" text="About..." onAction="#showAbout"/>
+              <MenuItem mnemonicParsing="false" onAction="#showAbout" text="About" />
             </items>
           </Menu>
         </menus>
@@ -63,32 +46,32 @@
    <left>
       <VBox prefHeight="200.0" prefWidth="300.0" BorderPane.alignment="CENTER_LEFT">
          <children>
-            <Button fx:id="button_operate1" mnemonicParsing="false" text="Run for 1 minute" onAction="#tick1">
+            <Button fx:id="button_operate1" mnemonicParsing="false" onAction="#tick1" text="Run for 1 minute">
                <VBox.margin>
                    <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                </VBox.margin>
             </Button>
-             <Button fx:id="button_operate2" mnemonicParsing="false" text="Run for 60 minutes" onAction="#tick60">
+             <Button fx:id="button_operate2" mnemonicParsing="false" onAction="#tick60" text="Run for 60 minutes">
                <VBox.margin>
                   <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="button_operate3" mnemonicParsing="false" text="Run for 1 day" onAction="#tickDay">
+            <Button fx:id="button_operate3" mnemonicParsing="false" onAction="#tickDay" text="Run for 1 day">
                <VBox.margin>
                    <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                </VBox.margin>
             </Button>
-             <Button fx:id="button_operate4" text="Run for ..." onAction="#submit">
+             <Button fx:id="button_operate4" onAction="#submit" text="Run for ...">
                  <VBox.margin>
                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                  </VBox.margin>
              </Button>
-             <Button fx:id="button_operate5" text="Stop" onAction="#stop" disable="true">
+             <Button fx:id="button_operate5" disable="true" onAction="#stop" text="Stop">
                  <VBox.margin>
                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                  </VBox.margin>
              </Button>
-             <Button fx:id="button_operate6" text="Reset" onAction="#reset" disable="true">
+             <Button fx:id="button_operate6" disable="true" onAction="#reset" text="Reset">
                  <VBox.margin>
                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                  </VBox.margin>
@@ -102,34 +85,45 @@
     <right>
         <VBox fx:id="_sidebarRight" prefWidth="300.0">
             <children>
-                <Label fx:id="titleRev" prefHeight="20" prefWidth="300" text="Revenue" BorderPane.alignment="TOP_CENTER"/>
-                <Label fx:id="dayRevenue" prefHeight="40" prefWidth="300" BorderPane.alignment="TOP_LEFT">
+                <Label fx:id="titleRev" prefHeight="20" prefWidth="300" text="Revenue" BorderPane.alignment="TOP_CENTER" />
+                <Label fx:id="dayRevenue" prefHeight="60" prefWidth="300" BorderPane.alignment="TOP_LEFT">
                     <VBox.margin>
-                        <Insets left="15.0" right="15.0"/>
+                        <Insets left="15.0" right="15.0" />
                     </VBox.margin>
                 </Label>
                 <Label fx:id="revenue" prefHeight="200" prefWidth="320" BorderPane.alignment="TOP_RIGHT">
                     <VBox.margin>
-                        <Insets bottom="5.0" left="15.0" right="15.0"/>
+                        <Insets left="15.0" right="15.0" />
                     </VBox.margin>
                 </Label>
-                <Label fx:id="titleTime" prefHeight="20" prefWidth="300" text="Time" BorderPane.alignment="CENTER"/>
-                <Label fx:id="date" prefHeight="50" prefWidth="300" BorderPane.alignment="TOP_LEFT">
+                <Label fx:id="titleTime" prefHeight="20" prefWidth="300" text="Time" BorderPane.alignment="CENTER" />
+                <Label fx:id="date" prefHeight="70" prefWidth="300" BorderPane.alignment="TOP_LEFT">
                     <VBox.margin>
-                        <Insets bottom="5.0" left="15.0" right="15.0" top="5.0"/>
+                        <Insets left="15.0" right="15.0" />
                     </VBox.margin>
                 </Label>
-                <Label fx:id="clock" prefHeight="50" prefWidth="300">
+                <Label fx:id="clock" prefHeight="60" prefWidth="300">
                     <VBox.margin>
-                        <Insets bottom="5.0" left="15.0" right="15.0" top="5.0"/>
+                        <Insets left="15.0" right="15.0" />
                     </VBox.margin>
                 </Label>
             </children>
         </VBox>
     </right>
    <bottom>
-       <VBox fx:id="_statistics" prefHeight="50" prefWidth="1000" BorderPane.alignment="BOTTOM_LEFT">
-           <children></children>
-       </VBox>
+       <HBox fx:id="bottomBar" prefWidth="1000">
+           <children>
+               <Label fx:id="statistics" prefHeight="200" prefWidth="350" alignment="TOP_LEFT">
+                   <HBox.margin>
+                       <Insets left="15" right="5"/>
+                   </HBox.margin>
+               </Label>
+               <Label fx:id="queueStats" prefHeight="200" alignment="TOP_LEFT">
+                   <HBox.margin>
+                       <Insets left="5" right="5"/>
+                   </HBox.margin>
+               </Label>
+           </children>
+       </HBox>
    </bottom>
 </BorderPane>

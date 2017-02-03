@@ -23,11 +23,11 @@ public class Controller {
 	private Simulator sim;              //makes the central simulator object
     private SimulatorView simView;      //makes the central simulatorview object
 
-    private OccupationChartView _occupationChartView;     //makes the statistics graph
+    private OccupationChartView _currentOccupationChart;     //makes the statistics graph
     private OccupationChart _statsPie;         //makes the pie graph
 
-    private DailyCarsChart _dailyCarsChart;
     private DailyCarsChartView _dailyCarsChartView;
+    private DailyCarsChart _dailyCarsChart;
 
     private double speed = 1;
     private static final String version = "1.0";
@@ -59,8 +59,14 @@ public class Controller {
     @FXML
     private Button button_operate6;     //makes button 6
 
+    //@FXML
+    //private Label textTarget;           //makes the label textTarget used for debugging
+
     @FXML
     private Label statistics;
+
+    @FXML
+    private Label queueStats;
   
     @FXML
     private Label date;                 //makes the label with the week and day
@@ -75,7 +81,7 @@ public class Controller {
     private Label dayRevenue;           //makes the label with the total day revenue
 
     @FXML
-    private Timeline timeline;          //makes the timeline object
+    private Timeline timeline;          //makes the timelime object
 
     /**
      * Initializes all the attributes
@@ -87,13 +93,13 @@ public class Controller {
         _statsPie = new OccupationChart();
         _dailyCarsChart = new DailyCarsChart();
 
-        _occupationChartView = new OccupationChartView(_statsPie);
+        _currentOccupationChart = new OccupationChartView(_statsPie);
         _dailyCarsChartView = new DailyCarsChartView(_dailyCarsChart);
 
-        _occupationChartView.setData();
-        _dailyCarsChartView.setData();
-        _sidebarRight.getChildren().add(_occupationChartView.getChart());
-        _statistics.getChildren().add(_dailyCarsChartView.getChart());
+        _currentOccupationChart.setData();
+        _currentOccupationChart.update();
+        _sidebarRight.getChildren().add(_currentOccupationChart.getChart());
+        //_statistics.getChildren().add(_dailyCarsChartView.getChart());
 
         getDate();
         clock();
@@ -103,7 +109,7 @@ public class Controller {
 
     /**
      * Closes the app
-     * @param: ActionEvent e     The action event
+     * @paramActionEvent e     The action event
      */
     @FXML
     private void closeApp(ActionEvent e) {
@@ -140,25 +146,29 @@ public class Controller {
 
     /**
      * Makes the simulator tick for any number of ticks
-     * @param: int ticks     The number of ticks the simulation should do
+     * @paramint ticks     The number of ticks the simulation should do
      */
     @FXML
     private void tickFor(int ticks) {
+        //setText("I should be running for " + ticks + " ticks now");
         disableButtons(true);
 
         timeline = new Timeline();
         timeline.setCycleCount(ticks);
-        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(100 * speed), e -> {
-            sim.tick();
-            getDate();
-            getRevenue();
-            getDayRevenue();
-            clock();
-            updateGraph();
-        }));
-
+        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(Math.round(100/speed)), e -> {
+                                                                             sim.tick();
+                                                                             getDate();
+                                                                             getRevenue();
+                                                                             getDayRevenue();
+                                                                             clock();
+                                                                             showStatistics();
+                                                                             showQueueStats();
+                                                                            }));
         timeline.play();
-        timeline.setOnFinished(e -> disableButtons(false));
+        timeline.setOnFinished(e -> {
+            updateGraph();
+            disableButtons(false);
+        });
     }
 
     @FXML
@@ -174,13 +184,25 @@ public class Controller {
             try {
                 a = Integer.parseInt(result2);
             } catch(NumberFormatException exception) {
+                showError();
             } finally {
                 if(a <= 0) {
+                    speed = 1;
+                } else if(a > 100) {
+                    speed = 100;
                 } else {
                     speed = a;
                 }
             }
         }
+    }
+
+    private void showError() {
+        Alert error = new Alert(Alert.AlertType.WARNING);
+        error.setTitle("Input error");
+        error.setHeaderText(null);
+        error.setContentText("Please enter an positive whole number!");
+        error.showAndWait();
     }
 
     @FXML
@@ -193,6 +215,7 @@ public class Controller {
      */
     @FXML
     private void makePassHolderSpots() {
+        //setText("I should be opening a popup window now.");
 
         TextInputDialog dialog = new TextInputDialog("0");
         dialog.setTitle("Number Input Dialog");
@@ -205,8 +228,10 @@ public class Controller {
             try {
                 spotAmount = Integer.parseInt(result2);
             } catch(NumberFormatException exception) {
+                showError();
             } finally {
                 if(spotAmount < 1) {
+                    showError();
                 } else {
                     simView.makePassHolderSpots(spotAmount);
                 }
@@ -219,6 +244,7 @@ public class Controller {
      */
     @FXML
     private void setPricePerMinute() {
+        //setText("I should be opening a popup window now.");
 
         TextInputDialog dialog = new TextInputDialog("0");
         dialog.setTitle("Number Input Dialog");
@@ -231,8 +257,10 @@ public class Controller {
             try {
                 priceAmount = Double.parseDouble(result2);
             } catch(NumberFormatException exception) {
+                showError();
             } finally {
                 if(priceAmount<=0) {
+                    showError();
                 } else {
                     sim.setCost(priceAmount);
                 }
@@ -253,6 +281,7 @@ public class Controller {
 
         // illegal answers return -1
         if (floor == -1 || row == -1 || place == -1) {
+            showError();
         } else {
             int[] time = sim.getTime();
             simView.makeReservationsAt(new Location(floor, row, place),time[0], time[1]);
@@ -271,7 +300,7 @@ public class Controller {
         int minute = givenMinute();
 
         if(week == -1 || day == -1 || hour == -1 || minute == -1) {
-
+            showError();
         } else {
             sim.setTime(week,day,hour,minute);
             getDate();
@@ -298,8 +327,10 @@ public class Controller {
             try {
                 week = Integer.parseInt(WeekResult2);
             } catch (NumberFormatException exception) {
+                showError();
             } finally {
                 if (week <= 0) {
+                    showError();
                 } else {
                     // check if the entered integer is between bounds
                     if (week <= 52) {
@@ -333,8 +364,10 @@ public class Controller {
             try {
                 day = Integer.parseInt(DayResult2);
             } catch (NumberFormatException exception) {
+                showError();
             } finally {
                 if (day <= 0) {
+                    showError();
                 } else {
                     // check if the entered integer is between bounds
                     if (day <= 7) {
@@ -368,8 +401,10 @@ public class Controller {
             try {
                 hour = Integer.parseInt(HourResult2);
             } catch (NumberFormatException exception) {
+                showError();
             } finally {
                 if (hour <= 0) {
+                    showError();
                 } else {
                     // check if the entered integer is between bounds
                     if (hour <= 24) {
@@ -403,8 +438,10 @@ public class Controller {
             try {
                 minute = Integer.parseInt(MinuteResult2);
             } catch (NumberFormatException exception) {
+                showError();
             } finally {
                 if (minute <= 0) {
+                    showError();
                 } else {
                     // check if the entered integer is between bounds
                     if (minute <= 60) {
@@ -440,8 +477,10 @@ public class Controller {
             try {
                 floor = Integer.parseInt(floorResult2);
             } catch (NumberFormatException exception) {
+                showError();
             } finally {
                 if (floor < 0) {
+                    showError();
                 } else {
                     // check if the entered integer is actually in this garage
                     if (floor < simView.getNumberOfFloors()) {
@@ -477,8 +516,10 @@ public class Controller {
             try {
                 row = Integer.parseInt(rowResult2);
             } catch (NumberFormatException exception) {
+                showError();
             } finally {
                 if (row < 0) {
+                    showError();
                 } else {
                     // check if the entered integer is actually in this garage
                     if (row < simView.getNumberOfRows()) {
@@ -514,8 +555,10 @@ public class Controller {
             try {
                 place = Integer.parseInt(placeResult2);
             } catch (NumberFormatException exception) {
+                showError();
             } finally {
                 if (place < 0) {
+                    showError();
                 } else {
                     // check if the entered integer is actually in this garage
                     if (place < simView.getNumberOfPlaces()) {
@@ -536,6 +579,7 @@ public class Controller {
     @FXML
     private void submit() {
         // Opening a pop-up dialog window to ask for the amount of ticks, converting it to integer and calling on tickFor
+        //setText("I should be opening a popup window now.");
 
         TextInputDialog dialog = new TextInputDialog("0");
         dialog.setTitle("Minute Input Dialog");
@@ -552,8 +596,10 @@ public class Controller {
             try {
                 ticksAmount = Integer.parseInt(result2);
             } catch(NumberFormatException exception) {
+                showError();
             } finally {
                 if(ticksAmount < 1) {
+                    showError();
                 } else {
                     tickFor(ticksAmount);
                 }
@@ -604,7 +650,19 @@ public class Controller {
     @FXML
     private void showStatistics() {
         int[] stats = sim.getStatistics();
-        statistics.setText("");
+        statistics.setText("Number of regular cars: " + stats[1] +
+                "\nNumber of cars with a reservation: " + stats[0] +
+                "\nNumber of passholder cars: " + stats[2]);
+    }
+
+    @FXML
+    private void showQueueStats() {
+        int[] queues = sim.getQueues();
+        queueStats.setText("Number of cars in regular entrance queue: " + queues[0] +
+                         "\nNumber of cars in passholder entrance queue: " + queues[1] +
+                         "\nNumber of cars in reservations entrance queue: " + queues[2] +
+                         "\nNumber of cars in exit queue: " + queues[3] +
+                         "\nNumber of cars in the payment queue: " + queues[4]);
     }
   
     /**
@@ -636,16 +694,18 @@ public class Controller {
     private void reset() {
         // resets all parking spots to empty on click
         sim.resetRevenue();
+
         sim.resetTime();
+      
         _statsPie.reset();
-        _dailyCarsChart.reset();
         simView.reset();
+      
         sim.resetArrivalCounter();
         updateGraph();
+
         getDate();
         clock();
         getRevenue();
-        getDayRevenue();
         button_operate6.setDisable(true);
     }
 
@@ -654,13 +714,14 @@ public class Controller {
      */
     @FXML
     private void getRevenue(){
-        showRevenue("The total revenue since the start is:\n€" + sim.getRevenue() + "\n\n" +
-                    "The expected revenue of all the cars\n still in the garage is:\n€" + sim.getExpectedRevenue() + "\n");
+        showRevenue("The total revenue since the start is:\n€" + sim.getRevenue() + "0\n\n" +
+                    "The expected revenue of all the cars\n still in the garage is:\n€" + sim.getExpectedRevenue() + "0\n");
     }
 
     @FXML
     private void getDayRevenue(){
-        showDayRevenue("The total daily revenue is:\n€" + sim.getDayRevenue());
+        showDayRevenue("The total daily revenue is:\n€" + sim.getDayRevenue() + "0\n\n");
+
     }
 
     /**
@@ -741,7 +802,7 @@ public class Controller {
             sim.getArrivalsOnSunday()
         );
 
-        _occupationChartView.update();
+        _currentOccupationChart.update();
         _dailyCarsChartView.update();
     }
 }
