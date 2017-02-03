@@ -149,7 +149,9 @@ public class Controller {
                                                                              getDate();
                                                                              getRevenue();
                                                                              getDayRevenue();
-                                                                             clock(); }));
+                                                                             clock();
+                                                                             showStatistics();
+                                                                            }));
 
         timeline.play();
         timeline.setOnFinished(e -> {
@@ -627,7 +629,7 @@ public class Controller {
     @FXML
     private void showStatistics() {
         int[] stats = sim.getStatistics();
-        statistics.setText("");
+        statistics.setText("Number of regular cars: " + stats[1] + " Number of cars with a reservation: " + stats[0] + " Number of passholder cars: " + stats[3]);
     }
 
     @FXML
@@ -682,12 +684,12 @@ public class Controller {
      */
     private void getRevenue(){
         showRevenue("The total revenue since the start is:\n€" + sim.getRevenue() + "\n\n" +
-                    "The expected revenue of all the cars\n still in the garage is:\n€" + sim.getExpectedRevenue() + "\n");
+                    "The expected revenue of all the cars\n still in the garage is:\n€" + sim.getExpectedRevenue());
     }
 
     @FXML
     private void getDayRevenue(){
-        showDayRevenue("The total day revenue of this day is:\n€" + sim.getDayRevenue());
+        showDayRevenue("The total day revenue of last day is:\n€" + sim.getDayRevenue());
     }
 
     @FXML

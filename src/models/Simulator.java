@@ -89,9 +89,8 @@ public class Simulator {
         while (hour > 23) {
             hour -= 24;
             day++;
-            if(day >= 2) {
+                pay.setLasDayRevenue(pay.getDayRevenue());
                 pay.resetDayRevenue();
-            }
         }
         while (day > 6) {
             day -= 7;
@@ -321,7 +320,7 @@ public class Simulator {
     }
 
     public double getDayRevenue() {
-        return pay.getDayRevenue();
+        return pay.getLastDayRevenue();
     }
 
     public double getExpectedRevenue() {
