@@ -756,6 +756,6 @@ public class Controller {
             simView.getNumberOfCarsWithReservation()
         );
 
-        _statsGraph.setData();
+        _statsGraph.update();
     }
 }
