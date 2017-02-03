@@ -1,21 +1,21 @@
 package models;
 
-public class StatsPie {
+public class OccupationChart {
 
-    private StatsData _unoccupied;
-    private StatsData _passholders;
-    private StatsData _adhoc;
-    private StatsData _carsWithReservations;
+    private OccupationChartData _unoccupied;
+    private OccupationChartData _passholders;
+    private OccupationChartData _adhoc;
+    private OccupationChartData _carsWithReservations;
 
-    public StatsPie() {
+    public OccupationChart() {
         reset();
     }
 
     public void reset() {
-        _unoccupied = new StatsData("Unoccupied", 100);
-        _passholders = new StatsData("Pass holders");
-        _adhoc = new StatsData("AdHoc");
-        _carsWithReservations = new StatsData("With reservation");
+        _unoccupied = new OccupationChartData("Unoccupied", 100);
+        _passholders = new OccupationChartData("Pass holders");
+        _adhoc = new OccupationChartData("AdHoc");
+        _carsWithReservations = new OccupationChartData("With reservation");
     }
 
     public void update(int total, int unoccupied, int passHolders, int adHoc, int reservations) {
@@ -34,19 +34,19 @@ public class StatsPie {
         _carsWithReservations.setPercentage(percentageWithReservation);
     }
 
-    public StatsData getUnoccupied() {
+    public OccupationChartData getUnoccupied() {
         return _unoccupied;
     }
 
-    public StatsData getPassHolders() {
+    public OccupationChartData getPassHolders() {
         return _passholders;
     }
 
-    public StatsData getAdHoc() {
+    public OccupationChartData getAdHoc() {
         return _adhoc;
     }
 
-    public StatsData getCarsWithReservation() {
+    public OccupationChartData getCarsWithReservation() {
         return _carsWithReservations;
     }
 }

@@ -473,4 +473,32 @@ public class Simulator {
         _arrivalsOnSaturday = 0;
         _arrivalsOnSunday = 0;
     }
+
+    public int getArrivalsOnMonday() {
+        return _arrivalsOnMonday;
+    }
+
+    public int getArrivalsOnTuesday() {
+        return _arrivalsOnTuesday;
+    }
+
+    public int getArrivalsOnWednesday() {
+        return _arrivalsOnWednesday;
+    }
+
+    public int getArrivalsOnThursday() {
+        return _arrivalsOnThursday;
+    }
+
+    public int getArrivalsOnFriday() {
+        return _arrivalsOnFriday;
+    }
+
+    public int getArrivalsOnSaturday() {
+        return _arrivalsOnSaturday;
+    }
+
+    public int getArrivalsOnSunday() {
+        return _arrivalsOnSunday;
+    }
 }
