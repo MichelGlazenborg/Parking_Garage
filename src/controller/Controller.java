@@ -57,6 +57,9 @@ public class Controller {
 
     @FXML
     private Label textTarget;           //makes the label textTarget used for debugging
+
+    @FXML
+    private Label statistics;
   
     @FXML
     private Label date;                 //makes the label with the week and day
@@ -620,6 +623,12 @@ public class Controller {
         showDate("Week " + time[3] + "\nDay: " + day);
     }
 
+    @FXML
+    private void showStatistics() {
+        int[] stats = sim.getStatistics();
+        statistics.setText("");
+    }
+  
     /**
      * gets the current date from the simulator and displays the hours and minutes in digital clock form
      */
@@ -692,7 +701,7 @@ public class Controller {
         alert.setHeaderText(null);
         alert.setTitle("About Parking Garage");
         alert.setContentText("Parking Simulator is a program that lets city parking Groningen see how some changes to their Parking Garage might affect business.\n\n" +
-                             "It was developed by: Robbert Monden, Job Hilts, Michel Glazenborg, Willem Slager en Jelmer Haarman.\n\n" +
+                             "It was developed by: Robert Monden, Job Wilts, Michel Glazenborg, Willem Slager en Jelmer Haarman.\n\n" +
                              "Version " + version);
 
         alert.showAndWait();
@@ -757,6 +766,6 @@ public class Controller {
             simView.getNumberOfCarsWithReservation()
         );
 
-        _statsGraph.setData();
+        _statsGraph.update();
     }
 }
