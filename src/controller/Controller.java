@@ -57,6 +57,9 @@ public class Controller {
 
     @FXML
     private Label textTarget;           //makes the label textTarget used for debugging
+
+    @FXML
+    private Label statistics;
   
     @FXML
     private Label date;                 //makes the label with the week and day
@@ -620,6 +623,13 @@ public class Controller {
         }
         showDate("Week " + time[3] + "\nDay: " + day);
     }
+
+    @FXML
+    private void showStatistics() {
+        int[] stats = sim.getStatistics();
+        statistics.setText("");
+    }
+
     @FXML
     /**
      * gets the current date from the simulator and displays the hours and minutes in digital clock form

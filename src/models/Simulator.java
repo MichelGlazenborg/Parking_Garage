@@ -332,6 +332,16 @@ public class Simulator {
 
     }
 
+    public int[] getStatistics() {
+        int[] statistics = new int[6];
+
+        statistics[0] = simulatorView.getNumberOfCarsWithReservation();
+        statistics[1] = simulatorView.getNumberOfAdHoc();
+        statistics[2] = simulatorView.getNumberOfPassHolders();
+
+        return statistics;
+    }
+
     /**
      * Makes the cars leave the parking garage
      */

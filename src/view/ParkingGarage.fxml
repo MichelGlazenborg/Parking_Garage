@@ -8,8 +8,6 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.text.Text?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.Label?>
 <BorderPane fx:controller="controller.Controller"
@@ -127,6 +125,11 @@
         </VBox>
     </right>
    <bottom>
-       <Label fx:id="Statistics" prefHeight="50" prefWidth="1000" BorderPane.alignment="CENTER"/>
+       <Label fx:id="statistics" prefHeight="200" prefWidth="1000" BorderPane.alignment="BASELINE_RIGHT"/>
+       <Label fx:id="textTarget" prefHeight="200" prefWidth="1000" BorderPane.alignment="BASELINE_LEFT">
+           <BorderPane.margin>
+               <Insets left="25"/>
+           </BorderPane.margin>
+       </Label>
    </bottom>
 </BorderPane>
