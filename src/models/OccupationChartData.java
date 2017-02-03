@@ -1,15 +1,15 @@
 package models;
 
-public class StatsData {
+public class OccupationChartData {
 
     private String _label;
     private double _percentage;
 
-    public StatsData(String label) {
+    public OccupationChartData(String label) {
         _label = label;
     }
 
-    public StatsData(String label, double percentage) {
+    public OccupationChartData(String label, double percentage) {
         _label = label;
         _percentage = percentage;
     }

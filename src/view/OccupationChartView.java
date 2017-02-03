@@ -1,22 +1,22 @@
 package view;
 
-import models.StatsPie;
+import models.OccupationChart;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.*;
 
-public class StatsGraph {
+public class OccupationChartView {
 
     private ObservableList _graphData;
     private PieChart _chart;
-    private StatsPie _statsPie;
+    private models.OccupationChart _statsPie;
 
     private PieChart.Data _statsPieUnoccupied;
     private PieChart.Data _statsPieAdHoc;
     private PieChart.Data _statsPiePassHolders;
     private PieChart.Data _statsPieCarWithReservations;
 
-    public StatsGraph(StatsPie pie) {
+    public OccupationChartView(OccupationChart pie) {
         _statsPie = pie;
         _chart = new PieChart();
         _chart.setTitle("Statistics");

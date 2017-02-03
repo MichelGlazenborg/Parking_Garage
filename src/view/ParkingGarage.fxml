@@ -130,6 +130,6 @@
         </VBox>
     </right>
    <bottom>
-       <Label fx:id="Statistics" prefHeight="50" prefWidth="1000" BorderPane.alignment="CENTER"/>
+       <VBox fx:id="_statistics" prefHeight="50" prefWidth="1000" BorderPane.alignment="BOTTOM_LEFT"></VBox>
    </bottom>
 </BorderPane>
