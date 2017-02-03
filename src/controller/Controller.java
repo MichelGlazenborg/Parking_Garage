@@ -691,7 +691,7 @@ public class Controller {
         alert.setHeaderText(null);
         alert.setTitle("About Parking Garage");
         alert.setContentText("Parking Simulator is a program that lets city parking Groningen see how some changes to their Parking Garage might affect business.\n\n" +
-                             "It was developed by: Robbert Monden, Job Hilts, Michel Glazenborg, Willem Slager en Jelmer Haarman.\n\n" +
+                             "It was developed by: Robert Monden, Job Wilts, Michel Glazenborg, Willem Slager en Jelmer Haarman.\n\n" +
                              "Version " + version);
 
         alert.showAndWait();

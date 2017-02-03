@@ -127,6 +127,6 @@
         </VBox>
     </right>
    <bottom>
-       <Label fx:id="textTarget" prefHeight="50" prefWidth="1000" BorderPane.alignment="CENTER_LEFT"/>
+       <Label fx:id="Statistics" prefHeight="50" prefWidth="1000" BorderPane.alignment="CENTER"/>
    </bottom>
 </BorderPane>
