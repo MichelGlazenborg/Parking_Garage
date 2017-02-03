@@ -10,7 +10,7 @@ public class PassHolderSpace extends Car{
 
     public PassHolderSpace() {
 
-        int stayMinutes = (100000);
+        double stayMinutes = Double.POSITIVE_INFINITY;
         this.setMinutesLeft(stayMinutes);
         this.setHasToPay(false);
     }

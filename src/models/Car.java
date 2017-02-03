@@ -4,7 +4,7 @@ public abstract class Car {
 
     private Location _location;
     private int _stayMinutes;
-    private int _minutesLeft;
+    private double _minutesLeft;
     private boolean _isPaying;
     private boolean _hasToPay;
     private boolean _hasReservation;
@@ -45,7 +45,7 @@ public abstract class Car {
      * Returns the number of minutes left of parking
      * @return int time left in minutes
      */
-    public int getMinutesLeft() {
+    public double getMinutesLeft() {
         return _minutesLeft;
     }
 
@@ -53,7 +53,7 @@ public abstract class Car {
      * Sets the number of minutes a car has left
      * @param minutesLeft time left in minutes
      */
-    public void setMinutesLeft(int minutesLeft) {
+    public void setMinutesLeft(double minutesLeft) {
         _minutesLeft = minutesLeft;
     }
 
