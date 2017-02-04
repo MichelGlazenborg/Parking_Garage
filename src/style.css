@@ -12,7 +12,7 @@
 #text_pane1 {
     -fx-min-height: 40px;
     -fx-background-color: limegreen;
-    -fx-graphic: url("http://files.softicons.com/download/application-icons/48x48-free-time-icons-by-aha-soft/png/48/Play.png");
+    -fx-graphic: url("");
 }
 
 #button_operate1, #button_operate2, #button_operate3,
