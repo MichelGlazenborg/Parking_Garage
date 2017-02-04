@@ -177,12 +177,12 @@ public class Simulator {
     }
 
     private void setArrivalNumbersBack(){
-        weekDayArrivals = 50;
-        weekendArrivals = 100;
-        weekDayPassArrivals = 30;
+        weekDayArrivals= 30;
+        weekendArrivals = 45;
+        weekDayPassArrivals= 30;
         weekendPassArrivals = 40;
-        weekDayResArrivals = 40;
-        weekendResArrivals = 25;
+        weekDayResArrivals = 26;
+        weekendResArrivals = 40;
     }
 
     /**
