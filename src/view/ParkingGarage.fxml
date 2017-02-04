@@ -50,7 +50,7 @@
       </MenuBar>
    </top>
    <left>
-      <VBox prefHeight="800.0" prefWidth="500.0" BorderPane.alignment="CENTER_LEFT">
+      <VBox prefHeight="800.0" prefWidth="300.0" BorderPane.alignment="CENTER_LEFT">
          <children>
              <Button fx:id="button_operate1" mnemonicParsing="false" onAction="#tick1">
                  <VBox.margin>
@@ -86,7 +86,7 @@
       </VBox>
    </left>
    <center>
-      <Canvas fx:id="_canvas" height="600.0" width="800.0" BorderPane.alignment="TOP_LEFT" />
+      <Canvas fx:id="_canvas" height="600.0" width="800.0" BorderPane.alignment="TOP_CENTER" />
    </center>
     <right>
         <VBox fx:id="_sidebarRight" prefWidth="300.0">

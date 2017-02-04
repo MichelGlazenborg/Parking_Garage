@@ -100,6 +100,13 @@ public class Simulator {
         }
     }
 
+    /**
+     * sets the time
+     * @param week the user entered week number
+     * @param day the user entered day number
+     * @param hour the user entered hour
+     * @param minute the user entered minute
+     */
     public void setTime(int week, int day, int hour, int minute) {
         this.week = week;
         this.day = day;
@@ -107,6 +114,10 @@ public class Simulator {
         this.minute = minute;
     }
 
+    /**
+     * gets the the current time
+     * @return an array of integers representing the week, day, hour and minute
+     */
     public int[] getTime() {
         int[] time = new int[4];
         time[0] = minute;
@@ -143,11 +154,19 @@ public class Simulator {
         // Update the car park view.
         simulatorView.updateView();
     }
-  
+
+    /**
+     * sets the cost of the parking garage per minute
+     * @param price the price per double
+     */
     public void setCost(double price) {
         pay.setCost(price);
     }
-  
+
+    /**
+     * modifier for the arrival numbers
+     * @param modifier the modifier for the arrival numbers
+     */
     private void modifyArrivalNumbers(double modifier) {
         weekDayArrivals *= modifier;
         weekendArrivals *= modifier;
