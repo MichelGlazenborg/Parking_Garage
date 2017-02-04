@@ -31,7 +31,7 @@ public class Simulator {
     private int weekendResArrivals = 40;
 
     private int enterSpeed = 1; // number of cars that can enter per minute
-    private int paymentSpeed = 1; // number of cars that can pay per minute
+    private int paymentSpeed = 3; // number of cars that can pay per minute
     private int exitSpeed = 2; // number of cars that can leave per minute
 
     private int _arrivalsOnMonday = 0;
@@ -177,12 +177,12 @@ public class Simulator {
     }
 
     private void setArrivalNumbersBack(){
-        weekDayArrivals = 50;
-        weekendArrivals = 100;
-        weekDayPassArrivals = 30;
+        weekDayArrivals= 30;
+        weekendArrivals = 45;
+        weekDayPassArrivals= 30;
         weekendPassArrivals = 40;
-        weekDayResArrivals = 40;
-        weekendResArrivals = 25;
+        weekDayResArrivals = 26;
+        weekendResArrivals = 40;
     }
 
     /**
@@ -191,44 +191,74 @@ public class Simulator {
     private void carsArriving(){
         switch(day) {
             case 0 : {
-
-            }
-            case 1 :
-            case 2 :
-            case 3 : {
-                int numberOfCars = getNumberOfCars(weekDayArrivals, weekendArrivals);
-                addArrivingCars(numberOfCars, AD_HOC);
-                numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
-                addArrivingCars(numberOfCars, PASS);
-                numberOfCars = getNumberOfCars(weekDayResArrivals, weekendResArrivals);
-                addArrivingCars(numberOfCars, RES);
+                if(hour > 23 && hour < 7) {
+                    modifyArrivalNumbers(0.5);
+                }
+                carsArrivingIn();
+                setArrivalNumbersBack();
                 break;
             }
-            case 4 :
-            case 5 : {
-                if(hour > 18 && hour < 23) {
-                    modifyArrivalNumbers(1.1);
-                    int numberOfCars = getNumberOfCars(weekDayArrivals, weekendArrivals);
-                    addArrivingCars(numberOfCars, AD_HOC);
-                    numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
-                    addArrivingCars(numberOfCars, PASS);
-                    numberOfCars = getNumberOfCars(weekDayResArrivals, weekendResArrivals);
-                    addArrivingCars(numberOfCars, RES);
-                    setArrivalNumbersBack();
-                    break;
-                } else {
+            case 1 : {
+                if(hour > 23 && hour < 7) {
+                    modifyArrivalNumbers(0.5);
                 }
+                carsArrivingIn();
+                setArrivalNumbersBack();
+                break;
+            }
+            case 2 : {
+                if(hour > 23 && hour < 7) {
+                    modifyArrivalNumbers(0.5);
+                }
+                carsArrivingIn();
+                setArrivalNumbersBack();
+                break;
+            }
+            case 3 : {
+                if(hour > 23 && hour < 7) {
+                    modifyArrivalNumbers(0.5);
+                }
+                carsArrivingIn();
+                setArrivalNumbersBack();
+                break;
+            }
+            case 4 : {
+                if(hour > 18 && hour < 23) {
+                    modifyArrivalNumbers(2);
+                }
+                carsArrivingIn();
+                setArrivalNumbersBack();
+                break;
+            }
+            case 5 : {
+                if(hour > 18 && hour < 3) {
+                    modifyArrivalNumbers(2);
+                    carsArrivingIn();
+                    setArrivalNumbersBack();
+                } else {
+                    carsArrivingIn();
+                }
+                break;
             }
             case 6 : {
-                int numberOfCars = getNumberOfCars(weekDayArrivals, weekendArrivals);
-                addArrivingCars(numberOfCars, AD_HOC);
-                numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
-                addArrivingCars(numberOfCars, PASS);
-                numberOfCars = getNumberOfCars(weekDayResArrivals, weekendResArrivals);
-                addArrivingCars(numberOfCars, RES);
+                if(hour > 23 && hour < 7) {
+                    modifyArrivalNumbers(0.3);
+                }
+                carsArrivingIn();
+                setArrivalNumbersBack();
+                break;
             }
-            break;
-            }
+        }
+
+    }
+
+        private void carsArrivingIn() {
+            int numberOfCars = getNumberOfCars(weekDayArrivals, weekendArrivals);
+            addArrivingCars(numberOfCars, AD_HOC);
+            numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
+            addArrivingCars(numberOfCars, PASS);
+            numberOfCars = getNumberOfCars(weekDayResArrivals, weekendResArrivals);
+            addArrivingCars(numberOfCars, RES);
         }
 
 
