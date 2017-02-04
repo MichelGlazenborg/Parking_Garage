@@ -29,6 +29,9 @@ public class Controller {
     private DailyCarsChart _dailyCarsChart;
     private DailyCarsChartView _dailyCarsChartView;
 
+    private Alert stats;
+    private boolean willShowStats;
+
     private double speed = 1;
     private static final String version = "1.0";
 
@@ -58,9 +61,6 @@ public class Controller {
 
     @FXML
     private Button button_operate6;     //makes button 6
-
-    //@FXML
-    //private Label textTarget;           //makes the label textTarget used for debugging
   
     @FXML
     private Label date;                 //makes the label with the week and day
@@ -161,6 +161,9 @@ public class Controller {
                                                                             }));
         timeline.play();
         timeline.setOnFinished(e -> {
+            if(willShowStats) {
+                showStats();
+            }
             disableButtons(false);
         });
     }
@@ -195,7 +198,7 @@ public class Controller {
         Alert error = new Alert(Alert.AlertType.WARNING);
         error.setTitle("Input error");
         error.setHeaderText(null);
-        error.setContentText("Please enter an positive whole number!");
+        error.setContentText("Please enter the correct information!");
         error.showAndWait();
     }
 
@@ -659,9 +662,8 @@ public class Controller {
                          "\nNumber of cars in the payment queue: " + queues[4]);
     }
 
-    @FXML
     private void showStats() {
-        Alert stats = new Alert(Alert.AlertType.INFORMATION);
+        stats = new Alert(Alert.AlertType.INFORMATION);
         stats.setWidth(500);
         stats.setHeight(750);
         stats.setHeaderText(null);
@@ -670,7 +672,41 @@ public class Controller {
 
         stats.show();
     }
-  
+
+    @FXML
+    private void setWillShowStats() {
+        TextInputDialog dialog = new TextInputDialog("");
+        dialog.setTitle("Set preference of statistics");
+        dialog.setHeaderText("Please enter yes or no");
+        dialog.setContentText("Show detailed statistics after every run of the simulation?");
+        Optional<String> result = dialog.showAndWait();
+
+        // Checking if something was filled in. No answer does nothing.
+        if (result.isPresent()) {
+            // Turns Optional<String> into a normal String
+            String result2 = result.get();
+            String answer = "";
+            try {
+                answer = result2.trim().toLowerCase();
+            } catch(Exception e) {
+                showError();
+                dialog.close();
+            }finally {
+                if(answer.equals("yes") || answer.equals("no")) {
+                    if(answer.equals("yes")) {
+                        willShowStats = true;
+                        System.out.println("yes");
+                    }else if(answer.equals("no")){
+                        willShowStats = false;
+                        System.out.println("no");
+                    }
+                } else {
+                    showError();
+                }
+            }
+        }
+    }
+
     /**
      * gets the current date from the simulator and displays the hours and minutes in digital clock form
      */
