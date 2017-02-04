@@ -23,15 +23,15 @@ public class Simulator {
     private int minute = 0;
     private int week = 0;
 
-    private int weekDayArrivals= 100; // average number of arriving cars per hour
-    private int weekendArrivals = 200; // average number of arriving cars per hour
-    private int weekDayPassArrivals= 80; // average number of arriving cars per hour
+    private int weekDayArrivals= 30; // average number of arriving cars per hour
+    private int weekendArrivals = 45; // average number of arriving cars per hour
+    private int weekDayPassArrivals= 30; // average number of arriving cars per hour
     private int weekendPassArrivals = 40; // average number of arriving cars per hour
-    private int weekDayResArrivals = 50;
-    private int weekendResArrivals = 30;
+    private int weekDayResArrivals = 26;
+    private int weekendResArrivals = 40;
 
-    private int enterSpeed = 2; // number of cars that can enter per minute
-    private int paymentSpeed = 5; // number of cars that can pay per minute
+    private int enterSpeed = 1; // number of cars that can enter per minute
+    private int paymentSpeed = 1; // number of cars that can pay per minute
     private int exitSpeed = 2; // number of cars that can leave per minute
 
     private int _arrivalsOnMonday = 0;
@@ -100,6 +100,13 @@ public class Simulator {
         }
     }
 
+    /**
+     * sets the time
+     * @param week the user entered week number
+     * @param day the user entered day number
+     * @param hour the user entered hour
+     * @param minute the user entered minute
+     */
     public void setTime(int week, int day, int hour, int minute) {
         this.week = week;
         this.day = day;
@@ -107,6 +114,10 @@ public class Simulator {
         this.minute = minute;
     }
 
+    /**
+     * gets the the current time
+     * @return an array of integers representing the week, day, hour and minute
+     */
     public int[] getTime() {
         int[] time = new int[4];
         time[0] = minute;
@@ -143,11 +154,19 @@ public class Simulator {
         // Update the car park view.
         simulatorView.updateView();
     }
-  
+
+    /**
+     * sets the cost of the parking garage per minute
+     * @param price the price per double
+     */
     public void setCost(double price) {
         pay.setCost(price);
     }
-  
+
+    /**
+     * modifier for the arrival numbers
+     * @param modifier the modifier for the arrival numbers
+     */
     private void modifyArrivalNumbers(double modifier) {
         weekDayArrivals *= modifier;
         weekendArrivals *= modifier;
@@ -171,7 +190,9 @@ public class Simulator {
      */
     private void carsArriving(){
         switch(day) {
-            case 0 :
+            case 0 : {
+
+            }
             case 1 :
             case 2 :
             case 3 : {
@@ -216,9 +237,9 @@ public class Simulator {
      * @param queue the carQueue a car enters from
      */
     private void carsEntering(CarQueue queue, boolean passHolder, boolean hasReservation){
-        int i = 0;
+        double i = 0;
         // Remove car from the front of the queue and assign to a parking space.
-    	while (queue.carsInQueue() > 0 && simulatorView.getNumberOfOpenSpots() > 0 && i < enterSpeed) {
+    	while (queue.carsInQueue() > new Random().nextInt(4) && simulatorView.getNumberOfOpenSpots() > 0 && i < enterSpeed) {
     	    if(!passHolder) {
     	        if(!hasReservation) {
                     AdHocCar car = (AdHocCar) queue.removeCar();
@@ -250,7 +271,7 @@ public class Simulator {
                     simulatorView.addOneCarToCount("ParkingPassCar");
                 }
             }
-			i++;
+			i += 0.33;
 
     	    switch (getTime()[2]) {
                 case 0:
@@ -473,6 +494,7 @@ public class Simulator {
     public void resetRevenue() {
         pay.reset();
         pay.resetDayRevenue();
+        pay.setLasDayRevenue(0);
 
     }
 
