@@ -9,10 +9,13 @@ public class Payment {
     private double lastDayRevenue;
     private double expectedRevenue;
     private double cost;        //cost in euro's per minute
+    private boolean ready;
 
     public Payment() {
         totalRevenue = 0.0;
         cost = 0;
+        expectedRevenue = 0;
+        ready = true;
     }
 
     public double getTotalRevenue() {
@@ -39,6 +42,7 @@ public class Payment {
   
     public void reset() {
         totalRevenue = 0;
+        expectedRevenue = 0;
     }
 
     public void setCost(double cost) {
@@ -47,11 +51,8 @@ public class Payment {
 
     public double getExpectedRevenue(int normalCarsStillInGarage,int carsWithReservationStillInGarage) {
         expectedRevenue = normalCarsStillInGarage * cost;
-        expectedRevenue += carsWithReservationStillInGarage * cost + (carsWithReservationStillInGarage * 5);
+        expectedRevenue += carsWithReservationStillInGarage * 5;
         return Math.round(expectedRevenue);
     }
 
-    public void resetExpectedRevenue() {
-        expectedRevenue = 0;
-    }
 }
