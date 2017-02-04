@@ -327,9 +327,11 @@ public class Controller {
                 week = Integer.parseInt(WeekResult2);
             } catch (NumberFormatException exception) {
                 showError();
+                System.out.println("error1");
             } finally {
                 if (week <= 0) {
                     showError();
+                    System.out.println("error2");
                 } else {
                     // check if the entered integer is between bounds
                     if (week <= 52) {
@@ -388,9 +390,9 @@ public class Controller {
     private  int givenHour() {
         int hour = -1;
 
-        TextInputDialog HourDialog = new TextInputDialog("1");
+        TextInputDialog HourDialog = new TextInputDialog("0");
         HourDialog.setTitle("Hour Input Dialog");
-        HourDialog.setHeaderText("Please enter any Hour between 1 and 24");
+        HourDialog.setHeaderText("Please enter any Hour between 0 and 23");
         HourDialog.setContentText("Hour:");
         Optional<String> HourResult = HourDialog.showAndWait();
         if (HourResult.isPresent()) {
@@ -401,12 +403,14 @@ public class Controller {
                 hour = Integer.parseInt(HourResult2);
             } catch (NumberFormatException exception) {
                 showError();
+
             } finally {
                 if (hour <= 0) {
                     showError();
+
                 } else {
                     // check if the entered integer is between bounds
-                    if (hour <= 24) {
+                    if (hour < 24) {
                         return(hour);
                     } else {
                         return(-1);
@@ -425,9 +429,9 @@ public class Controller {
     private  int givenMinute() {
         int minute = -1;
 
-        TextInputDialog MinuteDialog = new TextInputDialog("1");
+        TextInputDialog MinuteDialog = new TextInputDialog("0");
         MinuteDialog.setTitle("Minute Input Dialog");
-        MinuteDialog.setHeaderText("Please enter any minute between 1 and 60");
+        MinuteDialog.setHeaderText("Please enter any minute between 0 and 59");
         MinuteDialog.setContentText("Minute:");
         Optional<String> MinuteResult = MinuteDialog.showAndWait();
         if (MinuteResult.isPresent()) {
@@ -439,11 +443,11 @@ public class Controller {
             } catch (NumberFormatException exception) {
                 showError();
             } finally {
-                if (minute <= 0) {
+                if (minute < 0) {
                     showError();
                 } else {
                     // check if the entered integer is between bounds
-                    if (minute <= 60) {
+                    if (minute < 60) {
                         return(minute);
                     } else {
                         return(-1);
