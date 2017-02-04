@@ -10,28 +10,28 @@
         <menus>
           <Menu mnemonicParsing="false" text="_Simulator">
               <items>
-                  <MenuItem onAction="#setPricePerMinute" text="Set price per minute" />
+                  <MenuItem onAction="#setPricePerMinute" text="Set price per minute..." />
               </items>
               <items>
-                  <MenuItem onAction="#makePassHolderSpots" text="Make pass holder spots" />
+                  <MenuItem onAction="#makePassHolderSpots" text="Make pass holder spots..." />
               </items>
               <items>
-                  <MenuItem onAction="#makeReservationsAt" text="Make reservation at" />
+                  <MenuItem onAction="#makeReservationsAt" text="Make reservation at..." />
               </items>
               <items>
                   <SeparatorMenuItem />
               </items>
               <items>
-                  <MenuItem onAction="#setTime" text="Set the time at" />
+                  <MenuItem onAction="#setTime" text="Set the time at..." />
               </items>
               <items>
-                  <MenuItem onAction="#setSpeed" text="Set simulator speed" />
+                  <MenuItem onAction="#setSpeed" text="Set simulator speed..." />
               </items>
               <items>
                   <MenuItem onAction="#resetSpeed" text="Reset simulator speed" />
               </items>
               <items>
-                  <MenuItem onAction="#setWillShowStats" text="set statistics preference" />
+                  <MenuItem onAction="#setWillShowStats" text="Set statistics preference..." />
               </items>
               <items>
                   <SeparatorMenuItem />
@@ -43,7 +43,7 @@
 
           <Menu mnemonicParsing="false" text="_Help">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#showAbout" text="About" />
+              <MenuItem mnemonicParsing="false" onAction="#showAbout" text="About..." />
             </items>
           </Menu>
         </menus>
