@@ -1,48 +1,67 @@
 .button {
-    -fx-min-width: 150px;
-    -fx-min-height: 40px;
+    -fx-min-width: 200px;
+    -fx-min-height: 20px;
     -fx-font-family: Arial;
     -fx-font-size: 14px;
-    -fx-font-weight: bold;
+    -fx-font-weight: bolder;
     -fx-background-color: #d9dce0;
-    -fx-border: none;
     -fx-background-radius: 0!important;
+}
+
+
+#text_pane1 {
+    -fx-min-height: 40px;
+    -fx-background-color: limegreen;
+    -fx-graphic: url("http://files.softicons.com/download/application-icons/48x48-free-time-icons-by-aha-soft/png/48/Play.png");
 }
 
 #button_operate1, #button_operate2, #button_operate3,
 #button_operate4 {
-    -fx-background-color: lightgreen;
+    -fx-font-size: 11px;
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-width: 1px;
 }
 
 #button_operate1:hover, #button_operate2:hover, #button_operate3:hover,
 #button_operate4:hover {
-    -fx-background-color: limegreen;
+    -fx-font-size: 11px;
+    -fx-background-color: gray;
+    -fx-border-color: black;
+    -fx-border-width: 1px;
 }
 
 #button_operate5 {
-    -fx-background-color: transparent;
-    -fx-graphic: url('http://icons.iconarchive.com/icons/custom-icon-design/flatastic-9/48/Stop-red-icon.png');
+    -fx-min-height: 40px;
+    -fx-background-color: lightgray;
+    -fx-graphic: url('http://icons.iconarchive.com/icons/custom-icon-design/flatastic-9/24/Stop-red-icon.png');
+    -fx-translate-y: 20px;
 }
 
 #button_operate5:hover {
+    -fx-min-height: 40px;
     -fx-background-color: gray;
-    -fx-graphic: url('http://icons.iconarchive.com/icons/custom-icon-design/flatastic-9/48/Stop-red-icon.png');
+    -fx-graphic: url('http://icons.iconarchive.com/icons/custom-icon-design/flatastic-9/24/Stop-red-icon.png');
+    -fx-translate-y: 20px;
 }
 
 #button_operate6 {
-    -fx-background-color: transparent;
-    -fx-graphic: url('http://icons.iconarchive.com/icons/capital18/ethereal/48/Misc-Rewind-icon.png');
+    -fx-min-height: 40px;
+    -fx-background-color: lightgray;
+    -fx-graphic: url('http://icons.iconarchive.com/icons/capital18/ethereal/24/Misc-Rewind-icon.png');
+    -fx-translate-y: 20px;
 }
 
 #button_operate6:hover {
+    -fx-min-height: 40px;
     -fx-background-color: gray;
-    -fx-graphic: url('http://icons.iconarchive.com/icons/capital18/ethereal/48/Misc-Rewind-icon.png');
+    -fx-graphic: url('http://icons.iconarchive.com/icons/capital18/ethereal/24/Misc-Rewind-icon.png');
+    -fx-translate-y: 20px;
 }
 
-#titleRev{  -fx-font-size: 30;  }
-#titleTime{ -fx-font-size: 30;  }
-#statistics{ -fx-font-size: 20; }
-#queueStats{ -fx-font-size: 20;}
+#title{
+    -fx-font-size: 30 ;
+}
 .default-color0.chart-pie { -fx-pie-color: #c7c9cc; }
 .default-color1.chart-pie { -fx-pie-color: #f22809; }
 .default-color2.chart-pie { -fx-pie-color: #0d09ef; }

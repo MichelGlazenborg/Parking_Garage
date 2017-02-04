@@ -49,32 +49,37 @@
    <left>
       <VBox prefHeight="800.0" prefWidth="500.0" BorderPane.alignment="CENTER_LEFT">
          <children>
-            <Button fx:id="button_operate1" mnemonicParsing="false" onAction="#tick1" text="Run for 1 minute">
-               <VBox.margin>
-                   <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
-               </VBox.margin>
-            </Button>
-             <Button fx:id="button_operate2" mnemonicParsing="false" onAction="#tick60" text="Run for 60 minutes">
-               <VBox.margin>
-                  <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="button_operate3" mnemonicParsing="false" onAction="#tickDay" text="Run for 1 day">
-               <VBox.margin>
-                   <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
-               </VBox.margin>
-            </Button>
-             <Button fx:id="button_operate4" onAction="#submit" text="Run for ...">
+             <Button fx:id="text_pane1" mnemonicParsing="false" text="Run the simulator">
                  <VBox.margin>
                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                  </VBox.margin>
              </Button>
-             <Button fx:id="button_operate5" disable="true" onAction="#stop" text="Stop">
+             <Button fx:id="button_operate1" mnemonicParsing="false" text="1 minute" onAction="#tick1">
                  <VBox.margin>
                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                  </VBox.margin>
              </Button>
-             <Button fx:id="button_operate6" disable="true" onAction="#reset" text="Reset">
+             <Button fx:id="button_operate2" mnemonicParsing="false" text="60 minutes" onAction="#tick60">
+                 <VBox.margin>
+                     <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                 </VBox.margin>
+             </Button>
+             <Button fx:id="button_operate3" mnemonicParsing="false" text="1 day" onAction="#tickDay">
+                 <VBox.margin>
+                     <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                 </VBox.margin>
+             </Button>
+             <Button fx:id="button_operate4" text="Run for ..." onAction="#submit">
+                 <VBox.margin>
+                     <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                 </VBox.margin>
+             </Button>
+             <Button fx:id="button_operate5" text="Stop" onAction="#stop" disable="true">
+                 <VBox.margin>
+                     <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                 </VBox.margin>
+             </Button>
+             <Button fx:id="button_operate6" text="Reset" onAction="#reset" disable="true">
                  <VBox.margin>
                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                  </VBox.margin>
@@ -83,7 +88,7 @@
       </VBox>
    </left>
    <center>
-      <Canvas fx:id="_canvas" height="600.0" width="800.0" BorderPane.alignment="CENTER" />
+      <Canvas fx:id="_canvas" height="600.0" width="800.0" BorderPane.alignment="TOP_LEFT" />
    </center>
     <right>
         <VBox fx:id="_sidebarRight" prefWidth="300.0">
