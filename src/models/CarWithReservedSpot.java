@@ -12,7 +12,7 @@ public class CarWithReservedSpot extends Car {
 
     public CarWithReservedSpot() {
         Random rand = new Random();
-        int stayMinutes = (int) (40 + rand.nextFloat() * 3 * 60);
+        int stayMinutes = (int) (80 + rand.nextFloat() * 3 * 60);
         this.setStayMinutes(stayMinutes);
         this.setMinutesLeft(stayMinutes);
         this.setHasToPay(false);

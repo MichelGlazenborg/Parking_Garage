@@ -54,7 +54,7 @@ public class Simulator {
         exitCarQueue = new CarQueue();
         pay = new Payment();
         simulatorView = new SimulatorView(canvas, 3, 6, 30);
-        pay.setCost(0.067);
+        pay.setCost(0.0067);
         updateViews();
     }
 
