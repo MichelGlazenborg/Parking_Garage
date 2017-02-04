@@ -31,7 +31,7 @@ public class Simulator {
     private int weekendResArrivals = 40;
 
     private int enterSpeed = 1; // number of cars that can enter per minute
-    private int paymentSpeed = 1; // number of cars that can pay per minute
+    private int paymentSpeed = 3; // number of cars that can pay per minute
     private int exitSpeed = 2; // number of cars that can leave per minute
 
     private int _arrivalsOnMonday = 0;
