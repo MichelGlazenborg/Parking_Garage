@@ -1,11 +1,10 @@
 .button {
-    -fx-font-family: Arial;
-    -fx-font-size: 14px;
-    -fx-font-weight: bolder;
     -fx-background-color: transparent;
-    -fx-background-radius: 0!important;
 }
 
+/*
+Run for 1 minute
+ */
 #button_operate1 {
     -fx-graphic: url("assets/1m.png");
 }
@@ -14,6 +13,9 @@
     -fx-graphic: url("assets/1m_hover.png");
 }
 
+/*
+Run for 1 hour
+ */
 #button_operate2 {
     -fx-graphic: url("assets/1h.png");
 }
@@ -22,6 +24,9 @@
     -fx-graphic: url("assets/1h_hover.png");
 }
 
+/*
+Run for 24 hours
+ */
 #button_operate3 {
     -fx-graphic: url("assets/24h.png");
 }
@@ -30,6 +35,9 @@
     -fx-graphic: url("assets/24h_hover.png");
 }
 
+/*
+Run for x amount of minutes
+ */
 #button_operate4 {
     -fx-graphic: url("assets/...m.png");
 }
@@ -38,6 +46,9 @@
     -fx-graphic: url("assets/...m_hover.png");
 }
 
+/*
+Stop the simulation
+ */
 #button_operate5 {
     -fx-graphic: url('assets/stop.png');
 }
@@ -46,6 +57,9 @@
     -fx-graphic: url('assets/stop_hover.png');
 }
 
+/*
+Reset the simulator
+ */
 #button_operate6 {
     -fx-graphic: url('assets/reset.png');
 }
@@ -54,9 +68,16 @@
     -fx-graphic: url("assets/reset_hover.png");
 }
 
-#title{
-    -fx-font-size: 30 ;
+/*
+Title of Revenue view & Time view
+ */
+#titleRev, #titleTime {
+    -fx-font-size: 20 ;
 }
+
+/*
+Colors of the pie chart, matching the color of cars
+ */
 .default-color0.chart-pie { -fx-pie-color: #c7c9cc; }
 .default-color1.chart-pie { -fx-pie-color: #f22809; }
 .default-color2.chart-pie { -fx-pie-color: #0d09ef; }
