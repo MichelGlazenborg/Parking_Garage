@@ -140,8 +140,11 @@ public class SimulatorView {
         _currentCarsWithReservation = 0;
     }
 
+    /**
+     * Makes passHolder spots
+     * @param numberOfSpots the number of passHolder spots you want
+     */
     public void makePassHolderSpots(int numberOfSpots) {
-        reset();
         _numberOfPassHolderSpots = numberOfSpots;
         int x,z,y;
         x=0;

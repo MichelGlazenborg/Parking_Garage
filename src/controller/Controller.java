@@ -21,7 +21,7 @@ public class Controller {
 
     //make simulator object
 	private Simulator sim;              //makes the central simulator object
-    private SimulatorView simView;      //makes the central simulatorview object
+    private SimulatorView simView;      //makes the central simulatorView object
 
     private OccupationChartView _occupationChartView;     //makes the statistics graph
     private OccupationChart _statsPie;         //makes the pie graph
@@ -32,7 +32,7 @@ public class Controller {
     private Alert stats;
     private boolean willShowStats;
 
-    private double speed = 1;
+    private double speed = 100;
     private static final String version = "1.0";
 
     @FXML
@@ -230,6 +230,8 @@ public class Controller {
                 if(spotAmount < 1) {
                     showError();
                 } else {
+                    stop();
+                    reset();
                     simView.makePassHolderSpots(spotAmount);
                 }
             }
