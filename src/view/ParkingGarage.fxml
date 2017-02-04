@@ -13,10 +13,10 @@
                   <MenuItem onAction="#setPricePerMinute" text="Set price per minute" />
               </items>
               <items>
-                  <MenuItem onAction="#makePassHolderSpots" text="Make Passholder spots" />
+                  <MenuItem onAction="#makePassHolderSpots" text="Make pass holder spots" />
               </items>
               <items>
-                  <MenuItem onAction="#makeReservationsAt" text="Make Reservation at" />
+                  <MenuItem onAction="#makeReservationsAt" text="Make reservation at" />
               </items>
               <items>
                   <SeparatorMenuItem />
@@ -32,6 +32,9 @@
               </items>
               <items>
                   <MenuItem onAction="#showStats" text="Show the detailed statistics" />
+              </items>
+              <items>
+                  <SeparatorMenuItem />
               </items>
               <items>
                   <MenuItem mnemonicParsing="false" onAction="#closeApp" text="Close" />
