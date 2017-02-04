@@ -31,7 +31,7 @@
                   <MenuItem onAction="#resetSpeed" text="Reset simulator speed" />
               </items>
               <items>
-                  <MenuItem onAction="#showStats" text="Show the detailed statistics" />
+                  <MenuItem onAction="#setWillShowStats" text="set statistics preference" />
               </items>
               <items>
                   <MenuItem mnemonicParsing="false" onAction="#closeApp" text="Close" />
