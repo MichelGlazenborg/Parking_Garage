@@ -75,7 +75,7 @@ public class Controller {
     private Label dayRevenue;           //makes the label with the total day revenue
 
     @FXML
-    private Timeline timeline;          //makes the timelime object
+    private Timeline timeline;          //makes the timeline object
 
     /**
      * Initializes all the attributes
