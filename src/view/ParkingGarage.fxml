@@ -49,37 +49,32 @@
    <left>
       <VBox prefHeight="800.0" prefWidth="500.0" BorderPane.alignment="CENTER_LEFT">
          <children>
-             <Button fx:id="text_pane1" mnemonicParsing="false" text="Run the simulator">
+             <Button fx:id="button_operate1" mnemonicParsing="false" onAction="#tick1">
                  <VBox.margin>
                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                  </VBox.margin>
              </Button>
-             <Button fx:id="button_operate1" mnemonicParsing="false" text="1 minute" onAction="#tick1">
+             <Button fx:id="button_operate2" mnemonicParsing="false"  onAction="#tick60">
                  <VBox.margin>
                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                  </VBox.margin>
              </Button>
-             <Button fx:id="button_operate2" mnemonicParsing="false" text="60 minutes" onAction="#tick60">
+             <Button fx:id="button_operate3" mnemonicParsing="false"  onAction="#tickDay">
                  <VBox.margin>
                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                  </VBox.margin>
              </Button>
-             <Button fx:id="button_operate3" mnemonicParsing="false" text="1 day" onAction="#tickDay">
+             <Button fx:id="button_operate4" onAction="#submit">
                  <VBox.margin>
                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                  </VBox.margin>
              </Button>
-             <Button fx:id="button_operate4" text="Run for ..." onAction="#submit">
+             <Button fx:id="button_operate5" onAction="#stop" disable="true">
                  <VBox.margin>
                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                  </VBox.margin>
              </Button>
-             <Button fx:id="button_operate5" text="Stop" onAction="#stop" disable="true">
-                 <VBox.margin>
-                     <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
-                 </VBox.margin>
-             </Button>
-             <Button fx:id="button_operate6" text="Reset" onAction="#reset" disable="true">
+             <Button fx:id="button_operate6" onAction="#reset" disable="true">
                  <VBox.margin>
                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                  </VBox.margin>
