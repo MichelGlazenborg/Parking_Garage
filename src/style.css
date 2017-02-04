@@ -1,62 +1,57 @@
 .button {
-    -fx-min-width: 200px;
-    -fx-min-height: 20px;
     -fx-font-family: Arial;
     -fx-font-size: 14px;
     -fx-font-weight: bolder;
-    -fx-background-color: #d9dce0;
+    -fx-background-color: transparent;
     -fx-background-radius: 0!important;
 }
 
-
-#text_pane1 {
-    -fx-min-height: 40px;
-    -fx-background-color: limegreen;
-    -fx-graphic: url("");
+#button_operate1 {
+    -fx-graphic: url("assets/1m.png");
 }
 
-#button_operate1, #button_operate2, #button_operate3,
+#button_operate1:hover {
+    -fx-graphic: url("assets/1m_hover.png");
+}
+
+#button_operate2 {
+    -fx-graphic: url("assets/1h.png");
+}
+
+#button_operate2:hover {
+    -fx-graphic: url("assets/1h_hover.png");
+}
+
+#button_operate3 {
+    -fx-graphic: url("assets/24h.png");
+}
+
+#button_operate3:hover {
+    -fx-graphic: url("assets/24h_hover.png");
+}
+
 #button_operate4 {
-    -fx-font-size: 11px;
-    -fx-background-color: white;
-    -fx-border-color: black;
-    -fx-border-width: 1px;
+    -fx-graphic: url("assets/...m.png");
 }
 
-#button_operate1:hover, #button_operate2:hover, #button_operate3:hover,
 #button_operate4:hover {
-    -fx-font-size: 11px;
-    -fx-background-color: gray;
-    -fx-border-color: black;
-    -fx-border-width: 1px;
+    -fx-graphic: url("assets/...m_hover.png");
 }
 
 #button_operate5 {
-    -fx-min-height: 40px;
-    -fx-background-color: lightgray;
-    -fx-graphic: url('http://icons.iconarchive.com/icons/custom-icon-design/flatastic-9/24/Stop-red-icon.png');
-    -fx-translate-y: 20px;
+    -fx-graphic: url('assets/stop.png');
 }
 
 #button_operate5:hover {
-    -fx-min-height: 40px;
-    -fx-background-color: gray;
-    -fx-graphic: url('http://icons.iconarchive.com/icons/custom-icon-design/flatastic-9/24/Stop-red-icon.png');
-    -fx-translate-y: 20px;
+    -fx-graphic: url('assets/stop_hover.png');
 }
 
 #button_operate6 {
-    -fx-min-height: 40px;
-    -fx-background-color: lightgray;
-    -fx-graphic: url('http://icons.iconarchive.com/icons/capital18/ethereal/24/Misc-Rewind-icon.png');
-    -fx-translate-y: 20px;
+    -fx-graphic: url('assets/reset.png');
 }
 
 #button_operate6:hover {
-    -fx-min-height: 40px;
-    -fx-background-color: gray;
-    -fx-graphic: url('http://icons.iconarchive.com/icons/capital18/ethereal/24/Misc-Rewind-icon.png');
-    -fx-translate-y: 20px;
+    -fx-graphic: url("assets/reset_hover.png");
 }
 
 #title{
