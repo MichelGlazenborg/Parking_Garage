@@ -61,12 +61,6 @@ public class Controller {
 
     //@FXML
     //private Label textTarget;           //makes the label textTarget used for debugging
-
-    @FXML
-    private Label statistics;
-
-    @FXML
-    private Label queueStats;
   
     @FXML
     private Label date;                 //makes the label with the week and day
@@ -105,8 +99,6 @@ public class Controller {
         clock();
         getRevenue();
         getDayRevenue();
-        showQueueStats();
-        showStatistics();
     }
 
     /**
@@ -163,8 +155,8 @@ public class Controller {
                                                                              getRevenue();
                                                                              getDayRevenue();
                                                                              clock();
-                                                                             showStatistics();
-                                                                             showQueueStats();
+                                                                             getQueueStats();
+                                                                             getStatistics();
                                                                              updateGraph();
                                                                             }));
         timeline.play();
@@ -447,7 +439,7 @@ public class Controller {
                 } else {
                     // check if the entered integer is between bounds
                     if (minute <= 60) {
-                        return(minute - 1);
+                        return(minute);
                     } else {
                         return(-1);
                     }
@@ -650,21 +642,33 @@ public class Controller {
     }
 
     @FXML
-    private void showStatistics() {
+    private String getStatistics() {
         int[] stats = sim.getStatistics();
-        statistics.setText("Number of regular cars: " + stats[1] +
+        return ("Number of regular cars: " + stats[1] +
                 "\nNumber of cars with a reservation: " + stats[0] +
-                "\nNumber of passholder cars: " + stats[2]);
+                "\nNumber of passholder cars: " + stats[2] + "\n");
     }
 
     @FXML
-    private void showQueueStats() {
+    private String getQueueStats() {
         int[] queues = sim.getQueues();
-        queueStats.setText("Number of cars in regular entrance queue: " + queues[0] +
+        return("\nNumber of cars in regular entrance queue: " + queues[0] +
                          "\nNumber of cars in passholder entrance queue: " + queues[1] +
                          "\nNumber of cars in reservations entrance queue: " + queues[2] +
                          "\nNumber of cars in exit queue: " + queues[3] +
                          "\nNumber of cars in the payment queue: " + queues[4]);
+    }
+
+    @FXML
+    private void showStats() {
+        Alert stats = new Alert(Alert.AlertType.INFORMATION);
+        stats.setWidth(500);
+        stats.setHeight(750);
+        stats.setHeaderText(null);
+        stats.setTitle("Detailed statistics");
+        stats.setContentText(getStatistics() + getQueueStats());
+
+        stats.show();
     }
   
     /**
@@ -710,8 +714,8 @@ public class Controller {
         clock();
         getRevenue();
         getDayRevenue();
-        showStatistics();
-        showQueueStats();
+        getStatistics();
+        getQueueStats();
         button_operate6.setDisable(true);
     }
 

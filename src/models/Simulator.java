@@ -42,6 +42,7 @@ public class Simulator {
     private int _arrivalsOnSaturday = 0;
     private int _arrivalsOnSunday = 0;
 
+
     /**
      * The constructor of the class Simulator, runs the main simulator by handling arriving/leaving cars, keeps count of the time and Payments
      */
@@ -425,6 +426,11 @@ public class Simulator {
                 }
                 break;
             case PASS:
+          
+                /*for (int i = 0; i < numberOfCars; i++) {
+                    if(simulatorView.getNumberOfPassHolderSpots() > 0)
+                    entrancePassQueue.addCar(new ParkingPassCar());*/
+  
                 if (simulatorView.getNumberOfPassHolders() < simulatorView.getnumberOfPassHolderSpots()-5){
                     for (int i = 0; i < numberOfCars; i++) {
                         entrancePassQueue.addCar(new ParkingPassCar());
@@ -467,7 +473,7 @@ public class Simulator {
     public void resetRevenue() {
         pay.reset();
         pay.resetDayRevenue();
-        pay.resetExpectedRevenue();
+
     }
 
     public void resetTime() {

@@ -31,6 +31,9 @@
                   <MenuItem onAction="#resetSpeed" text="Reset simulator speed" />
               </items>
               <items>
+                  <MenuItem onAction="#showStats" text="Show the detailed statistics" />
+              </items>
+              <items>
                   <MenuItem mnemonicParsing="false" onAction="#closeApp" text="Close" />
               </items>
           </Menu>
@@ -118,10 +121,6 @@
    <bottom>
        <VBox fx:id="_statistics" prefHeight="50" prefWidth="1000" BorderPane.alignment="BOTTOM_LEFT">
            <children>
-               <Label fx:id="statistics" prefHeight="100" prefWidth="350" alignment="TOP_LEFT">
-               </Label>
-               <Label fx:id="queueStats" prefHeight="100" alignment="TOP_LEFT">
-               </Label>
            </children>
        </VBox>
    </bottom>

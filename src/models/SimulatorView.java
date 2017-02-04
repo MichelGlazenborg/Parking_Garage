@@ -59,6 +59,9 @@ public class SimulatorView {
         return _currentPassHolders;
     }
 
+    public int getNumberOfPassHolderSpots() { return _numberOfPassHolderSpots; }
+
+
     public int getNumberOfCarsWithReservation() {
         return _currentCarsWithReservation;
     }
@@ -132,6 +135,9 @@ public class SimulatorView {
             }
         }
         _numberOfPassHolderSpots = 0;
+        _currentAdHoc = 0;
+        _currentPassHolders = 0;
+        _currentCarsWithReservation = 0;
     }
 
     public void makePassHolderSpots(int numberOfSpots) {
