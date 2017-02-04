@@ -32,7 +32,7 @@ public class Controller {
     private Alert stats;
     private boolean willShowStats;
 
-    private double speed = 100;
+    private double speed = 1;
     private static final String version = "1.0";
 
     @FXML
