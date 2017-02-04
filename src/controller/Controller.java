@@ -766,7 +766,7 @@ public class Controller {
 
     @FXML
     private void getDayRevenue(){
-        showDayRevenue("The total daily revenue is:\n€" + sim.getDayRevenue() + "0\n\n");
+        showDayRevenue("The total daily revenue of yesterday is:\n€" + sim.getDayRevenue() + "0\n\n");
 
     }
 
