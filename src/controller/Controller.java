@@ -154,9 +154,10 @@ public class Controller {
         timeline.setCycleCount(ticks);
         timelineGraphs.setCycleCount(ticks);
         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(Math.round(100/speed)), e -> {
-                                                                             sim.tick();
-                                                                             clock();
-                                                                            }));
+            sim.tick();
+            clock();
+        }));
+
         timelineGraphs.getKeyFrames().add(new KeyFrame(Duration.millis(Math.round(1000/speed)), e -> {
             getDate();
             getRevenue();
@@ -233,6 +234,8 @@ public class Controller {
         dialog.setTitle("Number Input Dialog");
         dialog.setContentText("Number of spots:");
         Optional<String> result = dialog.showAndWait();
+
+        boolean exceptionOccurred = false;
         if (result.isPresent()){
             String result2 = result.get();
             // Parses a integer from a String and tries to catch errors.
@@ -241,8 +244,9 @@ public class Controller {
                 spotAmount = Integer.parseInt(result2);
             } catch(NumberFormatException exception) {
                 showError();
+                exceptionOccurred = true;
             } finally {
-                if(spotAmount < 1) {
+                if(spotAmount < 1 && !exceptionOccurred) {
                     showError();
                 } else {
                     stop();
@@ -264,6 +268,8 @@ public class Controller {
         dialog.setTitle("Number Input Dialog");
         dialog.setContentText("Price per minute:");
         Optional<String> result = dialog.showAndWait();
+
+        boolean exceptionOccurred = false;
         if (result.isPresent()){
             String result2 = result.get();
             // Parses a integer from a String and tries to catch errors.
@@ -272,8 +278,9 @@ public class Controller {
                 priceAmount = Double.parseDouble(result2);
             } catch(NumberFormatException exception) {
                 showError();
+                exceptionOccurred = true;
             } finally {
-                if(priceAmount<=0) {
+                if(priceAmount <= 0 && !exceptionOccurred) {
                     showError();
                 } else {
                     sim.setCost(priceAmount);
