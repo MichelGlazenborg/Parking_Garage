@@ -16,9 +16,6 @@
                   <MenuItem onAction="#makePassHolderSpots" text="Make pass holder spots..." />
               </items>
               <items>
-                  <MenuItem onAction="#makeReservationsAt" text="Make reservation at..." />
-              </items>
-              <items>
                   <SeparatorMenuItem />
               </items>
               <items>
@@ -67,7 +64,7 @@
                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                  </VBox.margin>
              </Button>
-             <Button fx:id="button_operate4" onAction="#tickFor">
+             <Button fx:id="button_operate4" onAction="#tickForDialog">
                  <VBox.margin>
                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                  </VBox.margin>
