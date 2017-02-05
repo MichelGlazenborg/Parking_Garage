@@ -19,7 +19,7 @@ public class Simulator {
     private Payment pay;
 
     private int day = 0;
-    private int hour = 0;
+    private int hour = 8;
     private int minute = 0;
     private int week = 0;
 
@@ -482,7 +482,7 @@ public class Simulator {
                     if(simulatorView.getNumberOfPassHolderSpots() > 0)
                     entrancePassQueue.addCar(new ParkingPassCar());*/
   
-                if (simulatorView.getNumberOfPassHolders() < simulatorView.getnumberOfPassHolderSpots()-5){
+                if (simulatorView.getNumberOfPassHolders() < simulatorView.getNumberOfPassHolderSpots()-5){
                     for (int i = 0; i < numberOfCars; i++) {
                         entrancePassQueue.addCar(new ParkingPassCar());
                     }
@@ -530,7 +530,7 @@ public class Simulator {
 
     public void resetTime() {
         day = 0;
-        hour = 0;
+        hour = 8;
         minute = 0;
         week = 0;
     }
