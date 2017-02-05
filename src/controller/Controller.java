@@ -643,7 +643,7 @@ public class Controller {
             } finally {
                 if(ticksAmount < 1 && !exceptionOccurred) {
                     showError();
-                } else {
+                } else if (!exceptionOccurred) {
                     tickFor(ticksAmount);
                 }
             }
