@@ -77,6 +77,8 @@ public class Controller {
     @FXML
     private Timeline timeline;          //makes the timeline object
 
+    @FXML
+    private Timeline timelineGraphs;
     /**
      * Initializes all the attributes
      */
@@ -148,19 +150,32 @@ public class Controller {
         disableButtons(true);
 
         timeline = new Timeline();
+        timelineGraphs = new Timeline();
         timeline.setCycleCount(ticks);
+        timelineGraphs.setCycleCount(ticks);
         timeline.getKeyFrames().add(new KeyFrame(Duration.millis(Math.round(100/speed)), e -> {
                                                                              sim.tick();
-                                                                             getDate();
-                                                                             getRevenue();
-                                                                             getDayRevenue();
                                                                              clock();
-                                                                             getQueueStats();
-                                                                             getStatistics();
-                                                                             updateGraph();
                                                                             }));
+        timelineGraphs.getKeyFrames().add(new KeyFrame(Duration.millis(Math.round(1000/speed)), e -> {
+            getDate();
+            getRevenue();
+            getDayRevenue();
+            getQueueStats();
+            getStatistics();
+            updateGraph();
+        }));
+
         timeline.play();
+        timelineGraphs.play();
         timeline.setOnFinished(e -> {
+            timelineGraphs.stop();
+            getDate();
+            getRevenue();
+            getDayRevenue();
+            getQueueStats();
+            getStatistics();
+            updateGraph();
             if(willShowStats) {
                 showStats();
             }
@@ -599,7 +614,7 @@ public class Controller {
             try {
                 ticksAmount = Integer.parseInt(result2);
             } catch(NumberFormatException exception) {
-                showError();
+                showError(); // Still 2 times error poppup
             } finally {
                 if(ticksAmount < 1) {
                     showError();
@@ -826,8 +841,9 @@ public class Controller {
      */
     @FXML
     private void stop() {
-        if (timeline != null) {
+        if (timeline != null || timelineGraphs != null) {
             timeline.stop();
+            timelineGraphs.stop();
             disableButtons(false);
         }
     }
