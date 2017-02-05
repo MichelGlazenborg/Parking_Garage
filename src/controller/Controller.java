@@ -341,6 +341,8 @@ public class Controller {
         WeekDialog.setHeaderText("Please enter any week number Between 1 and 52");
         WeekDialog.setContentText("Week:");
         Optional<String> WeekResult = WeekDialog.showAndWait();
+
+        boolean exceptionOccurred = false;
         if (WeekResult.isPresent()) {
             // Turns Optional<String> into a normal String
             String WeekResult2 = WeekResult.get();
@@ -349,23 +351,24 @@ public class Controller {
                 week = Integer.parseInt(WeekResult2);
             } catch (NumberFormatException exception) {
                 showError();
-                System.out.println("error1");
+                //System.out.println("error1"); ?
+                exceptionOccurred = true;
             } finally {
-                if (week <= 0) {
+                if (week <= 0 && !exceptionOccurred) {
                     showError();
-                    System.out.println("error2");
+                    // System.out.println("error2"); ?
                 } else {
                     // check if the entered integer is between bounds
                     if (week <= 52) {
-                        return (week);
+                        return week;
                     } else {
-                        return (-1);
+                        return -1;
                     }
                 }
             }
         }
         // if no acceptable input was found, this will return -1 and stop the method
-        return (week);
+        return week;
     }
 
     /**
@@ -380,6 +383,8 @@ public class Controller {
         DayDialog.setHeaderText("Please enter any day number Between 1 and 7");
         DayDialog.setContentText("Day:");
         Optional<String> DayResult = DayDialog.showAndWait();
+
+        boolean exceptionOccurred = false;
         if (DayResult.isPresent()) {
             // Turns Optional<String> into a normal String
             String DayResult2 = DayResult.get();
@@ -388,21 +393,22 @@ public class Controller {
                 day = Integer.parseInt(DayResult2);
             } catch (NumberFormatException exception) {
                 showError();
+                exceptionOccurred = true;
             } finally {
-                if (day <= 0) {
+                if (day <= 0 && !exceptionOccurred) {
                     showError();
                 } else {
                     // check if the entered integer is between bounds
                     if (day <= 7) {
-                        return(day - 1);
+                        return day - 1;
                     } else {
-                        return(-1);
+                        return -1;
                     }
                 }
             }
         }
         // if no acceptable input was found, this will return -1 and stop the method
-        return(day);
+        return day;
     }
 
     /**
@@ -417,6 +423,8 @@ public class Controller {
         HourDialog.setHeaderText("Please enter any Hour between 0 and 23");
         HourDialog.setContentText("Hour:");
         Optional<String> HourResult = HourDialog.showAndWait();
+
+        boolean exceptionOccurred = false;
         if (HourResult.isPresent()) {
             // Turns Optional<String> into a normal String
             String HourResult2 = HourResult.get();
@@ -425,23 +433,22 @@ public class Controller {
                 hour = Integer.parseInt(HourResult2);
             } catch (NumberFormatException exception) {
                 showError();
-
+                exceptionOccurred = true;
             } finally {
-                if (hour <= 0) {
+                if (hour <= 0 && !exceptionOccurred) {
                     showError();
-
                 } else {
                     // check if the entered integer is between bounds
                     if (hour < 24) {
-                        return(hour);
+                        return hour;
                     } else {
-                        return(-1);
+                        return -1;
                     }
                 }
             }
         }
         // if no acceptable input was found, this will return -1 and stop the method
-        return(hour);
+        return hour;
     }
 
     /**
@@ -456,6 +463,8 @@ public class Controller {
         MinuteDialog.setHeaderText("Please enter any minute between 0 and 59");
         MinuteDialog.setContentText("Minute:");
         Optional<String> MinuteResult = MinuteDialog.showAndWait();
+
+        boolean exceptionOccurred = false;
         if (MinuteResult.isPresent()) {
             // Turns Optional<String> into a normal String
             String MinuteResult2 = MinuteResult.get();
@@ -464,21 +473,22 @@ public class Controller {
                 minute = Integer.parseInt(MinuteResult2);
             } catch (NumberFormatException exception) {
                 showError();
+                exceptionOccurred = true;
             } finally {
-                if (minute < 0) {
+                if (minute < 0 && !exceptionOccurred) {
                     showError();
                 } else {
                     // check if the entered integer is between bounds
                     if (minute < 60) {
-                        return(minute);
+                        return minute;
                     } else {
-                        return(-1);
+                        return -1;
                     }
                 }
             }
         }
         // if no acceptable input was found, this will return -1 and stop the method
-        return(minute);
+        return minute;
     }
 
     /**
@@ -495,6 +505,7 @@ public class Controller {
         floorDialog.setContentText("Floor:");
         Optional<String> floorResult = floorDialog.showAndWait();
 
+        boolean exceptionOccurred = false;
         if (floorResult.isPresent()) {
             // Turns Optional<String> into a normal String
             String floorResult2 = floorResult.get();
@@ -503,21 +514,22 @@ public class Controller {
                 floor = Integer.parseInt(floorResult2);
             } catch (NumberFormatException exception) {
                 showError();
+                exceptionOccurred = true;
             } finally {
-                if (floor < 0) {
+                if (floor < 0 && !exceptionOccurred) {
                     showError();
                 } else {
                     // check if the entered integer is actually in this garage
                     if (floor < simView.getNumberOfFloors()) {
-                        return(floor);
+                        return floor;
                     } else {
-                        return(-1);
+                        return -1;
                     }
                 }
             }
         }
         // if no acceptable input was found, this will return -1 and stop the method
-        return(floor);
+        return floor;
     }
 
     /**
@@ -534,6 +546,7 @@ public class Controller {
         rowDialog.setContentText("Row:");
         Optional<String> rowResult = rowDialog.showAndWait();
 
+        boolean exceptionOccurred = false;
         if (rowResult.isPresent()) {
             // Turns Optional<String> into a normal String
             String rowResult2 = rowResult.get();
@@ -542,21 +555,22 @@ public class Controller {
                 row = Integer.parseInt(rowResult2);
             } catch (NumberFormatException exception) {
                 showError();
+                exceptionOccurred = true;
             } finally {
-                if (row < 0) {
+                if (row < 0 && !exceptionOccurred) {
                     showError();
                 } else {
                     // check if the entered integer is actually in this garage
                     if (row < simView.getNumberOfRows()) {
-                        return(row);
+                        return row;
                     } else {
-                        return(-1);
+                        return -1;
                     }
                 }
             }
         }
         // if no acceptable input was found, this will return -1 and stop the method
-        return(row);
+        return row;
     }
 
     /**
@@ -573,6 +587,7 @@ public class Controller {
         placeDialog.setContentText("Place:");
         Optional<String> placeResult = placeDialog.showAndWait();
 
+        boolean exceptionOccurred = false;
         if (placeResult.isPresent()) {
             // Turns Optional<String> into a normal String
             String placeResult2 = placeResult.get();
@@ -581,21 +596,22 @@ public class Controller {
                 place = Integer.parseInt(placeResult2);
             } catch (NumberFormatException exception) {
                 showError();
+                exceptionOccurred = true;
             } finally {
-                if (place < 0) {
+                if (place < 0 && !exceptionOccurred) {
                     showError();
                 } else {
                     // check if the entered integer is actually in this garage
                     if (place < simView.getNumberOfPlaces()) {
-                        return (place);
+                        return place;
                     } else {
-                        return (-1);
+                        return -1;
                     }
                 }
             }
         }
         // if no acceptable input was found, this will return -1 and stop the method
-        return (place);
+        return place;
     }
 
     /**
@@ -613,6 +629,7 @@ public class Controller {
         Optional<String> result = dialog.showAndWait();
 
         // Checking if something was filled in. No answer does nothing.
+        boolean exceptionOccurred = false;
         if (result.isPresent()){
             // Turns Optional<String> into a normal String
             String result2 = result.get();
@@ -621,9 +638,10 @@ public class Controller {
             try {
                 ticksAmount = Integer.parseInt(result2);
             } catch(NumberFormatException exception) {
-                showError(); // Still 2 times error poppup
+                showError();
+                exceptionOccurred = true;
             } finally {
-                if(ticksAmount < 1) {
+                if(ticksAmount < 1 && !exceptionOccurred) {
                     showError();
                 } else {
                     tickFor(ticksAmount);
