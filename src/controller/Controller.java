@@ -618,7 +618,7 @@ public class Controller {
      * Opens up a dialog that lets the user enter an integer to choose the amount of ticks the simulator must run
      */
     @FXML
-    private void submit() {
+    private void tickFor() {
         // Opening a pop-up dialog window to ask for the amount of ticks, converting it to integer and calling on tickFor
         //setText("I should be opening a popup window now.");
 
