@@ -14,6 +14,7 @@ import javafx.util.Duration;
 import models.*;
 import view.DailyCarsChartView;
 import view.OccupationChartView;
+import models.TimeInputPopup;
 
 import java.util.Optional;
 
@@ -315,18 +316,22 @@ public class Controller {
      */
     @FXML
     private void setTime() {
-        int week = givenWeek();
-        int day = givenDay();
-        int hour = givenHour();
-        int minute = givenMinute();
+        int[] dateAndTime = getTimeInput();
 
-        if(week == -1 || day == -1 || hour == -1 || minute == -1) {
+        if(dateAndTime[0] == -1 || dateAndTime[1] == -1 || dateAndTime[2] == -1 || dateAndTime[3] == -1) {
             showError();
         } else {
-            sim.setTime(week,day,hour,minute);
+            sim.setTime(dateAndTime[0], dateAndTime[1], dateAndTime[2], dateAndTime[3]);
             getDate();
             clock();
         }
+    }
+
+    private int[] getTimeInput() {
+        TimeInputPopup popup = new TimeInputPopup();
+        popup.show();
+
+        return null;
     }
 
     /**
