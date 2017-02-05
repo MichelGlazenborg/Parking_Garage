@@ -1,6 +1,5 @@
 package models;
 
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -27,6 +26,10 @@ public abstract class Popup {
 
         _window.setResizable(_isResizable);
         _window.showAndWait();
+    }
+
+    public void sizeToScene() {
+        _window.sizeToScene();
     }
 
     public void setScene(Scene scene) {

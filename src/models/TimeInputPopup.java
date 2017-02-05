@@ -1,29 +1,45 @@
 package models;
 
-import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import view.TimeInputPopupView;
 
-public class TimeInputPopup extends Popup {
+public class TimeInputPopup {
 
-    private VBox _layout;
-    private Scene _scene;
+    private TimeInputPopupView _view;
+    private GridPane _layout;
 
-    public TimeInputPopup() {
-        init(false, true);
+    private TextField _inputWeek;
+    private TextField _inputDay;
+    private TextField _inputHour;
+    private TextField _inputMinute;
 
-        _layout = new VBox(10);
-        _scene = new Scene(_layout, getHeight(), getWidth());
-
-        setScene(_scene);
-        setTitle("Please enter the date and time");
+    public TimeInputPopup(TimeInputPopupView view) {
+        _view = view;
     }
 
-    public void show() {
-        setFields();
-        super.show();
+    public void setFields() {
+        _inputWeek = new TextField();
+        _inputDay = new TextField();
+        _inputHour = new TextField();
+        _inputMinute = new TextField();
+
+        _inputWeek.setPromptText("Week");
+        _inputDay.setPromptText("Day");
+        _inputHour.setPromptText("Hour");
+        _inputMinute.setPromptText("Minute");
+
+        _view.addLabels(
+            new Label("Week:"),
+            new Label("Day:"),
+            new Label("Hour:"),
+            new Label("Minute:")
+        );
+        _view.addFields(_inputWeek, _inputDay, _inputHour, _inputMinute);
     }
 
-    private void setFields() {
-        _layout.getChildren().addAll();
+    public void setLayout(GridPane layout) {
+        _layout = layout;
     }
 }

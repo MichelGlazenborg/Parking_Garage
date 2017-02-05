@@ -14,7 +14,6 @@ import javafx.util.Duration;
 import models.*;
 import view.DailyCarsChartView;
 import view.OccupationChartView;
-import models.TimeInputPopup;
 
 import java.util.Optional;
 
@@ -318,17 +317,17 @@ public class Controller {
     private void setTime() {
         int[] dateAndTime = getTimeInput();
 
-        if(dateAndTime[0] == -1 || dateAndTime[1] == -1 || dateAndTime[2] == -1 || dateAndTime[3] == -1) {
+        /*if(dateAndTime[0] == -1 || dateAndTime[1] == -1 || dateAndTime[2] == -1 || dateAndTime[3] == -1) {
             showError();
         } else {
             sim.setTime(dateAndTime[0], dateAndTime[1], dateAndTime[2], dateAndTime[3]);
             getDate();
             clock();
-        }
+        }*/
     }
 
     private int[] getTimeInput() {
-        TimeInputPopup popup = new TimeInputPopup();
+        TimeInputPopupController popup = new TimeInputPopupController();
         popup.show();
 
         return null;
