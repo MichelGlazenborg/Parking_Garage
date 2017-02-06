@@ -1,9 +1,6 @@
 package models;
 
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import view.GarageView;
 
 public class Garage {
@@ -37,38 +34,6 @@ public class Garage {
 
     public void updateView() {
         _garageView.update();
-    }
-
-    public int getNumberOfFloors() {
-        return _numberOfFloors;
-    }
-
-    public int getNumberOfRows() {
-        return _numberOfRows;
-    }
-
-    public int getNumberOfPlaces() {
-        return _numberOfPlaces;
-    }
-
-    public int getNumberOfAdHoc() {
-        return _currentAdHoc;
-    }
-
-    public int getNumberOfPassHolders() {
-        return _currentPassHolders;
-    }
-
-    public int getNumberOfCarsWithReservation() {
-        return _currentCarsWithReservation;
-    }
-
-    public int getNumberOfOpenSpots() {
-        return _numberOfOpenSpots;
-    }
-
-    public int getNumberOfPassHolderSpots() {
-        return _numberOfPassHolderSpots;
     }
 
     public void removeCarFromCount(String type) {
@@ -131,6 +96,7 @@ public class Garage {
                 }
             }
         }
+
         _numberOfPassHolderSpots = 0;
         _currentAdHoc = 0;
         _currentPassHolders = 0;
@@ -164,10 +130,6 @@ public class Garage {
             z++;
         }
         updateView();
-    }
-
-    public int getPassHolderSpots() {
-        return _numberOfPassHolderSpots;
     }
 
     public void makeReservationsAt(Location loc , int minute, int hour) {
@@ -295,6 +257,42 @@ public class Garage {
                 }
             }
         }
+    }
+
+    public int getNumberOfFloors() {
+        return _numberOfFloors;
+    }
+
+    public int getNumberOfRows() {
+        return _numberOfRows;
+    }
+
+    public int getNumberOfPlaces() {
+        return _numberOfPlaces;
+    }
+
+    public int getNumberOfAdHoc() {
+        return _currentAdHoc;
+    }
+
+    public int getNumberOfPassHolders() {
+        return _currentPassHolders;
+    }
+
+    public int getNumberOfCarsWithReservation() {
+        return _currentCarsWithReservation;
+    }
+
+    public int getNumberOfOpenSpots() {
+        return _numberOfOpenSpots;
+    }
+
+    public int getNumberOfPassHolderSpots() {
+        return _numberOfPassHolderSpots;
+    }
+
+    public int getPassHolderSpots() {
+        return _numberOfPassHolderSpots;
     }
 
     private boolean locationIsValid(Location location) {

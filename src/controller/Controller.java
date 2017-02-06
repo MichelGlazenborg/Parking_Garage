@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.Optional;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -12,16 +14,17 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+
 import models.*;
+
 import view.DailyCarsChartView;
 import view.OccupationChartView;
 
-import java.util.Optional;
-
 public class Controller {
 
-    //make simulator object
-	private Simulator sim;              //makes the central simulator object
+    private static final String version = "1.0";
+
+	private Simulator _sim;              //makes the central simulator object
     private Garage _garage;      //makes the central simulatorView object
 
     private OccupationChartView _occupationChartView;     //makes the statistics graph
@@ -30,74 +33,55 @@ public class Controller {
     private DailyCarsChart _dailyCarsChart;
     private DailyCarsChartView _dailyCarsChartView;
 
-    private boolean willShowStats;
+    private boolean _willShowStats;
 
-    private double speed = 1;
-    private static final String version = "1.0";
+    private double _speed = 1;
 
-    private boolean boolRev = true;
-    private boolean boolGraph = true;
-    private boolean boolTime = true;
+    private boolean _boolRev = true;
+    private boolean _boolGraph = true;
+    private boolean _boolTime = true;
 
     private PieChart _object;
 
-    @FXML
-    private VBox _statistics;
+    private Timeline _timeline;          //makes the timeline object
+    private Timeline _timelineGraphs;
 
-    @FXML
-    private VBox _sidebarRight;         //makes the sidebar on the right
+    @FXML private VBox statistics;
 
-    @FXML
-    private Canvas _canvas;             //makes the canvas where the garage whil be drawn
+    @FXML private VBox sidebarRight;         //makes the sidebar on the right
 
-    @FXML
-    private Button button_operate1;     //makes button 1
+    @FXML private Canvas canvas;             //makes the canvas where the garage will be drawn
 
-    @FXML
-    private Button button_operate2;     //makes button 2
+    @FXML private Button button_operate1;     //makes button 1
 
-    @FXML
-    private Button button_operate3;     //makes button 3
+    @FXML private Button button_operate2;     //makes button 2
 
-    @FXML
-    private Button button_operate4;     //makes button 4
+    @FXML private Button button_operate3;     //makes button 3
 
-    @FXML
-    private Button button_operate5;     //makes button 5
+    @FXML private Button button_operate4;     //makes button 4
 
-    @FXML
-    private Button button_operate6;     //makes button 6
+    @FXML private Button button_operate5;     //makes button 5
+
+    @FXML private Button button_operate6;     //makes button 6
   
-    @FXML
-    private Label titleTime;
+    @FXML private Label titleTime;
 
-    @FXML
-    private Label date;                 //makes the label with the week and day
+    @FXML private Label date;                 //makes the label with the week and day
 
-    @FXML
-    private Label clock;                //makes the label with the hours and minutes
+    @FXML private Label clock;                //makes the label with the hours and minutes
   
-    @FXML
-    private Label revenue;              //makes the label with the total revenue
+    @FXML private Label revenue;              //makes the label with the total revenue
 
-    @FXML
-    private Label dayRevenue;           //makes the label with the total day revenue
+    @FXML private Label dayRevenue;           //makes the label with the total day revenue
 
-    @FXML
-    private Label titleRev;
-
-    @FXML
-    private Timeline timeline;          //makes the timeline object
-
-    @FXML
-    private Timeline timelineGraphs;
+    @FXML private Label titleRev;
 
     /**
      * Initializes all the attributes
      */
     public void initialize() {
-        sim = new Simulator(_canvas);
-        _garage = sim.getGarage();
+        _sim = new Simulator(canvas);
+        _garage = _sim.getGarage();
 
         _statsPie = new OccupationChart();
         _dailyCarsChart = new DailyCarsChart();
@@ -110,9 +94,9 @@ public class Controller {
 
         _object = _occupationChartView.getChart();
 
-        _sidebarRight.getChildren().add(_object);
+        sidebarRight.getChildren().add(_object);
 
-        _statistics.getChildren().add(_dailyCarsChartView.getChart());
+        statistics.getChildren().add(_dailyCarsChartView.getChart());
 
         getDate();
         clock();
@@ -165,28 +149,29 @@ public class Controller {
         //setText("I should be running for " + ticks + " ticks now");
         disableButtons(true);
 
-        timeline = new Timeline();
-        timelineGraphs = new Timeline();
-        timeline.setCycleCount(ticks);
-        timelineGraphs.setCycleCount(ticks);
-        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(Math.round(100/speed)), e -> {
-            sim.tick();
+        _timeline = new Timeline();
+        _timelineGraphs = new Timeline();
+        _timeline.setCycleCount(ticks);
+        _timelineGraphs.setCycleCount(ticks);
+        _timeline.getKeyFrames().add(new KeyFrame(Duration.millis(Math.round(100 / _speed)), e -> {
+            _sim.tick();
             clock();
         }));
 
-        timelineGraphs.getKeyFrames().add(new KeyFrame(Duration.millis(Math.round(1000/speed)), e -> {
+        _timelineGraphs.getKeyFrames().add(new KeyFrame(Duration.millis(Math.round(1000 / _speed)), e -> {
             update();
         }));
 
-        timeline.play();
-        timelineGraphs.play();
+        _timeline.play();
+        _timelineGraphs.play();
 
-        timeline.setOnFinished(e -> {
-            timelineGraphs.stop();
+        _timeline.setOnFinished(e -> {
+            _timelineGraphs.stop();
             update();
-            if(willShowStats) {
+
+            if (_willShowStats)
                 showStats();
-            }
+
             disableButtons(false);
         });
     }
@@ -203,23 +188,24 @@ public class Controller {
             int a = 0;
             try {
                 a = Integer.parseInt(result2);
-            } catch(NumberFormatException exception) {
+            }
+            catch(NumberFormatException exception) {
                 showError();
-            } finally {
-                if(a <= 0) {
-                    speed = 1;
-                } else if(a > 100) {
-                    speed = 100;
-                } else {
-                    speed = a;
-                }
+            }
+            finally {
+                if (a <= 0)
+                    _speed = 1;
+                else if (a > 100)
+                    _speed = 100;
+                else
+                    _speed = a;
             }
         }
     }
 
     @FXML
     private void resetSpeed(){
-        speed = 1;
+        _speed = 1;
     }
 
     public static void showError() {
@@ -235,8 +221,6 @@ public class Controller {
      */
     @FXML
     private void makePassHolderSpots() {
-        //setText("I should be opening a popup window now.");
-
         TextInputDialog dialog = new TextInputDialog("0");
         dialog.setTitle("Number Input Dialog");
         dialog.setContentText("Number of spots:");
@@ -265,12 +249,10 @@ public class Controller {
     }
 
     /**
-     * Opens op a dialog which lets you enter a double. The price per minute of the parking garage will be set to that double
+     * Opens a dialog which lets you enter a double. The price per minute of the parking garage will be set to that double
      */
     @FXML
     private void setPricePerMinute() {
-        //setText("I should be opening a popup window now.");
-
         TextInputDialog dialog = new TextInputDialog("0");
         dialog.setTitle("Number Input Dialog");
         dialog.setContentText("Price per minute:");
@@ -290,7 +272,7 @@ public class Controller {
                 if(priceAmount <= 0 && !exceptionOccurred) {
                     showError();
                 } else {
-                    sim.setCost(priceAmount);
+                    _sim.setCost(priceAmount);
                 }
             }
         }
@@ -309,7 +291,7 @@ public class Controller {
         if(dateAndTime[0] == -1 || dateAndTime[1] == -1 || dateAndTime[2] == -1 || dateAndTime[3] == -1) {
             showError();
         } else {
-            sim.setTime(dateAndTime[0], dateAndTime[1], dateAndTime[2], dateAndTime[3]);
+            _sim.setTime(dateAndTime[0], dateAndTime[1], dateAndTime[2], dateAndTime[3]);
             getDate();
             clock();
         }
@@ -328,8 +310,6 @@ public class Controller {
     @FXML
     private void tickForDialog() {
         // Opening a pop-up dialog window to ask for the amount of ticks, converting it to integer and calling on tickFor
-        //setText("I should be opening a popup window now.");
-
         TextInputDialog dialog = new TextInputDialog("0");
         dialog.setTitle("Minute Input Dialog");
         dialog.setHeaderText("Please enter the amount of minutes this program should be running for below.");
@@ -345,15 +325,16 @@ public class Controller {
             int ticksAmount = -1;
             try {
                 ticksAmount = Integer.parseInt(result2);
-            } catch(NumberFormatException exception) {
+            }
+            catch (NumberFormatException exception) {
                 showError();
                 exceptionOccurred = true;
-            } finally {
-                if(ticksAmount < 1 && !exceptionOccurred) {
+            }
+            finally {
+                if (ticksAmount < 1 && !exceptionOccurred)
                     showError();
-                } else if (!exceptionOccurred) {
+                else if (!exceptionOccurred)
                     tickFor(ticksAmount);
-                }
             }
         }
     }
@@ -363,34 +344,34 @@ public class Controller {
      */
     @FXML
     private void getDate(){
-        int[] time = sim.getTime();
+        int[] time = _sim.getTime();
         String day = null;
         switch (time[2]) {
-            case 0 : {
+            case 0: {
                 day = "Monday";
                 break;
             }
-            case 1 : {
+            case 1: {
                 day = "Tuesday";
                 break;
             }
-            case 2 : {
+            case 2: {
                 day = "Wednesday";
                 break;
             }
-            case 3 : {
+            case 3: {
                 day = "Thursday";
                 break;
             }
-            case 4 : {
+            case 4: {
                 day = "Friday";
                 break;
             }
-            case 5 : {
+            case 5: {
                 day = "Saturday";
                 break;
             }
-            case 6 : {
+            case 6: {
                 day = "Sunday";
                 break;
             }
@@ -400,7 +381,7 @@ public class Controller {
 
     @FXML
     private String getStatistics() {
-        int[] stats = sim.getStatistics();
+        int[] stats = _sim.getStatistics();
         return ("Number of regular cars: " + stats[1] +
                 "\nNumber of cars with a reservation: " + stats[0] +
                 "\nNumber of passholder cars: " + stats[2] + "\n");
@@ -408,7 +389,7 @@ public class Controller {
 
     @FXML
     private String getQueueStats() {
-        int[] queues = sim.getQueues();
+        int[] queues = _sim.getQueues();
         return("\nNumber of cars in regular entrance queue: " + queues[0] +
                          "\nNumber of cars in pass holder entrance queue: " + queues[1] +
                          "\nNumber of cars in reservations entrance queue: " + queues[2] +
@@ -429,34 +410,32 @@ public class Controller {
 
     @FXML
     private void setWillShowStats() {
-        TextInputDialog dialog = new TextInputDialog("");
+        TextInputDialog dialog = new TextInputDialog(null);
+
         dialog.setTitle("Set preference of statistics");
         dialog.setHeaderText("Please enter yes or no");
         dialog.setContentText("Show detailed statistics after every run of the simulation?");
+
         Optional<String> result = dialog.showAndWait();
 
         // Checking if something was filled in. No answer does nothing.
         if (result.isPresent()) {
             // Turns Optional<String> into a normal String
             String result2 = result.get();
-            String answer = "";
+            String answer = null;
+
             try {
                 answer = result2.trim().toLowerCase();
-            } catch(Exception e) {
+            }
+            catch(Exception e) {
                 showError();
                 dialog.close();
-            }finally {
-                if(answer.equals("yes") || answer.equals("no")) {
-                    if(answer.equals("yes")) {
-                        willShowStats = true;
-                        System.out.println("yes");
-                    }else if(answer.equals("no")){
-                        willShowStats = false;
-                        System.out.println("no");
-                    }
-                } else {
+            }
+            finally {
+                if (answer.equals("yes") || answer.equals("no"))
+                    _willShowStats = answer.equals("yes");
+                else
                     showError();
-                }
             }
         }
     }
@@ -466,21 +445,21 @@ public class Controller {
      */
     @FXML
     private void clock(){
-        int time[] = sim.getTime();
+        int time[] = _sim.getTime();
         String hours;
         String minutes;
-        if(time[1] < 10) {
-            hours = "0" + time[1];
-        } else {
-            hours = "" + time[1];
-        }
-        if(time[0] < 10) {
-            minutes = "0" + time[0];
-        } else {
-            minutes = "" +  time[0];
-        }
-        clock.setText("CLOCK" + "\n" + hours + " " + minutes);
 
+        if (time[1] < 10)
+            hours = "0" + time[1];
+        else
+            hours = "" + time[1];
+
+        if (time[0] < 10)
+            minutes = "0" + time[0];
+        else
+            minutes = "" +  time[0];
+
+        clock.setText("CLOCK" + "\n" + hours + " " + minutes);
     }
 
     /**
@@ -489,15 +468,15 @@ public class Controller {
     @FXML
     private void reset() {
         // resets all parking spots to empty on click
-        sim.resetRevenue();
-        sim.resetStats();
-        sim.resetTime();
+        _sim.resetRevenue();
+        _sim.resetStats();
+        _sim.resetTime();
 
         _statsPie.reset();
         _dailyCarsChart.reset();
         _garage.reset();
 
-        sim.resetArrivalCounter();
+        _sim.resetArrivalCounter();
         updateGraph();
 
         getDate();
@@ -514,21 +493,19 @@ public class Controller {
      */
     @FXML
     private void getRevenue(){
-        showRevenue("The total revenue since the start is:\n€" + sim.getRevenue() + "\n\n" +
-                    "The expected revenue of all the cars\n still in the garage is:\n€" + sim.getExpectedRevenue() + "\n");
+        showRevenue("The total revenue since the start is:\n€" + _sim.getRevenue() + "\n\n" +
+                    "The expected revenue of all the cars\n still in the garage is:\n€" + _sim.getExpectedRevenue() + "\n");
     }
 
     @FXML
     private void getDayRevenue(){
-        showDayRevenue("The total daily revenue of yesterday is:\n€" + sim.getDayRevenue() + "\n\n");
-
+        showDayRevenue("The total daily revenue of yesterday is:\n€" + _sim.getDayRevenue() + "\n\n");
     }
 
     /**
      * Opens up a text dialog that displays program information to the user
      */
     @FXML
-
     private void showAbout() {
         //show about information
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -546,15 +523,21 @@ public class Controller {
      * sets the text in the label date
      * @param t:    A string that will be shown in date
      */
-    private void showDate(String t) {date.setText(t); }
+    private void showDate(String t) {
+        date.setText(t);
+    }
 
     /**
      * sets the text in the label revenue
      * @param r:    A string that will be shown in revenue
      */
-    private void showRevenue(String r) {revenue.setText(r);}
+    private void showRevenue(String r) {
+        revenue.setText(r);
+    }
 
-    private void showDayRevenue(String r) {dayRevenue.setText(r);}
+    private void showDayRevenue(String r) {
+        dayRevenue.setText(r);
+    }
 
     /**
      * Disables or enables the buttons
@@ -574,9 +557,9 @@ public class Controller {
      */
     @FXML
     private void stop() {
-        if (timeline != null || timelineGraphs != null) {
-            timeline.stop();
-            timelineGraphs.stop();
+        if (_timeline != null || _timelineGraphs != null) {
+            _timeline.stop();
+            _timelineGraphs.stop();
             update();
             disableButtons(false);
         }
@@ -595,13 +578,13 @@ public class Controller {
         );
 
         _dailyCarsChart.update(
-            sim.getArrivalsOnMonday(),
-            sim.getArrivalsOnTuesday(),
-            sim.getArrivalsOnWednesday(),
-            sim.getArrivalsOnThursday(),
-            sim.getArrivalsOnFriday(),
-            sim.getArrivalsOnSaturday(),
-            sim.getArrivalsOnSunday()
+            _sim.getArrivalsOnMonday(),
+            _sim.getArrivalsOnTuesday(),
+            _sim.getArrivalsOnWednesday(),
+            _sim.getArrivalsOnThursday(),
+            _sim.getArrivalsOnFriday(),
+            _sim.getArrivalsOnSaturday(),
+            _sim.getArrivalsOnSunday()
         );
 
         _occupationChartView.update();
@@ -616,37 +599,36 @@ public class Controller {
         getStatistics();
         updateGraph();
     }
+
     @FXML
     private void setManageGraph() {
-        _statistics.setManaged(!boolGraph);
-        _statistics.setVisible(!boolGraph);
-        this.boolGraph = !boolGraph;
+        statistics.setManaged(!_boolGraph);
+        statistics.setVisible(!_boolGraph);
+        this._boolGraph = !_boolGraph;
     }
 
     @FXML
     private void setManageRevenue() {
-        setVisible(titleRev, boolRev);
-        setVisible(dayRevenue,boolRev);
-        setVisible(revenue,boolRev);
-        this.boolRev = !boolRev;
+        setVisible(titleRev, _boolRev);
+        setVisible(dayRevenue, _boolRev);
+        setVisible(revenue, _boolRev);
+        this._boolRev = !_boolRev;
     }
 
     @FXML
     private void setManageChart() {
-        if (_sidebarRight.getChildren().contains(_object)) {
-            _sidebarRight.getChildren().remove(_object);
-        }
-        else {
-            _sidebarRight.getChildren().add(_object);
-        }
+        if (sidebarRight.getChildren().contains(_object))
+            sidebarRight.getChildren().remove(_object);
+        else
+            sidebarRight.getChildren().add(_object);
     }
 
     @FXML
     private void setManageTime() {
-        setVisible(titleTime, boolTime);
-        setVisible(date,boolTime);
-        setVisible(clock,boolTime);
-        this.boolTime = !boolTime;
+        setVisible(titleTime, _boolTime);
+        setVisible(date, _boolTime);
+        setVisible(clock, _boolTime);
+        this._boolTime = !_boolTime;
     }
 
     private void setVisible(Node node, boolean bool) {

@@ -10,7 +10,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("../view/ParkingGarage.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/ParkingGarage.fxml"));
 
         primaryStage.setMaximized(true);
         primaryStage.setTitle("Parking simulator");
