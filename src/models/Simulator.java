@@ -2,6 +2,7 @@ package models;
 
 import javafx.scene.canvas.Canvas;
 
+import java.math.BigDecimal;
 import java.util.Random;
 
 public class Simulator {
@@ -19,9 +20,9 @@ public class Simulator {
     private Payment pay;
 
     private int day = 0;
-    private int hour = 0;
+    private int hour = 8;
     private int minute = 0;
-    private int week = 0;
+    private int week = 1;
 
     private int weekDayArrivals = 30; // average number of arriving cars per hour
     private int weekendArrivals = 45; // average number of arriving cars per hour
@@ -54,7 +55,7 @@ public class Simulator {
         exitCarQueue = new CarQueue();
         pay = new Payment();
         simulatorView = new SimulatorView(canvas, 3, 6, 30);
-        pay.setCost(0.0067);
+        pay.setCost(0.00667);
         updateViews();
     }
 
@@ -90,13 +91,16 @@ public class Simulator {
         while (hour > 23) {
             hour -= 24;
             day++;
-                pay.setLasDayRevenue(pay.getDayRevenue());
+                pay.setLasDayRevenue(pay.getDoubleDayRevenue());
                 pay.resetDayRevenue();
         }
         while (day > 6) {
             day -= 7;
             week++;
             resetArrivalCounter();
+        }
+        while (week > 52) {
+            week = 1;
         }
     }
 
@@ -407,19 +411,20 @@ public class Simulator {
     	}
     }
 
-    public double getRevenue() {
+    public BigDecimal getRevenue() {
         return pay.getTotalRevenue();
     }
 
-    public double getDayRevenue() {
+    public BigDecimal getDayRevenue() {
         return pay.getLastDayRevenue();
     }
 
-    public double getExpectedRevenue() {
+    public BigDecimal getExpectedRevenue() {
         int adHocCars = simulatorView.getNumberOfAdHoc();
         int carsWithReservations = simulatorView.getNumberOfCarsWithReservation();
-        double expectedRevenue = pay.getExpectedRevenue(adHocCars, carsWithReservations);
+        BigDecimal expectedRevenue = pay.getExpectedRevenue(adHocCars, carsWithReservations);
         return expectedRevenue;
+
 
     }
 
@@ -482,7 +487,7 @@ public class Simulator {
                     if(simulatorView.getNumberOfPassHolderSpots() > 0)
                     entrancePassQueue.addCar(new ParkingPassCar());*/
   
-                if (simulatorView.getNumberOfPassHolders() < simulatorView.getnumberOfPassHolderSpots()-5){
+                if (simulatorView.getNumberOfPassHolders() < simulatorView.getNumberOfPassHolderSpots()-5){
                     for (int i = 0; i < numberOfCars; i++) {
                         entrancePassQueue.addCar(new ParkingPassCar());
                     }
@@ -530,9 +535,9 @@ public class Simulator {
 
     public void resetTime() {
         day = 0;
-        hour = 0;
+        hour = 8;
         minute = 0;
-        week = 0;
+        week = 1;
     }
     public void resetStats() {
         while(entranceCarQueue.carsInQueue() > 0) {

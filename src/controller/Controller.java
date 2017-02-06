@@ -142,7 +142,7 @@ public class Controller {
 
     /**
      * Makes the simulator tick for any number of ticks
-     * @paramint ticks     The number of ticks the simulation should do
+     * @param ticks The number of ticks the simulation should do
      */
     @FXML
     private void tickFor(int ticks) {
@@ -210,17 +210,17 @@ public class Controller {
         }
     }
 
-    public static void showError() {
+    @FXML
+    private void resetSpeed(){
+        speed = 1;
+    }
+
+    private static void showError() {
         Alert error = new Alert(Alert.AlertType.WARNING);
         error.setTitle("Input error");
         error.setHeaderText(null);
         error.setContentText("Please enter the correct information!");
         error.showAndWait();
-    }
-
-    @FXML
-    private void resetSpeed(){
-        speed = 1;
     }
 
     /**
@@ -290,26 +290,6 @@ public class Controller {
     }
 
     /**
-     * Sets a reservation at a specific location;
-     * uses insertFloor(), insertRow() and insertPlace()
-     */
-    @FXML
-    private void makeReservationsAt() {
-        // make reservations at a prompted location
-        int floor = insertFloor();
-        int row = insertRow();
-        int place = insertPlace();
-
-        // illegal answers return -1
-        if (floor == -1 || row == -1 || place == -1) {
-            showError();
-        } else {
-            int[] time = sim.getTime();
-            simView.makeReservationsAt(new Location(floor, row, place),time[0], time[1]);
-        }
-    }
-
-    /**
      * Sets the time by letting the user specify the week, day, hour and minute
      * uses givenWeek(), givenDay(), givenHour() and givenMinute()
      */
@@ -336,133 +316,10 @@ public class Controller {
     }
 
     /**
-     * Opens op a dialog that lets the user enter an integer that is used as the floor for setting passholderspaces and making reservations
-     * @return int:     The number of the floor or -1 if the number is invalid
-     */
-    private int insertFloor() {
-        // input a floor
-        int floor = -1;
-
-        TextInputDialog floorDialog = new TextInputDialog("0");
-        floorDialog.setTitle("Floor Input Dialog");
-        floorDialog.setHeaderText("Please enter the floor number for your reservation below. Between 0 and " + (simView.getNumberOfFloors() - 1));
-        floorDialog.setContentText("Floor:");
-        Optional<String> floorResult = floorDialog.showAndWait();
-
-        boolean exceptionOccurred = false;
-        if (floorResult.isPresent()) {
-            // Turns Optional<String> into a normal String
-            String floorResult2 = floorResult.get();
-            // Parses a integer from a String and tries to catch errors.
-            try {
-                floor = Integer.parseInt(floorResult2);
-            } catch (NumberFormatException exception) {
-                showError();
-                exceptionOccurred = true;
-            } finally {
-                if (floor < 0 && !exceptionOccurred) {
-                    showError();
-                } else {
-                    // check if the entered integer is actually in this garage
-                    if (floor < simView.getNumberOfFloors()) {
-                        return floor;
-                    } else {
-                        return -1;
-                    }
-                }
-            }
-        }
-        // if no acceptable input was found, this will return -1 and stop the method
-        return floor;
-    }
-
-    /**
-     * Opens op a dialog that lets the user enter an integer that is used as the row for setting passholderspaces and making reservations
-     * @return int:     The number of the row or -1 if the number is invalid
-     */
-    private int insertRow() {
-        // input a row
-        int row = -1;
-
-        TextInputDialog rowDialog = new TextInputDialog("0");
-        rowDialog.setTitle("Row Input Dialog");
-        rowDialog.setHeaderText("Please enter the row number for your reservation below. Between 0 and " + (simView.getNumberOfRows() - 1));
-        rowDialog.setContentText("Row:");
-        Optional<String> rowResult = rowDialog.showAndWait();
-
-        boolean exceptionOccurred = false;
-        if (rowResult.isPresent()) {
-            // Turns Optional<String> into a normal String
-            String rowResult2 = rowResult.get();
-            // Parses a integer from a String and tries to catch errors.
-            try {
-                row = Integer.parseInt(rowResult2);
-            } catch (NumberFormatException exception) {
-                showError();
-                exceptionOccurred = true;
-            } finally {
-                if (row < 0 && !exceptionOccurred) {
-                    showError();
-                } else {
-                    // check if the entered integer is actually in this garage
-                    if (row < simView.getNumberOfRows()) {
-                        return row;
-                    } else {
-                        return -1;
-                    }
-                }
-            }
-        }
-        // if no acceptable input was found, this will return -1 and stop the method
-        return row;
-    }
-
-    /**
-     * Opens op a dialog that lets the user enter an integer that is used as the place for setting passholderspaces and making reservations
-     * @return int:     The number of the place or -1 if the number is invalid
-     */
-    private int insertPlace() {
-        // input a place
-        int place = -1;
-
-        TextInputDialog placeDialog = new TextInputDialog("0");
-        placeDialog.setTitle("Place Input Dialog");
-        placeDialog.setHeaderText("Please enter the floor number for your reservation below. Between 0 and " + (simView.getNumberOfPlaces() - 1));
-        placeDialog.setContentText("Place:");
-        Optional<String> placeResult = placeDialog.showAndWait();
-
-        boolean exceptionOccurred = false;
-        if (placeResult.isPresent()) {
-            // Turns Optional<String> into a normal String
-            String placeResult2 = placeResult.get();
-            // Parses a integer from a String and tries to catch errors.
-            try {
-                place = Integer.parseInt(placeResult2);
-            } catch (NumberFormatException exception) {
-                showError();
-                exceptionOccurred = true;
-            } finally {
-                if (place < 0 && !exceptionOccurred) {
-                    showError();
-                } else {
-                    // check if the entered integer is actually in this garage
-                    if (place < simView.getNumberOfPlaces()) {
-                        return place;
-                    } else {
-                        return -1;
-                    }
-                }
-            }
-        }
-        // if no acceptable input was found, this will return -1 and stop the method
-        return place;
-    }
-
-    /**
      * Opens up a dialog that lets the user enter an integer to choose the amount of ticks the simulator must run
      */
     @FXML
-    private void tickFor() {
+    private void tickForDialog() {
         // Opening a pop-up dialog window to ask for the amount of ticks, converting it to integer and calling on tickFor
         //setText("I should be opening a popup window now.");
 
@@ -650,13 +507,13 @@ public class Controller {
      */
     @FXML
     private void getRevenue(){
-        showRevenue("The total revenue since the start is:\n€" + sim.getRevenue() + "0\n\n" +
-                    "The expected revenue of all the cars\n still in the garage is:\n€" + sim.getExpectedRevenue() + "0\n");
+        showRevenue("The total revenue since the start is:\n€" + sim.getRevenue() + "\n\n" +
+                    "The expected revenue of all the cars\n still in the garage is:\n€" + sim.getExpectedRevenue() + "\n");
     }
 
     @FXML
     private void getDayRevenue(){
-        showDayRevenue("The total daily revenue of yesterday is:\n€" + sim.getDayRevenue() + "0\n\n");
+        showDayRevenue("The total daily revenue of yesterday is:\n€" + sim.getDayRevenue() + "\n\n");
 
     }
 

@@ -59,9 +59,6 @@ public class SimulatorView {
         return _currentPassHolders;
     }
 
-    public int getNumberOfPassHolderSpots() { return _numberOfPassHolderSpots; }
-
-
     public int getNumberOfCarsWithReservation() {
         return _currentCarsWithReservation;
     }
@@ -70,7 +67,7 @@ public class SimulatorView {
         return _numberOfOpenSpots;
     }
 
-    public int getnumberOfPassHolderSpots() {
+    public int getNumberOfPassHolderSpots() {
         return _numberOfPassHolderSpots;
     }
 
@@ -180,16 +177,12 @@ public class SimulatorView {
         updateView();
     }
 
-    public int getNumberOfReservations() {
-        return _numberOfReservations;
-    }
-
     public boolean setPassHolderSpace(Location loc, PassHolderSpace phs) {
         if (!locationIsValid(loc)) {
             return false;
         }
-        Car oldcar = getCarAt(loc);
-        if(oldcar == null) {
+        Car oldCar = getCarAt(loc);
+        if(oldCar == null) {
             _cars[loc.getFloor()][loc.getRow()][loc.getPlace()] = phs;
             phs.setLocation(loc);
             return true;
@@ -201,8 +194,8 @@ public class SimulatorView {
         if (!locationIsValid(loc)) {
             return false;
         }
-        Car oldcar = getCarAt(loc);
-        if(oldcar == null) {
+        Car oldCar = getCarAt(loc);
+        if(oldCar == null) {
             _cars[loc.getFloor()][loc.getRow()][loc.getPlace()] = res;
             res.setLocation(loc);
             return true;
