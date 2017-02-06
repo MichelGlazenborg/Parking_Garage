@@ -6,10 +6,10 @@ import javafx.scene.paint.Color;
  * Created by Jelmer on 26-Jan-17.
  */
 public class PassHolderSpace extends Car{
+
     public static final Color COLOR = Color.BLACK;
 
     public PassHolderSpace() {
-
         double stayMinutes = Double.POSITIVE_INFINITY;
         this.setMinutesLeft(stayMinutes);
         this.setHasToPay(false);
@@ -18,6 +18,7 @@ public class PassHolderSpace extends Car{
     /**
      * Although the COLOR constant is public, we still need a getter since we're extending the Car class.
      */
-    public Color getColor() {return COLOR;}
-
+    public Color getColor(){
+        return COLOR;
+    }
 }

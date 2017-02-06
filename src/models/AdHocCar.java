@@ -1,8 +1,8 @@
 package models;
 
-import javafx.scene.paint.Color;
-
 import java.util.Random;
+
+import javafx.scene.paint.Color;
 
 public class AdHocCar extends Car {
 
@@ -10,7 +10,8 @@ public class AdHocCar extends Car {
 	
     public AdHocCar() {
     	Random random = new Random();
-    	int time = ((random.nextInt(10-2) + 1 ) + 2) * 60;
+    	int time = ((random.nextInt(10 - 2) + 1 ) + 2) * 60;
+
     	this.setStayMinutes(time);
         this.setMinutesLeft(time);
         this.setHasToPay(true);
@@ -21,6 +22,4 @@ public class AdHocCar extends Car {
     public Color getColor(){
     	return COLOR;
     }
-
-
 }

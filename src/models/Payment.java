@@ -6,67 +6,70 @@ import java.math.BigDecimal;
  * Created by Jelmer on 30-Jan-17.
  */
 public class Payment {
-    private double totalRevenue;
-    private double dayRevenue;
-    private double lastDayRevenue;
-    private double expectedRevenue;
-    private double cost;        //cost in euro's per minute
+
+    private double _totalRevenue;
+    private double _dayRevenue;
+    private double _lastDayRevenue;
+    private double _expectedRevenue;
+    private double _cost;        //cost in euros per minute
 
     public Payment() {
-        totalRevenue = 0.0;
-        cost = 0;
-        expectedRevenue = 0;
+        _totalRevenue = 0.0;
+        _cost = 0;
+        _expectedRevenue = 0;
     }
 
     public BigDecimal getTotalRevenue() {
-        BigDecimal bd = new BigDecimal(totalRevenue);
-        BigDecimal rounded = bd.setScale(2, BigDecimal.ROUND_HALF_DOWN);
-        return rounded;
+        BigDecimal bd = new BigDecimal(_totalRevenue);
+        return bd.setScale(2, BigDecimal.ROUND_HALF_DOWN);
     }
 
     public BigDecimal getDayRevenue() {
-        BigDecimal bd = new BigDecimal(dayRevenue);
-        BigDecimal rounded = bd.setScale(2, BigDecimal.ROUND_HALF_DOWN);
-        return rounded;
+        BigDecimal bd = new BigDecimal(_dayRevenue);
+        return bd.setScale(2, BigDecimal.ROUND_HALF_DOWN);
     }
 
-    public BigDecimal getLastDayRevenue() {BigDecimal bd = new BigDecimal(lastDayRevenue);
-        BigDecimal rounded = bd.setScale(2, BigDecimal.ROUND_HALF_DOWN);
-        return rounded;
+    public BigDecimal getLastDayRevenue() {
+        BigDecimal bd = new BigDecimal(_lastDayRevenue);
+        return bd.setScale(2, BigDecimal.ROUND_HALF_DOWN);
     }
 
-    public double getDoubleDayRevenue() { return dayRevenue;}
+    public double getDoubleDayRevenue() {
+        return _dayRevenue;
+    }
 
-    public void resetDayRevenue() {dayRevenue = 0;}
+    public void resetDayRevenue() {
+        _dayRevenue = 0;
+    }
 
-    public void setLasDayRevenue(double a) {lastDayRevenue = a;}
+    public void setLastDayRevenue(double a) {
+        _lastDayRevenue = a;
+    }
 
     public void pay(int stayTime) {
-        totalRevenue += cost * (double) stayTime;
-        dayRevenue   += cost * (double) stayTime;
+        _totalRevenue += _cost * (double) stayTime;
+        _dayRevenue   += _cost * (double) stayTime;
     }
 
     public void payExtra(double extra) {
-        totalRevenue += extra;
-        dayRevenue   += extra;
+        _totalRevenue += extra;
+        _dayRevenue   += extra;
     }
   
     public void reset() {
-        totalRevenue = 0;
-        expectedRevenue = 0;
+        _totalRevenue = 0;
+        _expectedRevenue = 0;
     }
 
     public void setCost(double cost) {
-        this.cost = cost;
+        _cost = cost;
     }
 
-    public BigDecimal getExpectedRevenue(int normalCarsStillInGarage,int carsWithReservationStillInGarage) {
-        expectedRevenue = normalCarsStillInGarage * cost;
-        expectedRevenue += (carsWithReservationStillInGarage * cost) + (carsWithReservationStillInGarage * 5);
-        BigDecimal bd = new BigDecimal(expectedRevenue);
-        BigDecimal rounded = bd.setScale(2, BigDecimal.ROUND_HALF_DOWN);
-        return rounded;
+    public BigDecimal getExpectedRevenue(int normalCarsStillInGarage, int carsWithReservationStillInGarage) {
+        _expectedRevenue = normalCarsStillInGarage * _cost;
+        _expectedRevenue += (carsWithReservationStillInGarage * _cost) + (carsWithReservationStillInGarage * 5);
 
+        BigDecimal bd = new BigDecimal(_expectedRevenue);
+        return bd.setScale(2, BigDecimal.ROUND_HALF_DOWN);
     }
-
 }

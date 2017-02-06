@@ -4,12 +4,11 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+
 import models.DailyCarsChart;
 
 public class DailyCarsChartView {
 
-    private CategoryAxis _xAxis;
-    private NumberAxis _yAxis;
     private LineChart<String, Number> _lineChart;
     private XYChart.Series _chartData;
     private DailyCarsChart _chart;
@@ -24,8 +23,9 @@ public class DailyCarsChartView {
 
     public DailyCarsChartView(DailyCarsChart chart) {
         _chart = chart;
-        _xAxis = new CategoryAxis();
-        _yAxis = new NumberAxis();
+
+        CategoryAxis _xAxis = new CategoryAxis();
+        NumberAxis _yAxis = new NumberAxis();
 
         _xAxis.setLabel("Day");
 

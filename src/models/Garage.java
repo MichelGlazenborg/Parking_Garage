@@ -1,79 +1,39 @@
 package models;
 
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
+import view.GarageView;
 
-public class SimulatorView {
+public class Garage {
 
     private int _numberOfFloors;
     private int _numberOfRows;
     private int _numberOfPlaces;
     private int _numberOfOpenSpots;
-    private int _numberOfReservations;
     private int _numberOfPassHolderSpots;
     private Car[][][] _cars;
 
-    private CarParkView _carParkView;
+    private GarageView _garageView;
 
     private int _currentPassHolders;
     private int _currentAdHoc;
-    // Rename the variable below
     private int _currentCarsWithReservation;
 
-    Image canvasBackground;
-
-    public SimulatorView(Canvas canvas, int numberOfFloors, int numberOfRows, int numberOfPlaces) {
+    public Garage(Canvas canvas, int numberOfFloors, int numberOfRows, int numberOfPlaces) {
         _numberOfFloors = numberOfFloors;
         _numberOfRows = numberOfRows;
         _numberOfPlaces = numberOfPlaces;
         _numberOfOpenSpots = numberOfFloors * numberOfRows * numberOfPlaces;
         _numberOfPassHolderSpots = -1;
         _cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
-        _carParkView = new CarParkView(canvas);
+        _garageView = new GarageView(canvas, this);
 
         _currentPassHolders = 0;
         _currentAdHoc = 0;
         _currentCarsWithReservation = 0;
-
-        canvasBackground = new Image(SimulatorView.class.getResourceAsStream("/assets/canvasbackground.jpg"));
     }
 
     public void updateView() {
-        _carParkView.update();
-    }
-
-    public int getNumberOfFloors() {
-        return _numberOfFloors;
-    }
-
-    public int getNumberOfRows() {
-        return _numberOfRows;
-    }
-
-    public int getNumberOfPlaces() {
-        return _numberOfPlaces;
-    }
-
-    public int getNumberOfAdHoc() {
-        return _currentAdHoc;
-    }
-
-    public int getNumberOfPassHolders() {
-        return _currentPassHolders;
-    }
-
-    public int getNumberOfCarsWithReservation() {
-        return _currentCarsWithReservation;
-    }
-
-    public int getNumberOfOpenSpots() {
-        return _numberOfOpenSpots;
-    }
-
-    public int getNumberOfPassHolderSpots() {
-        return _numberOfPassHolderSpots;
+        _garageView.update();
     }
 
     public void removeCarFromCount(String type) {
@@ -136,6 +96,7 @@ public class SimulatorView {
                 }
             }
         }
+
         _numberOfPassHolderSpots = 0;
         _currentAdHoc = 0;
         _currentPassHolders = 0;
@@ -148,19 +109,21 @@ public class SimulatorView {
      */
     public void makePassHolderSpots(int numberOfSpots) {
         _numberOfPassHolderSpots = numberOfSpots;
-        int x,z,y;
-        x=0;
-        z=0;
-        y=0;
+
+        int x = 0,
+            z = 0,
+            y = 0;
+
         for (int i=0; i<numberOfSpots; i++) {
-            if(z==30) {
-                if(x==5) {
+            if (z == 30) {
+                if (x == 5) {
                     y++;
-                    x=0;
-                    z=0;
-                } else {
-                    x+=1;
-                    z=0;
+                    x = 0;
+                    z = 0;
+                }
+                else {
+                    x += 1;
+                    z = 0;
                 }
             }
             setPassHolderSpace(new Location(y, x, z), new PassHolderSpace());
@@ -169,36 +132,32 @@ public class SimulatorView {
         updateView();
     }
 
-    public int getPassHolderSpots() {
-        return _numberOfPassHolderSpots;
-    }
-
     public void makeReservationsAt(Location loc , int minute, int hour) {
         Reservation res = new Reservation(minute, hour);
         setReservation(loc, res);
-        _numberOfReservations++;
 
         addOneCarToCount("Reservation");
         updateView();
     }
 
     public boolean setPassHolderSpace(Location loc, PassHolderSpace phs) {
-        if (!locationIsValid(loc)) {
+        if (!locationIsValid(loc))
             return false;
-        }
+
         Car oldCar = getCarAt(loc);
         if(oldCar == null) {
             _cars[loc.getFloor()][loc.getRow()][loc.getPlace()] = phs;
             phs.setLocation(loc);
             return true;
         }
+
         return false;
     }
 
     public boolean setReservation(Location loc, Reservation res) {
-        if (!locationIsValid(loc)) {
+        if (!locationIsValid(loc))
             return false;
-        }
+
         Car oldCar = getCarAt(loc);
         if(oldCar == null) {
             _cars[loc.getFloor()][loc.getRow()][loc.getPlace()] = res;
@@ -209,13 +168,13 @@ public class SimulatorView {
     }
 
     public Car removeCarAt(Location location) {
-        if (!locationIsValid(location)) {
+        if (!locationIsValid(location))
             return null;
-        }
+
         Car car = getCarAt(location);
-        if (car == null) {
+        if (getCarAt(location) == null)
             return null;
-        }
+
         _cars[location.getFloor()][location.getRow()][location.getPlace()] = null;
         car.setLocation(null);
         _numberOfOpenSpots++;
@@ -227,9 +186,8 @@ public class SimulatorView {
             for (int row = 0; row < getNumberOfRows(); row++) {
                 for (int place = 0; place < getNumberOfPlaces(); place++) {
                     Location location = new Location(floor, row, place);
-                    if (getCarAt(location) == null ) {
+                    if (getCarAt(location) == null)
                         return location;
-                    }
                 }
             }
         }
@@ -280,9 +238,8 @@ public class SimulatorView {
                 for (int place = 0; place < getNumberOfPlaces(); place++) {
                     Location location = new Location(floor, row, place);
                     Car car = getCarAt(location);
-                    if (car != null && car.getMinutesLeft() <= 0 && !car.getIsPaying()) {
+                    if (car != null && car.getMinutesLeft() <= 0 && !car.getIsPaying())
                         return car;
-                    }
                 }
             }
         }
@@ -295,12 +252,47 @@ public class SimulatorView {
                 for (int place = 0; place < getNumberOfPlaces(); place++) {
                     Location location = new Location(floor, row, place);
                     Car car = getCarAt(location);
-                    if (car != null) {
+                    if (car != null)
                         car.tick();
-                    }
                 }
             }
         }
+    }
+
+    public int getNumberOfFloors() {
+        return _numberOfFloors;
+    }
+
+    public int getNumberOfRows() {
+        return _numberOfRows;
+    }
+
+    public int getNumberOfPlaces() {
+        return _numberOfPlaces;
+    }
+
+    public int getNumberOfAdHoc() {
+        return _currentAdHoc;
+    }
+
+    public int getNumberOfPassHolders() {
+        return _currentPassHolders;
+    }
+
+    public int getNumberOfCarsWithReservation() {
+        return _currentCarsWithReservation;
+    }
+
+    public int getNumberOfOpenSpots() {
+        return _numberOfOpenSpots;
+    }
+
+    public int getNumberOfPassHolderSpots() {
+        return _numberOfPassHolderSpots;
+    }
+
+    public int getPassHolderSpots() {
+        return _numberOfPassHolderSpots;
     }
 
     private boolean locationIsValid(Location location) {
@@ -308,43 +300,5 @@ public class SimulatorView {
         int row = location.getRow();
         int place = location.getPlace();
         return !(floor < 0 || floor >= _numberOfFloors || row < 0 || row > _numberOfRows || place < 0 || place > _numberOfPlaces);
-    }
-
-    private class CarParkView {
-
-        private GraphicsContext _graphicsContext;
-        private Canvas _canvas;
-
-        public CarParkView(Canvas canvas) {
-            _canvas = canvas;
-            _graphicsContext = canvas.getGraphicsContext2D();
-        }
-
-        public void update() {
-            _graphicsContext.clearRect(0, 0, _canvas.getWidth(), _canvas.getHeight());
-
-
-            _graphicsContext.drawImage(canvasBackground, 0, 0, 560, 335);
-
-            for (int floor = 0; floor <getNumberOfFloors(); floor++) {
-                for (int row = 0; row < getNumberOfRows(); row++) {
-                    for (int place = 0; place < getNumberOfPlaces(); place++) {
-                        Location location = new Location(floor, row, place);
-                        Car car = getCarAt(location);
-                        Color color = (car == null ? Color.WHITE : car.getColor());
-                        drawParkingSpot(location, color);
-                    }
-                }
-            }
-        }
-
-        private void drawParkingSpot(Location location, Color color) {
-            _graphicsContext.setFill(color);
-            _graphicsContext.fillRect(
-                    (location.getFloor() * 200 + (1 + (int)Math.floor(location.getRow() * 0.5)) * 55 + (location.getRow() % 2) * 20) - 50,
-                    30 + location.getPlace() * 10,
-                    20 - 1,
-                    10 - 1); // TODO use dynamic size or constants
-        }
     }
 }

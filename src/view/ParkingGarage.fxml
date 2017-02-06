@@ -4,7 +4,7 @@
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.Group?>
+
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
    <top>
       <MenuBar>
@@ -44,7 +44,7 @@
               <MenuItem mnemonicParsing="false" onAction="#showAbout" text="About..." />
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" text="Views">
+            <Menu mnemonicParsing="false" text="_Views">
                 <CheckMenuItem mnemonicParsing="false" text="Graph" onAction="#setManageGraph" selected="true"/>
                 <CheckMenuItem mnemonicParsing="false" text="Revenue" onAction="#setManageRevenue" selected="true"/>
                 <CheckMenuItem mnemonicParsing="false" text="Chart" onAction="#setManageChart"  selected="true"/>
@@ -90,10 +90,10 @@
       </VBox>
    </left>
    <center>
-      <Canvas fx:id="_canvas" height="600.0" width="800.0" BorderPane.alignment="TOP_CENTER" />
+      <Canvas fx:id="canvas" height="600.0" width="800.0" BorderPane.alignment="TOP_CENTER" />
    </center>
     <right>
-        <VBox fx:id="_sidebarRight" prefWidth="300.0">
+        <VBox fx:id="sidebarRight" prefWidth="300.0">
             <children>
                     <Label fx:id="titleRev" prefHeight="20" prefWidth="300" text="Revenue" BorderPane.alignment="TOP_CENTER" />
                     <Label fx:id="dayRevenue" prefHeight="60" prefWidth="300" BorderPane.alignment="TOP_LEFT">
@@ -121,7 +121,7 @@
         </VBox>
     </right>
    <bottom>
-       <VBox fx:id="_statistics" prefHeight="50" prefWidth="1000" BorderPane.alignment="BOTTOM_LEFT">
+       <VBox fx:id="statistics" prefHeight="50" prefWidth="1000" BorderPane.alignment="BOTTOM_LEFT">
            <children>
            </children>
        </VBox>

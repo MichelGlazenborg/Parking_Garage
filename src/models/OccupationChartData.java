@@ -7,6 +7,7 @@ public class OccupationChartData {
 
     public OccupationChartData(String label) {
         _label = label;
+        _percentage = 0;
     }
 
     public OccupationChartData(String label, double percentage) {

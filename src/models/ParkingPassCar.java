@@ -1,8 +1,8 @@
 package models;
 
-import javafx.scene.paint.Color;
-
 import java.util.Random;
+
+import javafx.scene.paint.Color;
 
 public class ParkingPassCar extends Car {
 
@@ -11,6 +11,7 @@ public class ParkingPassCar extends Car {
     public ParkingPassCar() {
     	Random random = new Random();
     	int stayMinutes = (int) (120 + random.nextFloat() * 3 * 60);
+
         this.setMinutesLeft(stayMinutes);
         this.setHasToPay(false);
     }
@@ -18,6 +19,4 @@ public class ParkingPassCar extends Car {
     public Color getColor(){
     	return COLOR;
     }
-
-
 }

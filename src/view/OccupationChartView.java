@@ -1,9 +1,10 @@
 package view;
 
-import models.OccupationChart;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.*;
+
+import models.OccupationChart;
 
 public class OccupationChartView {
 

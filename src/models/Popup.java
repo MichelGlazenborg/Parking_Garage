@@ -1,7 +1,7 @@
 package models;
 
-import javafx.scene.Scene;
 import javafx.stage.Modality;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public abstract class Popup {
@@ -11,10 +11,6 @@ public abstract class Popup {
     private boolean _isResizable;
     private boolean _closeBeforeContinue;
 
-    public Popup() {
-
-    }
-
     public void init(boolean isResizable, boolean closeBeforeContinue) {
         _window = new Stage();
         _isResizable = isResizable;
@@ -22,7 +18,8 @@ public abstract class Popup {
     }
 
     public void show() {
-        if (_closeBeforeContinue) _window.initModality(Modality.APPLICATION_MODAL);
+        if (_closeBeforeContinue)
+            _window.initModality(Modality.APPLICATION_MODAL);
 
         _window.setResizable(_isResizable);
         _window.showAndWait();

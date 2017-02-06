@@ -11,29 +11,29 @@ public class Simulator {
 	private static final String PASS = "2";
 	private static final String RES = "3";
 
-	private CarQueue entranceCarQueue;
-    private CarQueue entrancePassQueue;
-    private CarQueue entranceResQueue;
-    private CarQueue paymentCarQueue;
-    private CarQueue exitCarQueue;
-    private SimulatorView simulatorView;
-    private Payment pay;
+	private CarQueue _entranceCarQueue;
+    private CarQueue _entrancePassQueue;
+    private CarQueue _entranceResQueue;
+    private CarQueue _paymentCarQueue;
+    private CarQueue _exitCarQueue;
+    private Garage _garage;
+    private Payment _pay;
 
-    private int day = 0;
-    private int hour = 8;
-    private int minute = 0;
-    private int week = 1;
+    private int _day = 0;
+    private int _hour = 8;
+    private int _minute = 0;
+    private int _week = 1;
 
-    private int weekDayArrivals = 30; // average number of arriving cars per hour
-    private int weekendArrivals = 45; // average number of arriving cars per hour
-    private int weekDayPassArrivals = 30; // average number of arriving cars per hour
-    private int weekendPassArrivals = 40; // average number of arriving cars per hour
-    private int weekDayResArrivals = 26;
-    private int weekendResArrivals = 40;
+    private int _weekDayArrivals = 30; // average number of arriving cars per hour
+    private int _weekendArrivals = 45; // average number of arriving cars per hour
+    private int _weekDayPassArrivals = 30; // average number of arriving cars per hour
+    private int _weekendPassArrivals = 40; // average number of arriving cars per hour
+    private int _weekDayResArrivals = 26;
+    private int _weekendResArrivals = 40;
 
-    private int enterSpeed = 1; // number of cars that can enter per minute
-    private int paymentSpeed = 3; // number of cars that can pay per minute
-    private int exitSpeed = 2; // number of cars that can leave per minute
+    private int _enterSpeed = 1; // number of cars that can enter per minute
+    private int _paymentSpeed = 3; // number of cars that can pay per minute
+    private int _exitSpeed = 2; // number of cars that can leave per minute
 
     private int _arrivalsOnMonday = 0;
     private int _arrivalsOnTuesday = 0;
@@ -48,24 +48,24 @@ public class Simulator {
      * The constructor of the class Simulator, runs the main simulator by handling arriving/leaving cars, keeps count of the time and Payments
      */
     public Simulator(Canvas canvas) {
-        entranceCarQueue = new CarQueue();
-        entrancePassQueue = new CarQueue();
-        entranceResQueue = new CarQueue();
-        paymentCarQueue = new CarQueue();
-        exitCarQueue = new CarQueue();
-        pay = new Payment();
-        simulatorView = new SimulatorView(canvas, 3, 6, 30);
-        pay.setCost(0.00667);
+        _entranceCarQueue = new CarQueue();
+        _entrancePassQueue = new CarQueue();
+        _entranceResQueue = new CarQueue();
+        _paymentCarQueue = new CarQueue();
+        _exitCarQueue = new CarQueue();
+        _pay = new Payment();
+        _garage = new Garage(canvas, 3, 6, 30);
+        _pay.setCost(0.00667);
         updateViews();
     }
 
 
     /**
-     * returns the current instance of simulatorView
-     * @return the current instance of the class simulatorView
+     * returns the current instance of garage
+     * @return the current instance of the class garage
      */
-    public SimulatorView getView() {
-        return simulatorView;
+    public Garage getView() {
+        return _garage;
     }
 
     /**
@@ -83,24 +83,24 @@ public class Simulator {
      */
     private void advanceTime(){
         // Advance the time by one minute.
-        minute++;
-        while (minute > 59) {
-            minute -= 60;
-            hour++;
+        _minute++;
+        while (_minute > 59) {
+            _minute -= 60;
+            _hour++;
         }
-        while (hour > 23) {
-            hour -= 24;
-            day++;
-                pay.setLasDayRevenue(pay.getDoubleDayRevenue());
-                pay.resetDayRevenue();
+        while (_hour > 23) {
+            _hour -= 24;
+            _day++;
+                _pay.setLastDayRevenue(_pay.getDoubleDayRevenue());
+                _pay.resetDayRevenue();
         }
-        while (day > 6) {
-            day -= 7;
-            week++;
+        while (_day > 6) {
+            _day -= 7;
+            _week++;
             resetArrivalCounter();
         }
-        while (week > 52) {
-            week = 1;
+        while (_week > 52) {
+            _week = 1;
         }
     }
 
@@ -112,10 +112,10 @@ public class Simulator {
      * @param minute the user entered minute
      */
     public void setTime(int week, int day, int hour, int minute) {
-        this.week = week;
-        this.day = day;
-        this.hour = hour;
-        this.minute = minute;
+        _week = week;
+        _day = day;
+        _hour = hour;
+        _minute = minute;
     }
 
     /**
@@ -124,10 +124,10 @@ public class Simulator {
      */
     public int[] getTime() {
         int[] time = new int[4];
-        time[0] = minute;
-        time[1] = hour;
-        time[2] = day;
-        time[3] = week;
+        time[0] = _minute;
+        time[1] = _hour;
+        time[2] = _day;
+        time[3] = _week;
         return time;
     }
 
@@ -136,9 +136,9 @@ public class Simulator {
      */
     private void handleEntrance(){
     	carsArriving();
-    	carsEntering(entrancePassQueue,true, false);
-    	carsEntering(entranceCarQueue,false, false);
-    	carsEntering(entranceResQueue,false, true);
+    	carsEntering(_entrancePassQueue,true, false);
+    	carsEntering(_entranceCarQueue,false, false);
+    	carsEntering(_entranceResQueue,false, true);
     }
 
     /**
@@ -154,9 +154,9 @@ public class Simulator {
      * updates the simulator view
      */
     private void updateViews(){
-    	simulatorView.tick();
+    	_garage.tick();
         // Update the car park view.
-        simulatorView.updateView();
+        _garage.updateView();
     }
 
     /**
@@ -164,7 +164,7 @@ public class Simulator {
      * @param price the price per double
      */
     public void setCost(double price) {
-        pay.setCost(price);
+        _pay.setCost(price);
     }
 
     /**
@@ -172,99 +172,79 @@ public class Simulator {
      * @param modifier the modifier for the arrival numbers
      */
     private void modifyArrivalNumbers(double modifier) {
-        weekDayArrivals *= modifier;
-        weekendArrivals *= modifier;
-        weekDayPassArrivals *= modifier;
-        weekendPassArrivals *= modifier;
-        weekDayResArrivals *= modifier;
-        weekendResArrivals *= modifier;
+        _weekDayArrivals *= modifier;
+        _weekendArrivals *= modifier;
+        _weekDayPassArrivals *= modifier;
+        _weekendPassArrivals *= modifier;
+        _weekDayResArrivals *= modifier;
+        _weekendResArrivals *= modifier;
     }
 
-    private void setArrivalNumbersBack(){
-        weekDayArrivals= 30;
-        weekendArrivals = 45;
-        weekDayPassArrivals= 30;
-        weekendPassArrivals = 40;
-        weekDayResArrivals = 26;
-        weekendResArrivals = 40;
+    private void resetArrivalNumbers(){
+        _weekDayArrivals = 30;
+        _weekendArrivals = 45;
+        _weekDayPassArrivals = 30;
+        _weekendPassArrivals = 40;
+        _weekDayResArrivals = 26;
+        _weekendResArrivals = 40;
     }
 
     /**
      * adds new cars to the carQueue's
      */
     private void carsArriving(){
-        switch(day) {
-            case 0 : {
-                if(hour > 23 && hour < 7) {
+        switch(_day) {
+            case 0:
+            case 1:
+            case 2:
+            case 3: {
+                if (_hour > 23 || _hour < 7)
                     modifyArrivalNumbers(0.5);
-                }
+
                 carsArrivingIn();
-                setArrivalNumbersBack();
+                resetArrivalNumbers();
                 break;
             }
-            case 1 : {
-                if(hour > 23 && hour < 7) {
-                    modifyArrivalNumbers(0.5);
-                }
-                carsArrivingIn();
-                setArrivalNumbersBack();
-                break;
-            }
-            case 2 : {
-                if(hour > 23 && hour < 7) {
-                    modifyArrivalNumbers(0.5);
-                }
-                carsArrivingIn();
-                setArrivalNumbersBack();
-                break;
-            }
-            case 3 : {
-                if(hour > 23 && hour < 7) {
-                    modifyArrivalNumbers(0.5);
-                }
-                carsArrivingIn();
-                setArrivalNumbersBack();
-                break;
-            }
-            case 4 : {
-                if(hour > 18 && hour < 23) {
+            case 4: {
+                if (_hour > 18)
                     modifyArrivalNumbers(2);
-                }
+
                 carsArrivingIn();
-                setArrivalNumbersBack();
+                resetArrivalNumbers();
                 break;
             }
-            case 5 : {
-                if(hour > 18 && hour < 3) {
+            case 5: {
+                if (_hour > 18 || _hour < 3) {
                     modifyArrivalNumbers(2);
                     carsArrivingIn();
-                    setArrivalNumbersBack();
+                    resetArrivalNumbers();
                 } else {
                     carsArrivingIn();
                 }
                 break;
             }
-            case 6 : {
-                if(hour > 23 && hour < 7) {
+            case 6: {
+                if(_hour > 23 || _hour < 7)
                     modifyArrivalNumbers(0.3);
-                }
+
                 carsArrivingIn();
-                setArrivalNumbersBack();
+                resetArrivalNumbers();
                 break;
             }
         }
 
     }
 
-        private void carsArrivingIn() {
-            int numberOfCars = getNumberOfCars(weekDayArrivals, weekendArrivals);
-            addArrivingCars(numberOfCars, AD_HOC);
-            numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
-            addArrivingCars(numberOfCars, PASS);
-            numberOfCars = getNumberOfCars(weekDayResArrivals, weekendResArrivals);
-            addArrivingCars(numberOfCars, RES);
-        }
+    private void carsArrivingIn() {
+        int numberOfCars = getNumberOfCars(_weekDayArrivals, _weekendArrivals);
+        addArrivingCars(numberOfCars, AD_HOC);
 
+        numberOfCars = getNumberOfCars(_weekDayPassArrivals, _weekendPassArrivals);
+        addArrivingCars(numberOfCars, PASS);
+
+        numberOfCars = getNumberOfCars(_weekDayResArrivals, _weekendResArrivals);
+        addArrivingCars(numberOfCars, RES);
+    }
 
     /**
      * removes a car from the carQueue and assigns it a parking space
@@ -273,41 +253,45 @@ public class Simulator {
     private void carsEntering(CarQueue queue, boolean passHolder, boolean hasReservation){
         double i = 0;
         // Remove car from the front of the queue and assign to a parking space.
-    	while (queue.carsInQueue() > new Random().nextInt(4) && simulatorView.getNumberOfOpenSpots() > 0 && i < enterSpeed) {
+    	while (queue.carsInQueue() > new Random().nextInt(4) && _garage.getNumberOfOpenSpots() > 0 && i < _enterSpeed) {
     	    if(!passHolder) {
     	        if(!hasReservation) {
                     AdHocCar car = (AdHocCar) queue.removeCar();
-                    Location freeLocation = simulatorView.getFirstFreeLocation();
+                    Location freeLocation = _garage.getFirstFreeLocation();
                     if(freeLocation != null) {
-                        simulatorView.setCarAt(freeLocation, car);
-                        simulatorView.addOneCarToCount("AdHocCar");
+                        _garage.setCarAt(freeLocation, car);
+                        _garage.addOneCarToCount("AdHocCar");
                     }
-                }else {
+                }
+                else {
     	            CarWithReservedSpot car = (CarWithReservedSpot) queue.removeCar();
-                    Location freeLocation = simulatorView.getFirstReservation(getTime());
+                    Location freeLocation = _garage.getFirstReservation(getTime());
                     if(freeLocation != null) {
-                        simulatorView.setCarAt(freeLocation, car);
-                        simulatorView.addOneCarToCount("CarWithReservedSpot");
+                        _garage.setCarAt(freeLocation, car);
+                        _garage.addOneCarToCount("CarWithReservedSpot");
                     }
 
                 }
-            } else if(passHolder && simulatorView.getNumberOfPassHolders() < simulatorView.getPassHolderSpots()) {
+            }
+            else if(passHolder && _garage.getNumberOfPassHolders() < _garage.getPassHolderSpots()) {
     	        ParkingPassCar car = (ParkingPassCar) queue.removeCar();
-    	        Location freeLocation = simulatorView.getFirstPassSpot();
-    	        if(freeLocation == null) {
-                    freeLocation = simulatorView.getFirstFreeLocation();
+    	        Location freeLocation = _garage.getFirstPassSpot();
+
+    	        if (freeLocation == null) {
+                    freeLocation = _garage.getFirstFreeLocation();
                     if(freeLocation != null) {
-                        simulatorView.setCarAt(freeLocation, car);
-                        simulatorView.addOneCarToCount("ParkingPassCar");
+                        _garage.setCarAt(freeLocation, car);
+                        _garage.addOneCarToCount("ParkingPassCar");
                     }
-                } else {
-                    simulatorView.setCarAt(freeLocation, car);
-                    simulatorView.addOneCarToCount("ParkingPassCar");
+                }
+                else {
+                    _garage.setCarAt(freeLocation, car);
+                    _garage.addOneCarToCount("ParkingPassCar");
                 }
             }
 			i += 0.33;
 
-    	    switch (getTime()[2]) {
+    	    switch (getTime()[1]) {
                 case 0:
                     _arrivalsOnMonday++;
                     break;
@@ -334,23 +318,23 @@ public class Simulator {
     }
 
     public CarQueue getEntranceCarQueue() {
-        return entranceCarQueue;
+        return _entranceCarQueue;
     }
 
     public CarQueue getEntrancePassQueue() {
-        return entrancePassQueue;
+        return _entrancePassQueue;
     }
 
     public CarQueue getEntranceResQueue() {
-        return entranceResQueue;
+        return _entranceResQueue;
     }
 
     public CarQueue getExitCarQueue() {
-        return exitCarQueue;
+        return _exitCarQueue;
     }
 
     public CarQueue getPaymentCarQueue() {
-        return paymentCarQueue;
+        return _paymentCarQueue;
     }
 
     public int[] getQueues() {
@@ -378,17 +362,17 @@ public class Simulator {
      */
     private void carsReadyToLeave(){
         // Add leaving cars to the payment queue.
-        Car car = simulatorView.getFirstLeavingCar();
+        Car car = _garage.getFirstLeavingCar();
         while (car != null) {
-            simulatorView.removeCarFromCount(car.getClass().getSimpleName());
+            _garage.removeCarFromCount(car.getClass().getSimpleName());
         	if (car.getHasToPay()){
 	            car.setIsPaying(true);
-	            paymentCarQueue.addCar(car);
+	            _paymentCarQueue.addCar(car);
         	}
         	else {
         		carLeavesSpot(car, (car instanceof ParkingPassCar));
         	}
-            car = simulatorView.getFirstLeavingCar();
+            car = _garage.getFirstLeavingCar();
         }
     }
 
@@ -396,44 +380,41 @@ public class Simulator {
      * Makes the cars pay
      */
     private void carsPaying(){
-        // Let cars pay.
     	int i = 0;
-    	while (paymentCarQueue.carsInQueue()>0 && i < paymentSpeed){
-            Car car = paymentCarQueue.removeCar();
+    	while (_paymentCarQueue.carsInQueue()>0 && i < _paymentSpeed){
+            Car car = _paymentCarQueue.removeCar();
             if(car.getHasToPay()) {
                 if(car.getHasReservation()) {
-                    pay.payExtra(5);
+                    _pay.payExtra(5);
                 }
-                pay.pay(car.getStayMinutes());
+                _pay.pay(car.getStayMinutes());
             }
+
             carLeavesSpot(car, (car instanceof ParkingPassCar));
             i++;
     	}
     }
 
     public BigDecimal getRevenue() {
-        return pay.getTotalRevenue();
+        return _pay.getTotalRevenue();
     }
 
     public BigDecimal getDayRevenue() {
-        return pay.getLastDayRevenue();
+        return _pay.getLastDayRevenue();
     }
 
     public BigDecimal getExpectedRevenue() {
-        int adHocCars = simulatorView.getNumberOfAdHoc();
-        int carsWithReservations = simulatorView.getNumberOfCarsWithReservation();
-        BigDecimal expectedRevenue = pay.getExpectedRevenue(adHocCars, carsWithReservations);
-        return expectedRevenue;
-
-
+        int adHocCars = _garage.getNumberOfAdHoc();
+        int carsWithReservations = _garage.getNumberOfCarsWithReservation();
+        return _pay.getExpectedRevenue(adHocCars, carsWithReservations);
     }
 
     public int[] getStatistics() {
-        int[] statistics = new int[6];
+        int[] statistics = new int[3];
 
-        statistics[0] = simulatorView.getNumberOfCarsWithReservation();
-        statistics[1] = simulatorView.getNumberOfAdHoc();
-        statistics[2] = simulatorView.getNumberOfPassHolders();
+        statistics[0] = _garage.getNumberOfCarsWithReservation();
+        statistics[1] = _garage.getNumberOfAdHoc();
+        statistics[2] = _garage.getNumberOfPassHolders();
 
         return statistics;
     }
@@ -444,8 +425,8 @@ public class Simulator {
     private void carsLeaving(){
         // Let cars leave.
     	int i = 0;
-    	while (exitCarQueue.carsInQueue()>0 && i < exitSpeed){
-            exitCarQueue.removeCar();
+    	while (_exitCarQueue.carsInQueue()>0 && i < _exitSpeed){
+            _exitCarQueue.removeCar();
             i++;
     	}
     }
@@ -460,12 +441,12 @@ public class Simulator {
         Random random = new Random();
 
         // Get the average number of cars that arrive per hour.
-        int averageNumberOfCarsPerHour = day < 5 ? weekDay : weekend;
+        int averageNumberOfCarsPerHour = _day < 5 ? weekDay : weekend;
 
         // Calculate the number of cars that arrive this minute.
         double standardDeviation = averageNumberOfCarsPerHour * 0.3;
         double numberOfCarsPerHour = averageNumberOfCarsPerHour + random.nextGaussian() * standardDeviation;
-        return (int)Math.round(numberOfCarsPerHour / 60);
+        return (int) Math.round(numberOfCarsPerHour / 60);
     }
 
     /**
@@ -478,26 +459,21 @@ public class Simulator {
     	switch(type) {
             case AD_HOC:
                 for (int i = 0; i < numberOfCars; i++) {
-                    entranceCarQueue.addCar(new AdHocCar());
+                    _entranceCarQueue.addCar(new AdHocCar());
                 }
                 break;
             case PASS:
-          
-                /*for (int i = 0; i < numberOfCars; i++) {
-                    if(simulatorView.getNumberOfPassHolderSpots() > 0)
-                    entrancePassQueue.addCar(new ParkingPassCar());*/
-  
-                if (simulatorView.getNumberOfPassHolders() < simulatorView.getNumberOfPassHolderSpots()-5){
+                if (_garage.getNumberOfPassHolders() < _garage.getNumberOfPassHolderSpots()-5){
                     for (int i = 0; i < numberOfCars; i++) {
-                        entrancePassQueue.addCar(new ParkingPassCar());
+                        _entrancePassQueue.addCar(new ParkingPassCar());
                     }
                 }
                 break;
             case RES:
                 for(int i = 0; i < numberOfCars; i++) {
                     Random ran = new Random();
-                    simulatorView.makeReservationsAt(new Location(ran.nextInt(3),ran.nextInt(6),ran.nextInt(30)), minute, hour);
-                    entranceResQueue.addCar(new CarWithReservedSpot());
+                    _garage.makeReservationsAt(new Location(ran.nextInt(3), ran.nextInt(6), ran.nextInt(30)), _minute, _hour);
+                    _entranceResQueue.addCar(new CarWithReservedSpot());
                 }
     	}
     }
@@ -508,49 +484,43 @@ public class Simulator {
      */
     private void carLeavesSpot(Car car, boolean hasParkingPass){
 		Location location = car.getLocation();
-    	simulatorView.removeCarAt(location);
+        _garage.removeCarAt(location);
 
-    	/**
-		 * Temporary fix, this should be changed as soon as the manager can decide where he/she wants the reserved
-		 * spots to be
-		 */
-    	if (hasParkingPass)
-    	    if(location.getRow() <= simulatorView.getPassHolderSpots()) {
-                simulatorView.setPassHolderSpace(location, new PassHolderSpace());
-            }
+    	if (hasParkingPass && location.getRow() <= _garage.getPassHolderSpots())
+            _garage.setPassHolderSpace(location, new PassHolderSpace());
 
-        exitCarQueue.addCar(car);
+        _exitCarQueue.addCar(car);
     }
 
-    public SimulatorView getSimulatorView() {
-        return simulatorView;
+    public Garage getGarage() {
+        return _garage;
     }
 
     public void resetRevenue() {
-        pay.reset();
-        pay.resetDayRevenue();
-        pay.setLasDayRevenue(0);
-
+        _pay.reset();
+        _pay.resetDayRevenue();
+        _pay.setLastDayRevenue(0);
     }
 
     public void resetTime() {
-        day = 0;
-        hour = 8;
-        minute = 0;
-        week = 1;
+        _day = 0;
+        _hour = 8;
+        _minute = 0;
+        _week = 1;
     }
+
     public void resetStats() {
-        while(entranceCarQueue.carsInQueue() > 0) {
-            entranceCarQueue.removeCar();
+        while (_entranceCarQueue.carsInQueue() > 0) {
+            _entranceCarQueue.removeCar();
         }
-        while(entrancePassQueue.carsInQueue() > 0) {
-            entrancePassQueue.removeCar();
+        while (_entrancePassQueue.carsInQueue() > 0) {
+            _entrancePassQueue.removeCar();
         }
-        while(entranceResQueue.carsInQueue() > 0) {
-            entranceResQueue.removeCar();
+        while (_entranceResQueue.carsInQueue() > 0) {
+            _entranceResQueue.removeCar();
         }
-        while(paymentCarQueue.carsInQueue() > 0) {
-            paymentCarQueue.removeCar();
+        while (_paymentCarQueue.carsInQueue() > 0) {
+            _paymentCarQueue.removeCar();
         }
     }
 
