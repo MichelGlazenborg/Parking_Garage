@@ -74,8 +74,8 @@ public class Simulator {
     public void tick() {
     	advanceTime();
     	handleExit();
-    	updateViews();
     	handleEntrance();
+        updateViews();
     }
 
     /**
