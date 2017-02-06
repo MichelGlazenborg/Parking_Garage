@@ -90,6 +90,8 @@ public class Controller {
         _occupationChartView = new OccupationChartView(_statsPie);
         _dailyCarsChartView = new DailyCarsChartView(_dailyCarsChart);
 
+
+
         _occupationChartView.setData();
         _dailyCarsChartView.setData();
         _sidebarRight.getChildren().add(_occupationChartView.getChart());
