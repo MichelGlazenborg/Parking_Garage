@@ -71,6 +71,7 @@ public class TimeInputPopupController extends Popup {
         _input[1] = _model.validateInput(_model.getInputDay().getText());
         _input[2] = _model.validateInput(_model.getInputHour().getText());
         _input[3] = _model.validateInput(_model.getInputMinute().getText());
+        super.close();
     }
 
     private void enableSubmitButton() {

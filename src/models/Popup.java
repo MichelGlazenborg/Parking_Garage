@@ -36,11 +36,7 @@ public abstract class Popup {
         _window.setTitle(title);
     }
 
-    public int getWidth() {
-        return (int) _window.getWidth();
-    }
-
-    public int getHeight() {
-        return (int) _window.getHeight();
+    public void close() {
+        _window.close();
     }
 }

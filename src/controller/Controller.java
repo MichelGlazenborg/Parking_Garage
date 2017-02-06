@@ -317,6 +317,9 @@ public class Controller {
     private void setTime() {
         int[] dateAndTime = getTimeInput();
 
+        if (dateAndTime[2] == 1)
+            dateAndTime[2] = 0;
+
         if(dateAndTime[0] == -1 || dateAndTime[1] == -1 || dateAndTime[2] == -1 || dateAndTime[3] == -1) {
             showError();
         } else {
@@ -327,8 +330,6 @@ public class Controller {
     }
 
     private int[] getTimeInput() {
-        int[] results = new int[4];
-
         TimeInputPopupController popup = new TimeInputPopupController();
         popup.show();
 
