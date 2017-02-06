@@ -2,6 +2,7 @@ package models;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 public class SimulatorView {
@@ -20,6 +21,8 @@ public class SimulatorView {
     private int _currentAdHoc;
     // Rename the variable below
     private int _currentCarsWithReservation;
+
+    Image image;
 
     public SimulatorView(Canvas canvas, int numberOfFloors, int numberOfRows, int numberOfPlaces) {
         _numberOfFloors = numberOfFloors;
@@ -317,6 +320,9 @@ public class SimulatorView {
 
         public void update() {
             _graphicsContext.clearRect(0, 0, _canvas.getWidth(), _canvas.getHeight());
+
+            image = new Image(SimulatorView.class.getResourceAsStream("/assets/canvasbackground.jpg"));
+            _graphicsContext.drawImage(image, 0, 0, 560, 335);
 
             for (int floor = 0; floor <getNumberOfFloors(); floor++) {
                 for (int row = 0; row < getNumberOfRows(); row++) {
