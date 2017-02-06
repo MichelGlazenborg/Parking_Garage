@@ -8,14 +8,12 @@ import javafx.scene.layout.GridPane;
 public class TimeInputPopupView {
 
     private GridPane _layout;
-    private static final int ROW_FIELD_WEEK = 2;
-    private static final int ROW_FIELD_DAY = 4;
-    private static final int ROW_FIELD_HOUR = 6;
-    private static final int ROW_FIELD_MINUTE = 8;
-    private static final int ROW_BUTTON_SUBMIT = 10;
 
-    private static final int COLUMN_LABELS = 3;
-    private static final int COLUMN_FIELDS = 5;
+    private int _labelRowNumber = 0;
+    private int _fieldRowNumber = 0;
+
+    private static final int COLUMN_LABELS = 0;
+    private static final int COLUMN_FIELDS = 1;
 
     private Button _submit;
 
@@ -26,21 +24,25 @@ public class TimeInputPopupView {
     }
 
     public void addLabels(Label week, Label day, Label hour, Label minute) {
-        GridPane.setConstraints(week, COLUMN_LABELS, ROW_FIELD_WEEK);
-        GridPane.setConstraints(day, COLUMN_LABELS, ROW_FIELD_DAY);
-        GridPane.setConstraints(hour, COLUMN_LABELS, ROW_FIELD_HOUR);
-        GridPane.setConstraints(minute, COLUMN_LABELS, ROW_FIELD_MINUTE);
+        GridPane.setConstraints(week, COLUMN_LABELS, _labelRowNumber++);
+        GridPane.setConstraints(day, COLUMN_LABELS, _labelRowNumber++);
+        GridPane.setConstraints(hour, COLUMN_LABELS, _labelRowNumber++);
+        GridPane.setConstraints(minute, COLUMN_LABELS, _labelRowNumber);
 
         _layout.getChildren().addAll(week, day, hour, minute);
     }
 
     public void addFields(TextField setWeek, TextField setDay, TextField setHour, TextField setMinute) {
-        GridPane.setConstraints(setWeek, COLUMN_FIELDS, ROW_FIELD_WEEK);
-        GridPane.setConstraints(setDay, COLUMN_FIELDS, ROW_FIELD_DAY);
-        GridPane.setConstraints(setHour, COLUMN_FIELDS, ROW_FIELD_HOUR);
-        GridPane.setConstraints(setMinute, COLUMN_FIELDS, ROW_FIELD_MINUTE);
-        GridPane.setConstraints(_submit = new Button("Submit"), COLUMN_FIELDS, ROW_BUTTON_SUBMIT);
+        GridPane.setConstraints(setWeek, COLUMN_FIELDS, _fieldRowNumber++);
+        GridPane.setConstraints(setDay, COLUMN_FIELDS, _fieldRowNumber++);
+        GridPane.setConstraints(setHour, COLUMN_FIELDS, _fieldRowNumber++);
+        GridPane.setConstraints(setMinute, COLUMN_FIELDS, _fieldRowNumber++);
+        GridPane.setConstraints(_submit = new Button("Submit"), COLUMN_FIELDS, _fieldRowNumber);
 
         _layout.getChildren().addAll(setWeek, setDay, setHour, setMinute, _submit);
+    }
+
+    public Button getSubmitButton() {
+        return _submit;
     }
 }

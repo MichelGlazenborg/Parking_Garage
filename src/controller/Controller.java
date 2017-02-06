@@ -210,7 +210,7 @@ public class Controller {
         }
     }
 
-    private void showError() {
+    public static void showError() {
         Alert error = new Alert(Alert.AlertType.WARNING);
         error.setTitle("Input error");
         error.setHeaderText(null);
@@ -317,182 +317,22 @@ public class Controller {
     private void setTime() {
         int[] dateAndTime = getTimeInput();
 
-        /*if(dateAndTime[0] == -1 || dateAndTime[1] == -1 || dateAndTime[2] == -1 || dateAndTime[3] == -1) {
+        if(dateAndTime[0] == -1 || dateAndTime[1] == -1 || dateAndTime[2] == -1 || dateAndTime[3] == -1) {
             showError();
         } else {
             sim.setTime(dateAndTime[0], dateAndTime[1], dateAndTime[2], dateAndTime[3]);
             getDate();
             clock();
-        }*/
+        }
     }
 
     private int[] getTimeInput() {
+        int[] results = new int[4];
+
         TimeInputPopupController popup = new TimeInputPopupController();
         popup.show();
 
-        return null;
-    }
-
-    /**
-     * Opens up a dialog that lets the user enter an integer which will become the new week number
-     * @return int:     the new week number that the user entered or -1 if the number is invalid
-     */
-    private int givenWeek() {
-        int week = -1;
-
-        TextInputDialog WeekDialog = new TextInputDialog("1");
-        WeekDialog.setTitle("Week Input Dialog");
-        WeekDialog.setHeaderText("Please enter any week number Between 1 and 52");
-        WeekDialog.setContentText("Week:");
-        Optional<String> WeekResult = WeekDialog.showAndWait();
-
-        boolean exceptionOccurred = false;
-        if (WeekResult.isPresent()) {
-            // Turns Optional<String> into a normal String
-            String WeekResult2 = WeekResult.get();
-            // Parses a integer from a String and tries to catch errors.
-            try {
-                week = Integer.parseInt(WeekResult2);
-            } catch (NumberFormatException exception) {
-                showError();
-                //System.out.println("error1"); ?
-                exceptionOccurred = true;
-            } finally {
-                if (week <= 0 && !exceptionOccurred) {
-                    showError();
-                    // System.out.println("error2"); ?
-                } else {
-                    // check if the entered integer is between bounds
-                    if (week <= 52) {
-                        return week;
-                    } else {
-                        return -1;
-                    }
-                }
-            }
-        }
-        // if no acceptable input was found, this will return -1 and stop the method
-        return week;
-    }
-
-    /**
-     * Opens up a dialog that lets the user enter an integer which will become the new day number
-     * @return int:     the new day number that the user entered or -1 if the number is invalid
-     */
-    private  int givenDay() {
-        int day = -1;
-
-        TextInputDialog DayDialog = new TextInputDialog("1");
-        DayDialog.setTitle("Day Input Dialog");
-        DayDialog.setHeaderText("Please enter any day number Between 1 and 7");
-        DayDialog.setContentText("Day:");
-        Optional<String> DayResult = DayDialog.showAndWait();
-
-        boolean exceptionOccurred = false;
-        if (DayResult.isPresent()) {
-            // Turns Optional<String> into a normal String
-            String DayResult2 = DayResult.get();
-            // Parses a integer from a String and tries to catch errors.
-            try {
-                day = Integer.parseInt(DayResult2);
-            } catch (NumberFormatException exception) {
-                showError();
-                exceptionOccurred = true;
-            } finally {
-                if (day <= 0 && !exceptionOccurred) {
-                    showError();
-                } else {
-                    // check if the entered integer is between bounds
-                    if (day <= 7) {
-                        return day - 1;
-                    } else {
-                        return -1;
-                    }
-                }
-            }
-        }
-        // if no acceptable input was found, this will return -1 and stop the method
-        return day;
-    }
-
-    /**
-     * Opens up a dialog that lets the user enter an integer which will become the new hour number
-     * @return int:     the new hour number that the user entered or -1 if the number is invalid
-     */
-    private  int givenHour() {
-        int hour = -1;
-
-        TextInputDialog HourDialog = new TextInputDialog("0");
-        HourDialog.setTitle("Hour Input Dialog");
-        HourDialog.setHeaderText("Please enter any Hour between 0 and 23");
-        HourDialog.setContentText("Hour:");
-        Optional<String> HourResult = HourDialog.showAndWait();
-
-        boolean exceptionOccurred = false;
-        if (HourResult.isPresent()) {
-            // Turns Optional<String> into a normal String
-            String HourResult2 = HourResult.get();
-            // Parses a integer from a String and tries to catch errors.
-            try {
-                hour = Integer.parseInt(HourResult2);
-            } catch (NumberFormatException exception) {
-                showError();
-                exceptionOccurred = true;
-            } finally {
-                if (hour <= 0 && !exceptionOccurred) {
-                    showError();
-                } else {
-                    // check if the entered integer is between bounds
-                    if (hour < 24) {
-                        return hour;
-                    } else {
-                        return -1;
-                    }
-                }
-            }
-        }
-        // if no acceptable input was found, this will return -1 and stop the method
-        return hour;
-    }
-
-    /**
-     * Opens up a dialog that lets the user enter an integer which will become the new minute number
-     * @return int:     the new minute number that the user entered or -1 if the number is invalid
-     */
-    private  int givenMinute() {
-        int minute = -1;
-
-        TextInputDialog MinuteDialog = new TextInputDialog("0");
-        MinuteDialog.setTitle("Minute Input Dialog");
-        MinuteDialog.setHeaderText("Please enter any minute between 0 and 59");
-        MinuteDialog.setContentText("Minute:");
-        Optional<String> MinuteResult = MinuteDialog.showAndWait();
-
-        boolean exceptionOccurred = false;
-        if (MinuteResult.isPresent()) {
-            // Turns Optional<String> into a normal String
-            String MinuteResult2 = MinuteResult.get();
-            // Parses a integer from a String and tries to catch errors.
-            try {
-                minute = Integer.parseInt(MinuteResult2);
-            } catch (NumberFormatException exception) {
-                showError();
-                exceptionOccurred = true;
-            } finally {
-                if (minute < 0 && !exceptionOccurred) {
-                    showError();
-                } else {
-                    // check if the entered integer is between bounds
-                    if (minute < 60) {
-                        return minute;
-                    } else {
-                        return -1;
-                    }
-                }
-            }
-        }
-        // if no acceptable input was found, this will return -1 and stop the method
-        return minute;
+        return popup.getInput();
     }
 
     /**
@@ -706,7 +546,7 @@ public class Controller {
     private String getQueueStats() {
         int[] queues = sim.getQueues();
         return("\nNumber of cars in regular entrance queue: " + queues[0] +
-                         "\nNumber of cars in passholder entrance queue: " + queues[1] +
+                         "\nNumber of cars in pass holder entrance queue: " + queues[1] +
                          "\nNumber of cars in reservations entrance queue: " + queues[2] +
                          "\nNumber of cars in exit queue: " + queues[3] +
                          "\nNumber of cars in the payment queue: " + queues[4]);

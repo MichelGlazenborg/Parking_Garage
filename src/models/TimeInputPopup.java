@@ -1,5 +1,6 @@
 package models;
 
+import controller.Controller;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -41,5 +42,39 @@ public class TimeInputPopup {
 
     public void setLayout(GridPane layout) {
         _layout = layout;
+    }
+
+    public int validateInput(String input) {
+        int inputInteger = -1;
+        boolean failed = false;
+
+        try {
+            inputInteger = Integer.parseInt(input);
+        }
+        catch (NumberFormatException e) {
+            Controller.showError();
+            failed = true;
+        }
+        finally {
+            if (inputInteger < 1 && !failed) Controller.showError();
+        }
+
+        return inputInteger;
+    }
+
+    public TextField getInputWeek() {
+        return _inputWeek;
+    }
+
+    public TextField getInputDay() {
+        return _inputDay;
+    }
+
+    public TextField getInputHour() {
+        return _inputHour;
+    }
+
+    public TextField getInputMinute() {
+        return _inputMinute;
     }
 }

@@ -28,10 +28,6 @@ public abstract class Popup {
         _window.showAndWait();
     }
 
-    public void sizeToScene() {
-        _window.sizeToScene();
-    }
-
     public void setScene(Scene scene) {
         _window.setScene(scene);
     }
