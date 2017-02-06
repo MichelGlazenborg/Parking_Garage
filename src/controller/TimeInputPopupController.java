@@ -1,26 +1,26 @@
 package controller;
 
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.Scene;
+
 import models.Popup;
 import models.TimeInputPopup;
+
 import view.TimeInputPopupView;
 
 public class TimeInputPopupController extends Popup {
 
     private GridPane _layout;
-    private Scene _scene;
     private TimeInputPopup _model;
     private TimeInputPopupView _view;
 
     private static final int SCENE_WIDTH = 400;
     private static final int SCENE_HEIGHT = 200;
 
-    private Button _submit;
     private int[] _input;
 
     public TimeInputPopupController() {
@@ -32,14 +32,11 @@ public class TimeInputPopupController extends Popup {
         _view = new TimeInputPopupView(_layout);
 
         _model = new TimeInputPopup(_view);
-        _model.setLayout(_layout);
 
         setup();
 
-        _scene = new Scene(_layout, SCENE_WIDTH, SCENE_HEIGHT);
-
         setTitle("Please enter the date and time");
-        setScene(_scene);
+        setScene(new Scene(_layout, SCENE_WIDTH, SCENE_HEIGHT));
 
         enableSubmitButton();
     }
@@ -75,7 +72,7 @@ public class TimeInputPopupController extends Popup {
     }
 
     private void enableSubmitButton() {
-        _submit = _view.getSubmitButton();
+        Button _submit = _view.getSubmitButton();
         _submit.setOnAction(e -> handleInput());
 
         _model.getInputWeek().setOnKeyPressed(e -> {

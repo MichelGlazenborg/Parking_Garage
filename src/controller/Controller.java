@@ -22,7 +22,7 @@ public class Controller {
 
     //make simulator object
 	private Simulator sim;              //makes the central simulator object
-    private SimulatorView simView;      //makes the central simulatorView object
+    private Garage _garage;      //makes the central simulatorView object
 
     private OccupationChartView _occupationChartView;     //makes the statistics graph
     private OccupationChart _statsPie;         //makes the pie graph
@@ -92,13 +92,12 @@ public class Controller {
     @FXML
     private Timeline timelineGraphs;
 
-
     /**
      * Initializes all the attributes
      */
     public void initialize() {
         sim = new Simulator(_canvas);
-        simView = sim.getSimulatorView();
+        _garage = sim.getGarage();
 
         _statsPie = new OccupationChart();
         _dailyCarsChart = new DailyCarsChart();
@@ -259,7 +258,7 @@ public class Controller {
                 } else {
                     stop();
                     reset();
-                    simView.makePassHolderSpots(spotAmount);
+                    _garage.makePassHolderSpots(spotAmount);
                 }
             }
         }
@@ -496,7 +495,7 @@ public class Controller {
 
         _statsPie.reset();
         _dailyCarsChart.reset();
-        simView.reset();
+        _garage.reset();
 
         sim.resetArrivalCounter();
         updateGraph();
@@ -588,11 +587,11 @@ public class Controller {
      */
     private void updateGraph() {
         _statsPie.update(
-            simView.getNumberOfFloors() * simView.getNumberOfRows() * simView.getNumberOfPlaces(),
-            simView.getNumberOfOpenSpots(),
-            simView.getNumberOfPassHolders(),
-            simView.getNumberOfAdHoc(),
-            simView.getNumberOfCarsWithReservation()
+            _garage.getNumberOfFloors() * _garage.getNumberOfRows() * _garage.getNumberOfPlaces(),
+            _garage.getNumberOfOpenSpots(),
+            _garage.getNumberOfPassHolders(),
+            _garage.getNumberOfAdHoc(),
+            _garage.getNumberOfCarsWithReservation()
         );
 
         _dailyCarsChart.update(

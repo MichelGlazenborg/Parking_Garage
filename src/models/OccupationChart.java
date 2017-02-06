@@ -23,10 +23,6 @@ public class OccupationChart {
         double percentagePassHolders = (double) passHolders / total * 100;
         double percentageAdHoc = (double) adHoc / total * 100;
         double percentageWithReservation = (double) reservations / total * 100;
-        double percentageTotal = percentageUnoccupied + percentageAdHoc + percentagePassHolders + percentageWithReservation;
-        
-        //if (percentageTotal < 100)
-            //percentageUnoccupied += (100 - percentageTotal);
 
         _unoccupied.setPercentage(percentageUnoccupied);
         _passHolders.setPercentage(percentagePassHolders);

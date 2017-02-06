@@ -1,10 +1,14 @@
 package models;
 
+import javafx.scene.paint.Color;
+
 public abstract class Car {
 
     private Location _location;
+
     private int _stayMinutes;
     private double _minutesLeft;
+
     private boolean _isPaying;
     private boolean _hasToPay;
     private boolean _hasReservation;
@@ -76,7 +80,9 @@ public abstract class Car {
         return _stayMinutes;
     }
 
-    public void setStayMinutes(int time) {_stayMinutes = time;}
+    public void setStayMinutes(int time) {
+        _stayMinutes = time;
+    }
 
     /**
      * Return if the car has to pay
@@ -86,8 +92,14 @@ public abstract class Car {
         return _hasToPay;
     }
 
-    public boolean getHasReservation() {return  _hasReservation; }
-    public void setHasReservation(boolean hasReservation) {_hasReservation = hasReservation; }
+    public boolean getHasReservation() {
+        return  _hasReservation;
+    }
+
+    public void setHasReservation(boolean hasReservation) {
+        _hasReservation = hasReservation;
+    }
+
     /**
      * Sets if the car has to pay
      * @param hasToPay does the car need to pay
@@ -100,5 +112,5 @@ public abstract class Car {
         _minutesLeft--;
     }
     
-    public abstract javafx.scene.paint.Color getColor();
+    public abstract Color getColor();
 }

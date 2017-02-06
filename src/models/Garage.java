@@ -5,13 +5,12 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
-public class SimulatorView {
+public class Garage {
 
     private int _numberOfFloors;
     private int _numberOfRows;
     private int _numberOfPlaces;
     private int _numberOfOpenSpots;
-    private int _numberOfReservations;
     private int _numberOfPassHolderSpots;
     private Car[][][] _cars;
 
@@ -19,12 +18,11 @@ public class SimulatorView {
 
     private int _currentPassHolders;
     private int _currentAdHoc;
-    // Rename the variable below
     private int _currentCarsWithReservation;
 
     Image canvasBackground;
 
-    public SimulatorView(Canvas canvas, int numberOfFloors, int numberOfRows, int numberOfPlaces) {
+    public Garage(Canvas canvas, int numberOfFloors, int numberOfRows, int numberOfPlaces) {
         _numberOfFloors = numberOfFloors;
         _numberOfRows = numberOfRows;
         _numberOfPlaces = numberOfPlaces;
@@ -37,7 +35,7 @@ public class SimulatorView {
         _currentAdHoc = 0;
         _currentCarsWithReservation = 0;
 
-        canvasBackground = new Image(SimulatorView.class.getResourceAsStream("/assets/canvasbackground.jpg"));
+        canvasBackground = new Image(Garage.class.getResourceAsStream("/assets/canvasbackground.jpg"));
     }
 
     public void updateView() {
@@ -176,7 +174,6 @@ public class SimulatorView {
     public void makeReservationsAt(Location loc , int minute, int hour) {
         Reservation res = new Reservation(minute, hour);
         setReservation(loc, res);
-        _numberOfReservations++;
 
         addOneCarToCount("Reservation");
         updateView();
