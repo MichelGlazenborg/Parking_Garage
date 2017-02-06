@@ -4,6 +4,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import view.GarageView;
 
 public class Garage {
 
@@ -14,13 +15,11 @@ public class Garage {
     private int _numberOfPassHolderSpots;
     private Car[][][] _cars;
 
-    private CarParkView _carParkView;
+    private GarageView _garageView;
 
     private int _currentPassHolders;
     private int _currentAdHoc;
     private int _currentCarsWithReservation;
-
-    Image canvasBackground;
 
     public Garage(Canvas canvas, int numberOfFloors, int numberOfRows, int numberOfPlaces) {
         _numberOfFloors = numberOfFloors;
@@ -29,17 +28,15 @@ public class Garage {
         _numberOfOpenSpots = numberOfFloors * numberOfRows * numberOfPlaces;
         _numberOfPassHolderSpots = -1;
         _cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
-        _carParkView = new CarParkView(canvas);
+        _garageView = new GarageView(canvas, this);
 
         _currentPassHolders = 0;
         _currentAdHoc = 0;
         _currentCarsWithReservation = 0;
-
-        canvasBackground = new Image(Garage.class.getResourceAsStream("/assets/canvasbackground.jpg"));
     }
 
     public void updateView() {
-        _carParkView.update();
+        _garageView.update();
     }
 
     public int getNumberOfFloors() {
@@ -146,19 +143,21 @@ public class Garage {
      */
     public void makePassHolderSpots(int numberOfSpots) {
         _numberOfPassHolderSpots = numberOfSpots;
-        int x,z,y;
-        x=0;
-        z=0;
-        y=0;
+
+        int x = 0,
+            z = 0,
+            y = 0;
+
         for (int i=0; i<numberOfSpots; i++) {
-            if(z==30) {
-                if(x==5) {
+            if (z == 30) {
+                if (x == 5) {
                     y++;
-                    x=0;
-                    z=0;
-                } else {
-                    x+=1;
-                    z=0;
+                    x = 0;
+                    z = 0;
+                }
+                else {
+                    x += 1;
+                    z = 0;
                 }
             }
             setPassHolderSpace(new Location(y, x, z), new PassHolderSpace());
@@ -180,22 +179,23 @@ public class Garage {
     }
 
     public boolean setPassHolderSpace(Location loc, PassHolderSpace phs) {
-        if (!locationIsValid(loc)) {
+        if (!locationIsValid(loc))
             return false;
-        }
+
         Car oldCar = getCarAt(loc);
         if(oldCar == null) {
             _cars[loc.getFloor()][loc.getRow()][loc.getPlace()] = phs;
             phs.setLocation(loc);
             return true;
         }
+
         return false;
     }
 
     public boolean setReservation(Location loc, Reservation res) {
-        if (!locationIsValid(loc)) {
+        if (!locationIsValid(loc))
             return false;
-        }
+
         Car oldCar = getCarAt(loc);
         if(oldCar == null) {
             _cars[loc.getFloor()][loc.getRow()][loc.getPlace()] = res;
@@ -206,13 +206,13 @@ public class Garage {
     }
 
     public Car removeCarAt(Location location) {
-        if (!locationIsValid(location)) {
+        if (!locationIsValid(location))
             return null;
-        }
+
         Car car = getCarAt(location);
-        if (car == null) {
+        if (getCarAt(location) == null)
             return null;
-        }
+
         _cars[location.getFloor()][location.getRow()][location.getPlace()] = null;
         car.setLocation(null);
         _numberOfOpenSpots++;
@@ -224,9 +224,8 @@ public class Garage {
             for (int row = 0; row < getNumberOfRows(); row++) {
                 for (int place = 0; place < getNumberOfPlaces(); place++) {
                     Location location = new Location(floor, row, place);
-                    if (getCarAt(location) == null ) {
+                    if (getCarAt(location) == null)
                         return location;
-                    }
                 }
             }
         }
@@ -277,9 +276,8 @@ public class Garage {
                 for (int place = 0; place < getNumberOfPlaces(); place++) {
                     Location location = new Location(floor, row, place);
                     Car car = getCarAt(location);
-                    if (car != null && car.getMinutesLeft() <= 0 && !car.getIsPaying()) {
+                    if (car != null && car.getMinutesLeft() <= 0 && !car.getIsPaying())
                         return car;
-                    }
                 }
             }
         }
@@ -292,9 +290,8 @@ public class Garage {
                 for (int place = 0; place < getNumberOfPlaces(); place++) {
                     Location location = new Location(floor, row, place);
                     Car car = getCarAt(location);
-                    if (car != null) {
+                    if (car != null)
                         car.tick();
-                    }
                 }
             }
         }
@@ -305,43 +302,5 @@ public class Garage {
         int row = location.getRow();
         int place = location.getPlace();
         return !(floor < 0 || floor >= _numberOfFloors || row < 0 || row > _numberOfRows || place < 0 || place > _numberOfPlaces);
-    }
-
-    private class CarParkView {
-
-        private GraphicsContext _graphicsContext;
-        private Canvas _canvas;
-
-        public CarParkView(Canvas canvas) {
-            _canvas = canvas;
-            _graphicsContext = canvas.getGraphicsContext2D();
-        }
-
-        public void update() {
-            _graphicsContext.clearRect(0, 0, _canvas.getWidth(), _canvas.getHeight());
-
-
-            _graphicsContext.drawImage(canvasBackground, 0, 0, 560, 335);
-
-            for (int floor = 0; floor <getNumberOfFloors(); floor++) {
-                for (int row = 0; row < getNumberOfRows(); row++) {
-                    for (int place = 0; place < getNumberOfPlaces(); place++) {
-                        Location location = new Location(floor, row, place);
-                        Car car = getCarAt(location);
-                        Color color = (car == null ? Color.WHITE : car.getColor());
-                        drawParkingSpot(location, color);
-                    }
-                }
-            }
-        }
-
-        private void drawParkingSpot(Location location, Color color) {
-            _graphicsContext.setFill(color);
-            _graphicsContext.fillRect(
-                    (location.getFloor() * 200 + (1 + (int)Math.floor(location.getRow() * 0.5)) * 55 + (location.getRow() % 2) * 20) - 50,
-                    30 + location.getPlace() * 10,
-                    20 - 1,
-                    10 - 1); // TODO use dynamic size or constants
-        }
     }
 }
