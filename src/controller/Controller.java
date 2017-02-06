@@ -2,7 +2,6 @@ package controller;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Alert;
@@ -29,7 +28,6 @@ public class Controller {
     private DailyCarsChart _dailyCarsChart;
     private DailyCarsChartView _dailyCarsChartView;
 
-    private Alert stats;
     private boolean willShowStats;
 
     private double speed = 1;
@@ -105,10 +103,9 @@ public class Controller {
 
     /**
      * Closes the app
-     * @paramActionEvent e     The action event
      */
     @FXML
-    private void closeApp(ActionEvent e) {
+    private void closeApp() {
         System.exit(0);
     }
 
@@ -215,7 +212,7 @@ public class Controller {
         speed = 1;
     }
 
-    private static void showError() {
+    public static void showError() {
         Alert error = new Alert(Alert.AlertType.WARNING);
         error.setTitle("Input error");
         error.setHeaderText(null);
@@ -410,7 +407,7 @@ public class Controller {
     }
 
     private void showStats() {
-        stats = new Alert(Alert.AlertType.INFORMATION);
+        Alert stats = new Alert(Alert.AlertType.INFORMATION);
         stats.setWidth(500);
         stats.setHeight(750);
         stats.setHeaderText(null);
