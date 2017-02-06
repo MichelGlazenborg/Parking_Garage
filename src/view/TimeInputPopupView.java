@@ -1,5 +1,6 @@
 package view;
 
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -11,9 +12,12 @@ public class TimeInputPopupView {
     private static final int ROW_FIELD_DAY = 4;
     private static final int ROW_FIELD_HOUR = 6;
     private static final int ROW_FIELD_MINUTE = 8;
+    private static final int ROW_BUTTON_SUBMIT = 10;
 
-    private static final int COLUMN_LABELS = 1;
-    private static final int COLUMN_FIELDS = 2;
+    private static final int COLUMN_LABELS = 3;
+    private static final int COLUMN_FIELDS = 5;
+
+    private Button _submit;
 
     public TimeInputPopupView(GridPane layout) {
         _layout = layout;
@@ -35,7 +39,8 @@ public class TimeInputPopupView {
         GridPane.setConstraints(setDay, COLUMN_FIELDS, ROW_FIELD_DAY);
         GridPane.setConstraints(setHour, COLUMN_FIELDS, ROW_FIELD_HOUR);
         GridPane.setConstraints(setMinute, COLUMN_FIELDS, ROW_FIELD_MINUTE);
+        GridPane.setConstraints(_submit = new Button("Submit"), COLUMN_FIELDS, ROW_BUTTON_SUBMIT);
 
-        _layout.getChildren().addAll(setWeek, setDay, setHour, setMinute);
+        _layout.getChildren().addAll(setWeek, setDay, setHour, setMinute, _submit);
     }
 }
