@@ -22,7 +22,7 @@ public class Simulator {
     private int day = 0;
     private int hour = 8;
     private int minute = 0;
-    private int week = 0;
+    private int week = 1;
 
     private int weekDayArrivals= 30; // average number of arriving cars per hour
     private int weekendArrivals = 45; // average number of arriving cars per hour
@@ -98,6 +98,9 @@ public class Simulator {
             day -= 7;
             week++;
             resetArrivalCounter();
+        }
+        while (week > 52) {
+            week = 1;
         }
     }
 
@@ -534,7 +537,7 @@ public class Simulator {
         day = 0;
         hour = 8;
         minute = 0;
-        week = 0;
+        week = 1;
     }
     public void resetStats() {
         while(entranceCarQueue.carsInQueue() > 0) {
