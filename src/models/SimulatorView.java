@@ -318,13 +318,11 @@ public class SimulatorView {
         public CarParkView(Canvas canvas) {
             _canvas = canvas;
             _graphicsContext = canvas.getGraphicsContext2D();
+            _graphicsContext.drawImage(canvasBackground, 0, 0, 560, 335);
         }
 
         public void update() {
             _graphicsContext.clearRect(0, 0, _canvas.getWidth(), _canvas.getHeight());
-
-
-            _graphicsContext.drawImage(canvasBackground, 0, 0, 560, 335);
 
             for (int floor = 0; floor <getNumberOfFloors(); floor++) {
                 for (int row = 0; row < getNumberOfRows(); row++) {
