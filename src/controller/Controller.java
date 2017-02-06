@@ -663,13 +663,13 @@ public class Controller {
      */
     @FXML
     private void getRevenue(){
-        showRevenue("The total revenue since the start is:\n€" + sim.getRevenue() + "0\n\n" +
-                    "The expected revenue of all the cars\n still in the garage is:\n€" + sim.getExpectedRevenue() + "0\n");
+        showRevenue("The total revenue since the start is:\n€" + sim.getRevenue() + "\n\n" +
+                    "The expected revenue of all the cars\n still in the garage is:\n€" + sim.getExpectedRevenue() + "\n");
     }
 
     @FXML
     private void getDayRevenue(){
-        showDayRevenue("The total daily revenue of yesterday is:\n€" + sim.getDayRevenue() + "0\n\n");
+        showDayRevenue("The total daily revenue of yesterday is:\n€" + sim.getDayRevenue() + "\n\n");
 
     }
 
