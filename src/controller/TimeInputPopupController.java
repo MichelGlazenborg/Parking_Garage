@@ -67,10 +67,10 @@ public class TimeInputPopupController extends Popup {
     }
 
     private void handleInput() {
-        _input[0] = _model.validateInput(_model.getInputWeek().getText());
-        _input[1] = _model.validateInput(_model.getInputDay().getText());
-        _input[2] = _model.validateInput(_model.getInputHour().getText());
-        _input[3] = _model.validateInput(_model.getInputMinute().getText());
+        _input[0] = _model.validateInput(_model.getInputWeek().getText(), 52);
+        _input[1] = _model.validateInput(_model.getInputDay().getText(), 7);
+        _input[2] = _model.validateInput(_model.getInputHour().getText(), 24);
+        _input[3] = _model.validateInput(_model.getInputMinute().getText(), 60);
         super.close();
     }
 
