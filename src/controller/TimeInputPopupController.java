@@ -1,0 +1,97 @@
+package controller;
+
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import models.Popup;
+import models.TimeInputPopup;
+import view.TimeInputPopupView;
+
+public class TimeInputPopupController extends Popup {
+
+    private GridPane _layout;
+    private Scene _scene;
+    private TimeInputPopup _model;
+    private TimeInputPopupView _view;
+
+    private static final int SCENE_WIDTH = 400;
+    private static final int SCENE_HEIGHT = 200;
+
+    private Button _submit;
+    private int[] _input;
+
+    public TimeInputPopupController() {
+        _input = new int[4];
+        init(true, true);
+
+        _layout = new GridPane();
+        setupLayout();
+        _view = new TimeInputPopupView(_layout);
+
+        _model = new TimeInputPopup(_view);
+        _model.setLayout(_layout);
+
+        setup();
+
+        _scene = new Scene(_layout, SCENE_WIDTH, SCENE_HEIGHT);
+
+        setTitle("Please enter the date and time");
+        setScene(_scene);
+
+        enableSubmitButton();
+    }
+
+    public void show() {
+        super.show();
+    }
+
+    public int[] getInput() {
+        return _input;
+    }
+
+    private void setupLayout() {
+        ColumnConstraints colLabel = new ColumnConstraints();
+        ColumnConstraints colFields = new ColumnConstraints();
+
+        colLabel.setPercentWidth(50);
+        colFields.setPercentWidth(50);
+        _layout.getColumnConstraints().addAll(colLabel, colFields);
+        _layout.setPadding(new Insets(20, 20, 20, 20));
+    }
+
+    private void setup() {
+        _model.setFields();
+    }
+
+    private void handleInput() {
+        _input[0] = _model.validateInput(_model.getInputWeek().getText());
+        _input[1] = _model.validateInput(_model.getInputDay().getText());
+        _input[2] = _model.validateInput(_model.getInputHour().getText());
+        _input[3] = _model.validateInput(_model.getInputMinute().getText());
+        super.close();
+    }
+
+    private void enableSubmitButton() {
+        _submit = _view.getSubmitButton();
+        _submit.setOnAction(e -> handleInput());
+
+        _model.getInputWeek().setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ENTER) handleInput();
+        });
+
+        _model.getInputDay().setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ENTER) handleInput();
+        });
+
+        _model.getInputHour().setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ENTER) handleInput();
+        });
+
+        _model.getInputMinute().setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ENTER) handleInput();
+        });
+    }
+}
