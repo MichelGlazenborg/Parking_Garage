@@ -317,8 +317,7 @@ public class Controller {
     private void setTime() {
         int[] dateAndTime = getTimeInput();
 
-        if (dateAndTime[2] == 1)
-            dateAndTime[2] = 0;
+        dateAndTime[2]--;
 
         if(dateAndTime[0] == -1 || dateAndTime[1] == -1 || dateAndTime[2] == -1 || dateAndTime[3] == -1) {
             showError();
