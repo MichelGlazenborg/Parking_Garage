@@ -4,7 +4,9 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -35,6 +37,12 @@ public class Controller {
     private double speed = 1;
     private static final String version = "1.0";
 
+    private boolean boolRev = true;
+    private boolean boolGraph = true;
+    private boolean boolTime = true;
+
+    private PieChart _object;
+
     @FXML
     private VBox _statistics;
 
@@ -63,6 +71,9 @@ public class Controller {
     private Button button_operate6;     //makes button 6
   
     @FXML
+    private Label titleTime;
+
+    @FXML
     private Label date;                 //makes the label with the week and day
 
     @FXML
@@ -75,10 +86,15 @@ public class Controller {
     private Label dayRevenue;           //makes the label with the total day revenue
 
     @FXML
+    private Label titleRev;
+
+    @FXML
     private Timeline timeline;          //makes the timeline object
 
     @FXML
     private Timeline timelineGraphs;
+
+
     /**
      * Initializes all the attributes
      */
@@ -94,7 +110,11 @@ public class Controller {
 
         _occupationChartView.setData();
         _dailyCarsChartView.setData();
-        _sidebarRight.getChildren().add(_occupationChartView.getChart());
+
+        _object = _occupationChartView.getChart();
+
+        _sidebarRight.getChildren().add(_object);
+
         _statistics.getChildren().add(_dailyCarsChartView.getChart());
 
         getDate();
@@ -159,24 +179,15 @@ public class Controller {
         }));
 
         timelineGraphs.getKeyFrames().add(new KeyFrame(Duration.millis(Math.round(1000/speed)), e -> {
-            getDate();
-            getRevenue();
-            getDayRevenue();
-            getQueueStats();
-            getStatistics();
-            updateGraph();
+            update();
         }));
 
         timeline.play();
         timelineGraphs.play();
+
         timeline.setOnFinished(e -> {
             timelineGraphs.stop();
-            getDate();
-            getRevenue();
-            getDayRevenue();
-            getQueueStats();
-            getStatistics();
-            updateGraph();
+            update();
             if(willShowStats) {
                 showStats();
             }
@@ -726,6 +737,7 @@ public class Controller {
         if (timeline != null || timelineGraphs != null) {
             timeline.stop();
             timelineGraphs.stop();
+            update();
             disableButtons(false);
         }
     }
@@ -754,5 +766,51 @@ public class Controller {
 
         _occupationChartView.update();
         _dailyCarsChartView.update();
+    }
+
+    private void update() {
+        getDate();
+        getRevenue();
+        getDayRevenue();
+        getQueueStats();
+        getStatistics();
+        updateGraph();
+    }
+    @FXML
+    private void setManageGraph() {
+        _statistics.setManaged(!boolGraph);
+        _statistics.setVisible(!boolGraph);
+        this.boolGraph = !boolGraph;
+    }
+
+    @FXML
+    private void setManageRevenue() {
+        setVisible(titleRev, boolRev);
+        setVisible(dayRevenue,boolRev);
+        setVisible(revenue,boolRev);
+        this.boolRev = !boolRev;
+    }
+
+    @FXML
+    private void setManageChart() {
+        if (_sidebarRight.getChildren().contains(_object)) {
+            _sidebarRight.getChildren().remove(_object);
+        }
+        else {
+            _sidebarRight.getChildren().add(_object);
+        }
+    }
+
+    @FXML
+    private void setManageTime() {
+        setVisible(titleTime, boolTime);
+        setVisible(date,boolTime);
+        setVisible(clock,boolTime);
+        this.boolTime = !boolTime;
+    }
+
+    private void setVisible(Node node, boolean bool) {
+        node.setManaged(!bool);
+        node.setVisible(!bool);
     }
 }
