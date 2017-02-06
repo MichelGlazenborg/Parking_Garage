@@ -3,8 +3,8 @@ package models;
 public class OccupationChart {
 
     private OccupationChartData _unoccupied;
-    private OccupationChartData _passholders;
-    private OccupationChartData _adhoc;
+    private OccupationChartData _passHolders;
+    private OccupationChartData _adHoc;
     private OccupationChartData _carsWithReservations;
 
     public OccupationChart() {
@@ -13,8 +13,8 @@ public class OccupationChart {
 
     public void reset() {
         _unoccupied = new OccupationChartData("Unoccupied", 100);
-        _passholders = new OccupationChartData("Pass holders");
-        _adhoc = new OccupationChartData("AdHoc");
+        _passHolders = new OccupationChartData("Pass holders");
+        _adHoc = new OccupationChartData("AdHoc");
         _carsWithReservations = new OccupationChartData("With reservation");
     }
 
@@ -29,8 +29,8 @@ public class OccupationChart {
             //percentageUnoccupied += (100 - percentageTotal);
 
         _unoccupied.setPercentage(percentageUnoccupied);
-        _passholders.setPercentage(percentagePassHolders);
-        _adhoc.setPercentage(percentageAdHoc);
+        _passHolders.setPercentage(percentagePassHolders);
+        _adHoc.setPercentage(percentageAdHoc);
         _carsWithReservations.setPercentage(percentageWithReservation);
     }
 
@@ -39,11 +39,11 @@ public class OccupationChart {
     }
 
     public OccupationChartData getPassHolders() {
-        return _passholders;
+        return _passHolders;
     }
 
     public OccupationChartData getAdHoc() {
-        return _adhoc;
+        return _adHoc;
     }
 
     public OccupationChartData getCarsWithReservation() {
