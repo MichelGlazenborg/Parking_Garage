@@ -271,14 +271,23 @@ public class Garage {
         return _numberOfPlaces;
     }
 
+<<<<<<< HEAD:src/models/Garage.java
     public int getNumberOfAdHoc() {
         return _currentAdHoc;
     }
+=======
+        public CarParkView(Canvas canvas) {
+            _canvas = canvas;
+            _graphicsContext = canvas.getGraphicsContext2D();
+            _graphicsContext.drawImage(canvasBackground, 0, 0, 560, 335);
+        }
+>>>>>>> update:src/models/SimulatorView.java
 
     public int getNumberOfPassHolders() {
         return _currentPassHolders;
     }
 
+<<<<<<< HEAD:src/models/Garage.java
     public int getNumberOfCarsWithReservation() {
         return _currentCarsWithReservation;
     }
@@ -290,6 +299,19 @@ public class Garage {
     public int getNumberOfPassHolderSpots() {
         return _numberOfPassHolderSpots;
     }
+=======
+            for (int floor = 0; floor <getNumberOfFloors(); floor++) {
+                for (int row = 0; row < getNumberOfRows(); row++) {
+                    for (int place = 0; place < getNumberOfPlaces(); place++) {
+                        Location location = new Location(floor, row, place);
+                        Car car = getCarAt(location);
+                        Color color = (car == null ? Color.WHITE : car.getColor());
+                        drawParkingSpot(location, color);
+                    }
+                }
+            }
+        }
+>>>>>>> update:src/models/SimulatorView.java
 
     public int getPassHolderSpots() {
         return _numberOfPassHolderSpots;
