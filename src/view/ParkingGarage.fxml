@@ -4,6 +4,7 @@
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.Group?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
    <top>
       <MenuBar>
@@ -43,6 +44,12 @@
               <MenuItem mnemonicParsing="false" onAction="#showAbout" text="About..." />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Views">
+                <CheckMenuItem mnemonicParsing="false" text="Graph" onAction="#setManageGraph" selected="true"/>
+                <CheckMenuItem mnemonicParsing="false" text="Revenue" onAction="#setManageRevenue" selected="true"/>
+                <CheckMenuItem mnemonicParsing="false" text="Chart" onAction="#setManageChart"  selected="true"/>
+                <CheckMenuItem mnemonicParsing="false" text="Time" onAction="#setManageTime"  selected="true"/>
+            </Menu>
         </menus>
       </MenuBar>
    </top>
@@ -88,28 +95,28 @@
     <right>
         <VBox fx:id="_sidebarRight" prefWidth="300.0">
             <children>
-                <Label fx:id="titleRev" prefHeight="20" prefWidth="300" text="Revenue" BorderPane.alignment="TOP_CENTER" />
-                <Label fx:id="dayRevenue" prefHeight="60" prefWidth="300" BorderPane.alignment="TOP_LEFT">
-                    <VBox.margin>
-                        <Insets left="15.0" right="15.0" />
-                    </VBox.margin>
-                </Label>
-                <Label fx:id="revenue" prefHeight="200" prefWidth="320" BorderPane.alignment="TOP_RIGHT">
-                    <VBox.margin>
-                        <Insets left="15.0" right="15.0" />
-                    </VBox.margin>
-                </Label>
-                <Label fx:id="titleTime" prefHeight="20" prefWidth="300" text="Time" BorderPane.alignment="CENTER" />
-                <Label fx:id="date" prefHeight="70" prefWidth="300" BorderPane.alignment="TOP_LEFT">
-                    <VBox.margin>
-                        <Insets left="15.0" right="15.0" />
-                    </VBox.margin>
-                </Label>
-                <Label fx:id="clock" prefHeight="70" prefWidth="300">
-                    <VBox.margin>
-                        <Insets left="15.0" right="15.0" />
-                    </VBox.margin>
-                </Label>
+                    <Label fx:id="titleRev" prefHeight="20" prefWidth="300" text="Revenue" BorderPane.alignment="TOP_CENTER" />
+                    <Label fx:id="dayRevenue" prefHeight="60" prefWidth="300" BorderPane.alignment="TOP_LEFT">
+                        <VBox.margin>
+                            <Insets left="15.0" right="15.0" />
+                        </VBox.margin>
+                    </Label>
+                    <Label fx:id="revenue" prefHeight="200" prefWidth="320" BorderPane.alignment="TOP_RIGHT">
+                        <VBox.margin>
+                            <Insets left="15.0" right="15.0" />
+                        </VBox.margin>
+                    </Label>
+                    <Label fx:id="titleTime" prefHeight="20" prefWidth="300" text="Time" BorderPane.alignment="CENTER" />
+                    <Label fx:id="date" prefHeight="70" prefWidth="300" BorderPane.alignment="TOP_LEFT">
+                        <VBox.margin>
+                            <Insets left="15.0" right="15.0" />
+                        </VBox.margin>
+                    </Label>
+                    <Label fx:id="clock" prefHeight="70" prefWidth="300">
+                        <VBox.margin>
+                            <Insets left="15.0" right="15.0" />
+                        </VBox.margin>
+                    </Label>
             </children>
         </VBox>
     </right>
