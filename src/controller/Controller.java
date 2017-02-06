@@ -215,7 +215,7 @@ public class Controller {
         speed = 1;
     }
 
-    private static void showError() {
+    public static void showError() {
         Alert error = new Alert(Alert.AlertType.WARNING);
         error.setTitle("Input error");
         error.setHeaderText(null);
@@ -297,7 +297,7 @@ public class Controller {
     private void setTime() {
         int[] dateAndTime = getTimeInput();
 
-        dateAndTime[2]--;
+        dateAndTime[1]--;
 
         if(dateAndTime[0] == -1 || dateAndTime[1] == -1 || dateAndTime[2] == -1 || dateAndTime[3] == -1) {
             showError();

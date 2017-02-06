@@ -44,7 +44,7 @@ public class TimeInputPopup {
         _layout = layout;
     }
 
-    public int validateInput(String input) {
+    public int validateInput(String input, int maxInput) {
         int inputInteger = -1;
         boolean failed = false;
 
@@ -57,6 +57,7 @@ public class TimeInputPopup {
         }
         finally {
             if (inputInteger < 1 && !failed) Controller.showError();
+            else if (inputInteger >= maxInput) Controller.showError();
         }
 
         return inputInteger;
