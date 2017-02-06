@@ -2,6 +2,7 @@ package models;
 
 import javafx.scene.canvas.Canvas;
 
+import java.math.BigDecimal;
 import java.util.Random;
 
 public class Simulator {
@@ -54,7 +55,7 @@ public class Simulator {
         exitCarQueue = new CarQueue();
         pay = new Payment();
         simulatorView = new SimulatorView(canvas, 3, 6, 30);
-        pay.setCost(0.0067);
+        pay.setCost(0.00667);
         updateViews();
     }
 
@@ -90,7 +91,7 @@ public class Simulator {
         while (hour > 23) {
             hour -= 24;
             day++;
-                pay.setLasDayRevenue(pay.getDayRevenue());
+                pay.setLasDayRevenue(pay.getDoubleDayRevenue());
                 pay.resetDayRevenue();
         }
         while (day > 6) {
@@ -407,19 +408,20 @@ public class Simulator {
     	}
     }
 
-    public double getRevenue() {
+    public BigDecimal getRevenue() {
         return pay.getTotalRevenue();
     }
 
-    public double getDayRevenue() {
+    public BigDecimal getDayRevenue() {
         return pay.getLastDayRevenue();
     }
 
-    public double getExpectedRevenue() {
+    public BigDecimal getExpectedRevenue() {
         int adHocCars = simulatorView.getNumberOfAdHoc();
         int carsWithReservations = simulatorView.getNumberOfCarsWithReservation();
-        double expectedRevenue = pay.getExpectedRevenue(adHocCars, carsWithReservations);
+        BigDecimal expectedRevenue = pay.getExpectedRevenue(adHocCars, carsWithReservations);
         return expectedRevenue;
+
 
     }
 
