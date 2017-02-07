@@ -161,7 +161,7 @@ public class Controller {
         _timeline.getKeyFrames().add(new KeyFrame(Duration.millis(Math.round(100 / _speed)), e -> {
             _sim.tick();
             clock();
-            remainingTicks = remainingTicks - 1;
+            _remainingTicks = _remainingTicks - 1;
         }));
 
         _timelineGraphs.getKeyFrames().add(new KeyFrame(Duration.millis(Math.round(500)), e -> {
@@ -207,7 +207,7 @@ public class Controller {
                     _speed = a;
 
                 stop();
-                tickFor(remainingTicks);
+                tickFor(_remainingTicks);
             }
         }
     }
@@ -215,6 +215,8 @@ public class Controller {
     @FXML
     private void resetSpeed(){
         _speed = 1;
+        stop();
+        tickFor(_remainingTicks);
     }
 
     public static void showError() {
