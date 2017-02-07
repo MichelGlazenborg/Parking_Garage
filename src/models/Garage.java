@@ -82,7 +82,7 @@ public class Garage {
     }
 
     public void playSound() {
-        String musicFile = "src/ping.mp3";
+        String musicFile = "src/assets/ping.mp3";
 
         Media sound = new Media(new File(musicFile).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
