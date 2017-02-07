@@ -287,7 +287,7 @@ public class Simulator {
                     _garage.addOneCarToCount("ParkingPassCar");
                 }
             }
-			i += 0.33;
+			i += 1;
 
     	    switch (getTime()[2]) {
                 case 0:
