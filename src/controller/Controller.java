@@ -90,8 +90,6 @@ public class Controller {
         _occupationChartView = new OccupationChartView(_statsPie);
         _dailyCarsChartView = new DailyCarsChartView(_dailyCarsChart);
 
-
-
         _occupationChartView.setData();
         _dailyCarsChartView.setData();
 
@@ -143,6 +141,91 @@ public class Controller {
         tickFor(1440);
     }
 
+    @FXML
+    private void makeFloors() {
+        TextInputDialog dialog = new TextInputDialog("3");
+        dialog.setTitle("Set number of floors");
+        dialog.setContentText("Number of floors between 1 and 4: ");
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            String result2 = result.get();
+            // Parses a integer from a String and tries to catch errors.
+            int floors = 0;
+            try {
+                floors = Integer.parseInt(result2);
+            } catch (NumberFormatException exception) {
+                showError();
+            } finally {
+                if (floors <= 0)
+                    showError();
+                else if (floors > 4)
+                    showError();
+                else {
+                    // erase current garage and make a new one
+                    _garage.eraseCanvas();
+                    _garage.set_numberOfFloors(floors);
+                    _garage.updateView();
+                }
+            }
+        }
+    }
+
+    @FXML
+    private void makeRows() {
+        TextInputDialog dialog = new TextInputDialog("6");
+        dialog.setTitle("Set number of rows");
+        dialog.setContentText("Number of rows between 1 and 10: ");
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            String result2 = result.get();
+            // Parses a integer from a String and tries to catch errors.
+            int rows = 0;
+            try {
+                rows = Integer.parseInt(result2);
+            } catch (NumberFormatException exception) {
+                showError();
+            } finally {
+                if (rows <= 0)
+                    showError();
+                else if (rows > 10)
+                    showError();
+                else {
+                    // erase current garage and make a new one
+                    _garage.eraseCanvas();
+                    _garage.set_numberOfRows(rows);
+                    _garage.updateView();
+                }
+            }
+        }
+    }
+    @FXML
+    private void makePlaces() {
+        TextInputDialog dialog = new TextInputDialog("30");
+        dialog.setTitle("Set number of places");
+        dialog.setContentText("Number of places between 1 and 50: ");
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            String result2 = result.get();
+            // Parses a integer from a String and tries to catch errors.
+            int places = 0;
+            try {
+                places = Integer.parseInt(result2);
+            } catch (NumberFormatException exception) {
+                showError();
+            } finally {
+                if (places <= 0)
+                    showError();
+                else if (places > 50)
+                    showError();
+                else {
+                    // erase current garage and make a new one
+                    _garage.eraseCanvas();
+                    _garage.set_numberOfPlaces(places);
+                    _garage.updateView();
+                }
+            }
+        }
+    }
     /**
      * Makes the simulator tick for any number of ticks
      * @param ticks The number of ticks the simulation should do
