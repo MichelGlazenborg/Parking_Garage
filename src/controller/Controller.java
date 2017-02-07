@@ -205,8 +205,8 @@ public class Controller {
                     _speed = a;
                     _garage.setSpeed(a);
                 }
-                stop();
-                tickFor(_remainingTicks);
+                //stop();
+                //tickFor(_remainingTicks);
             }
         }
     }
@@ -215,8 +215,8 @@ public class Controller {
     private void resetSpeed(){
         _speed = 1;
         _garage.setSpeed(1);
-        stop();
-        tickFor(_remainingTicks);
+        //stop();
+        //tickFor(_remainingTicks);
     }
 
     public static void showError() {
@@ -640,6 +640,15 @@ public class Controller {
         setVisible(date, _boolTime);
         setVisible(clock, _boolTime);
         this._boolTime = !_boolTime;
+    }
+
+    @FXML
+    private void playSound() {
+        if (_garage.getPlaySound()) {
+            _garage.setPlaySound(false);
+        } else {
+            _garage.setPlaySound(true);
+        }
     }
 
     private void setVisible(Node node, boolean bool) {
