@@ -21,17 +21,6 @@
                   <MenuItem onAction="#makeFloors" text="Set number of floors" />
                   <MenuItem onAction="#makeRows" text="Set number of rows" />
                   <MenuItem onAction="#makePlaces" text="Set number of places" />
-                  <MenuItem onAction="#makeFloors" text="Set number of floors" />
-                  <MenuItem onAction="#makeRows" text="Set number of rows" />
-                  <MenuItem onAction="#makePlaces" text="Set number of places" />
-              </items>
-              <items>
-                  <SeparatorMenuItem />
-              </items>
-              <items>
-                  <MenuItem onAction="#setTime" text="Set the time at..." />
-                  <MenuItem onAction="#setSpeed" text="Set simulator speed..." />
-                  <MenuItem onAction="#resetSpeed" text="Reset simulator speed" />
               </items>
               <items>
                   <SeparatorMenuItem />
