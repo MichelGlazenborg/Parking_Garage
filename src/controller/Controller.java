@@ -38,6 +38,8 @@ public class Controller {
 
     private double _speed = 1;
 
+    private int remainingTicks;
+
     private boolean _boolRev = true;
     private boolean _boolGraph = true;
     private boolean _boolTime = true;
@@ -151,7 +153,7 @@ public class Controller {
     private void tickFor(int ticks) {
         //setText("I should be running for " + ticks + " ticks now");
         disableButtons(true);
-
+        remainingTicks = ticks;
         _timeline = new Timeline();
         _timelineGraphs = new Timeline();
         _timeline.setCycleCount(ticks);
@@ -159,9 +161,10 @@ public class Controller {
         _timeline.getKeyFrames().add(new KeyFrame(Duration.millis(Math.round(100 / _speed)), e -> {
             _sim.tick();
             clock();
+            remainingTicks = remainingTicks - 1;
         }));
 
-        _timelineGraphs.getKeyFrames().add(new KeyFrame(Duration.millis(Math.round(1000 / _speed)), e -> {
+        _timelineGraphs.getKeyFrames().add(new KeyFrame(Duration.millis(Math.round(500)), e -> {
             update();
         }));
 
@@ -202,6 +205,9 @@ public class Controller {
                     _speed = 100;
                 else
                     _speed = a;
+
+                stop();
+                tickFor(remainingTicks);
             }
         }
     }
