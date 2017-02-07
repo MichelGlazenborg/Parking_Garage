@@ -44,7 +44,7 @@ public class GarageView {
     private void drawParkingSpot(Location location, Color color) {
         _graphicsContext.setFill(color);
         _graphicsContext.fillRect(
-                (location.getFloor() * (33.33 * _garage.getNumberOfRows()) + (1 + (int)Math.floor(location.getRow() * 0.5)) * 55 + (location.getRow() % 2) * CAR_WIDTH) - 50,
+                (location.getFloor() * (33 * _garage.getNumberOfRows()) + (1 + (int)Math.floor(location.getRow() * 0.5)) * 55 + (location.getRow() % 2) * CAR_WIDTH) - 50,
                 30 + location.getPlace() * 10,
                 CAR_WIDTH - 1,
                 CAR_HEIGHT - 1
