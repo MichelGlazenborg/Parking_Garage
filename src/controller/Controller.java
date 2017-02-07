@@ -38,7 +38,7 @@ public class Controller {
 
     private double _speed = 1;
 
-    private int remainingTicks;
+    private int _remainingTicks;
 
     private boolean _boolRev = true;
     private boolean _boolGraph = true;
@@ -153,7 +153,7 @@ public class Controller {
     private void tickFor(int ticks) {
         //setText("I should be running for " + ticks + " ticks now");
         disableButtons(true);
-        remainingTicks = ticks;
+        _remainingTicks = ticks;
         _timeline = new Timeline();
         _timelineGraphs = new Timeline();
         _timeline.setCycleCount(ticks);
