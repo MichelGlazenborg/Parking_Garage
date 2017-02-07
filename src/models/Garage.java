@@ -14,6 +14,7 @@ public class Garage {
     private int _numberOfOpenSpots;
     private int _numberOfPassHolderSpots;
     private double _speed;
+    private boolean _playSound = true;
     private Car[][][] _cars;
 
     private GarageView _garageView;
@@ -38,6 +39,14 @@ public class Garage {
 
     public void setSpeed(double speed) {
         _speed = speed;
+    }
+
+    public boolean getPlaySound() {
+        return _playSound;
+    }
+
+    public void setPlaySound(boolean a) {
+        _playSound = a;
     }
 
     public void updateView() {
@@ -96,7 +105,7 @@ public class Garage {
             _cars[location.getFloor()][location.getRow()][location.getPlace()] = car;
             car.setLocation(location);
             _numberOfOpenSpots--;
-            if (_speed < 4) {
+            if (_speed < 4 && _playSound) {
                 playSound();
             }
 
