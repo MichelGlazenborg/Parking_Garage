@@ -2,9 +2,7 @@ package view;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-
 import models.Car;
 import models.Garage;
 import models.Location;
