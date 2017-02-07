@@ -36,4 +36,8 @@ public abstract class Popup {
     public void close() {
         _window.close();
     }
+
+    protected Stage getWindow() {
+        return _window;
+    }
 }
