@@ -2,7 +2,7 @@ package models;
 
 public class DailyCarsChartData {
 
-    private String _name;
+    private final String _name;
     private int _carCounter;
 
     public DailyCarsChartData(String name, int carCounter) {

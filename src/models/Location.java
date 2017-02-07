@@ -2,9 +2,9 @@ package models;
 
 public class Location {
 
-    private int _floor;
-    private int _row;
-    private int _place;
+    private final int _floor;
+    private final int _row;
+    private final int _place;
 
     /**
      * Constructor for objects of class controllers.Location

@@ -7,7 +7,7 @@ import javafx.scene.layout.GridPane;
 
 public class TimeInputPopupView {
 
-    private GridPane _layout;
+    private final GridPane _layout;
 
     private int _labelRowNumber = 0;
     private int _fieldRowNumber = 0;

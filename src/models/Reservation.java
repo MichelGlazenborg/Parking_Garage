@@ -6,8 +6,8 @@ public class Reservation extends Car {
 
     public static final Color COLOR = Color.GREEN;
 
-    private int _madeAtMinute;
-    private int _madeAtHour;
+    private final int _madeAtMinute;
+    private final int _madeAtHour;
 
     public Reservation(int madeAtMinute, int madeAtHour) {
         set_readyToEnter(false);
