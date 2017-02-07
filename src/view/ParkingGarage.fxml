@@ -29,6 +29,9 @@
                   <MenuItem onAction="#resetSpeed" text="Reset simulator speed" />
               </items>
               <items>
+                  <SeparatorMenuItem />
+              </items>
+              <items>
                   <CheckMenuItem mnemonicParsing="false" text="Show expanded statistics" onAction="#setWillShowStats" selected="false"/>
               </items>
               <items>
