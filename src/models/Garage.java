@@ -1,8 +1,7 @@
 package models;
 
-import controller.Controller;
+
 import javafx.scene.canvas.Canvas;
-import javafx.scene.media.AudioClip;
 import view.GarageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;

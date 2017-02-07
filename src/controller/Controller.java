@@ -131,7 +131,7 @@ public class Controller {
      */
     @FXML
     private void tick60() {
-        //call simulator object to run for 50 ticks
+        //call simulator object to run for 60 ticks
         tickFor(60);
     }
 
@@ -140,7 +140,7 @@ public class Controller {
      */
     @FXML
     private void tickDay() {
-        //call the simulator object to run for 1000 ticks
+        //call the simulator object to run for 1440 ticks
         tickFor(1440);
     }
 
