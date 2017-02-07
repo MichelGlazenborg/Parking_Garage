@@ -246,13 +246,15 @@ public class Controller {
             int spotAmount = 0;
             try {
                 spotAmount = Integer.parseInt(result2);
-            } catch(NumberFormatException exception) {
+            }
+            catch(NumberFormatException exception) {
                 showError();
                 exceptionOccurred = true;
-            } finally {
-                if(spotAmount < 1 && !exceptionOccurred) {
+            }
+            finally {
+                if(spotAmount < 1 && !exceptionOccurred)
                     showError();
-                } else {
+                else {
                     stop();
                     reset();
                     _garage.makePassHolderSpots(spotAmount);
@@ -278,15 +280,16 @@ public class Controller {
             double priceAmount = 0;
             try {
                 priceAmount = Double.parseDouble(result2);
-            } catch(NumberFormatException exception) {
+            }
+            catch(NumberFormatException exception) {
                 showError();
                 exceptionOccurred = true;
-            } finally {
-                if(priceAmount <= 0 && !exceptionOccurred) {
+            }
+            finally {
+                if(priceAmount <= 0 && !exceptionOccurred)
                     showError();
-                } else {
+                else
                     _sim.setCost(priceAmount);
-                }
             }
         }
     }
@@ -299,11 +302,15 @@ public class Controller {
     private void setTime() {
         int[] dateAndTime = getTimeInput();
 
+        // If the value of this is -1, it means the user pressed the close button
+        if (dateAndTime[0] == -1)
+            return;
+
         dateAndTime[1]--;
 
-        if(dateAndTime[0] == -1 || dateAndTime[1] == -1 || dateAndTime[2] == -1 || dateAndTime[3] == -1) {
+        if(dateAndTime[0] == -1 || dateAndTime[1] == -1 || dateAndTime[2] == -1 || dateAndTime[3] == -1)
             showError();
-        } else {
+        else {
             _sim.setTime(dateAndTime[0], dateAndTime[1], dateAndTime[2], dateAndTime[3]);
             getDate();
             clock();
@@ -360,34 +367,27 @@ public class Controller {
         int[] time = _sim.getTime();
         String day = null;
         switch (time[2]) {
-            case 0: {
+            case 0:
                 day = "Monday";
                 break;
-            }
-            case 1: {
+            case 1:
                 day = "Tuesday";
                 break;
-            }
-            case 2: {
+            case 2:
                 day = "Wednesday";
                 break;
-            }
-            case 3: {
+            case 3:
                 day = "Thursday";
                 break;
-            }
-            case 4: {
+            case 4:
                 day = "Friday";
                 break;
-            }
-            case 5: {
+            case 5:
                 day = "Saturday";
                 break;
-            }
-            case 6: {
+            case 6:
                 day = "Sunday";
                 break;
-            }
         }
         showDate("Week " + time[3] + "\nDay: " + day);
     }
@@ -397,7 +397,7 @@ public class Controller {
         int[] stats = _sim.getStatistics();
         return ("Number of regular cars: " + stats[1] +
                 "\nNumber of cars with a reservation: " + stats[0] +
-                "\nNumber of passholder cars: " + stats[2] + "\n");
+                "\nNumber of pass holder cars: " + stats[2] + "\n");
     }
 
     @FXML
@@ -511,10 +511,10 @@ public class Controller {
 
     /**
      * sets the text in the label date
-     * @param t:    A string that will be shown in date
+     * @param dateAsString:    A string that will be shown in date
      */
-    private void showDate(String t) {
-        date.setText(t);
+    private void showDate(String dateAsString) {
+        date.setText(dateAsString);
     }
 
     /**

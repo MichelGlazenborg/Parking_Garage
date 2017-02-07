@@ -1,6 +1,7 @@
 package models;
 
 import javafx.scene.canvas.Canvas;
+
 import view.GarageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -82,9 +83,9 @@ public class Garage {
     }
 
     public Car getCarAt(Location location) {
-        if (!locationIsValid(location)) {
+        if (!locationIsValid(location))
             return null;
-        }
+
         return _cars[location.getFloor()][location.getRow()][location.getPlace()];
     }
 
@@ -139,9 +140,9 @@ public class Garage {
     public void makePassHolderSpots(int numberOfSpots) {
         _numberOfPassHolderSpots = numberOfSpots;
 
-        int x = 0;
-        int z = 0;
-        int y = 0;
+        int x = 0,
+            z = 0,
+            y = 0;
 
         for (int i=0; i<numberOfSpots; i++) {
             if (z == _numberOfPlaces) {
@@ -288,6 +289,13 @@ public class Garage {
         }
     }
 
+    private boolean locationIsValid(Location location) {
+        int floor = location.getFloor();
+        int row = location.getRow();
+        int place = location.getPlace();
+        return !(floor < 0 || floor >= _numberOfFloors || row < 0 || row > _numberOfRows || place < 0 || place > _numberOfPlaces);
+    }
+
     public int getNumberOfFloors() {
         return _numberOfFloors;
     }
@@ -322,12 +330,5 @@ public class Garage {
 
     public int getPassHolderSpots() {
         return _numberOfPassHolderSpots;
-    }
-
-    private boolean locationIsValid(Location location) {
-        int floor = location.getFloor();
-        int row = location.getRow();
-        int place = location.getPlace();
-        return !(floor < 0 || floor >= _numberOfFloors || row < 0 || row > _numberOfRows || place < 0 || place > _numberOfPlaces);
     }
 }

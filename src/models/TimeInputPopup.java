@@ -52,8 +52,8 @@ public class TimeInputPopup {
             failed = true;
         }
         finally {
-            if (inputInteger < 1 && !failed) Controller.showError();
-            else if (inputInteger >= maxInput) Controller.showError();
+            if ((inputInteger < 1 || inputInteger >= maxInput) && !failed)
+                Controller.showError();
         }
 
         return inputInteger;
