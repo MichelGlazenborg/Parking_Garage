@@ -159,7 +159,7 @@ public class Controller {
         _timeline.getKeyFrames().add(new KeyFrame(Duration.millis(Math.round(100 / _speed)), e -> {
             _sim.tick();
             clock();
-            _remainingTicks = _remainingTicks - 1;
+            this._remainingTicks = _remainingTicks - 1;
         }));
 
         _timelineGraphs.getKeyFrames().add(new KeyFrame(Duration.millis(Math.round(500)), e -> {
