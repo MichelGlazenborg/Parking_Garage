@@ -107,7 +107,6 @@ public class Garage {
         if (!locationIsValid(location)) {
             return false;
         }
-
         Car oldCar = getCarAt(location);
         if (oldCar == null) {
             _cars[location.getFloor()][location.getRow()][location.getPlace()] = car;
