@@ -9,16 +9,16 @@ import java.io.File;
 
 public class Garage {
 
-    private int _numberOfFloors;
-    private int _numberOfRows;
-    private int _numberOfPlaces;
+    private final int _numberOfFloors;
+    private final int _numberOfRows;
+    private final int _numberOfPlaces;
     private int _numberOfOpenSpots;
     private int _numberOfPassHolderSpots;
+    private final Car[][][] _cars;
     private double _speed;
-    private boolean _playSound = true;
-    private Car[][][] _cars;
 
-    private GarageView _garageView;
+    private final GarageView _garageView;
+    private boolean _playSound = true;
 
     private int _currentPassHolders;
     private int _currentAdHoc;
@@ -83,9 +83,9 @@ public class Garage {
     }
 
     public Car getCarAt(Location location) {
-        if (!locationIsValid(location))
+        if (locationIsValid(location)) {
             return null;
-
+        }
         return _cars[location.getFloor()][location.getRow()][location.getPlace()];
     }
 
@@ -98,7 +98,7 @@ public class Garage {
     }
 
     public boolean setCarAt(Location location, Car car) {
-        if (!locationIsValid(location)) {
+        if (locationIsValid(location)) {
             return false;
         }
         Car oldCar = getCarAt(location);
@@ -171,7 +171,7 @@ public class Garage {
     }
 
     public boolean setPassHolderSpace(Location loc, PassHolderSpace phs) {
-        if (!locationIsValid(loc))
+        if (locationIsValid(loc))
             return false;
 
         Car oldCar = getCarAt(loc);
@@ -184,21 +184,19 @@ public class Garage {
         return false;
     }
 
-    public boolean setReservation(Location loc, Reservation res) {
-        if (!locationIsValid(loc))
-            return false;
+    private void setReservation(Location loc, Reservation res) {
+        if (locationIsValid(loc))
+            return;
 
         Car oldCar = getCarAt(loc);
         if(oldCar == null) {
             _cars[loc.getFloor()][loc.getRow()][loc.getPlace()] = res;
             res.setLocation(loc);
-            return true;
         }
-        return false;
     }
 
     public Car removeCarAt(Location location) {
-        if (!locationIsValid(location))
+        if (locationIsValid(location))
             return null;
 
         Car car = getCarAt(location);
@@ -330,5 +328,12 @@ public class Garage {
 
     public int getPassHolderSpots() {
         return _numberOfPassHolderSpots;
+    }
+
+    private boolean locationIsValid(Location location) {
+        int floor = location.getFloor();
+        int row = location.getRow();
+        int place = location.getPlace();
+        return (floor < 0 || floor >= _numberOfFloors || row < 0 || row > _numberOfRows || place < 0 || place > _numberOfPlaces);
     }
 }

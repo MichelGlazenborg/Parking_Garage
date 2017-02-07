@@ -1,27 +1,25 @@
 package controller;
 
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.Scene;
-
 import models.Popup;
 import models.TimeInputPopup;
-
 import view.TimeInputPopupView;
 
 public class TimeInputPopupController extends Popup {
 
-    private GridPane _layout;
-    private TimeInputPopup _model;
-    private TimeInputPopupView _view;
+    private final GridPane _layout;
+    private final TimeInputPopup _model;
+    private final TimeInputPopupView _view;
 
     private static final int SCENE_WIDTH = 400;
     private static final int SCENE_HEIGHT = 200;
 
-    private int[] _input;
+    private final int[] _input;
 
     public TimeInputPopupController() {
         _input = new int[4];
@@ -40,10 +38,6 @@ public class TimeInputPopupController extends Popup {
 
         enableSubmitButton();
         getWindow().setOnCloseRequest(e -> handleInput(true));
-    }
-
-    public void show() {
-        super.show();
     }
 
     public int[] getInput() {

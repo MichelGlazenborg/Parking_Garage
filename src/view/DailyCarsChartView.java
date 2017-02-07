@@ -4,14 +4,13 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-
 import models.DailyCarsChart;
 
 public class DailyCarsChartView {
 
-    private LineChart<String, Number> _lineChart;
-    private XYChart.Series _chartData;
-    private DailyCarsChart _chart;
+    private final LineChart<String, Number> _lineChart;
+    private final XYChart.Series _chartData;
+    private final DailyCarsChart _chart;
 
     private XYChart.Data _dataMonday;
     private XYChart.Data _dataTuesday;

@@ -21,11 +21,6 @@ public class Payment {
         return bd.setScale(2, BigDecimal.ROUND_HALF_DOWN);
     }
 
-    public BigDecimal getDayRevenue() {
-        BigDecimal bd = new BigDecimal(_dayRevenue);
-        return bd.setScale(2, BigDecimal.ROUND_HALF_DOWN);
-    }
-
     public BigDecimal getLastDayRevenue() {
         BigDecimal bd = new BigDecimal(_lastDayRevenue);
         return bd.setScale(2, BigDecimal.ROUND_HALF_DOWN);

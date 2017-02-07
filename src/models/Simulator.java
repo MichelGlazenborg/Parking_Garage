@@ -7,17 +7,17 @@ import java.util.Random;
 
 public class Simulator {
 
-	private static final String AD_HOC = "1";
-	private static final String PASS = "2";
-	private static final String RES = "3";
-
-	private CarQueue _entranceCarQueue;
-    private CarQueue _entrancePassQueue;
-    private CarQueue _entranceResQueue;
-    private CarQueue _paymentCarQueue;
-    private CarQueue _exitCarQueue;
-    private Garage _garage;
-    private Payment _pay;
+    private static final String AD_HOC = "1";
+    private static final String PASS = "2";
+    private static final String RES = "3";
+	
+    private final CarQueue _entranceCarQueue;
+    private final CarQueue _entrancePassQueue;
+    private final CarQueue _entranceResQueue;
+    private final CarQueue _paymentCarQueue;
+    private final CarQueue _exitCarQueue;
+    private final Garage _garage;
+    private final Payment _pay;
 
     private int _day = 0;
     private int _hour = 8;
@@ -56,14 +56,6 @@ public class Simulator {
         _garage = new Garage(canvas, 3, 6, 30);
         _pay.setCost(0.00667);
         updateViews();
-    }
-
-    /**
-     * returns the current instance of garage
-     * @return the current instance of the class garage
-     */
-    public Garage getView() {
-        return _garage;
     }
 
     /**
@@ -251,7 +243,8 @@ public class Simulator {
     private void carsEntering(CarQueue queue, boolean passHolder, boolean hasReservation){
         double i = 0;
         // Remove car from the front of the queue and assign to a parking space.
-    	while (queue.carsInQueue() > new Random().nextInt(4) && _garage.getNumberOfOpenSpots() > 0 && i < _enterSpeed) {
+        int _enterSpeed = 1;
+        while (queue.carsInQueue() > new Random().nextInt(4) && _garage.getNumberOfOpenSpots() > 0 && i < _enterSpeed) {
     	    if(!passHolder) {
     	        if(!hasReservation) {
                     AdHocCar car = (AdHocCar) queue.removeCar();
@@ -379,7 +372,8 @@ public class Simulator {
      */
     private void carsPaying(){
     	int i = 0;
-    	while (_paymentCarQueue.carsInQueue()>0 && i < _paymentSpeed){
+        int _paymentSpeed = 3;
+        while (_paymentCarQueue.carsInQueue()>0 && i < _paymentSpeed){
             Car car = _paymentCarQueue.removeCar();
             if(car.getHasToPay()) {
                 if(car.getHasReservation()) {
@@ -423,7 +417,8 @@ public class Simulator {
     private void carsLeaving(){
         // Let cars leave.
     	int i = 0;
-    	while (_exitCarQueue.carsInQueue()>0 && i < _exitSpeed){
+        int _exitSpeed = 2;
+        while (_exitCarQueue.carsInQueue()>0 && i < _exitSpeed){
             _exitCarQueue.removeCar();
             i++;
     	}
