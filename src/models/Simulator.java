@@ -7,11 +7,11 @@ import java.util.Random;
 
 public class Simulator {
 
-	private static final String AD_HOC = "1";
-	private static final String PASS = "2";
-	private static final String RES = "3";
-
-	private final CarQueue _entranceCarQueue;
+    private static final String AD_HOC = "1";
+    private static final String PASS = "2";
+    private static final String RES = "3";
+	
+    private final CarQueue _entranceCarQueue;
     private final CarQueue _entrancePassQueue;
     private final CarQueue _entranceResQueue;
     private final CarQueue _paymentCarQueue;
