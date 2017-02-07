@@ -3,6 +3,9 @@ package models;
 import javafx.scene.canvas.Canvas;
 
 import view.GarageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import java.io.File;
 
 public class Garage {
 
@@ -11,6 +14,8 @@ public class Garage {
     private int _numberOfPlaces;
     private int _numberOfOpenSpots;
     private int _numberOfPassHolderSpots;
+    private double _speed;
+    private boolean _playSound = true;
     private Car[][][] _cars;
 
     private GarageView _garageView;
@@ -31,6 +36,18 @@ public class Garage {
         _currentPassHolders = 0;
         _currentAdHoc = 0;
         _currentCarsWithReservation = 0;
+    }
+
+    public void setSpeed(double speed) {
+        _speed = speed;
+    }
+
+    public boolean getPlaySound() {
+        return _playSound;
+    }
+
+    public void setPlaySound(boolean a) {
+        _playSound = a;
     }
 
     public void updateView() {
@@ -72,6 +89,14 @@ public class Garage {
         return _cars[location.getFloor()][location.getRow()][location.getPlace()];
     }
 
+    public void playSound() {
+        String musicFile = "src/assets/ping.mp3";
+
+        Media sound = new Media(new File(musicFile).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.play();
+    }
+
     public boolean setCarAt(Location location, Car car) {
         if (!locationIsValid(location)) {
             return false;
@@ -81,6 +106,10 @@ public class Garage {
             _cars[location.getFloor()][location.getRow()][location.getPlace()] = car;
             car.setLocation(location);
             _numberOfOpenSpots--;
+            if (_speed < 4 && _playSound) {
+                playSound();
+            }
+
             return true;
         }
 
@@ -116,8 +145,8 @@ public class Garage {
             y = 0;
 
         for (int i=0; i<numberOfSpots; i++) {
-            if (z == 30) {
-                if (x == 5) {
+            if (z == _numberOfPlaces) {
+                if (x == _numberOfRows - 1) {
                     y++;
                     x = 0;
                     z = 0;

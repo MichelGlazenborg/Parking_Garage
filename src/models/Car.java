@@ -76,6 +76,7 @@ public abstract class Car {
     public void setIsPaying(boolean isPaying) {
         _isPaying = isPaying;
     }
+
     public int getStayMinutes(){
         return _stayMinutes;
     }

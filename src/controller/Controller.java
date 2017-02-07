@@ -92,8 +92,6 @@ public class Controller {
         _occupationChartView = new OccupationChartView(_statsPie);
         _dailyCarsChartView = new DailyCarsChartView(_dailyCarsChart);
 
-
-
         _occupationChartView.setData();
         _dailyCarsChartView.setData();
 
@@ -107,6 +105,7 @@ public class Controller {
         clock();
         getRevenue();
         getDayRevenue();
+        _garage.setSpeed(_speed);
     }
 
     /**
@@ -132,7 +131,7 @@ public class Controller {
      */
     @FXML
     private void tick60() {
-        //call simulator object to run for 50 ticks
+        //call simulator object to run for 60 ticks
         tickFor(60);
     }
 
@@ -141,7 +140,7 @@ public class Controller {
      */
     @FXML
     private void tickDay() {
-        //call the simulator object to run for 1000 ticks
+        //call the simulator object to run for 1440 ticks
         tickFor(1440);
     }
 
@@ -151,7 +150,6 @@ public class Controller {
      */
     @FXML
     private void tickFor(int ticks) {
-        //setText("I should be running for " + ticks + " ticks now");
         disableButtons(true);
         _remainingTicks = ticks;
         _timeline = new Timeline();
@@ -199,15 +197,18 @@ public class Controller {
                 showError();
             }
             finally {
-                if (a <= 0)
+                if (a <= 0) {
                     _speed = 1;
-                else if (a > 100)
+                    _garage.setSpeed(1);
+                } else if (a > 100) {
                     _speed = 100;
-                else
+                    _garage.setSpeed(100);
+                } else {
                     _speed = a;
-
-                stop();
-                tickFor(_remainingTicks);
+                    _garage.setSpeed(a);
+                }
+                //stop();
+                //tickFor(_remainingTicks);
             }
         }
     }
@@ -215,8 +216,9 @@ public class Controller {
     @FXML
     private void resetSpeed(){
         _speed = 1;
-        stop();
-        tickFor(_remainingTicks);
+        _garage.setSpeed(1);
+        //stop();
+        //tickFor(_remainingTicks);
     }
 
     public static void showError() {
@@ -640,6 +642,15 @@ public class Controller {
         setVisible(date, _boolTime);
         setVisible(clock, _boolTime);
         this._boolTime = !_boolTime;
+    }
+
+    @FXML
+    private void playSound() {
+        if (_garage.getPlaySound()) {
+            _garage.setPlaySound(false);
+        } else {
+            _garage.setPlaySound(true);
+        }
     }
 
     private void setVisible(Node node, boolean bool) {
