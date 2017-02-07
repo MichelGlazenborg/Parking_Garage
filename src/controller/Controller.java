@@ -423,33 +423,10 @@ public class Controller {
 
     @FXML
     private void setWillShowStats() {
-        TextInputDialog dialog = new TextInputDialog(null);
-
-        dialog.setTitle("Set preference of statistics");
-        dialog.setHeaderText("Please enter yes or no");
-        dialog.setContentText("Show detailed statistics after every run of the simulation?");
-
-        Optional<String> result = dialog.showAndWait();
-
-        // Checking if something was filled in. No answer does nothing.
-        if (result.isPresent()) {
-            // Turns Optional<String> into a normal String
-            String result2 = result.get();
-            String answer = null;
-
-            try {
-                answer = result2.trim().toLowerCase();
-            }
-            catch(Exception e) {
-                showError();
-                dialog.close();
-            }
-            finally {
-                if (answer.equals("yes") || answer.equals("no"))
-                    _willShowStats = answer.equals("yes");
-                else
-                    showError();
-            }
+        if (_willShowStats) {
+           _willShowStats = false;
+        } else {
+            _willShowStats = true;
         }
     }
 
@@ -574,6 +551,9 @@ public class Controller {
             _timeline.stop();
             _timelineGraphs.stop();
             update();
+            if (_willShowStats) {
+                showStats();
+            }
             disableButtons(false);
         }
     }
