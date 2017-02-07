@@ -74,8 +74,8 @@ public class Simulator {
     public void tick() {
     	advanceTime();
     	handleExit();
-    	updateViews();
     	handleEntrance();
+        updateViews();
     }
 
     /**
@@ -291,7 +291,7 @@ public class Simulator {
             }
 			i += 0.33;
 
-    	    switch (getTime()[1]) {
+    	    switch (getTime()[2]) {
                 case 0:
                     _arrivalsOnMonday++;
                     break;

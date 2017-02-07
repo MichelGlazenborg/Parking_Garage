@@ -75,13 +75,13 @@ public class Garage {
         if (!locationIsValid(location)) {
             return false;
         }
-            Car oldCar = getCarAt(location);
-            if (oldCar == null) {
-                _cars[location.getFloor()][location.getRow()][location.getPlace()] = car;
-                car.setLocation(location);
-                _numberOfOpenSpots--;
-                return true;
-            }
+        Car oldCar = getCarAt(location);
+        if (oldCar == null) {
+            _cars[location.getFloor()][location.getRow()][location.getPlace()] = car;
+            car.setLocation(location);
+            _numberOfOpenSpots--;
+            return true;
+        }
 
         return false;
     }
@@ -111,8 +111,8 @@ public class Garage {
         _numberOfPassHolderSpots = numberOfSpots;
 
         int x = 0,
-            z = 0,
-            y = 0;
+                z = 0,
+                y = 0;
 
         for (int i=0; i<numberOfSpots; i++) {
             if (z == 30) {
