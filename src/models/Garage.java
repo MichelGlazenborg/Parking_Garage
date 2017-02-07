@@ -110,13 +110,13 @@ public class Garage {
     public void makePassHolderSpots(int numberOfSpots) {
         _numberOfPassHolderSpots = numberOfSpots;
 
-        int x = 0,
-                z = 0,
-                y = 0;
+        int x = 0;
+        int z = 0;
+        int y = 0;
 
         for (int i=0; i<numberOfSpots; i++) {
-            if (z == 30) {
-                if (x == 5) {
+            if (z == _numberOfPlaces) {
+                if (x == _numberOfRows - 1) {
                     y++;
                     x = 0;
                     z = 0;
