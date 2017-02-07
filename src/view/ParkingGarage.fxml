@@ -38,17 +38,16 @@
                   <MenuItem mnemonicParsing="false" onAction="#closeApp" text="Close" />
               </items>
           </Menu>
-
-          <Menu mnemonicParsing="false" text="_Help">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#showAbout" text="About..." />
-            </items>
-          </Menu>
             <Menu mnemonicParsing="false" text="_Views">
                 <CheckMenuItem mnemonicParsing="false" text="Graph" onAction="#setManageGraph" selected="true"/>
                 <CheckMenuItem mnemonicParsing="false" text="Revenue" onAction="#setManageRevenue" selected="true"/>
                 <CheckMenuItem mnemonicParsing="false" text="Chart" onAction="#setManageChart"  selected="true"/>
                 <CheckMenuItem mnemonicParsing="false" text="Time" onAction="#setManageTime"  selected="true"/>
+            </Menu>
+            <Menu mnemonicParsing="false" text="_Help">
+                <items>
+                    <MenuItem mnemonicParsing="false" onAction="#showAbout" text="About..." />
+                </items>
             </Menu>
         </menus>
       </MenuBar>

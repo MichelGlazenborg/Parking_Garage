@@ -94,20 +94,16 @@ public class Garage {
     public void playSound() {
         String musicFile = "src/assets/ping.mp3";
 
-        try {
-            Media sound = new Media(new File(musicFile).toURI().toString());
-            MediaPlayer mediaPlayer = new MediaPlayer(sound);
-            mediaPlayer.play();
-        }
-        catch (MediaException e) {
-
-        }
+        Media sound = new Media(new File(musicFile).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.play();
     }
 
     public boolean setCarAt(Location location, Car car) {
         if (!locationIsValid(location)) {
             return false;
         }
+
         Car oldCar = getCarAt(location);
         if (oldCar == null) {
             _cars[location.getFloor()][location.getRow()][location.getPlace()] = car;
