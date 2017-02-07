@@ -293,13 +293,6 @@ public class Garage {
         }
     }
 
-    private boolean locationIsValid(Location location) {
-        int floor = location.getFloor();
-        int row = location.getRow();
-        int place = location.getPlace();
-        return !(floor < 0 || floor >= _numberOfFloors || row < 0 || row > _numberOfRows || place < 0 || place > _numberOfPlaces);
-    }
-
     public int getNumberOfFloors() {
         return _numberOfFloors;
     }
@@ -340,5 +333,12 @@ public class Garage {
 
     public int getPassHolderSpots() {
         return _numberOfPassHolderSpots;
+    }
+
+    private boolean locationIsValid(Location location) {
+        int floor = location.getFloor();
+        int row = location.getRow();
+        int place = location.getPlace();
+        return !(floor < 0 || floor >= _numberOfFloors || row < 0 || row > _numberOfRows || place < 0 || place > _numberOfPlaces);
     }
 }
