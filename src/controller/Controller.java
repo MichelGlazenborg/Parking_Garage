@@ -1,7 +1,5 @@
 package controller;
 
-import java.util.Optional;
-
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -14,11 +12,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
-
-import models.*;
-
+import models.DailyCarsChart;
+import models.Garage;
+import models.OccupationChart;
+import models.Simulator;
 import view.DailyCarsChartView;
 import view.OccupationChartView;
+
+import java.util.Optional;
 
 public class Controller {
 
