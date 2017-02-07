@@ -2,9 +2,6 @@ package models;
 
 import javafx.scene.paint.Color;
 
-/**
- * Created by Jelmer on 23-Jan-17.
- */
 public class Reservation extends Car {
 
     public static final Color COLOR = Color.GREEN;

@@ -2,9 +2,6 @@ package models;
 
 import java.math.BigDecimal;
 
-/**
- * Created by Jelmer on 30-Jan-17.
- */
 public class Payment {
 
     private double _totalRevenue;

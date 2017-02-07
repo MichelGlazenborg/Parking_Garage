@@ -4,9 +4,6 @@ import java.util.Random;
 
 import javafx.scene.paint.Color;
 
-/**
- * Created by Jelmer on 26-Jan-17.
- */
 public class CarWithReservedSpot extends Car {
 
     private static final Color COLOR = Color.YELLOW;
