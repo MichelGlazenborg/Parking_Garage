@@ -18,7 +18,6 @@ public class Garage {
 
     private final GarageView _garageView;
     private boolean _playSound = true;
-    private Car[][][] _cars;
 
     private int _currentPassHolders;
     private int _currentAdHoc;
