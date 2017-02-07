@@ -31,9 +31,9 @@ public class Simulator {
     private int _weekDayResArrivals = 26;
     private int _weekendResArrivals = 40;
 
-    private int _enterSpeed = 1; // number of cars that can enter per minute
-    private int _paymentSpeed = 3; // number of cars that can pay per minute
-    private int _exitSpeed = 2; // number of cars that can leave per minute
+    private int _enterSpeed = 1;   // number of cars that can enter per minute (Global to make easily editable)
+    private int _paymentSpeed = 3; // number of cars that can pay per minute   (Global to make easily editable)
+    private int _exitSpeed = 2;    // number of cars that can leave per minute (Global to make easily editable)
 
     private int _arrivalsOnMonday = 0;
     private int _arrivalsOnTuesday = 0;
@@ -273,7 +273,7 @@ public class Simulator {
 
                 }
             }
-            else if(passHolder && _garage.getNumberOfPassHolders() < _garage.getPassHolderSpots()) {
+            else if(_garage.getNumberOfPassHolders() < _garage.getPassHolderSpots()) {
     	        ParkingPassCar car = (ParkingPassCar) queue.removeCar();
     	        Location freeLocation = _garage.getFirstPassSpot();
 
@@ -317,23 +317,23 @@ public class Simulator {
         }
     }
 
-    public CarQueue getEntranceCarQueue() {
+    private CarQueue getEntranceCarQueue() {
         return _entranceCarQueue;
     }
 
-    public CarQueue getEntrancePassQueue() {
+    private CarQueue getEntrancePassQueue() {
         return _entrancePassQueue;
     }
 
-    public CarQueue getEntranceResQueue() {
+    private CarQueue getEntranceResQueue() {
         return _entranceResQueue;
     }
 
-    public CarQueue getExitCarQueue() {
+    private CarQueue getExitCarQueue() {
         return _exitCarQueue;
     }
 
-    public CarQueue getPaymentCarQueue() {
+    private CarQueue getPaymentCarQueue() {
         return _paymentCarQueue;
     }
 

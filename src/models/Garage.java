@@ -1,6 +1,5 @@
 package models;
 
-
 import javafx.scene.canvas.Canvas;
 import view.GarageView;
 import javafx.scene.media.Media;

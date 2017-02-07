@@ -150,7 +150,6 @@ public class Controller {
      */
     @FXML
     private void tickFor(int ticks) {
-        //setText("I should be running for " + ticks + " ticks now");
         disableButtons(true);
         _remainingTicks = ticks;
         _timeline = new Timeline();
