@@ -23,7 +23,7 @@ import java.util.Optional;
 
 public class Controller {
 
-    private static final String version = "1.0";
+    private static final String version = "1.1";
 
 	private Simulator _sim;              //makes the central simulator object
     private Garage _garage;      //makes the central simulatorView object
