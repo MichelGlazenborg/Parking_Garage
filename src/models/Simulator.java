@@ -53,7 +53,7 @@ public class Simulator {
         _paymentCarQueue = new CarQueue();
         _exitCarQueue = new CarQueue();
         _pay = new Payment();
-        _garage = new Garage(canvas, 3, 6, 30);
+        _garage = new Garage(canvas,3, 6, 30);
         _pay.setCost(0.00667);
         updateViews();
     }
@@ -470,7 +470,7 @@ public class Simulator {
             case RES:
                 for(int i = 0; i < numberOfCars; i++) {
                     Random ran = new Random();
-                    _garage.makeReservationsAt(new Location(ran.nextInt(3), ran.nextInt(6), ran.nextInt(30)), _minute, _hour);
+                    _garage.makeReservationsAt(new Location(ran.nextInt(_garage.getNumberOfFloors()), ran.nextInt(_garage.getNumberOfRows()), ran.nextInt(_garage.getNumberOfPlaces())), _minute, _hour);
                     _entranceResQueue.addCar(new CarWithReservedSpot());
                 }
     	}
