@@ -207,8 +207,10 @@ public class Controller {
                     _speed = a;
                     _garage.setSpeed(a);
                 }
-                //stop();
-                //tickFor(_remainingTicks);
+                if (_remainingTicks != 0) {
+                    stopspeed();
+                    tickFor(_remainingTicks);
+                }
             }
         }
     }
@@ -217,8 +219,10 @@ public class Controller {
     private void resetSpeed(){
         _speed = 1;
         _garage.setSpeed(1);
-        //stop();
-        //tickFor(_remainingTicks);
+        if (_remainingTicks != 0) {
+            stopspeed();
+            tickFor(_remainingTicks);
+        }
     }
 
     public static void showError() {
@@ -555,6 +559,18 @@ public class Controller {
                 showStats();
             }
             disableButtons(false);
+            _remainingTicks = 0;
+        }
+    }
+
+    private void stopspeed() {
+        if (_timeline != null || _timelineGraphs != null) {
+            _timeline.stop();
+            _timelineGraphs.stop();
+            update();
+            if (_willShowStats) {
+                showStats();
+            }
         }
     }
 
