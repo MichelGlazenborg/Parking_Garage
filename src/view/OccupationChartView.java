@@ -33,6 +33,7 @@ public class OccupationChartView {
             _statsPiePassHolders = new PieChart.Data(_statsPie.getPassHolders().getLabel(), _statsPie.getPassHolders().getPercentage()),
             _statsPieCarWithReservations = new PieChart.Data(_statsPie.getCarsWithReservation().getLabel(), _statsPie.getCarsWithReservation().getPercentage())
         );
+
         _chart.setData(_graphData);
     }
 

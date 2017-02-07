@@ -43,7 +43,6 @@ public class Simulator {
     private int _arrivalsOnSaturday = 0;
     private int _arrivalsOnSunday = 0;
 
-
     /**
      * The constructor of the class Simulator, runs the main simulator by handling arriving/leaving cars, keeps count of the time and Payments
      */
@@ -58,7 +57,6 @@ public class Simulator {
         _pay.setCost(0.00667);
         updateViews();
     }
-
 
     /**
      * Ticks the simulation forward by calling other methods like advanceTime(), updateViews() and handles the entering and leaving of cars

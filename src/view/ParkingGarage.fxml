@@ -28,7 +28,13 @@
                   <MenuItem onAction="#resetSpeed" text="Reset simulator speed" />
               </items>
               <items>
-                  <MenuItem onAction="#setWillShowStats" text="Set statistics preference..." />
+                  <SeparatorMenuItem />
+              </items>
+              <items>
+                  <CheckMenuItem mnemonicParsing="false" text="Show expanded statistics" onAction="#setWillShowStats" selected="false"/>
+              </items>
+              <items>
+                  <CheckMenuItem mnemonicParsing="false" text="Play sound" onAction="#playSound" selected="true"/>
               </items>
               <items>
                   <SeparatorMenuItem />
@@ -121,8 +127,6 @@
     </right>
    <bottom>
        <VBox fx:id="statistics" prefHeight="50" prefWidth="1000" BorderPane.alignment="BOTTOM_LEFT">
-           <children>
-           </children>
        </VBox>
    </bottom>
 </BorderPane>

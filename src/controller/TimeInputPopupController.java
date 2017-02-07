@@ -37,6 +37,7 @@ public class TimeInputPopupController extends Popup {
         setScene(new Scene(_layout, SCENE_WIDTH, SCENE_HEIGHT));
 
         enableSubmitButton();
+        getWindow().setOnCloseRequest(e -> handleInput(true));
     }
 
     public int[] getInput() {
@@ -62,6 +63,18 @@ public class TimeInputPopupController extends Popup {
         _input[1] = _model.validateInput(_model.getInputDay().getText(), 7);
         _input[2] = _model.validateInput(_model.getInputHour().getText(), 24);
         _input[3] = _model.validateInput(_model.getInputMinute().getText(), 60);
+        super.close();
+    }
+
+    /**
+     * Just a quick way of closing the popup without getting one of our beloved error popups.
+     * @param stop
+     */
+    private void handleInput(boolean stop) {
+        _input[0] = -1;
+        _input[1] = -1;
+        _input[2] = -1;
+        _input[3] = -1;
         super.close();
     }
 
