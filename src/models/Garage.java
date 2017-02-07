@@ -1,11 +1,13 @@
 package models;
 
+import java.io.File;
+
 import javafx.scene.canvas.Canvas;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaException;
+import javafx.scene.media.MediaPlayer;
 
 import view.GarageView;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import java.io.File;
 
 public class Garage {
 
@@ -101,6 +103,7 @@ public class Garage {
         if (!locationIsValid(location)) {
             return false;
         }
+
         Car oldCar = getCarAt(location);
         if (oldCar == null) {
             _cars[location.getFloor()][location.getRow()][location.getPlace()] = car;
