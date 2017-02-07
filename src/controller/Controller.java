@@ -92,8 +92,6 @@ public class Controller {
         _occupationChartView = new OccupationChartView(_statsPie);
         _dailyCarsChartView = new DailyCarsChartView(_dailyCarsChart);
 
-
-
         _occupationChartView.setData();
         _dailyCarsChartView.setData();
 
@@ -107,6 +105,7 @@ public class Controller {
         clock();
         getRevenue();
         getDayRevenue();
+        _garage.setSpeed(_speed);
     }
 
     /**
@@ -199,13 +198,16 @@ public class Controller {
                 showError();
             }
             finally {
-                if (a <= 0)
+                if (a <= 0) {
                     _speed = 1;
-                else if (a > 100)
+                    _garage.setSpeed(1);
+                } else if (a > 100) {
                     _speed = 100;
-                else
+                    _garage.setSpeed(100);
+                } else {
                     _speed = a;
-
+                    _garage.setSpeed(a);
+                }
                 stop();
                 tickFor(_remainingTicks);
             }
@@ -215,6 +217,7 @@ public class Controller {
     @FXML
     private void resetSpeed(){
         _speed = 1;
+        _garage.setSpeed(1);
         stop();
         tickFor(_remainingTicks);
     }
