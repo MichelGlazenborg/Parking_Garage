@@ -1,13 +1,11 @@
 package models;
 
-import java.io.File;
-
 import javafx.scene.canvas.Canvas;
 import javafx.scene.media.Media;
-import javafx.scene.media.MediaException;
 import javafx.scene.media.MediaPlayer;
-
 import view.GarageView;
+
+import java.io.File;
 
 public class Garage {
 
@@ -342,11 +340,5 @@ public class Garage {
 
     public int getPassHolderSpots() {
         return _numberOfPassHolderSpots;
-    }
-    private boolean locationIsValid(Location location) {
-        int floor = location.getFloor();
-        int row = location.getRow();
-        int place = location.getPlace();
-        return !(floor < 0 || floor >= _numberOfFloors || row < 0 || row > _numberOfRows || place < 0 || place > _numberOfPlaces);
     }
 }
