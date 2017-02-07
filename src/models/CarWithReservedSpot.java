@@ -1,11 +1,11 @@
 package models;
 
-import java.util.Random;
-
 import javafx.scene.paint.Color;
 
+import java.util.Random;
+
 /**
- * Created by Jelmer on 26-Jan-17.
+ * @author Jelmer
  */
 public class CarWithReservedSpot extends Car {
 

@@ -2,15 +2,14 @@ package view;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.chart.*;
-
+import javafx.scene.chart.PieChart;
 import models.OccupationChart;
 
 public class OccupationChartView {
 
     private ObservableList _graphData;
-    private PieChart _chart;
-    private models.OccupationChart _statsPie;
+    private final PieChart _chart;
+    private final models.OccupationChart _statsPie;
 
     private PieChart.Data _statsPieUnoccupied;
     private PieChart.Data _statsPieAdHoc;

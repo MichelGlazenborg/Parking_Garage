@@ -11,13 +11,13 @@ public class Simulator {
 	private static final String PASS = "2";
 	private static final String RES = "3";
 
-	private CarQueue _entranceCarQueue;
-    private CarQueue _entrancePassQueue;
-    private CarQueue _entranceResQueue;
-    private CarQueue _paymentCarQueue;
-    private CarQueue _exitCarQueue;
-    private Garage _garage;
-    private Payment _pay;
+	private final CarQueue _entranceCarQueue;
+    private final CarQueue _entrancePassQueue;
+    private final CarQueue _entranceResQueue;
+    private final CarQueue _paymentCarQueue;
+    private final CarQueue _exitCarQueue;
+    private final Garage _garage;
+    private final Payment _pay;
 
     private int _day = 0;
     private int _hour = 8;
@@ -30,10 +30,6 @@ public class Simulator {
     private int _weekendPassArrivals = 40; // average number of arriving cars per hour
     private int _weekDayResArrivals = 26;
     private int _weekendResArrivals = 40;
-
-    private int _enterSpeed = 1; // number of cars that can enter per minute
-    private int _paymentSpeed = 3; // number of cars that can pay per minute
-    private int _exitSpeed = 2; // number of cars that can leave per minute
 
     private int _arrivalsOnMonday = 0;
     private int _arrivalsOnTuesday = 0;
@@ -59,14 +55,6 @@ public class Simulator {
         updateViews();
     }
 
-
-    /**
-     * returns the current instance of garage
-     * @return the current instance of the class garage
-     */
-    public Garage getView() {
-        return _garage;
-    }
 
     /**
      * Ticks the simulation forward by calling other methods like advanceTime(), updateViews() and handles the entering and leaving of cars
@@ -253,7 +241,8 @@ public class Simulator {
     private void carsEntering(CarQueue queue, boolean passHolder, boolean hasReservation){
         double i = 0;
         // Remove car from the front of the queue and assign to a parking space.
-    	while (queue.carsInQueue() > new Random().nextInt(4) && _garage.getNumberOfOpenSpots() > 0 && i < _enterSpeed) {
+        int _enterSpeed = 1;
+        while (queue.carsInQueue() > new Random().nextInt(4) && _garage.getNumberOfOpenSpots() > 0 && i < _enterSpeed) {
     	    if(!passHolder) {
     	        if(!hasReservation) {
                     AdHocCar car = (AdHocCar) queue.removeCar();
@@ -273,7 +262,7 @@ public class Simulator {
 
                 }
             }
-            else if(passHolder && _garage.getNumberOfPassHolders() < _garage.getPassHolderSpots()) {
+            else if(_garage.getNumberOfPassHolders() < _garage.getPassHolderSpots()) {
     	        ParkingPassCar car = (ParkingPassCar) queue.removeCar();
     	        Location freeLocation = _garage.getFirstPassSpot();
 
@@ -317,23 +306,23 @@ public class Simulator {
         }
     }
 
-    public CarQueue getEntranceCarQueue() {
+    private CarQueue getEntranceCarQueue() {
         return _entranceCarQueue;
     }
 
-    public CarQueue getEntrancePassQueue() {
+    private CarQueue getEntrancePassQueue() {
         return _entrancePassQueue;
     }
 
-    public CarQueue getEntranceResQueue() {
+    private CarQueue getEntranceResQueue() {
         return _entranceResQueue;
     }
 
-    public CarQueue getExitCarQueue() {
+    private CarQueue getExitCarQueue() {
         return _exitCarQueue;
     }
 
-    public CarQueue getPaymentCarQueue() {
+    private CarQueue getPaymentCarQueue() {
         return _paymentCarQueue;
     }
 
@@ -381,7 +370,8 @@ public class Simulator {
      */
     private void carsPaying(){
     	int i = 0;
-    	while (_paymentCarQueue.carsInQueue()>0 && i < _paymentSpeed){
+        int _paymentSpeed = 3;
+        while (_paymentCarQueue.carsInQueue()>0 && i < _paymentSpeed){
             Car car = _paymentCarQueue.removeCar();
             if(car.getHasToPay()) {
                 if(car.getHasReservation()) {
@@ -425,7 +415,8 @@ public class Simulator {
     private void carsLeaving(){
         // Let cars leave.
     	int i = 0;
-    	while (_exitCarQueue.carsInQueue()>0 && i < _exitSpeed){
+        int _exitSpeed = 2;
+        while (_exitCarQueue.carsInQueue()>0 && i < _exitSpeed){
             _exitCarQueue.removeCar();
             i++;
     	}

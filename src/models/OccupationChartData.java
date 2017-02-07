@@ -2,7 +2,7 @@ package models;
 
 public class OccupationChartData {
 
-    private String _label;
+    private final String _label;
     private double _percentage;
 
     public OccupationChartData(String label) {

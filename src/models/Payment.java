@@ -2,9 +2,7 @@ package models;
 
 import java.math.BigDecimal;
 
-/**
- * Created by Jelmer on 30-Jan-17.
- */
+
 public class Payment {
 
     private double _totalRevenue;
@@ -21,11 +19,6 @@ public class Payment {
 
     public BigDecimal getTotalRevenue() {
         BigDecimal bd = new BigDecimal(_totalRevenue);
-        return bd.setScale(2, BigDecimal.ROUND_HALF_DOWN);
-    }
-
-    public BigDecimal getDayRevenue() {
-        BigDecimal bd = new BigDecimal(_dayRevenue);
         return bd.setScale(2, BigDecimal.ROUND_HALF_DOWN);
     }
 

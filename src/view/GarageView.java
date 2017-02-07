@@ -4,7 +4,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-
 import models.Car;
 import models.Garage;
 import models.Location;
@@ -14,15 +13,13 @@ public class GarageView {
     private static final int CAR_HEIGHT = 10;
     private static final int CAR_WIDTH = 20;
 
-    private GraphicsContext _graphicsContext;
-    private Canvas _canvas;
-    private Image _canvasBackground;
-    private Garage _garage;
+    private final GraphicsContext _graphicsContext;
+    private final Image _canvasBackground;
+    private final Garage _garage;
 
     public GarageView(Canvas canvas, Garage garage) {
-        _canvas = canvas;
         _canvasBackground = new Image(Garage.class.getResourceAsStream("/assets/canvasbackground.jpg"));
-        _graphicsContext = _canvas.getGraphicsContext2D();
+        _graphicsContext = canvas.getGraphicsContext2D();
 
         _garage = garage;
     }

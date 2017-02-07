@@ -1,7 +1,7 @@
 package models;
 
-import javafx.stage.Modality;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public abstract class Popup {
