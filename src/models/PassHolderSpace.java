@@ -2,10 +2,6 @@ package models;
 
 import javafx.scene.paint.Color;
 
-/**
- * @author Jelmer Haarman
- */
-@SuppressWarnings("DefaultFileTemplate")
 public class PassHolderSpace extends Car{
 
     public static final Color COLOR = Color.BLACK;

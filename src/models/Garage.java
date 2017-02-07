@@ -2,6 +2,9 @@ package models;
 
 import javafx.scene.canvas.Canvas;
 import view.GarageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import java.io.File;
 
 public class Garage {
 
@@ -11,7 +14,7 @@ public class Garage {
     private int _numberOfOpenSpots;
     private int _numberOfPassHolderSpots;
     private final Car[][][] _cars;
-
+    private double _speed;
     private final GarageView _garageView;
 
     private int _currentPassHolders;
@@ -30,6 +33,10 @@ public class Garage {
         _currentPassHolders = 0;
         _currentAdHoc = 0;
         _currentCarsWithReservation = 0;
+    }
+
+    public void setSpeed(double speed) {
+        _speed = speed;
     }
 
     public void updateView() {
@@ -71,6 +78,14 @@ public class Garage {
         return _cars[location.getFloor()][location.getRow()][location.getPlace()];
     }
 
+    public void playSound() {
+        String musicFile = "src/assets/ping.mp3";
+
+        Media sound = new Media(new File(musicFile).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.play();
+    }
+
     public boolean setCarAt(Location location, Car car) {
         if (locationIsValid(location)) {
             return false;
@@ -80,6 +95,10 @@ public class Garage {
             _cars[location.getFloor()][location.getRow()][location.getPlace()] = car;
             car.setLocation(location);
             _numberOfOpenSpots--;
+            if (_speed < 4) {
+                playSound();
+            }
+
             return true;
         }
 
@@ -110,13 +129,13 @@ public class Garage {
     public void makePassHolderSpots(int numberOfSpots) {
         _numberOfPassHolderSpots = numberOfSpots;
 
-        int x = 0,
-                z = 0,
-                y = 0;
+        int x = 0;
+        int z = 0;
+        int y = 0;
 
         for (int i=0; i<numberOfSpots; i++) {
-            if (z == 30) {
-                if (x == 5) {
+            if (z == _numberOfPlaces) {
+                if (x == _numberOfRows - 1) {
                     y++;
                     x = 0;
                     z = 0;

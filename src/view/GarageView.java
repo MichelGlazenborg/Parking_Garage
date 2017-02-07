@@ -19,6 +19,7 @@ public class GarageView {
 
     public GarageView(Canvas canvas, Garage garage) {
         _canvasBackground = new Image(Garage.class.getResourceAsStream("/assets/canvasbackground.jpg"));
+
         _graphicsContext = canvas.getGraphicsContext2D();
 
         _garage = garage;
