@@ -4,8 +4,11 @@ import javafx.scene.paint.Color;
 
 public class PassHolderSpace extends Car{
 
-    public static final Color COLOR = Color.BLACK;
+    public static final Color COLOR = Color.BLACK;      //The color of the car
 
+    /**
+     * The constructor for the passholderspot, This "car" will stay indefinitely
+     */
     public PassHolderSpace() {
         double stayMinutes = Double.POSITIVE_INFINITY;
         this.setMinutesLeft(stayMinutes);
@@ -13,7 +16,8 @@ public class PassHolderSpace extends Car{
     }
     
     /**
-     * Although the COLOR constant is public, we still need a getter since we're extending the Car class.
+     * Gets the color of the car
+     * @Return The color of the car/
      */
     public Color getColor(){
         return COLOR;
