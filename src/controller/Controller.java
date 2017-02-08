@@ -23,6 +23,11 @@ import models.Simulator;
 import view.DailyCarsChartView;
 import view.OccupationChartView;
 
+/**
+ * This class controls almost everything and talks to the views and models
+ * @author MATA
+ * @since 1.0
+ */
 public class Controller {
 
     private static final String version = "1.1";
@@ -124,7 +129,6 @@ public class Controller {
      */
     @FXML
     private void tick1() {
-        //call the simulator object to run for 1 tick
         tickFor(1);
     }
 
@@ -142,7 +146,6 @@ public class Controller {
      */
     @FXML
     private void tickDay() {
-        //call the simulator object to run for 1440 ticks
         tickFor(1440);
     }
 
@@ -246,7 +249,7 @@ public class Controller {
         _timeline.getKeyFrames().add(new KeyFrame(Duration.millis(Math.round(100 / _speed)), e -> {
             _sim.tick();
             clock();
-            this._remainingTicks = _remainingTicks - 1; // updates _remainingTicks
+            this._remainingTicks = _remainingTicks - 1;
         }));
 
         _timelineGraphs.getKeyFrames().add(new KeyFrame(Duration.millis(Math.round(500)), e -> {
@@ -295,22 +298,29 @@ public class Controller {
                     _garage.setSpeed(a);
                 }
                 if (_remainingTicks != 0) {
-                    stopspeed();
+                    stopSpeed();
                     tickFor(_remainingTicks);
                 }
             }
         }
     }
 
+    /**
+     * reset the speed of the simulator
+     */
     @FXML
     private void resetSpeed(){
         _speed = 1;
         _garage.setSpeed(1);
         if (_remainingTicks != 0) {
-            stopspeed();
+            stopSpeed();
             tickFor(_remainingTicks);
         }
     }
+
+    /**
+     * creates new error and displays it
+     */
 
     public static void showError() {
         Alert error = new Alert(Alert.AlertType.WARNING);
@@ -408,6 +418,10 @@ public class Controller {
         }
     }
 
+    /**
+     * opens popup to get the desired time
+     * @return
+     */
     private int[] getTimeInput() {
         TimeInputPopupController popup = new TimeInputPopupController();
         popup.show();
@@ -483,6 +497,10 @@ public class Controller {
         showDate("Week " + time[3] + "\nDay: " + day);
     }
 
+    /**
+     * Gets the statistics and
+     * @return statistics with text
+     */
     @FXML
     private String getStatistics() {
         int[] stats = _sim.getStatistics();
@@ -491,6 +509,10 @@ public class Controller {
                 "\nNumber of pass holder cars: " + stats[2] + "\n");
     }
 
+    /**
+     * Gets the queuestatistics and
+     * @return the queuestatistics
+     */
     @FXML
     private String getQueueStats() {
         int[] queues = _sim.getQueues();
@@ -501,6 +523,9 @@ public class Controller {
                          "\nNumber of cars in the payment queue: " + queues[4]);
     }
 
+    /**
+     * Gets the statistics and the queuestatistics and displays it
+     */
     private void showStats() {
         Alert stats = new Alert(Alert.AlertType.INFORMATION);
         stats.setWidth(500);
@@ -512,6 +537,9 @@ public class Controller {
         stats.show();
     }
 
+    /**
+     * Sets the boolean _willshowstats if the user wants to show the statistics or not
+     */
     @FXML
     private void setWillShowStats() {
         if (_willShowStats) {
@@ -578,6 +606,9 @@ public class Controller {
                     "The expected revenue of all the cars\n still in the garage is:\n€" + _sim.getExpectedRevenue() + "\n");
     }
 
+    /**
+     * Gets the day revenue from the simulation and displays it
+     */
     @FXML
     private void getDayRevenue(){
         showDayRevenue("The total daily revenue of yesterday is:\n€" + _sim.getDayRevenue() + "\n\n");
@@ -616,6 +647,10 @@ public class Controller {
         revenue.setText(r);
     }
 
+    /**
+     * sets the text in the label dayrevenue
+     * @param r:    A string that will be shown in dayrevenue
+     */
     private void showDayRevenue(String r) {
         dayRevenue.setText(r);
     }
@@ -634,7 +669,8 @@ public class Controller {
     }
 
     /**
-     * Stops the current running simulation.
+     * Stops the current running simulation and updates it.
+     * Will set the _remainingticks to 0 because of the setting and resetting of the speed.
      */
     @FXML
     private void stop() {
@@ -650,7 +686,10 @@ public class Controller {
         }
     }
 
-    private void stopspeed() {
+    /**
+     * will stop the simulator and updates it
+     */
+    private void stopSpeed() {
         if (_timeline != null || _timelineGraphs != null) {
             _timeline.stop();
             _timelineGraphs.stop();
@@ -687,6 +726,9 @@ public class Controller {
         _dailyCarsChartView.update();
     }
 
+    /**
+     * updates everything what has to do with Statistics
+     */
     private void update() {
         getDate();
         getRevenue();
@@ -696,6 +738,9 @@ public class Controller {
         updateGraph();
     }
 
+    /**
+     * Turns on and off the graph view
+     */
     @FXML
     private void setManageGraph() {
         statistics.setManaged(!_boolGraph);
@@ -703,6 +748,9 @@ public class Controller {
         this._boolGraph = !_boolGraph;
     }
 
+    /**
+     * Turns on and off the view for the revenues
+     */
     @FXML
     private void setManageRevenue() {
         setVisible(titleRev, _boolRev);
@@ -711,6 +759,9 @@ public class Controller {
         this._boolRev = !_boolRev;
     }
 
+    /**
+     * Turns on and off the piechart view
+     */
     @FXML
     private void setManageChart() {
         if (sidebarRight.getChildren().contains(_object))
@@ -719,6 +770,9 @@ public class Controller {
             sidebarRight.getChildren().add(_object);
     }
 
+    /**
+     * Turns on and off the time view
+     */
     @FXML
     private void setManageTime() {
         setVisible(titleTime, _boolTime);
@@ -727,6 +781,9 @@ public class Controller {
         this._boolTime = !_boolTime;
     }
 
+    /**
+     * Turn on or off the sound.
+     */
     @FXML
     private void playSound() {
         if (_garage.getPlaySound()) {
@@ -736,6 +793,11 @@ public class Controller {
         }
     }
 
+    /**
+     * Set the views on or off
+     * @param node is a part of a view
+     * @param bool if the node has to be shown or not
+     */
     private void setVisible(Node node, boolean bool) {
         node.setManaged(!bool);
         node.setVisible(!bool);

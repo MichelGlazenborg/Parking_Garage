@@ -17,6 +17,10 @@ public class OccupationChartView {
     private PieChart.Data _statsPiePassHolders;
     private PieChart.Data _statsPieCarWithReservations;
 
+    /**
+     * Creates a new object and initializes it
+     * @param pie is the model
+     */
     public OccupationChartView(OccupationChart pie) {
         _statsPie = pie;
         _chart = new PieChart();
@@ -25,6 +29,9 @@ public class OccupationChartView {
         _graphData = FXCollections.observableArrayList();
     }
 
+    /**
+     * Sets the date of the _graphData
+     */
     public void setData() {
         _graphData.clear();
 
@@ -38,6 +45,9 @@ public class OccupationChartView {
         _chart.setData(_graphData);
     }
 
+    /**
+     * updates the pieChart
+     */
     public void update() {
         _statsPieUnoccupied.setPieValue(_statsPie.getUnoccupied().getPercentage());
         _statsPieAdHoc.setPieValue(_statsPie.getAdHoc().getPercentage());
@@ -45,6 +55,10 @@ public class OccupationChartView {
         _statsPieCarWithReservations.setPieValue(_statsPie.getCarsWithReservation().getPercentage());
     }
 
+    /**
+     * Gets the pieChart and returns it.
+     * @return
+     */
     public PieChart getChart() {
         return _chart;
     }

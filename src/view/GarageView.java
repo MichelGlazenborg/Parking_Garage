@@ -27,6 +27,9 @@ public class GarageView {
         _garage = garage;
     }
 
+    /**
+     * Updates the rectangles for the garage
+     */
     public void update() {
         //_graphicsContext.clearRect(0, 0, _canvas.getWidth(), _canvas.getHeight());
         //_graphicsContext.drawImage(_canvasBackground, 0, 0, 560, 335);
@@ -43,6 +46,11 @@ public class GarageView {
         }
     }
 
+    /**
+     * Creates the Parking spots and colors it
+     * @param location
+     * @param color
+     */
     private void drawParkingSpot(Location location, Color color) {
         _graphicsContext.setFill(color);
         _graphicsContext.fillRect(
