@@ -161,7 +161,7 @@ public class Controller {
         _timeline.getKeyFrames().add(new KeyFrame(Duration.millis(Math.round(100 / _speed)), e -> {
             _sim.tick();
             clock();
-            _remainingTicks = _remainingTicks - 1;
+            this._remainingTicks = _remainingTicks - 1; // updates _remainingTicks
         }));
 
         _timelineGraphs.getKeyFrames().add(new KeyFrame(Duration.millis(Math.round(500)), e -> {
@@ -209,8 +209,10 @@ public class Controller {
                     _speed = a;
                     _garage.setSpeed(a);
                 }
-                //stop();
-                //tickFor(_remainingTicks);
+                if (_remainingTicks != 0) {
+                    stopspeed();
+                    tickFor(_remainingTicks);
+                }
             }
         }
     }
@@ -219,8 +221,10 @@ public class Controller {
     private void resetSpeed(){
         _speed = 1;
         _garage.setSpeed(1);
-        //stop();
-        //tickFor(_remainingTicks);
+        if (_remainingTicks != 0) {
+            stopspeed();
+            tickFor(_remainingTicks);
+        }
     }
 
     public static void showError() {
@@ -557,6 +561,18 @@ public class Controller {
                 showStats();
             }
             disableButtons(false);
+            _remainingTicks = 0;
+        }
+    }
+
+    private void stopspeed() {
+        if (_timeline != null || _timelineGraphs != null) {
+            _timeline.stop();
+            _timelineGraphs.stop();
+            update();
+            if (_willShowStats) {
+                showStats();
+            }
         }
     }
 
