@@ -29,6 +29,11 @@
                   <MenuItem onAction="#setTime" text="Set the time at..." />
                   <MenuItem onAction="#setSpeed" text="Set simulator speed..." />
                   <MenuItem onAction="#resetSpeed" text="Reset simulator speed" />
+              </items>
+              <items>
+                  <SeparatorMenuItem />
+              </items>
+              <items>
                   <CheckMenuItem mnemonicParsing="false" text="Show expanded statistics" onAction="#setWillShowStats" selected="false"/>
                   <CheckMenuItem mnemonicParsing="false" text="Play sound" onAction="#playSound" selected="true"/>
               </items>
