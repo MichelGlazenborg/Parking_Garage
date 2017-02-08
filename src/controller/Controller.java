@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.Optional;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -12,18 +14,18 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+
 import models.DailyCarsChart;
 import models.Garage;
 import models.OccupationChart;
 import models.Simulator;
+
 import view.DailyCarsChartView;
 import view.OccupationChartView;
 
-import java.util.Optional;
-
 public class Controller {
 
-    private static final String version = "1.0";
+    private static final String version = "1.1";
 
 	private Simulator _sim;      //makes the central simulator object
     private Garage _garage;      //makes the central simulatorView object
@@ -144,6 +146,91 @@ public class Controller {
         tickFor(1440);
     }
 
+    @FXML
+    private void makeFloors() {
+        TextInputDialog dialog = new TextInputDialog("3");
+        dialog.setTitle("Set number of floors");
+        dialog.setContentText("Number of floors between 1 and 4: ");
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            String result2 = result.get();
+            // Parses a integer from a String and tries to catch errors.
+            int floors = 0;
+            try {
+                floors = Integer.parseInt(result2);
+            } catch (NumberFormatException exception) {
+                showError();
+            } finally {
+                if (floors <= 0)
+                    showError();
+                else if (floors > 4)
+                    showError();
+                else {
+                    // erase current garage and make a new one
+                    _garage.eraseCanvas();
+                    _garage.set_numberOfFloors(floors);
+                    _garage.updateView();
+                }
+            }
+        }
+    }
+
+    @FXML
+    private void makeRows() {
+        TextInputDialog dialog = new TextInputDialog("6");
+        dialog.setTitle("Set number of rows");
+        dialog.setContentText("Number of rows between 1 and 10: ");
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            String result2 = result.get();
+            // Parses a integer from a String and tries to catch errors.
+            int rows = 0;
+            try {
+                rows = Integer.parseInt(result2);
+            } catch (NumberFormatException exception) {
+                showError();
+            } finally {
+                if (rows <= 0)
+                    showError();
+                else if (rows > 10)
+                    showError();
+                else {
+                    // erase current garage and make a new one
+                    _garage.eraseCanvas();
+                    _garage.set_numberOfRows(rows);
+                    _garage.updateView();
+                }
+            }
+        }
+    }
+    @FXML
+    private void makePlaces() {
+        TextInputDialog dialog = new TextInputDialog("30");
+        dialog.setTitle("Set number of places");
+        dialog.setContentText("Number of places between 1 and 50: ");
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            String result2 = result.get();
+            // Parses a integer from a String and tries to catch errors.
+            int places = 0;
+            try {
+                places = Integer.parseInt(result2);
+            } catch (NumberFormatException exception) {
+                showError();
+            } finally {
+                if (places <= 0)
+                    showError();
+                else if (places > 50)
+                    showError();
+                else {
+                    // erase current garage and make a new one
+                    _garage.eraseCanvas();
+                    _garage.set_numberOfPlaces(places);
+                    _garage.updateView();
+                }
+            }
+        }
+    }
     /**
      * Makes the simulator tick for any number of ticks
      * @param ticks The number of ticks the simulation should do
@@ -159,7 +246,7 @@ public class Controller {
         _timeline.getKeyFrames().add(new KeyFrame(Duration.millis(Math.round(100 / _speed)), e -> {
             _sim.tick();
             clock();
-            _remainingTicks = _remainingTicks - 1;
+            this._remainingTicks = _remainingTicks - 1; // updates _remainingTicks
         }));
 
         _timelineGraphs.getKeyFrames().add(new KeyFrame(Duration.millis(Math.round(500)), e -> update()));
@@ -205,8 +292,10 @@ public class Controller {
                     _speed = a;
                     _garage.setSpeed(a);
                 }
-                //stop();
-                //tickFor(_remainingTicks);
+                if (_remainingTicks != 0) {
+                    stopspeed();
+                    tickFor(_remainingTicks);
+                }
             }
         }
     }
@@ -215,8 +304,10 @@ public class Controller {
     private void resetSpeed(){
         _speed = 1;
         _garage.setSpeed(1);
-        //stop();
-        //tickFor(_remainingTicks);
+        if (_remainingTicks != 0) {
+            stopspeed();
+            tickFor(_remainingTicks);
+        }
     }
 
     public static void showError() {
@@ -553,6 +644,18 @@ public class Controller {
                 showStats();
             }
             disableButtons(false);
+            _remainingTicks = 0;
+        }
+    }
+
+    private void stopspeed() {
+        if (_timeline != null || _timelineGraphs != null) {
+            _timeline.stop();
+            _timelineGraphs.stop();
+            update();
+            if (_willShowStats) {
+                showStats();
+            }
         }
     }
 

@@ -1,10 +1,10 @@
 package models;
 
 import javafx.scene.canvas.Canvas;
-
-import view.GarageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import view.GarageView;
+
 import java.io.File;
 
 public class Garage {
@@ -30,7 +30,7 @@ public class Garage {
         _numberOfPlaces = numberOfPlaces;
         _numberOfOpenSpots = numberOfFloors * numberOfRows * numberOfPlaces;
         _numberOfPassHolderSpots = -1;
-        _cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
+        _cars = new Car[4][10][50];
         _garageView = new GarageView(canvas, this);
 
         _currentPassHolders = 0;
@@ -89,6 +89,10 @@ public class Garage {
         return _cars[location.getFloor()][location.getRow()][location.getPlace()];
     }
 
+    public void eraseCanvas() {
+        _garageView.eraseCanvas();
+    }
+
     public void playSound() {
         String musicFile = "src/assets/ping.mp3";
 
@@ -101,6 +105,7 @@ public class Garage {
         if (!locationIsValid(location)) {
             return false;
         }
+
         Car oldCar = getCarAt(location);
         if (oldCar == null) {
             _cars[location.getFloor()][location.getRow()][location.getPlace()] = car;
@@ -300,13 +305,19 @@ public class Garage {
         return _numberOfFloors;
     }
 
+    public void set_numberOfFloors(int floors) {_numberOfFloors = floors;}
+
     public int getNumberOfRows() {
         return _numberOfRows;
     }
 
+    public void set_numberOfRows(int rows) {_numberOfRows = rows;}
+
     public int getNumberOfPlaces() {
         return _numberOfPlaces;
     }
+
+    public void set_numberOfPlaces(int places) { _numberOfPlaces = places; }
 
     public int getNumberOfAdHoc() {
         return _currentAdHoc;

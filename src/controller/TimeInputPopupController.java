@@ -17,7 +17,7 @@ public class TimeInputPopupController extends Popup {
     private final TimeInputPopupView _view;
 
     private static final int SCENE_WIDTH = 400;
-    private static final int SCENE_HEIGHT = 200;
+    private static final int SCENE_HEIGHT = 250;
 
     private final int[] _input;
 

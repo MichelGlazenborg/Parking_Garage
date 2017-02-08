@@ -11,20 +11,22 @@
           <Menu mnemonicParsing="false" text="_Simulator">
               <items>
                   <MenuItem onAction="#setPricePerMinute" text="Set price per minute..." />
+                  <MenuItem onAction="#makePassHolderSpots" text="Make pass holder spots..." />
               </items>
               <items>
-                  <MenuItem onAction="#makePassHolderSpots" text="Make pass holder spots..." />
+                  <SeparatorMenuItem/>
+              </items>
+              <items>
+                  <MenuItem onAction="#makeFloors" text="Set number of floors" />
+                  <MenuItem onAction="#makeRows" text="Set number of rows" />
+                  <MenuItem onAction="#makePlaces" text="Set number of places" />
               </items>
               <items>
                   <SeparatorMenuItem />
               </items>
               <items>
                   <MenuItem onAction="#setTime" text="Set the time at..." />
-              </items>
-              <items>
                   <MenuItem onAction="#setSpeed" text="Set simulator speed..." />
-              </items>
-              <items>
                   <MenuItem onAction="#resetSpeed" text="Reset simulator speed" />
               </items>
               <items>
@@ -32,8 +34,6 @@
               </items>
               <items>
                   <CheckMenuItem mnemonicParsing="false" text="Show expanded statistics" onAction="#setWillShowStats" selected="false"/>
-              </items>
-              <items>
                   <CheckMenuItem mnemonicParsing="false" text="Play sound" onAction="#playSound" selected="true"/>
               </items>
               <items>
@@ -43,17 +43,16 @@
                   <MenuItem mnemonicParsing="false" onAction="#closeApp" text="Close" />
               </items>
           </Menu>
-
-          <Menu mnemonicParsing="false" text="_Help">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#showAbout" text="About..." />
-            </items>
-          </Menu>
             <Menu mnemonicParsing="false" text="_Views">
                 <CheckMenuItem mnemonicParsing="false" text="Graph" onAction="#setManageGraph" selected="true"/>
                 <CheckMenuItem mnemonicParsing="false" text="Revenue" onAction="#setManageRevenue" selected="true"/>
                 <CheckMenuItem mnemonicParsing="false" text="Chart" onAction="#setManageChart"  selected="true"/>
                 <CheckMenuItem mnemonicParsing="false" text="Time" onAction="#setManageTime"  selected="true"/>
+            </Menu>
+            <Menu mnemonicParsing="false" text="_Help">
+                <items>
+                    <MenuItem mnemonicParsing="false" onAction="#showAbout" text="About..." />
+                </items>
             </Menu>
         </menus>
       </MenuBar>
@@ -95,7 +94,7 @@
       </VBox>
    </left>
    <center>
-      <Canvas fx:id="canvas" height="600.0" width="800.0" BorderPane.alignment="TOP_CENTER" />
+      <Canvas fx:id="canvas" height="600.0" width="870.0" BorderPane.alignment="TOP_CENTER" />
    </center>
     <right>
         <VBox fx:id="sidebarRight" prefWidth="300.0">
