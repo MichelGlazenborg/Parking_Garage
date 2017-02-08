@@ -23,6 +23,13 @@ public class TimeInputPopupView {
         _layout.setHgap(10);
     }
 
+    /**
+     * Adds labels to the user inputs
+     * @param week = label for weeks
+     * @param day = label for days
+     * @param hour = label for hours
+     * @param minute = label for minutes
+     */
     public void addLabels(Label week, Label day, Label hour, Label minute) {
         GridPane.setConstraints(week, COLUMN_LABELS, _labelRowNumber++);
         GridPane.setConstraints(day, COLUMN_LABELS, _labelRowNumber++);
@@ -32,6 +39,13 @@ public class TimeInputPopupView {
         _layout.getChildren().addAll(week, day, hour, minute);
     }
 
+    /**
+     * Adds the textfields for the user inputs
+     * @param setWeek = user input for weeks
+     * @param setDay = user input for days
+     * @param setHour = user input for hours
+     * @param setMinute = user input for minutes
+     */
     public void addFields(TextField setWeek, TextField setDay, TextField setHour, TextField setMinute) {
         GridPane.setConstraints(setWeek, COLUMN_FIELDS, _fieldRowNumber++);
         GridPane.setConstraints(setDay, COLUMN_FIELDS, _fieldRowNumber++);
@@ -42,6 +56,10 @@ public class TimeInputPopupView {
         _layout.getChildren().addAll(setWeek, setDay, setHour, setMinute, _submit);
     }
 
+    /**
+     * Creates a button for submitting the user input
+     * @return = If all inputs were legitimate, submit them to the program
+     */
     public Button getSubmitButton() {
         return _submit;
     }

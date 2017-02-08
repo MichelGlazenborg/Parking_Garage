@@ -35,6 +35,9 @@ public class DailyCarsChartView {
         _chartData = new XYChart.Series();
     }
 
+    /**
+     * Allocates the chart to our data
+     */
     public void setData() {
         _chartData.getData().add(_dataMonday = new XYChart.Data(_chart.getMonday().getName(), _chart.getMonday().getCarCounter()));
         _chartData.getData().add(_dataTuesday = new XYChart.Data(_chart.getTuesday().getName(), _chart.getTuesday().getCarCounter()));
@@ -47,6 +50,9 @@ public class DailyCarsChartView {
         _lineChart.getData().add(_chartData);
     }
 
+    /**
+     * Updates the chart with actual data
+     */
     public void update() {
         _dataMonday.setYValue(_chart.getMonday().getCarCounter());
         _dataTuesday.setYValue(_chart.getTuesday().getCarCounter());
@@ -57,10 +63,18 @@ public class DailyCarsChartView {
         _dataSunday.setYValue(_chart.getSunday().getCarCounter());
     }
 
+    /**
+     * Returns the chart for viewing
+     * @return the chart filled with data
+     */
     public LineChart getChart() {
         return _lineChart;
     }
 
+    /**
+     * Set a title for the chart
+     * @param title = the title of this chart
+     */
     private void setChartTitle(String title) {
         _lineChart.setTitle(title);
     }

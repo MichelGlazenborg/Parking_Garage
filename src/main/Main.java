@@ -8,6 +8,11 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+    /**
+     * Creates the stage for the program
+     * @param primaryStage = the stage the program is build on
+     * @throws Exception = makes sure the program starts up safely
+     */
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("/view/ParkingGarage.fxml"));
@@ -23,6 +28,9 @@ public class Main extends Application {
     }
 
 
+    /**
+     * The main starting point for the program
+     */
     public static void main(String[] args) {
         launch(args);
     }
