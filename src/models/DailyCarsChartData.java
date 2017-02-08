@@ -10,7 +10,7 @@ public class DailyCarsChartData {
     /**
      * This is the label used for the current day. Usually this is an abbreviation of the day name.
      */
-    private String _name;
+    private final String _name;
 
     /**
      * Contains the amount of cars that entered today.

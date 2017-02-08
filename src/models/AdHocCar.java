@@ -1,14 +1,15 @@
 package models;
 
+import javafx.scene.paint.Color;
 import java.util.Random;
 
-import javafx.scene.paint.Color;
 
 /**
  * This class is used for storing regular cars (i.e. cars not owned by pass holders).
  * @author  MATA
  * @since   1.0
  */
+
 public class AdHocCar extends Car {
 
     /**

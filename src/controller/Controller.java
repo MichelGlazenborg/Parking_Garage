@@ -27,7 +27,7 @@ public class Controller {
 
     private static final String version = "1.1";
 
-	private Simulator _sim;              //makes the central simulator object
+	private Simulator _sim;      //makes the central simulator object
     private Garage _garage;      //makes the central simulatorView object
 
     private OccupationChartView _occupationChartView;     //makes the statistics graph
@@ -249,9 +249,7 @@ public class Controller {
             this._remainingTicks = _remainingTicks - 1; // updates _remainingTicks
         }));
 
-        _timelineGraphs.getKeyFrames().add(new KeyFrame(Duration.millis(Math.round(500)), e -> {
-            update();
-        }));
+        _timelineGraphs.getKeyFrames().add(new KeyFrame(Duration.millis(Math.round(500)), e -> update()));
 
         _timeline.play();
         _timelineGraphs.play();

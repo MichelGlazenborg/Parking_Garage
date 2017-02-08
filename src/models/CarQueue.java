@@ -13,7 +13,7 @@ public class CarQueue {
     /**
      * Cars are added to this queue.
      */
-    private Queue<Car> _queue = new LinkedList<>();
+    private final Queue<Car> _queue = new LinkedList<>();
 
     /**
      * Adds a car to the queue.

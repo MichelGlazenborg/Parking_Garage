@@ -1,15 +1,13 @@
 package models;
 
 import controller.Controller;
-
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-
 import view.TimeInputPopupView;
 
 public class TimeInputPopup {
 
-    private TimeInputPopupView _view;
+    private final TimeInputPopupView _view;
 
     private TextField _inputWeek;
     private TextField _inputDay;
