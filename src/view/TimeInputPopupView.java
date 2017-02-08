@@ -18,12 +18,23 @@ public class TimeInputPopupView {
     private Button _submit;
 
 
+    /**
+     * The constructor for the popup for setting the time
+     * @param layout The layout of the popup
+     */
     public TimeInputPopupView(GridPane layout) {
         _layout = layout;
         _layout.setVgap(10);
         _layout.setHgap(10);
     }
 
+    /**
+     * Adds labels to the popup
+     * @param week   The week
+     * @param day    The day
+     * @param hour   The hour
+     * @param minute The minute
+     */
     public void addLabels(Label week, Label day, Label hour, Label minute) {
         GridPane.setConstraints(week, COLUMN_LABELS, _labelRowNumber++);
         GridPane.setConstraints(day, COLUMN_LABELS, _labelRowNumber++);
@@ -33,6 +44,13 @@ public class TimeInputPopupView {
         _layout.getChildren().addAll(week, day, hour, minute);
     }
 
+    /**
+     * Adds fields to the popup
+     * @param setWeek    The week field
+     * @param setDay     The day field
+     * @param setHour    The hour field
+     * @param setMinute  The minute field
+     */
     public void addFields(TextField setWeek, TextField setDay, TextField setHour, TextField setMinute) {
         GridPane.setConstraints(setWeek, COLUMN_FIELDS, _fieldRowNumber++);
         GridPane.setConstraints(setDay, COLUMN_FIELDS, _fieldRowNumber++);
@@ -43,6 +61,10 @@ public class TimeInputPopupView {
         _layout.getChildren().addAll(setWeek, setDay, setHour, setMinute, _submit);
     }
 
+    /**
+     * The submit button
+     * @return The button
+     */
     public Button getSubmitButton() {
         return _submit;
     }

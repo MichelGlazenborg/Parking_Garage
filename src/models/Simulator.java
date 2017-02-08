@@ -32,8 +32,8 @@ public class Simulator {
     private int _weekendResArrivals = 40;
 
     private int _enterSpeed = 1;   // number of cars that can enter per minute (Global to make easily editable)
-    private int _paymentSpeed = 3; // number of cars that can pay per minute   (Global to make easily editable)
-    private int _exitSpeed = 2;    // number of cars that can leave per minute (Global to make easily editable)
+    private int _paymentSpeed = 1; // number of cars that can pay per minute   (Global to make easily editable)
+    private int _exitSpeed = 1;    // number of cars that can leave per minute (Global to make easily editable)
 
     private int _arrivalsOnMonday = 0;
     private int _arrivalsOnTuesday = 0;
