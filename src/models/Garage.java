@@ -30,7 +30,7 @@ public class Garage {
         _numberOfPlaces = numberOfPlaces;
         _numberOfOpenSpots = numberOfFloors * numberOfRows * numberOfPlaces;
         _numberOfPassHolderSpots = -1;
-        _cars = new Car[4][10][50];
+        _cars = new Car[4][6][50];
         _garageView = new GarageView(canvas, this);
 
         _currentPassHolders = 0;
