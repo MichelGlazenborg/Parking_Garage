@@ -48,8 +48,8 @@ public class GarageView {
 
     /**
      * Creates the Parking spots and colors it
-     * @param location
-     * @param color
+     * @param location The location where the spot must be drawn
+     * @param color     The color of the spot
      */
     private void drawParkingSpot(Location location, Color color) {
         _graphicsContext.setFill(color);
@@ -61,6 +61,9 @@ public class GarageView {
         );
     }
 
+    /**
+     * Erases the canvas
+     */
     public void eraseCanvas() {
         _graphicsContext.clearRect(0,0,2000,1000);
     }
