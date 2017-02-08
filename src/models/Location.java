@@ -1,7 +1,15 @@
 package models;
 
+/**
+ * This class is used for storing locations.
+ * @author  MATA
+ * @since   1.0
+ */
 public class Location {
 
+    /**
+     * The floor, row and spot numbers
+     */
     private int _floor;
     private int _row;
     private int _place;
