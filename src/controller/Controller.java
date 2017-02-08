@@ -179,7 +179,7 @@ public class Controller {
     private void makeRows() {
         TextInputDialog dialog = new TextInputDialog("6");
         dialog.setTitle("Set number of rows");
-        dialog.setContentText("Number of rows between 1 and 10: ");
+        dialog.setContentText("Number of rows between 1 and 6: ");
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()) {
             String result2 = result.get();
@@ -192,7 +192,7 @@ public class Controller {
             } finally {
                 if (rows <= 0)
                     showError();
-                else if (rows > 10)
+                else if (rows > 6)
                     showError();
                 else {
                     // erase current garage and make a new one
