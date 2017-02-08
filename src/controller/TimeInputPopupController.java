@@ -42,14 +42,17 @@ public class TimeInputPopupController extends Popup {
         getWindow().setOnCloseRequest(e -> handleInput(true));
     }
 
-    public void show() {
-        super.show();
-    }
-
+    /**
+     * Get the input and
+     * @return _input
+     */
     public int[] getInput() {
         return _input;
     }
 
+    /**
+     * Creates the layout for the popup
+     */
     private void setupLayout() {
         ColumnConstraints colLabel = new ColumnConstraints();
         ColumnConstraints colFields = new ColumnConstraints();
@@ -60,10 +63,16 @@ public class TimeInputPopupController extends Popup {
         _layout.setPadding(new Insets(20, 20, 20, 20));
     }
 
+    /**
+     * Does the setup
+     */
     private void setup() {
         _model.setFields();
     }
 
+    /**
+     * Handles the Input
+     */
     private void handleInput() {
         _input[0] = _model.validateInput(_model.getInputWeek().getText(), 52);
         _input[1] = _model.validateInput(_model.getInputDay().getText(), 7);
@@ -84,6 +93,9 @@ public class TimeInputPopupController extends Popup {
         super.close();
     }
 
+    /**
+     * Enables the Submit Button
+     */
     private void enableSubmitButton() {
         Button _submit = _view.getSubmitButton();
         _submit.setOnAction(e -> handleInput());
