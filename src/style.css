@@ -82,3 +82,12 @@ Colors of the pie chart, matching the color of cars
 .default-color1.chart-pie { -fx-pie-color: #f22809; }
 .default-color2.chart-pie { -fx-pie-color: #0d09ef; }
 .default-color3.chart-pie { -fx-pie-color: #efc909; }
+
+#sidebarRight, #sidebarLeft {
+    -fx-background-color: #e3e5e8;
+    -fx-padding: 5px;
+}
+
+#statistics {
+    -fx-background-color: #e3e5e8;
+}

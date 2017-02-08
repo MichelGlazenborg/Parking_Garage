@@ -59,7 +59,7 @@
       </MenuBar>
    </top>
    <left>
-      <VBox prefHeight="800.0" prefWidth="300.0" BorderPane.alignment="CENTER_LEFT">
+      <VBox fx:id="sidebarLeft" prefHeight="800.0" prefWidth="100.0" BorderPane.alignment="CENTER_LEFT">
          <children>
              <Button fx:id="button_operate1" mnemonicParsing="false" onAction="#tick1">
                  <VBox.margin>
