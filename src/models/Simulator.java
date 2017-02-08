@@ -178,6 +178,9 @@ public class Simulator {
         _weekendResArrivals *= modifier;
     }
 
+    /**
+     * Resets the arrival numbers back to their original value
+     */
     private void resetArrivalNumbers(){
         _weekDayArrivals = 30;
         _weekendArrivals = 45;
@@ -233,6 +236,9 @@ public class Simulator {
 
     }
 
+    /**
+     * Makes the cars arrive to the garage
+     */
     private void carsArrivingIn() {
         int numberOfCars = getNumberOfCars(_weekDayArrivals, _weekendArrivals);
         addArrivingCars(numberOfCars, AD_HOC);
@@ -315,26 +321,50 @@ public class Simulator {
         }
     }
 
+    /**
+     * Gets the normal car entrance queue
+     * @return  the normal car entrance queue
+     */
     private CarQueue getEntranceCarQueue() {
         return _entranceCarQueue;
     }
 
+    /**
+     * Gets the passholder car entrance queue
+     * @return  the passholder car entrance queue
+     */
     private CarQueue getEntrancePassQueue() {
         return _entrancePassQueue;
     }
 
+    /**
+     * Gets the reservation car entrance queue
+     * @return  the reservation car entrance queue
+     */
     private CarQueue getEntranceResQueue() {
         return _entranceResQueue;
     }
 
+    /**
+     * Gets the exit car queue
+     * @return  the exit car queue
+     */
     private CarQueue getExitCarQueue() {
         return _exitCarQueue;
     }
 
+    /**
+     * Gets the payment car queue
+     * @return  the payment car queue
+     */
     private CarQueue getPaymentCarQueue() {
         return _paymentCarQueue;
     }
 
+    /**
+     * Gets all the queues
+     * @return an array of integers that contains the number of cars per queue
+     */
     public int[] getQueues() {
         int[] queues = new int[5];
 
@@ -393,20 +423,36 @@ public class Simulator {
     	}
     }
 
+    /**
+     * Gets the total revenue from the payment class
+     * @return The total revenue
+     */
     public BigDecimal getRevenue() {
         return _pay.getTotalRevenue();
     }
 
+    /**
+     * Gets the last day revenue from the payment class
+     * @return The last day revenue
+     */
     public BigDecimal getDayRevenue() {
         return _pay.getLastDayRevenue();
     }
 
+    /**
+     * Gets the expected revenue from the payment class
+     * @return  the expected revenue
+     */
     public BigDecimal getExpectedRevenue() {
         int adHocCars = _garage.getNumberOfAdHoc();
         int carsWithReservations = _garage.getNumberOfCarsWithReservation();
         return _pay.getExpectedRevenue(adHocCars, carsWithReservations);
     }
 
+    /**
+     * Gets the statistics
+     * @return An array of integers containing the number of cars per type
+     */
     public int[] getStatistics() {
         int[] statistics = new int[3];
 
@@ -490,16 +536,25 @@ public class Simulator {
         _exitCarQueue.addCar(car);
     }
 
+    /**
+     * Gets the garage that was made
+     * @return The garage
+     */
     public Garage getGarage() {
         return _garage;
     }
 
+    /**
+     * Resets the all revenue
+     */
     public void resetRevenue() {
         _pay.reset();
-        _pay.resetDayRevenue();
         _pay.setLastDayRevenue(0);
     }
 
+    /**
+     * Resets the time to the start
+     */
     public void resetTime() {
         _day = 0;
         _hour = 8;
@@ -507,6 +562,9 @@ public class Simulator {
         _week = 1;
     }
 
+    /**
+     * Resets the statistics
+     */
     public void resetStats() {
         while (_entranceCarQueue.carsInQueue() > 0) {
             _entranceCarQueue.removeCar();
@@ -522,6 +580,9 @@ public class Simulator {
         }
     }
 
+    /**
+     * Resets the arrivalcounters
+     */
     public void resetArrivalCounter() {
         _arrivalsOnMonday = 0;
         _arrivalsOnTuesday = 0;
@@ -532,30 +593,58 @@ public class Simulator {
         _arrivalsOnSunday = 0;
     }
 
+    /**
+     * Gets the amount of arrivals on monday
+     * @return The amount of arrivals on monday
+     */
     public int getArrivalsOnMonday() {
         return _arrivalsOnMonday;
     }
 
+    /**
+     * Gets the amount of arrivals on Tuesday
+     * @return The amount of arrivals on Tuesday
+     */
     public int getArrivalsOnTuesday() {
         return _arrivalsOnTuesday;
     }
 
+    /**
+     * Gets the amount of arrivals on Wednesday
+     * @return The amount of arrivals on Wednesday
+     */
     public int getArrivalsOnWednesday() {
         return _arrivalsOnWednesday;
     }
 
+    /**
+     * Gets the amount of arrivals on Thursday
+     * @return The amount of arrivals on Thursday
+     */
     public int getArrivalsOnThursday() {
         return _arrivalsOnThursday;
     }
 
+    /**
+     * Gets the amount of arrivals on Friday
+     * @return The amount of arrivals on Friday
+     */
     public int getArrivalsOnFriday() {
         return _arrivalsOnFriday;
     }
 
+    /**
+     * Gets the amount of arrivals on Saturday
+     * @return The amount of arrivals on Saturday
+     */
     public int getArrivalsOnSaturday() {
         return _arrivalsOnSaturday;
     }
 
+    /**
+     * Gets the amount of arrivals on Sunday
+     * @return The amount of arrivals on Sunday
+     */
     public int getArrivalsOnSunday() {
         return _arrivalsOnSunday;
     }
