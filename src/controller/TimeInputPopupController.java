@@ -12,6 +12,9 @@ import models.TimeInputPopup;
 
 import view.TimeInputPopupView;
 
+/**
+ * this class controls the popup where the user can say how many minutes the simulator has to run
+ */
 public class TimeInputPopupController extends Popup {
 
     private GridPane _layout;

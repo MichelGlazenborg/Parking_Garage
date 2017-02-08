@@ -17,6 +17,7 @@ public class TimeInputPopupView {
 
     private Button _submit;
 
+
     public TimeInputPopupView(GridPane layout) {
         _layout = layout;
         _layout.setVgap(10);

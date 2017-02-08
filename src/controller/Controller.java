@@ -23,6 +23,11 @@ import models.Simulator;
 import view.DailyCarsChartView;
 import view.OccupationChartView;
 
+/**
+ * This class controls almost everything and talks to the views and models
+ * @author MATA
+ * @since 1.0
+ */
 public class Controller {
 
     private static final String version = "1.0";
