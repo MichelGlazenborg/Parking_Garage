@@ -1,11 +1,13 @@
 package models;
 
+import java.io.File;
+
 import javafx.scene.canvas.Canvas;
 import javafx.scene.media.Media;
+import javafx.scene.media.MediaException;
 import javafx.scene.media.MediaPlayer;
-import view.GarageView;
 
-import java.io.File;
+import view.GarageView;
 
 public class Garage {
 
@@ -96,9 +98,15 @@ public class Garage {
     public void playSound() {
         String musicFile = "src/assets/ping.mp3";
 
-        Media sound = new Media(new File(musicFile).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(sound);
-        mediaPlayer.play();
+        try {
+            Media sound = new Media(new File(musicFile).toURI().toString());
+            MediaPlayer mediaPlayer = new MediaPlayer(sound);
+            mediaPlayer.play();
+        }
+        catch (MediaException e) {
+            setPlaySound(false);
+            System.out.println("Could not play audio file.");
+        }
     }
 
     public boolean setCarAt(Location location, Car car) {
